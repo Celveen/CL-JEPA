@@ -1,0 +1,29 @@
+# Architecture and optimization match checkpoints/pushobj_shape_shift/hydra.yaml.
+# Data: pusht_noise replay with swapped shapes (scripts/gen_pushobj_dataset.py);
+# 2,000 episodes, 10 epochs.
+defaults:
+  - train
+  - override env: pusht
+  - override encoder: scratch_resnet_gem
+  - _self_
+
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: ${hydra:runtime.cwd}/checkpoints/pushobj_replay_2000_e10_seed0
+
+env:
+  name: pushobj
+  dataset:
+    data_path: ${hydra:runtime.cwd}/data/pushobj_replay_2000
+  num_workers: 8
+
+training:
+  epochs: 10
+  batch_size: 64
+  straighten: cos1e-2
+  decoder_start_epoch: 3
+  save_every_x_iterations: -1
+  # Optional perceptual diagnostic only; does not enter the training loss.
+  eval_lpips: false

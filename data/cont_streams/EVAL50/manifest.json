@@ -1,0 +1,637 @@
+{
+ "name": "EVAL50",
+ "seed": 100,
+ "n": 50,
+ "blocks": [
+  {
+   "chunk": "chunk_00_I",
+   "shape": "I",
+   "tag": "I",
+   "n": 10,
+   "draw_index": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "chunk": "chunk_01_I",
+   "shape": "I",
+   "tag": "I",
+   "n": 10,
+   "draw_index": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "chunk": "chunk_02_I",
+   "shape": "I",
+   "tag": "I",
+   "n": 10,
+   "draw_index": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ]
+  },
+  {
+   "chunk": "chunk_03_I",
+   "shape": "I",
+   "tag": "I",
+   "n": 10,
+   "draw_index": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ]
+  },
+  {
+   "chunk": "chunk_04_I",
+   "shape": "I",
+   "tag": "I",
+   "n": 10,
+   "draw_index": [
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+   ]
+  },
+  {
+   "chunk": "chunk_05_L",
+   "shape": "L",
+   "tag": "L",
+   "n": 10,
+   "draw_index": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "chunk": "chunk_06_L",
+   "shape": "L",
+   "tag": "L",
+   "n": 10,
+   "draw_index": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "chunk": "chunk_07_L",
+   "shape": "L",
+   "tag": "L",
+   "n": 10,
+   "draw_index": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ]
+  },
+  {
+   "chunk": "chunk_08_L",
+   "shape": "L",
+   "tag": "L",
+   "n": 10,
+   "draw_index": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ]
+  },
+  {
+   "chunk": "chunk_09_L",
+   "shape": "L",
+   "tag": "L",
+   "n": 10,
+   "draw_index": [
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+   ]
+  },
+  {
+   "chunk": "chunk_10_square",
+   "shape": "square",
+   "tag": "square",
+   "n": 10,
+   "draw_index": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "chunk": "chunk_11_square",
+   "shape": "square",
+   "tag": "square",
+   "n": 10,
+   "draw_index": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "chunk": "chunk_12_square",
+   "shape": "square",
+   "tag": "square",
+   "n": 10,
+   "draw_index": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ]
+  },
+  {
+   "chunk": "chunk_13_square",
+   "shape": "square",
+   "tag": "square",
+   "n": 10,
+   "draw_index": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ]
+  },
+  {
+   "chunk": "chunk_14_square",
+   "shape": "square",
+   "tag": "square",
+   "n": 10,
+   "draw_index": [
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+   ]
+  },
+  {
+   "chunk": "chunk_15_Z",
+   "shape": "Z",
+   "tag": "Z",
+   "n": 10,
+   "draw_index": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "chunk": "chunk_16_Z",
+   "shape": "Z",
+   "tag": "Z",
+   "n": 10,
+   "draw_index": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "chunk": "chunk_17_Z",
+   "shape": "Z",
+   "tag": "Z",
+   "n": 10,
+   "draw_index": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ]
+  },
+  {
+   "chunk": "chunk_18_Z",
+   "shape": "Z",
+   "tag": "Z",
+   "n": 10,
+   "draw_index": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ]
+  },
+  {
+   "chunk": "chunk_19_Z",
+   "shape": "Z",
+   "tag": "Z",
+   "n": 10,
+   "draw_index": [
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+   ]
+  },
+  {
+   "chunk": "chunk_20_small_tee",
+   "shape": "small_tee",
+   "tag": "small_tee",
+   "n": 10,
+   "draw_index": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "chunk": "chunk_21_small_tee",
+   "shape": "small_tee",
+   "tag": "small_tee",
+   "n": 10,
+   "draw_index": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "chunk": "chunk_22_small_tee",
+   "shape": "small_tee",
+   "tag": "small_tee",
+   "n": 10,
+   "draw_index": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ]
+  },
+  {
+   "chunk": "chunk_23_small_tee",
+   "shape": "small_tee",
+   "tag": "small_tee",
+   "n": 10,
+   "draw_index": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ]
+  },
+  {
+   "chunk": "chunk_24_small_tee",
+   "shape": "small_tee",
+   "tag": "small_tee",
+   "n": 10,
+   "draw_index": [
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+   ]
+  },
+  {
+   "chunk": "chunk_25_plus",
+   "shape": "+",
+   "tag": "plus",
+   "n": 10,
+   "draw_index": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "chunk": "chunk_26_plus",
+   "shape": "+",
+   "tag": "plus",
+   "n": 10,
+   "draw_index": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "chunk": "chunk_27_plus",
+   "shape": "+",
+   "tag": "plus",
+   "n": 10,
+   "draw_index": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ]
+  },
+  {
+   "chunk": "chunk_28_plus",
+   "shape": "+",
+   "tag": "plus",
+   "n": 10,
+   "draw_index": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ]
+  },
+  {
+   "chunk": "chunk_29_plus",
+   "shape": "+",
+   "tag": "plus",
+   "n": 10,
+   "draw_index": [
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+   ]
+  },
+  {
+   "chunk": "chunk_30_T",
+   "shape": "T",
+   "tag": "T",
+   "n": 10,
+   "draw_index": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "chunk": "chunk_31_T",
+   "shape": "T",
+   "tag": "T",
+   "n": 10,
+   "draw_index": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "chunk": "chunk_32_T",
+   "shape": "T",
+   "tag": "T",
+   "n": 10,
+   "draw_index": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+   ]
+  },
+  {
+   "chunk": "chunk_33_T",
+   "shape": "T",
+   "tag": "T",
+   "n": 10,
+   "draw_index": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ]
+  },
+  {
+   "chunk": "chunk_34_T",
+   "shape": "T",
+   "tag": "T",
+   "n": 10,
+   "draw_index": [
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+   ]
+  }
+ ]
+}

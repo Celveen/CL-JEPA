@@ -1,0 +1,33 @@
+# Architecture and optimization match checkpoints/pushobj_shape_shift/hydra.yaml and
+# AdaJEPA Table 3. Data: data/pushobj_bias_16k (pusht_noise replay with the calibrated
+# action-level contact bias b=9 px, sigma=10 px, source placement; 4 shapes x 4000 train,
+# 1000 val). 3 epochs as in App. A.2 (the released model_latest.pth is epoch 3); the
+# VQVAE decoder (visualisation only, stop-gradient input) trains in the last epoch, as
+# in the released run (decoder_start_epoch: 3).
+# Multi-GPU: batch_size is the effective batch; train.py splits it across processes.
+defaults:
+  - train
+  - override env: pusht
+  - override encoder: scratch_resnet_gem
+  - _self_
+
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: ${hydra:runtime.cwd}/checkpoints/pushobj_bias_16k_e3_seed0
+
+env:
+  name: pushobj
+  dataset:
+    data_path: ${hydra:runtime.cwd}/data/pushobj_bias_16k
+  num_workers: 8
+
+training:
+  epochs: 3
+  batch_size: 64
+  straighten: cos1e-2
+  decoder_start_epoch: 3
+  save_every_x_iterations: 5000   # extra model_e{epoch}_it{i}.pth; epoch-end saves unchanged
+  # Optional perceptual diagnostic only; does not enter the training loss.
+  eval_lpips: false

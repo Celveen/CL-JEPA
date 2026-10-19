@@ -1,4 +1,6 @@
 import os
+import json
+import random
 import time
 import hydra
 import torch
@@ -20,6 +22,7 @@ from hydra.types import RunMode
 from hydra.core.hydra_config import HydraConfig
 from datetime import timedelta
 from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 from metrics.image_metrics import eval_images
 from utils import slice_trajdict_with_t, cfg_to_dict, seed, sample_tensors
 import custom_resolvers  # noqa: F401  # Registers OmegaConf resolvers at import time.
@@ -72,6 +75,7 @@ class Trainer:
         self.base_path = os.path.dirname(os.path.abspath(__file__))
 
         self.num_reconstruct_samples = self.cfg.training.num_reconstruct_samples
+        self.eval_images = partial(eval_images, include_lpips=self.cfg.training.get("eval_lpips", True))
         self.total_epochs = self.cfg.training.epochs
         self.epoch = 0
         self.decoder_start_epoch = int(self.cfg.training.get("decoder_start_epoch", 1))
@@ -97,7 +101,7 @@ class Trainer:
             wandb_run_id = None
             if os.path.exists("hydra.yaml"):
                 existing_cfg = OmegaConf.load("hydra.yaml")
-                wandb_run_id = existing_cfg["wandb_run_id"]
+                wandb_run_id = existing_cfg.get("wandb_run_id")
                 log.info(f"Resuming Wandb run {wandb_run_id}")
 
             wandb_dict = OmegaConf.to_container(cfg, resolve=True)
@@ -143,7 +147,8 @@ class Trainer:
                 num_workers=self.cfg.env.num_workers,
                 collate_fn=None,
                 pin_memory=True,
-                persistent_workers=True,
+                persistent_workers=self.cfg.env.num_workers > 0,
+                generator=torch.Generator().manual_seed(cfg.training.seed + (101 if x == "train" else 102)),
             )
             for x in ["train", "valid"]
         }
@@ -182,9 +187,19 @@ class Trainer:
             ["decoder", "decoder_optimizer"] if self.train_decoder else []
         )
         self._keys_to_save += ["action_encoder", "proprio_encoder"]
+        if self.train_predictor and self.cfg.has_predictor:
+            self._keys_to_save += ["action_encoder_optimizer"]
 
         self.init_models()
         self.init_optimizers()
+        # Restore after initialization, which itself consumes random numbers.
+        if getattr(self, "_loaded_rng_state", None) is not None:
+            rng = self._loaded_rng_state
+            random.setstate(rng["python"])
+            np.random.set_state(rng["numpy"])
+            torch.set_rng_state(rng["torch"].cpu())
+            if torch.cuda.is_available() and rng.get("cuda") is not None:
+                torch.cuda.set_rng_state_all([s.cpu() for s in rng["cuda"]])
 
         self.epoch_log = OrderedDict()
 
@@ -224,7 +239,9 @@ class Trainer:
             and self.epoch >= self.decoder_start_epoch
         )
 
-    def save_ckpt(self):
+    def save_ckpt(self, tag=None):
+        """Epoch-boundary save (tag=None) updates model_latest/model_{epoch}, which
+        resume relies on; a mid-epoch save writes only checkpoints/{tag}.pth."""
         self.accelerator.wait_for_everyone()
         if self.accelerator.is_main_process:
             if not os.path.exists("checkpoints"):
@@ -238,10 +255,19 @@ class Trainer:
                     ckpt[k] = self.accelerator.unwrap_model(v)
                 else:
                     ckpt[k] = v
-            torch.save(ckpt, "checkpoints/model_latest.pth")
-            torch.save(ckpt, f"checkpoints/model_{self.epoch}.pth")
-            log.info("Saved model to {}".format(os.getcwd()))
-            ckpt_path = os.path.join(os.getcwd(), f"checkpoints/model_{self.epoch}.pth")
+            if self.accelerator.num_processes == 1:
+                ckpt["rng_state"] = {
+                    "python": random.getstate(), "numpy": np.random.get_state(),
+                    "torch": torch.get_rng_state(),
+                    "cuda": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None,
+                }
+            names = (f"{tag}.pth",) if tag else ("model_latest.pth", f"model_{self.epoch}.pth")
+            for name in names:
+                path = Path("checkpoints") / name
+                torch.save(ckpt, str(path) + ".tmp")
+                os.replace(str(path) + ".tmp", path)
+            log.info("Saved {} to {}".format(", ".join(names), os.getcwd()))
+            ckpt_path = os.path.join(os.getcwd(), "checkpoints", names[-1])
         else:
             ckpt_path = None
         model_name = self.cfg["saved_folder"].split("/")[-1]
@@ -249,10 +275,12 @@ class Trainer:
         return ckpt_path, model_name, model_epoch
 
     def load_ckpt(self, filename="model_latest.pth"):
-        ckpt = torch.load(filename)
+        ckpt = torch.load(filename, map_location="cpu", weights_only=False)
         self._loaded_optim_state = {}
         for k, v in ckpt.items():
-            if k.endswith("_optimizer") and isinstance(v, dict):
+            if k == "rng_state":
+                self._loaded_rng_state = v
+            elif k.endswith("_optimizer") and isinstance(v, dict):
                 self._loaded_optim_state[k] = v
             else:
                 self.__dict__[k] = v
@@ -282,20 +310,22 @@ class Trainer:
             )
         self._configure_encoder_trainability()
 
-        self.proprio_encoder = hydra.utils.instantiate(
-            self.cfg.proprio_encoder,
-            in_chans=self.datasets["train"].proprio_dim,
-            emb_dim=self.cfg.proprio_emb_dim,
-        )
+        if self.proprio_encoder is None:
+            self.proprio_encoder = hydra.utils.instantiate(
+                self.cfg.proprio_encoder,
+                in_chans=self.datasets["train"].proprio_dim,
+                emb_dim=self.cfg.proprio_emb_dim,
+            )
         proprio_emb_dim = self.proprio_encoder.emb_dim
         print(f"Proprio encoder type: {type(self.proprio_encoder)}")
         self.proprio_encoder = self.accelerator.prepare(self.proprio_encoder)
 
-        self.action_encoder = hydra.utils.instantiate(
-            self.cfg.action_encoder,
-            in_chans=self.datasets["train"].action_dim,
-            emb_dim=self.cfg.action_emb_dim,
-        )
+        if self.action_encoder is None:
+            self.action_encoder = hydra.utils.instantiate(
+                self.cfg.action_encoder,
+                in_chans=self.datasets["train"].action_dim,
+                emb_dim=self.cfg.action_emb_dim,
+            )
         action_emb_dim = self.action_encoder.emb_dim
         print(f"Action encoder type: {type(self.action_encoder)}")
 
@@ -473,7 +503,8 @@ class Trainer:
             self.monitor_thread.start()
 
         init_epoch = self.epoch + 1  # epoch starts from 1
-        for epoch in range(init_epoch, init_epoch + self.total_epochs):
+        for epoch in range(init_epoch, self.total_epochs + 1):
+            self._epoch_started_at = time.perf_counter()
             self.epoch = epoch
             if self.accelerator.is_main_process:
                 decoder_active = self.decoder_training_active()
@@ -537,7 +568,7 @@ class Trainer:
         slices = {
             "full": (None, None),
             "pred": (-self.model.num_pred, None),
-            "next1": (-self.model.num_pred, -self.model.num_pred + 1),
+            "next1": (-self.model.num_pred, (-self.model.num_pred + 1) or None),
         }
         for name, (start_idx, end_idx) in slices.items():
             z_out_slice = slice_trajdict_with_t(
@@ -567,6 +598,9 @@ class Trainer:
                 obs, act
             )
 
+            if not torch.isfinite(loss).all():
+                raise FloatingPointError(f"Non-finite training loss at epoch {self.epoch}, batch {i}")
+
             self.encoder_optimizer.zero_grad()
             if decoder_active:
                 self.decoder_optimizer.zero_grad()
@@ -594,7 +628,10 @@ class Trainer:
                 # only eval images when plotting due to speed
                 if self.cfg.has_predictor:
                     z_obs_out, z_act_out = self.model.separate_emb(z_out)
-                    z_gt = self.model.encode_obs(obs)
+                    # Diagnostic re-encoding must not retain a second encoder
+                    # graph across batches; it never contributes to backward.
+                    with torch.no_grad():
+                        z_gt = self.model.encode_obs(obs)
                     z_tgt = slice_trajdict_with_t(z_gt, start_idx=self.model.num_pred)
 
                     state_tgt = state[:, -self.model.num_hist :]  # (b, num_hist, dim)
@@ -612,7 +649,7 @@ class Trainer:
                     for t in range(
                         self.cfg.num_hist, self.cfg.num_hist + self.cfg.num_pred
                     ):
-                        img_pred_scores = eval_images(
+                        img_pred_scores = self.eval_images(
                             visual_out[:, t - self.cfg.num_pred], obs["visual"][:, t]
                         )
                         img_pred_scores = self.accelerator.gather_for_metrics(
@@ -626,7 +663,7 @@ class Trainer:
 
                 if visual_reconstructed is not None:
                     for t in range(obs["visual"].shape[1]):
-                        img_reconstruction_scores = eval_images(
+                        img_reconstruction_scores = self.eval_images(
                             visual_reconstructed[:, t], obs["visual"][:, t]
                         )
                         img_reconstruction_scores = self.accelerator.gather_for_metrics(
@@ -649,14 +686,15 @@ class Trainer:
                 )
 
             loss_components = {f"train_{k}": [v] for k, v in loss_components.items()}
-            self.logs_update(loss_components)
+            self.logs_update(loss_components, weight=obs["visual"].shape[0])
 
             if (
                 self.cfg.training.save_every_x_iterations > 0
+                and i > 0
                 and i % self.cfg.training.save_every_x_iterations == 0
             ):
                 self.logs_flash_iter(iteration=i)
-                self.save_ckpt()
+                self.save_ckpt(tag=f"model_e{self.epoch}_it{i}")
 
     @torch.no_grad()
     def val(self):
@@ -717,7 +755,7 @@ class Trainer:
                     for t in range(
                         self.cfg.num_hist, self.cfg.num_hist + self.cfg.num_pred
                     ):
-                        img_pred_scores = eval_images(
+                        img_pred_scores = self.eval_images(
                             visual_out[:, t - self.cfg.num_pred], obs["visual"][:, t]
                         )
                         img_pred_scores = self.accelerator.gather_for_metrics(
@@ -731,7 +769,7 @@ class Trainer:
 
                 if visual_reconstructed is not None:
                     for t in range(obs["visual"].shape[1]):
-                        img_reconstruction_scores = eval_images(
+                        img_reconstruction_scores = self.eval_images(
                             visual_reconstructed[:, t], obs["visual"][:, t]
                         )
                         img_reconstruction_scores = self.accelerator.gather_for_metrics(
@@ -753,7 +791,7 @@ class Trainer:
                     phase="valid",
                 )
             loss_components = {f"val_{k}": [v] for k, v in loss_components.items()}
-            self.logs_update(loss_components)
+            self.logs_update(loss_components, weight=obs["visual"].shape[0])
 
     def openloop_rollout(
         self, dset, num_rollout=10, rand_start_end=True, min_horizon=2, mode="train"
@@ -845,15 +883,16 @@ class Trainer:
         }
         return logs
 
-    def logs_update(self, logs):
+    def logs_update(self, logs, weight=1):
         for key, value in logs.items():
             if isinstance(value, torch.Tensor):
-                value = value.detach().cpu().item()
+                value = [value.detach().cpu().item()]
+            value = [v.detach().cpu().item() if isinstance(v, torch.Tensor) else v for v in value]
             length = len(value)
             count, total = self.epoch_log.get(key, (0, 0.0))
             self.epoch_log[key] = (
-                count + length,
-                total + sum(value),
+                count + length * weight,
+                total + sum(value) * weight,
             )
 
     def logs_flash(self, step):
@@ -863,24 +902,36 @@ class Trainer:
             to_log = sum / count
             epoch_log[key] = to_log
         epoch_log["epoch"] = step
+        epoch_log["epoch_seconds"] = time.perf_counter() - self._epoch_started_at
         log.info(f"Epoch {self.epoch}  Training loss: {epoch_log['train_loss']:.4f}  \
                 Validation loss: {epoch_log['val_loss']:.4f}")
 
         if self.accelerator.is_main_process:
             self.wandb_run.log(epoch_log)
+            with open("metrics.jsonl", "a") as f:
+                f.write(json.dumps(epoch_log, allow_nan=False) + "\n")
         self.epoch_log = OrderedDict()
 
     def logs_flash_iter(self, iteration):
+        # Mean over the iterations since the previous flush in this epoch, so a
+        # mid-epoch rise in the loss is visible instead of diluted by the epoch mean.
+        previous = getattr(self, "_iter_log_mark", {})
+        if iteration < getattr(self, "_iter_log_last", -1):
+            previous = {}  # new epoch: epoch_log was reset
         iter_log = OrderedDict()
-        for key, value in self.epoch_log.items():
-            count, sum = value
-            to_log = sum / count
-            iter_log[key] = to_log
+        for key, (count, total) in self.epoch_log.items():
+            prev_count, prev_total = previous.get(key, (0, 0.0))
+            if count > prev_count:
+                iter_log[key] = (total - prev_total) / (count - prev_count)
+        self._iter_log_mark, self._iter_log_last = dict(self.epoch_log), iteration
         iter_log["iter"] = iteration
         iter_log["epoch"] = self.epoch
+        iter_log["seconds"] = time.perf_counter() - self._epoch_started_at
 
         if self.accelerator.is_main_process:
             self.wandb_run.log(iter_log)
+            with open("metrics_iter.jsonl", "a") as f:
+                f.write(json.dumps(iter_log, allow_nan=False) + "\n")
 
     def plot_samples(
         self,

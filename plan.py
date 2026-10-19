@@ -327,11 +327,30 @@ class PlanWorkspace:
         observations = []
         env_info = []
 
+        def _load_traj(i):
+            """(obs, act, state, env_info) for trajectory i.
+
+            Released states-only datasets (e.g. point_maze_medium_states) carry
+            states and actions but no rendered observations. Both callers of
+            this method discard the returned observations -- only states,
+            actions and env_info are consumed -- so fall back to a visual-free
+            load rather than failing on the missing frames.
+            """
+            try:
+                return self.dset[i]
+            except (ValueError, FileNotFoundError, KeyError):
+                frames = list(range(int(self.dset.get_seq_length(i))))
+                obs = {"proprio": self.dset.proprios[i, frames]}
+                return obs, self.dset.actions[i, frames], self.dset.states[i, frames], {}
+
+        def _obs_len(obs):
+            return obs["visual"].shape[0] if "visual" in obs else obs["proprio"].shape[0]
+
         # Check if any trajectory is long enough
         valid_traj = [
-            self.dset[i][0]["visual"].shape[0]
+            _obs_len(_load_traj(i)[0])
             for i in range(len(self.dset))
-            if self.dset[i][0]["visual"].shape[0] >= traj_len
+            if _obs_len(_load_traj(i)[0]) >= traj_len
         ]
         if len(valid_traj) == 0:
             raise ValueError("No trajectory in the dataset is long enough.")
@@ -341,8 +360,8 @@ class PlanWorkspace:
             max_offset = -1
             while max_offset < 0:  # filter out traj that are not long enough
                 traj_id = random.randint(0, len(self.dset) - 1)
-                obs, act, state, e_info = self.dset[traj_id]
-                max_offset = obs["visual"].shape[0] - traj_len
+                obs, act, state, e_info = _load_traj(traj_id)
+                max_offset = _obs_len(obs) - traj_len
             state = state.numpy()
             offset = random.randint(0, max_offset)
             obs = {
@@ -426,8 +445,12 @@ class PlanWorkspace:
         segments = data["segments"]
         self.goal_H = data["traj_len"]
 
-        rng = random.Random(self.cfg_dict["seed"])
-        chosen = rng.sample(segments, min(self.n_evals, len(segments)))
+        if self.cfg_dict.get("segments_order", "random") == "file":
+            # Ordered deployment streams: run the first n_evals segments as stored.
+            chosen = segments[: self.n_evals]
+        else:
+            rng = random.Random(self.cfg_dict["seed"])
+            chosen = rng.sample(segments, min(self.n_evals, len(segments)))
 
         # Pad 5-dim states to 7-dim (add zero velocities) if needed
         raw_init = np.array([s["states"][0] for s in chosen])
@@ -516,6 +539,12 @@ class PlanWorkspace:
         logs, successes, _, _ = self.evaluator.eval_actions(
             actions.detach(), action_len, save_video=True, filename="output_final"
         )
+        # Preserve paired episode outcomes for reproducible comparisons/reports.
+        np.savez_compressed(
+            "final_eval_results.npz", successes=np.asarray(successes, dtype=bool),
+            actions=actions.detach().cpu().numpy(), action_len=np.asarray(action_len),
+            state_0=self.state_0, state_g=self.state_g,
+        )
         logs = {f"final_eval/{k}": v for k, v in logs.items()}
         self.wandb_run.log(logs)
         logs_entry = {
@@ -533,13 +562,21 @@ class PlanWorkspace:
 
 def load_ckpt(snapshot_path, device):
     from models.dino import DinoV2Encoder
-    _ = DinoV2Encoder('dinov2_vits14', 'x_norm_patchtokens')
+    try:
+        # Warms the torch.hub cache so DINO-based checkpoints unpickle cleanly.
+        # Not needed for checkpoints with other encoders (e.g. SmallResNetGeM),
+        # and upstream dinov2@main needs Python >= 3.10, so it fails on 3.9.
+        _ = DinoV2Encoder('dinov2_vits14', 'x_norm_patchtokens')
+    except Exception as e:
+        warnings.warn(f"DinoV2 hub warm-up skipped ({type(e).__name__}: {e})")
     with snapshot_path.open("rb") as f:
         payload = torch.load(f, map_location=device)
     loaded_keys = []
     result = {}
     for k, v in payload.items():
-        if k in ALL_MODEL_KEYS:
+        # A run with has_decoder=false stores decoder=None; skip it so load_model
+        # takes its own "no decoder" path instead of crashing on None.to(device).
+        if k in ALL_MODEL_KEYS and v is not None:
             loaded_keys.append(k)
             result[k] = v.to(device)
     result["epoch"] = payload["epoch"]

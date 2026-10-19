@@ -69,12 +69,13 @@ def psnr(img1, img2): # batched input only
     mse = (((img1 - img2)) ** 2).reshape(img1.shape[0], -1).mean()
     return 20 * torch.log10(1.0 / torch.sqrt(mse))
 
-def eval_images(img1, img2, item_only=True):
+def eval_images(img1, img2, item_only=True, include_lpips=True):
     metrics = {}
     metrics['l1'] = l1_loss(img1, img2)
     metrics['l2'] = l2_loss(img1, img2)
     metrics['ssim'] = ssim(img1, img2)
     metrics['mse'] = mse(img1, img2)
     metrics['psnr'] = psnr(img1, img2)
-    metrics['lpips'] = lpips(img1, img2, net_type='vgg')
+    if include_lpips:
+        metrics['lpips'] = lpips(img1, img2, net_type='vgg')
     return metrics

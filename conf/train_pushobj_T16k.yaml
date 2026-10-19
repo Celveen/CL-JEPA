@@ -1,0 +1,38 @@
+# Visual-shift world model (AdaJEPA App. A.2, PushObj-T-16k): shape T only, 16k trajectories,
+# 3 epochs; visual corruptions and colour changes are applied only at test time.
+# Data: data/pushobj_T16k_bias (pusht_noise replay with the calibrated action-level contact
+# bias b=9 px, sigma=10 px, source placement; 16000 train + 1000 val, second draws fill the
+# sources lost to the quality gate). Architecture and optimization as train_pushobj_bias16k.
+# Multi-GPU: batch_size is the effective batch; train.py splits it across processes.
+defaults:
+  - train
+  - override env: pusht
+  - override encoder: scratch_resnet_gem
+  - _self_
+
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: ${hydra:runtime.cwd}/checkpoints/pushobj_T16k_bias_e3_seed0
+
+env:
+  name: pushobj
+  dataset:
+    data_path: ${hydra:runtime.cwd}/data/pushobj_T16k_bias
+  num_workers: 8
+
+# No decoder, as in the released pusht_visual_shift checkpoint. The decoder only serves
+# visualisation (stop-gradient input), so this does not change the world model; checkpoints
+# load with decoder=None and need decode_for_viz=false at planning time.
+has_decoder: false
+model:
+  train_decoder: false
+
+training:
+  epochs: 3
+  batch_size: 64
+  straighten: cos1e-2
+  save_every_x_iterations: 5000   # extra model_e{epoch}_it{i}.pth; epoch-end saves unchanged
+  # Optional perceptual diagnostic only; does not enter the training loss.
+  eval_lpips: false

@@ -121,6 +121,20 @@ class PushTDataset(TrajDataset):
         obs = {"visual": image, "proprio": proprio}
         return obs, act, state, {'shape': shape}
 
+    def load_visual_frames(self, idx, frames):
+        """Decode and preprocess only `frames` (TrajSlicerDataset's fast path).
+
+        Same values as get_frames(idx, range(start, end))["visual"][::frameskip]:
+        decoding is deterministic and the transform works frame by frame, but the
+        frames the slicer drops are no longer resized and normalized (~6x less CPU
+        per training window)."""
+        reader = VideoReader(str(self.data_path / "obses" / f"episode_{idx:03d}.mp4"), num_threads=1)
+        image = reader.get_batch(list(frames)) / 255.0  # THWC
+        image = rearrange(image, "T H W C -> T C H W")
+        if self.transform:
+            image = self.transform(image)
+        return image
+
     def __getitem__(self, idx):
         return self.get_frames(idx, range(self.get_seq_length(idx)))
 

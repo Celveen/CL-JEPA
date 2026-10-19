@@ -49,7 +49,10 @@ class VWorldModel(nn.Module):
         self.num_proprio_repeat = num_proprio_repeat
         self.proprio_dim = proprio_dim * num_proprio_repeat 
         self.action_dim = action_dim * num_action_repeat 
-        self.emb_dim = self.encoder.emb_dim + (self.action_dim + self.proprio_dim) * (concat_dim) # Not used
+        # Multi-GPU training hands in DDP-wrapped modules; read attributes from the
+        # inner module but keep calling the wrapper so gradients stay synchronised.
+        encoder_module = getattr(encoder, "module", encoder)
+        self.emb_dim = encoder_module.emb_dim + (self.action_dim + self.proprio_dim) * (concat_dim) # Not used
         self.straighten = False
         self.straighten_scale = 0.0
         self.curvature_mode = None
@@ -101,10 +104,10 @@ class VWorldModel(nn.Module):
         assert concat_dim == 0 or concat_dim == 1, f"concat_dim {concat_dim} not supported."
         log.info("Model emb_dim: %s", self.emb_dim)
 
-        if "dino" in self.encoder.name:
+        if "dino" in encoder_module.name:
             decoder_scale = 16  # from vqvae
             num_side_patches = image_size // decoder_scale
-            self.encoder_image_size = num_side_patches * encoder.patch_size
+            self.encoder_image_size = num_side_patches * encoder_module.patch_size
             self.encoder_transform = transforms.Compose(
                 [transforms.Resize(self.encoder_image_size)]
             )
@@ -271,7 +274,9 @@ class VWorldModel(nn.Module):
             step1 = v1.norm(dim=-1)
             step2 = v2.norm(dim=-1)
             mask = (step1 > step_thresh) & (step2 > step_thresh)
-            loss = loss[mask]
+            # Stationary windows have no defined turning angle. An empty mean
+            # produces NaN, even though these windows should contribute zero.
+            return (loss * mask).sum() / mask.sum().clamp_min(1)
         return loss.mean()
 
     def total_curvature(self, features, mode="cos"):
@@ -314,9 +319,12 @@ class VWorldModel(nn.Module):
         if self.predictor is not None:
             z_pred = self.predict(z_src)
             if decoder_enabled:
-                obs_pred, diff_pred = self.decode(
-                    z_pred.detach()
-                )  # recon loss should only affect decoder
+                # This prediction decode is diagnostic only: decoder_loss_pred
+                # is logged, but never added to the optimized loss below.
+                # Keeping its unused graph retains a full decoder activation
+                # batch until the next forward, causing avoidable GPU OOMs.
+                with torch.no_grad():
+                    obs_pred, diff_pred = self.decode(z_pred.detach())
                 visual_pred = obs_pred['visual']
                 recon_loss_pred = self.decoder_criterion(visual_pred, visual_tgt)
                 decoder_loss_pred = (

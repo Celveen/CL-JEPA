@@ -1,0 +1,84 @@
+# Experiment 0: is AdaJEPA's planning gain information or perturbation?
+# Same planning and adaptation settings as adajepa_plan_gd_pushobj.yaml, at the paper's
+# main protocol (30 MPC steps), with the planner swapped for ProbeMPCPlanner: probe.mode
+# picks how each replan's weight change is formed (planning/adajepa_probe.py), and every
+# replan logs diagnostics into per_iter_logs.json. Runs go through scripts/exp0_run.py,
+# which sets hydra.run.dir per arm.
+defaults:
+  - _self_
+  - override hydra/launcher: submitit_slurm
+
+hydra:
+  run:
+    dir: eval_outputs/exp0/${planner.probe.mode}_seed${seed}
+  sweep:
+    dir: eval_outputs/exp0/${planner.probe.mode}_seed${seed}
+    subdir: ${hydra.job.num}
+  launcher:
+    submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+    nodes: 1
+    tasks_per_node: 1
+    cpus_per_task: 16
+    mem_gb: 64
+    gres: "gpu:1"
+    qos: "normal"
+    timeout_min: 720
+
+ckpt_base_path: ./checkpoints # model dir (contains hydra.yaml + checkpoints/)
+model_name: null
+model_epoch: latest
+
+seed: 100
+n_evals: 50
+goal_source: 'segments'
+eval_data_path: null          # data/pushobj_eval/val_<shape>/plan_targets.pkl
+ood_corruption: null
+ood_level: null
+env_kwargs_override: null
+goal_H: 25
+n_plot_samples: 10
+decode_for_viz: false         # no per-replan videos; the diagnostics are in per_iter_logs.json
+num_start_frames: 1
+
+debug_dset_init: False
+
+objective:
+  _target_: planning.objectives.create_objective_fn
+  alpha: 1
+  base: 2
+  mode: staged
+
+planner:
+  _target_: planning.adajepa_probe.ProbeMPCPlanner
+  max_iter: 30
+  n_taken_actions: 5
+
+  adapt:                           # the AdaJEPA step every adapting mode starts from
+    lr: 5e-4
+    steps: 1
+    optimizer: adam
+    finetune_every: 1
+    replay_buffer: recent5
+    finetune_encoder: true
+    encoder_lr: 1e-5
+    last_layer_only: true
+    encoder_last_layer_only: true
+
+  probe:
+    mode: grad                     # none | grad | ascent | random_sign | random_fixed | other_data
+    seed: 0                        # random streams are seeded per episode from this and the eval seed
+    scale: 1.0                     # multiplies the applied change
+    bank_dir: null                 # other_data: data/exp0_bank (scripts/exp0_build_bank.py)
+    bank_shapes: null              # other_data: e.g. [T] (same shape) or the other shapes
+  reuse_actions: true
+
+  sub_planner:
+    target: planning.gd.GDPlanner
+    lr: 0.1
+    sample_type: zero
+    action_noise: 0
+    horizon: 25
+    var_scale: 1
+    opt_steps: 100
+    eval_every: -1
+  name: exp0_plan_gd_pushobj

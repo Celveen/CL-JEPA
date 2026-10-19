@@ -2,7 +2,11 @@ __pycache__
 *.pyc
 figures
 *outputs*
-data
+data/*
+# stream target files and the seen-shape probe are small and needed to run the continual experiments
+!data/cont_streams/
+data/cont_streams/smoke_*
+!data/seen_probe/
 wandb
 checkpoints
 *.slurm
@@ -10,3 +14,8 @@ checkpoints
 # env/wall/data is a source package (WallDatasetConfig, layouts), not a dataset dir
 !env/wall/data/
 !env/wall/data/*.py
+
+# experiment reports and packaged zips stay local
+reports
+dist
+!scripts/cont_frozen_chunks.sh

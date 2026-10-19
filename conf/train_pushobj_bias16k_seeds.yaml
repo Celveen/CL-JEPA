@@ -1,0 +1,35 @@
+# Training-seed repeats of train_pushobj_bias16k: same data (data/pushobj_bias_16k),
+# architecture and optimization (AdaJEPA Table 3, 3 epochs); only training.seed changes.
+# The VQVAE decoder is not trained here. It decodes z.detach() with its own optimizer and
+# no shared gradient clipping, so it does not change the world model, and evaluation
+# runs with decode_for_viz=false. Leaving it out saves the ~1 h it costs in its epoch.
+#   accelerate launch ... train.py --config-name train_pushobj_bias16k_seeds training.seed=1
+# Multi-GPU: batch_size is the effective batch; train.py splits it across processes.
+defaults:
+  - train
+  - override env: pusht
+  - override encoder: scratch_resnet_gem
+  - _self_
+
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: ${hydra:runtime.cwd}/checkpoints/pushobj_bias_16k_e3_seed${training.seed}
+
+env:
+  name: pushobj
+  dataset:
+    data_path: ${hydra:runtime.cwd}/data/pushobj_bias_16k
+  num_workers: 8
+
+has_decoder: false
+model:
+  train_decoder: false
+
+training:
+  epochs: 3
+  batch_size: 64
+  straighten: cos1e-2
+  save_every_x_iterations: 5000   # extra model_e{epoch}_it{i}.pth; epoch-end saves unchanged
+  eval_lpips: false
