@@ -21,6 +21,21 @@ reads use the online rule (lowest first-3-transition error among theta0 and matu
           are absorbed by the mature domain whose learner predicts their stored episodes best (median
           ratio <= 0.8); two mature domains pool only if a candidate trained on both is no worse than
           either own learner on 4 held-out validation episodes per side (and better than theta0)
+  v7      online v7 (planning/continual_v7.py): familiar episodes are never written and read theta0; an
+          episode that read a learner is written there unless rejected (ratio > 1.2); otherwise it joins the
+          mature domain whose learner predicts it best if ratio <= 0.9 (not counted as a validation); then,
+          for theta0-read episodes, the fingerprint join and a pending pool needing 5 aligned episodes; v5's
+          symmetric merge with eps 0.5, k 2; every 25 episodes immature domains a mature learner predicts
+          within 0.8 (and pending episodes within 0.9) are absorbed into its domain
+  v7nr    v7 without the familiarity gate on reads (reads as v5)
+  v7b     v7 with v5's founding (3 pending episodes) and absorption limited to fragments (< 6 episodes,
+          fewer than 3 validations, so never mature): on S7b3, v7's slower founding left the I domain
+          immature when I returned, so I episodes went to the square-led domain and the I domain was absorbed
+  v7c     v7b with v5's merge between mature domains (eps 0.3, k 3): v7b's relaxed merge (eps 0.5, k 2) merged
+          the I domain into the square-led one when I returned
+  v5a     v5 writing and merging unchanged, familiar data reads theta0, and every 25 episodes fragments (< 6
+          episodes, < 3 validations) that a mature learner predicts within 0.8 are absorbed (no pending joins):
+          v7/v7b/v7c's easier writes moved I episodes into the square-led domain and degraded the I learner
   --knn   additionally records, before each episode, which learner a KNN on the start+goal encoder
           features would read first (references: earlier episodes labelled by the domain they were
           written to, or theta0 when familiar), as CLSKnnReadMPCPlanner does online
@@ -78,12 +93,13 @@ class R:
                        "created": self.block, "reads": 0, "writes": 0, "absorbed": []}
         return d
 
-    def write(self, d, i, fp):
+    def write(self, d, i, fp, val=True):
         D = self.dom[d]
         D["writes"] += 1
         if D["L"] is not None:
             r = self.ratio(D, i)
-            D["val"].append(r)
+            if val:  # joins are chosen because the learner predicts them well: not a validation
+                D["val"].append(r)
             D["valrec"].append((i, r))
         D["members"].append(i)
         if fp:
@@ -113,6 +129,8 @@ class R:
             rec["read"] = tag if D is not None and self.mature(D) else None
         else:
             mats = {dk: D for dk, D in self.dom.items() if self.mature(D)}
+            if self.v in ("v7", "v7b", "v7c", "v5a") and self.fam[i] <= self.thr90:
+                mats = {}  # data theta0 already predicts reads theta0
             if mats:
                 e0 = self.first3(self.theta0, i)
                 errs = {dk: self.first3(D["L"]["m"], i) for dk, D in mats.items()}
@@ -138,6 +156,8 @@ class R:
             self.write(tag, i, fp=True)
             rec.update(write=tag, rule="oracle")
             return rec
+        if self.v in ("v7", "v7nr", "v7b", "v7c"):
+            return self._write_v7(rec, pending_m=3 if self.v in ("v7b", "v7c") else 5)
         fam = self.fam[i]
         rd = rec["read"]
         if rd is not None and self.dom[rd]["kind"] == "free":
@@ -148,7 +168,7 @@ class R:
                 self.write(rd, i, fp=False)
                 rec.update(write=rd, rule="learner")
                 return rec
-        if self.v in ("v4", "v5", "v5B", "v5M"):
+        if self.v in ("v4", "v5", "v5B", "v5M", "v5a"):
             if fam <= self.thr90:
                 rec["rule"] = "familiar"
                 return rec
@@ -174,6 +194,90 @@ class R:
             self.pending = (self.pending + [i])[-40:]
             rec["rule"] = "pending"
         return rec
+
+    def _write_v7(self, rec, join_ratio=0.9, reject=1.2, pending_m=5):
+        i, rd = rec["i"], rec["read"]
+        if self.fam[i] <= self.thr90:
+            rec["rule"] = "familiar"
+            return rec
+        rejected = None
+        if rd is not None:
+            if rec["read_ratio"] <= reject:
+                self.write(rd, i, fp=False)
+                rec.update(write=rd, rule="learner")
+                return rec
+            rejected = rd
+        fit = sorted((self.ratio(D, i), dk) for dk, D in self.dom.items() if self.mature(D) and dk != rejected)
+        if fit and fit[0][0] <= join_ratio:
+            self.write(fit[0][1], i, fp=rd is None, val=False)
+            rec.update(write=fit[0][1], rule="join")
+            return rec
+        if rd is not None:
+            rec["rule"] = "rejected"
+            return rec
+        cands = sorted(((self.centroid_cos(i, D), dk) for dk, D in self.dom.items() if D["kind"] == "free" and D["fp"]), reverse=True)
+        for c, dk in cands:
+            if c < 0.10:
+                break
+            D = self.dom[dk]
+            if D["L"] is not None and self.ratio(D, i) > reject:
+                continue
+            self.write(dk, i, fp=True)
+            rec.update(write=dk, rule="direction")
+            return rec
+        nb = [p for p in self.pending if self.G[i, p] >= 0.05]
+        if len(nb) + 1 >= pending_m:
+            group = nb[: pending_m - 1] + [i]
+            self.pending = [p for p in self.pending if p not in group]
+            d = self.new_domain()
+            D = self.dom[d]  # as online: all members first, then the learner catches up on them (no validations)
+            for j in group:
+                D["writes"] += 1
+                D["members"].append(j)
+                D["fp"].append(j)
+            D["L"] = self.S.new_learner()
+            self.S.train(D["L"], [self.Z[j] for j in D["members"]], self.S.steps * len(D["members"]))
+            rec.update(write=d, rule="new_from_pending")
+        else:
+            self.pending = (self.pending + [i])[-40:]
+            rec["rule"] = "pending"
+        return rec
+
+    def absorb_v7(self, absorb_ratio=0.8, join_ratio=0.9, frag_only=False, pending=True):
+        """Immature domains, then pending episodes, that a mature learner predicts well move into its domain."""
+        gm = lambda xs: math.exp(float(np.mean(np.log(np.maximum(xs, 1e-12)))))
+        mats = [dk for dk, D in self.dom.items() if self.mature(D)]
+        if not mats:
+            return
+        scored = []
+        for dk, D in list(self.dom.items()):
+            if dk in mats or not D["members"]:
+                continue
+            if frag_only and (len(D["members"]) >= 6 or len(D["val"]) >= 3):
+                continue  # a domain with its own validation history is left to the merge rule
+            r = {m: gm([self.ratio(self.dom[m], j) for j in D["members"]]) for m in mats}
+            best = min(r, key=r.get)
+            if r[best] <= absorb_ratio:
+                scored.append((dk, best, r[best]))
+        for dk, best, r in scored:  # merged after scoring, as online
+            n = len(self.dom[dk]["members"])
+            vals_gone = self.dom[dk].get("vals", [])
+            self._merge(best, dk, "absorb", ratio=round(r, 3))
+            self.dom[best]["vals"] = self.dom[best].get("vals", []) + vals_gone
+            self.S.train(self.dom[best]["L"], [self.Z[j] for j in self.dom[best]["members"]], self.S.steps * n)
+        if not pending:
+            return
+        stay = []
+        for p in self.pending:
+            r = {m: self.ratio(self.dom[m], p) for m in mats}
+            best = min(r, key=r.get)
+            if r[best] <= join_ratio:
+                self.write(best, p, fp=True, val=False)
+                self.merges.append({"block": self.block, "from": "pending", "into": best, "n": 1,
+                                    "tags": {self.tags[p]: 1}, "how": "pending_join", "ratio": round(r[best], 3)})
+            else:
+                stay.append(p)
+        self.pending = stay
 
     # ------------------------------------------------------------------ KNN early read (evaluation)
     def knn_choice(self, i, k=5, vote=0.6, min_ref=3):
@@ -430,14 +534,24 @@ def main():
             feats += [np.concatenate([x, y]) for x, y in zip(f0, fg)]
     router = R(a.variant, Slow(wm), wm.predictor, G, np.array(fam), float(np.percentile(cal, 80)), float(np.percentile(cal, 90)), Z, tags,
                feats=feats)
-    recs = []
+    recs, n_done = [], 0
     for k, b in enumerate(blocks):
         router.block = k
         for i in [j for j, e in enumerate(eps) if e["block"] == k]:
             rec = router.step(i)
-            if a.variant == "v5":
+            if a.variant in ("v5", "v5a"):
                 router.v5_validate_all(rec)
                 router._merge_v5()
+            if a.variant == "v5a":
+                n_done += 1
+                if n_done % 25 == 0:
+                    router.absorb_v7(frag_only=True, pending=False)
+            if a.variant in ("v7", "v7nr", "v7b", "v7c"):
+                router.v5_validate_all(rec)
+                router._merge_v5(**({} if a.variant == "v7c" else {"eps": 0.5, "k": 2}))
+                n_done += 1
+                if n_done % 25 == 0:
+                    router.absorb_v7(frag_only=a.variant in ("v7b", "v7c"))
             router.add_ref(rec)
             recs.append(rec)
         router.block_end()
