@@ -79,7 +79,12 @@ NAMED_ARMS = {  # domain-separated memories (planning/continual.py: MemoryMPCPla
                   "planner.continual.merge_eps=0.5", "planner.continual.merge_k=2",
                   f"planner.continual.seen_probe={ROOT / 'data/seen_probe/pushobj_bias_16k_e3_seed0.pt'}",
                   "planner.continual.seen_conf=0.95"],
-    # two independent extensions of v5 (planning/continual_v5x.py)
+    # independent extensions of v5 (planning/continual_v5x.py)
+    "cls5s_free": ["planner._target_=planning.continual_v5x.CLSStickyReadMPCPlanner", "planner.continual.write=delta",
+                   "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
+                   "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
+                   "planner.continual.pending_m=3", "planner.continual.tau_new=0.05", "planner.continual.fp_unit=true",
+                   "planner.continual.merge_eps=0.3", "planner.continual.merge_k=3"],
     "cls5k_free": ["planner._target_=planning.continual_v5x.CLSKnnReadMPCPlanner", "planner.continual.write=delta",
                    "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
                    "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",

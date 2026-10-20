@@ -11,7 +11,7 @@
 | `planning/continual.py` | 持续学习基础：`ContinualMPCPlanner`（快慢权重）、`CLSMPCPlanner`（v4：每个领域一份慢学习器 + 无标签路由 + 熟悉度门 + 确认池 + 成熟门 + 写入门） |
 | `planning/continual_merge.py` | v5：v4 + 对称验证合并 |
 | `planning/continual_v6.py` | **v6**：v5 + 见过形状按分类器写入各自领域（先学、成熟后才调用）+ 写入与合并稍放宽 |
-| `planning/continual_fixw.py`、`continual_slow.py`、`continual_v5x.py` | 消融：固定 w 快慢权重、多步损失、重点回放、KNN 早读、验证式合并 |
+| `planning/continual_fixw.py`、`continual_slow.py`、`continual_v5x.py` | 消融：固定 w 快慢权重、多步损失、重点回放、沿用上一回合领域的早读（`cls5s_free`）、KNN 早读、验证式合并 |
 | `planning/adajepa_probe.py` | 实验 0 用的探针规划器（也是持续学习规划器的基类） |
 | `planning/escape.py`、`scripts/escape_*.py` | 第二条线：规划器卡住时的脱困策略 |
 | `scripts/cont_run_stream.py` | 按段串行跑一条流（各组的超参数在 `NAMED_ARMS`）；`--independent` 让 AdaJEPA 基线各段并行 |
@@ -48,14 +48,17 @@ python scripts/cont_train_seen_probe.py --ckpt /abs/ckpt --val-data /abs/训练�
 python scripts/cont_run_stream.py --stream S7t3 --ws 0 --independent --no-base-probes \
     --chain-gpus 2,3,4,5,6,7 --probe-gpus 2 --extra planner.continual.save_deltas=false
 
-# v5（同学的参数）与 v6：持续学习要串行，各占一张卡
+# v5（同学的参数）、v6、v5 + 早读：持续学习要串行，各占一张卡
 python scripts/cont_run_stream.py --stream S7t3 --arms cls5_free --no-base-probes --chain-gpus 1 --probe-gpus 1 \
     --keep-states 6 13 --extra planner.continual.save_deltas=false
 python scripts/cont_run_stream.py --stream S7t3 --arms cls6_free --no-base-probes --chain-gpus 0 --probe-gpus 0 \
     --keep-states 6 13 --extra planner.continual.save_deltas=false
+# v5 + 沿用上一回合领域的早读（第一次规划前直接用上一回合最后读的学习器）
+python scripts/cont_run_stream.py --stream S7t3 --arms cls5s_free --no-base-probes --chain-gpus 3 --probe-gpus 3 \
+    --keep-states 6 13 --extra planner.continual.save_deltas=false
 
 # 分析：逐 episode 配对、按轮次统计、领域与门控统计
-python scripts/cont_rounds.py --stream S7t3 --arms w0 cls5_free cls6_free --frozen "" --out reports/cont_S7t3
+python scripts/cont_rounds.py --stream S7t3 --arms w0 cls5_free cls6_free cls5s_free --frozen "" --out reports/cont_S7t3
 ```
 
 说明：

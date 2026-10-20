@@ -1,4 +1,13 @@
-"""Two independent extensions of v5 (CLSMergeMPCPlanner), each changing one thing.
+"""Independent extensions of v5 (CLSMergeMPCPlanner), each changing one thing.
+
+CLSStickyReadMPCPlanner -- early read by carrying over the previous episode's read.
+    v5's first plan always uses theta0. Here an episode starts on the learner the previous
+    episode ended on (followed through merges), provided it is still mature; consecutive
+    episodes tend to come from the same task, and no label is needed. The usual error-based
+    reroute over the first 3 replans still runs, so a wrong carry-over (typically the first
+    episode after a task switch) is corrected after the first executed segment. Writing is
+    unchanged. Offline (reports/cont_S7b3/v5x_offline_check.md) this picked the episode's own
+    domain about as often as v5's read after replans 1-3 did.
 
 CLSKnnReadMPCPlanner -- early read by KNN on encoder features.
     v5 decides what to plan with only after the first transitions (reroute over replans 1-3),
@@ -28,6 +37,53 @@ import torch
 
 from .adajepa_probe import ProbeMPCPlanner
 from .continual_merge import CLSMergeMPCPlanner
+
+
+class CLSStickyReadMPCPlanner(CLSMergeMPCPlanner):
+    def __init__(self, continual=None, **kwargs):
+        if not hasattr(self, "_last_read"):
+            self._last_read = None  # the learner the previous episode ended on (None: theta0)
+        self._early = None
+        super().__init__(continual=continual, **kwargs)
+
+    def _carried(self):
+        """The previous episode's final read, followed through merges; None unless it may be read now."""
+        key = self._last_read
+        while key is not None and self.domains.get(key, {}).get("merged_into"):
+            key = self.domains[key]["merged_into"]
+        return key if key in self._learners() else None
+
+    def _plan_single(self, **kw):
+        # as CLSMPCPlanner._plan_single, plus the carried-over read before the first plan
+        with torch.no_grad():
+            for p, q in zip(self._pred_params, self._pred0):
+                p.copy_(q)
+            for p, q in zip(self._params, self._init):
+                p.copy_(q)
+        self._base, self._route_log = None, []
+        self._start = [p.detach().clone() for p in self._params]
+        self._early = self._carried()
+        if self._early is not None:
+            self._load_base(self._early, carry_fast=False)
+        out = ProbeMPCPlanner._plan_single(self, **kw)
+        self._end_episode()
+        return out
+
+    def _end_episode(self):
+        super()._end_episode()
+        rec = self._ep_records[-1]
+        rec["early_read"] = self._early
+        self._last_read = rec["read"]
+
+    def _save_state(self, path):
+        super()._save_state(path)
+        st = torch.load(path, map_location="cpu")
+        st["last_read"] = self._last_read
+        torch.save(st, path)
+
+    def _load_state(self, path):
+        super()._load_state(path)
+        self._last_read = torch.load(path, map_location="cpu").get("last_read")
 
 
 class CLSKnnReadMPCPlanner(CLSMergeMPCPlanner):
