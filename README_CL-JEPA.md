@@ -11,7 +11,7 @@
 | `planning/continual.py` | 持续学习基础：`ContinualMPCPlanner`（快慢权重）、`CLSMPCPlanner`（v4：每个领域一份慢学习器 + 无标签路由 + 熟悉度门 + 确认池 + 成熟门 + 写入门） |
 | `planning/continual_merge.py` | v5：v4 + 对称验证合并 |
 | `planning/continual_v6.py` | v6：v5 + 见过形状按分类器写入各自领域（先学、成熟后才调用）+ 写入与合并稍放宽 |
-| `planning/continual_v7.py` | **v7**：v5 + 写入优先进已有领域（读了学习器就写入，否则按预测能力加入成熟领域）+ 开新领域要 5 个回合 + 定期把未成熟领域并入成熟领域 + 熟悉的数据只用原参数；熟悉的回合照旧不学，不用任何形状标签 |
+| `planning/continual_v7.py` | **v7 系列**，同一个规划器的三组配置，都不用形状标签，熟悉的回合照旧不学、也不调用学习器：`cls7_free`（写入优先进已有领域 + 开新领域要 5 个回合 + 定期吸收未成熟领域 + 合并放宽）、`cls7c_free`（同上，但开新领域和合并按 v5，只吸收小碎片）、`cls5a_free`（写入和合并完全按 v5，只加小碎片吸收）。离线对比见 `reports/cont_S7b3/v7_offline_replay.md` |
 | `planning/continual_fixw.py`、`continual_slow.py`、`continual_v5x.py` | 消融：固定 w 快慢权重、多步损失、重点回放、沿用上一回合领域的早读（`cls5s_free`）、KNN 早读、验证式合并 |
 | `planning/adajepa_probe.py` | 实验 0 用的探针规划器（也是持续学习规划器的基类） |
 | `planning/escape.py`、`scripts/escape_*.py` | 第二条线：规划器卡住时的脱困策略 |
@@ -57,12 +57,16 @@ python scripts/cont_run_stream.py --stream S7t3 --arms cls6_free --no-base-probe
 # v5 + 沿用上一回合领域的早读（第一次规划前直接用上一回合最后读的学习器）
 python scripts/cont_run_stream.py --stream S7t3 --arms cls5s_free --no-base-probes --chain-gpus 3 --probe-gpus 3 \
     --keep-states 6 13 --extra planner.continual.save_deltas=false
-# v7
+# v7 系列：三组可以分别放在三张卡上同时跑
 python scripts/cont_run_stream.py --stream S7t3 --arms cls7_free --no-base-probes --chain-gpus 0 --probe-gpus 0 \
+    --keep-states 6 13 --extra planner.continual.save_deltas=false
+python scripts/cont_run_stream.py --stream S7t3 --arms cls7c_free --no-base-probes --chain-gpus 1 --probe-gpus 1 \
+    --keep-states 6 13 --extra planner.continual.save_deltas=false
+python scripts/cont_run_stream.py --stream S7t3 --arms cls5a_free --no-base-probes --chain-gpus 2 --probe-gpus 2 \
     --keep-states 6 13 --extra planner.continual.save_deltas=false
 
 # 分析：逐 episode 配对、按轮次统计、领域与门控统计
-python scripts/cont_rounds.py --stream S7t3 --arms w0 cls5_free cls6_free cls5s_free cls7_free --frozen "" --out reports/cont_S7t3
+python scripts/cont_rounds.py --stream S7t3 --arms w0 cls5_free cls6_free cls5s_free cls7_free cls7c_free cls5a_free --frozen "" --out reports/cont_S7t3
 ```
 
 说明：

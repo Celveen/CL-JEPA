@@ -1,4 +1,13 @@
-"""v7: v5 (the classmate's settings) with writing that prefers existing domains, and fewer new ones.
+"""v7 family: v5 (the classmate's settings) with fewer new domains, as three arms of one planner.
+
+  cls7_free   items 1-5 below (writes prefer existing domains, slower founding, absorption, relaxed merge)
+  cls7c_free  as cls7_free, but v5's founding (3 pending episodes), v5's merge (merge_k 3, merge_eps 0.3),
+              and absorption limited to fragments (absorb_frag)
+  cls5a_free  v5's writing and merging unchanged (learner_win, join_ratio 0, no pending joins), plus item 1
+              and fragment absorption
+Offline on S7b3 (reports/cont_S7b3/v7_offline_replay.md) easier writes moved I episodes into the
+square-led domain and worsened the I learner (0.59-0.81 vs 0.52) while cls5a_free kept v5's read
+quality; online, sharing one learner between I and square helped square on S7t3, so all three are kept.
 
 Everything not listed is v5 (CLSMergeMPCPlanner with tau 0.10, familiar_thr 0.0146, tau_new 0.05, fp_unit,
 mature_k 3, mature_ratio 0.9, reject_ratio 1.2, slow learners as CLS). Familiar episodes (theta0 error over
@@ -21,6 +30,9 @@ rules carry over to visual shifts unchanged.
    rarely align, so they get no new episodes and could otherwise neither mature nor merge (v6 on S7t3: 11
    such fragments; the final small_tee learner predicted 7 of them at 0.43-0.79 of theta0).
 5. Merging between mature domains as v5, with merge_k / merge_eps from the config (2 / 0.5 in cls7_free).
+Switches: learner_win keeps v5's learner rule (the read learner must also beat theta0's 1-step error on
+the whole episode); absorb_frag > 0 limits absorption to domains with fewer episodes and fewer than
+mature_k validations (never mature); absorb_pending: false leaves the pending pool alone.
 Join and absorption writes do not count as validations: those episodes were chosen because the learner
 predicts them well, so they would bias the maturity gate.
 """
@@ -46,6 +58,9 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
         self.join_ratio = float(c.get("join_ratio", 0.9))
         self.absorb_ratio = float(c.get("absorb_ratio", 0.8))
         self.absorb_every = int(c.get("absorb_every", 25))
+        self.learner_win = bool(c.get("learner_win", False))
+        self.absorb_frag = int(c.get("absorb_frag", 0))
+        self.absorb_pending = bool(c.get("absorb_pending", True))
         super().__init__(continual=continual, **kwargs)
         if self.write_mode == "oracle":
             raise ValueError("CLSv7MPCPlanner routes label-free; use CLSMPCPlanner for write=oracle")
@@ -88,9 +103,12 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
         self._val_cache = dict(ratios)
         rule, key, rejected, new_members = ("familiar" if familiar else "none"), None, [], []
         if not familiar:
+            lost = False  # learner_win: the read learner did not beat theta0 on the whole episode
             if base is not None:
                 if self._rejects(base, z):
                     rejected.append(base)
+                elif self.learner_win and not self._wins(base, z):
+                    lost = True
                 else:
                     rule, key = "learner", base
             if key is None:  # the mature domain whose learner predicts the episode best
@@ -113,7 +131,7 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
                 if key is None:
                     rule, key, new_members = self._pend(delta, z)
             elif key is None:
-                rule = "rejected"
+                rule = "none" if lost else "rejected"
         slow_loss, val_ratio = float("nan"), float("nan")
         if key is not None:
             d = self.domains.setdefault(key, {"n": 0, "tags": {}, "replay": [], "fp_sum": None, "fp_n": 0,
@@ -146,6 +164,11 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
                         for dk, d in self.domains.items() if d["n"] >= 2},
         })
 
+    @torch.no_grad()
+    def _wins(self, key, z):
+        """v5's learner rule: the domain's learner has a lower 1-step error than theta0 on the whole episode."""
+        return float(self._latent_loss(self.domains[key]["learner"], z)) < float(self._latent_loss(self._pred0_module, z))
+
     def _add(self, d, tag, z, fp):
         d["n"] += 1
         d["tags"][tag] = d["tags"].get(tag, 0) + 1
@@ -176,6 +199,8 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
             for dk, d in list(self.domains.items()):
                 if d["n"] == 0 or d.get("merged_into") or dk in mature:
                     continue
+                if self.absorb_frag > 0 and (d["n"] >= self.absorb_frag or len(d.get("val", [])) >= self.mature_k):
+                    continue  # a domain with its own validation history is left to the merge rule
                 e0 = [max(self._rollout_err(self._pred0_module, z), 1e-12) for z in d["replay"]]
                 r = {m: _gmean([self._rollout_err(self.domains[m]["learner"], z) / e for z, e in zip(d["replay"], e0)])
                      for m in mature}
@@ -184,6 +209,8 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
                     out.append({"what": "domain", "gone": dk, "keep": best, "ratio": r[best], "tags": dict(d["tags"])})
         for a in out:  # merged after scoring, so every ratio refers to the learners as they were
             self._merge(a["keep"], a["gone"])
+        if not self.absorb_pending:
+            return out
         dev = self._params[0].device
         stay = []
         for m in self.pending:

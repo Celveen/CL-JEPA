@@ -114,6 +114,9 @@ planner:
     join_ratio: 0.9                # CLSv7MPCPlanner: join the best mature domain if its learner's 5-step ratio is <= this
     absorb_ratio: 0.8              # CLSv7MPCPlanner: absorb an immature domain a mature learner predicts within this of theta0
     absorb_every: 25               # CLSv7MPCPlanner: episodes between absorption checks (0 = off)
+    learner_win: false             # CLSv7MPCPlanner: v5's learner rule (read learner must also beat theta0's 1-step error)
+    absorb_frag: 0                 # CLSv7MPCPlanner: absorb only domains with fewer episodes (and < mature_k validations); 0 = any immature
+    absorb_pending: true           # CLSv7MPCPlanner: absorption also moves well-predicted pending episodes
   reuse_actions: true
 
   sub_planner:
