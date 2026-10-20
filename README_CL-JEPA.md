@@ -10,7 +10,8 @@
 |---|---|
 | `planning/continual.py` | 持续学习基础：`ContinualMPCPlanner`（快慢权重）、`CLSMPCPlanner`（v4：每个领域一份慢学习器 + 无标签路由 + 熟悉度门 + 确认池 + 成熟门 + 写入门） |
 | `planning/continual_merge.py` | v5：v4 + 对称验证合并 |
-| `planning/continual_v6.py` | **v6**：v5 + 见过形状按分类器写入各自领域（先学、成熟后才调用）+ 写入与合并稍放宽 |
+| `planning/continual_v6.py` | v6：v5 + 见过形状按分类器写入各自领域（先学、成熟后才调用）+ 写入与合并稍放宽 |
+| `planning/continual_v7.py` | **v7**：v5 + 写入优先进已有领域（读了学习器就写入，否则按预测能力加入成熟领域）+ 开新领域要 5 个回合 + 定期把未成熟领域并入成熟领域 + 熟悉的数据只用原参数；熟悉的回合照旧不学，不用任何形状标签 |
 | `planning/continual_fixw.py`、`continual_slow.py`、`continual_v5x.py` | 消融：固定 w 快慢权重、多步损失、重点回放、沿用上一回合领域的早读（`cls5s_free`）、KNN 早读、验证式合并 |
 | `planning/adajepa_probe.py` | 实验 0 用的探针规划器（也是持续学习规划器的基类） |
 | `planning/escape.py`、`scripts/escape_*.py` | 第二条线：规划器卡住时的脱困策略 |
@@ -32,7 +33,7 @@ PushObj 不需要 MuJoCo，导入时出现 mujoco 缺失的警告可以忽略。
 
 把 PushObj 世界模型的 checkpoint 目录（含 `hydra.yaml` 和 `checkpoints/model_3.pth`）放到 `checkpoints/pushobj_bias_16k_e3_seed0/`，或者运行时用 `--ckpt` 指向它。
 
-见过形状分类器和熟悉度门槛（`familiar_thr` = 0.0146）都是为这份权重标定的。**换权重时两者都要重做：**
+熟悉度门槛（`familiar_thr` = 0.0146）和见过形状分类器（只有 v6 用）都是为这份权重标定的。**换权重时要重做：**
 
 ```bash
 python scripts/cont_calibrate_familiarity.py --ckpt /abs/ckpt --epoch 3 --val-data /abs/训练数据/val   # 取 90 分位
@@ -56,13 +57,17 @@ python scripts/cont_run_stream.py --stream S7t3 --arms cls6_free --no-base-probe
 # v5 + 沿用上一回合领域的早读（第一次规划前直接用上一回合最后读的学习器）
 python scripts/cont_run_stream.py --stream S7t3 --arms cls5s_free --no-base-probes --chain-gpus 3 --probe-gpus 3 \
     --keep-states 6 13 --extra planner.continual.save_deltas=false
+# v7
+python scripts/cont_run_stream.py --stream S7t3 --arms cls7_free --no-base-probes --chain-gpus 0 --probe-gpus 0 \
+    --keep-states 6 13 --extra planner.continual.save_deltas=false
 
 # 分析：逐 episode 配对、按轮次统计、领域与门控统计
-python scripts/cont_rounds.py --stream S7t3 --arms w0 cls5_free cls6_free cls5s_free --frozen "" --out reports/cont_S7t3
+python scripts/cont_rounds.py --stream S7t3 --arms w0 cls5_free cls6_free cls5s_free cls7_free --frozen "" --out reports/cont_S7t3
 ```
 
 说明：
-- 每段 50 个 episode 时，一条持续学习链约需 18–20 小时；AdaJEPA 基线并行后几个小时即可完成。
+- 每段 50 个 episode 时，一条持续学习链约需 15–16 小时；AdaJEPA 基线并行后几个小时即可完成。
+- `cont_rounds.py` 只比较都跑完的段，各组的输出要放在同一个 `eval_outputs/cont_S7t3/` 下（别的服务器上跑的组，把它的目录拷过来即可）。
 - 内存少于 40 GB 的机器加 `--min-free-gb 8`。
 - 输出在 `eval_outputs/cont_S7t3/<组>/chunk_xx_<形状>/`。中断后重跑同一命令即可续跑。
 - 每个 episode 的路由记录在 `continual_episodes.jsonl`。

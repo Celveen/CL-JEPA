@@ -110,6 +110,10 @@ planner:
     mergeb_max_steps: 300          # CLSMergeBMPCPlanner: training steps of the candidate learner
     seen_probe: null               # CLSv6MPCPlanner: linear probe over the training shapes (scripts/cont_train_seen_probe.py)
     seen_conf: 0.95                # CLSv6MPCPlanner: probe confidence for a familiar episode to go to its training shape's domain
+    familiar_read: true            # CLSv7MPCPlanner: data within familiar_thr reads theta0 while the read is re-decided
+    join_ratio: 0.9                # CLSv7MPCPlanner: join the best mature domain if its learner's 5-step ratio is <= this
+    absorb_ratio: 0.8              # CLSv7MPCPlanner: absorb an immature domain a mature learner predicts within this of theta0
+    absorb_every: 25               # CLSv7MPCPlanner: episodes between absorption checks (0 = off)
   reuse_actions: true
 
   sub_planner:
