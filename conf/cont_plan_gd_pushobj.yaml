@@ -127,5 +127,6 @@ planner:
     horizon: 25
     var_scale: 1
     opt_steps: 100
+    cuda_graph: false              # replay the GD step as a CUDA graph (planning/gd.py): bitwise-identical results, ~13x faster planning
     eval_every: -1
   name: cont_plan_gd_pushobj

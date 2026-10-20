@@ -13,6 +13,7 @@ def create_objective_fn(alpha, base, mode="last"):
         loss: tensor (B, )
     """
     metric = nn.MSELoss(reduction="none")
+    coeffs_cache = {}  # (T, device) -> coeffs; a host-to-device copy cannot run inside CUDA graph capture
 
     def objective_fn_last(z_obs_pred, z_obs_tgt, step=None):
         """
@@ -41,8 +42,11 @@ def create_objective_fn(alpha, base, mode="last"):
             loss: tensor (B, )
         """
         if coeffs is None:
-            coeffs = np.array([base**i for i in range(z_obs_pred["visual"].shape[1])], dtype=np.float32)
-            coeffs = torch.tensor(coeffs / np.sum(coeffs)).to(z_obs_pred["visual"].device)
+            key = (z_obs_pred["visual"].shape[1], z_obs_pred["visual"].device)
+            if key not in coeffs_cache:
+                c = np.array([base**i for i in range(key[0])], dtype=np.float32)
+                coeffs_cache[key] = torch.tensor(c / np.sum(c)).to(key[1])
+            coeffs = coeffs_cache[key]
         else:
             coeffs = coeffs.to(z_obs_pred["visual"].device)
 
