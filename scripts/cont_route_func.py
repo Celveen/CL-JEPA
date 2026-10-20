@@ -36,6 +36,8 @@ reads use the online rule (lowest first-3-transition error among theta0 and matu
   v5a     v5 writing and merging unchanged, familiar data reads theta0, and every 25 episodes fragments (< 6
           episodes, < 3 validations) that a mature learner predicts within 0.8 are absorbed (no pending joins):
           v7/v7b/v7c's easier writes moved I episodes into the square-led domain and degraded the I learner
+  v6a     v6 without its seen-shape probe: v6's relaxed learner writes and merge (eps 0.5, k 2), v5's founding,
+          familiar data reads theta0, fragment absorption as v5a (no functional or pending joins)
   --knn   additionally records, before each episode, which learner a KNN on the start+goal encoder
           features would read first (references: earlier episodes labelled by the domain they were
           written to, or theta0 when familiar), as CLSKnnReadMPCPlanner does online
@@ -129,7 +131,7 @@ class R:
             rec["read"] = tag if D is not None and self.mature(D) else None
         else:
             mats = {dk: D for dk, D in self.dom.items() if self.mature(D)}
-            if self.v in ("v7", "v7b", "v7c", "v5a") and self.fam[i] <= self.thr90:
+            if self.v in ("v7", "v7b", "v7c", "v5a", "v6a") and self.fam[i] <= self.thr90:
                 mats = {}  # data theta0 already predicts reads theta0
             if mats:
                 e0 = self.first3(self.theta0, i)
@@ -156,8 +158,9 @@ class R:
             self.write(tag, i, fp=True)
             rec.update(write=tag, rule="oracle")
             return rec
-        if self.v in ("v7", "v7nr", "v7b", "v7c"):
-            return self._write_v7(rec, pending_m=3 if self.v in ("v7b", "v7c") else 5)
+        if self.v in ("v7", "v7nr", "v7b", "v7c", "v6a"):
+            return self._write_v7(rec, pending_m=3 if self.v in ("v7b", "v7c", "v6a") else 5,
+                                  join_ratio=0.0 if self.v == "v6a" else 0.9)
         fam = self.fam[i]
         rd = rec["read"]
         if rd is not None and self.dom[rd]["kind"] == "free":
@@ -546,12 +549,12 @@ def main():
                 n_done += 1
                 if n_done % 25 == 0:
                     router.absorb_v7(frag_only=True, pending=False)
-            if a.variant in ("v7", "v7nr", "v7b", "v7c"):
+            if a.variant in ("v7", "v7nr", "v7b", "v7c", "v6a"):
                 router.v5_validate_all(rec)
                 router._merge_v5(**({} if a.variant == "v7c" else {"eps": 0.5, "k": 2}))
                 n_done += 1
                 if n_done % 25 == 0:
-                    router.absorb_v7(frag_only=a.variant in ("v7b", "v7c"))
+                    router.absorb_v7(frag_only=a.variant in ("v7b", "v7c", "v6a"), pending=a.variant != "v6a")
             router.add_ref(rec)
             recs.append(rec)
         router.block_end()

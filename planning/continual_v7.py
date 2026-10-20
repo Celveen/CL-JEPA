@@ -5,6 +5,8 @@
               and absorption limited to fragments (absorb_frag)
   cls5a_free  v5's writing and merging unchanged (learner_win, join_ratio 0, no pending joins), plus item 1
               and fragment absorption
+  cls6a_free  v6 without its seen-shape probe: v6's relaxed learner writes (item 2 without the join) and
+              relaxed merge (item 5), plus item 1 and fragment absorption (no joins, v5's founding)
 Offline on S7b3 (reports/cont_S7b3/v7_offline_replay.md) easier writes moved I episodes into the
 square-led domain and worsened the I learner (0.59-0.81 vs 0.52) while cls5a_free kept v5's read
 quality; online, sharing one learner between I and square helped square on S7t3, so all three are kept.

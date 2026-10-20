@@ -108,6 +108,17 @@ NAMED_ARMS = {  # domain-separated memories (planning/continual.py: MemoryMPCPla
                    "planner.continual.learner_win=true", "planner.continual.absorb_ratio=0.8",
                    "planner.continual.absorb_every=25", "planner.continual.absorb_frag=6",
                    "planner.continual.absorb_pending=false"],
+    # v6a = v6 without the seen-shape probe (familiar episodes never written, as v5) + relaxed learner writes and
+    # relaxed merge (merge_k 2, merge_eps 0.5) as v6 + familiar data reads theta0 + fragment absorption (no joins)
+    "cls6a_free": ["planner._target_=planning.continual_v7.CLSv7MPCPlanner", "planner.continual.write=delta",
+                   "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
+                   "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
+                   "planner.continual.pending_m=3", "planner.continual.tau_new=0.05", "planner.continual.fp_unit=true",
+                   "planner.continual.merge_eps=0.5", "planner.continual.merge_k=2",
+                   "planner.continual.familiar_read=true", "planner.continual.join_ratio=0",
+                   "planner.continual.learner_win=false", "planner.continual.absorb_ratio=0.8",
+                   "planner.continual.absorb_every=25", "planner.continual.absorb_frag=6",
+                   "planner.continual.absorb_pending=false"],
     # independent extensions of v5 (planning/continual_v5x.py)
     "cls5s_free": ["planner._target_=planning.continual_v5x.CLSStickyReadMPCPlanner", "planner.continual.write=delta",
                    "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
