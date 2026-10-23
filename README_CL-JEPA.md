@@ -79,3 +79,53 @@ python scripts/cont_rounds.py --stream S7t3 --arms w0 cls5_free cls6_free cls5s_
 - 每个 episode 的路由记录在 `continual_episodes.jsonl`。
 
 冒烟测试（每段只跑 1 个 episode）：在上面的命令里加 `--max-episodes 1 --root /tmp/smoke`。
+
+## 多种子、五轮与冻结评测
+
+**数据流**（`scripts/cont_build_seed_stream.py`，需要作者的测试片段 `data/pushobj_eval/`；生成好的流已在 `data/cont_streams/` 中）：
+
+| 流 | 每轮的测试种子 | 用途 |
+|---|---|---|
+| `S7t3` / `S7t5` | 100, 200, 300（`S7t5` 再加 1000, 1100） | 原流 / 五轮版本，前 3 轮逐字节相同 |
+| `S7t3s400` / `S7t5s400` | 400, 500, 600（再加 1200, 1300） | 第二组种子 |
+| `S7t3s700` / `S7t5s700` | 700, 800, 900（再加 1400, 1500） | 第三组种子 |
+| `H7t3` | 2000, 2100, 2200 | 留出评测：`--exclude S7t5 S7t5s400 S7t5s700`，与上面所有流的目标都不重合 |
+
+```bash
+python scripts/cont_build_seed_stream.py --name S7t5s400 --seeds 400 500 600 1200 1300
+python scripts/cont_build_seed_stream.py --name H7t3 --seeds 2000 2100 2200 --exclude S7t5 S7t5s400 S7t5s700
+```
+
+**规划器**：GD 加 `--extra planner.sub_planner.cuda_graph=true`（与 eager 逐位一致，见 README_cudagraph.md）；CEM 用论文设置：
+`--extra planner.sub_planner.target=planning.cem.CEMPlanner +planner.sub_planner.topk=30 +planner.sub_planner.num_samples=200 planner.sub_planner.opt_steps=10`。CEM 的输出放在另一个 `--root`（如 `eval_outputs/cont_S7t3s400_cem`），以免和 GD 的同名组冲突。
+
+**五轮续跑**：用五轮的流、原来的 `--root`，持续学习链会从第 3 轮结束时保存的状态（`chunk_20`）接着跑：
+
+```bash
+python scripts/cont_run_stream.py --stream S7t5s400 --root eval_outputs/cont_S7t3s400 --arms cls6a_free --no-base-probes \
+    --chain-gpus 0 --probe-gpus 0 --keep-states 6 13 20 27 --extra planner.continual.save_deltas=false planner.sub_planner.cuda_graph=true
+```
+
+**冻结评测（只读）**：`planner.continual.read_only=true` 时，`CLSv7MPCPlanner`（v6a、v7 系列）照常读取学习器、做 AdaJEPA 快适应，但不写入、不训练、不合并，也不保存状态，所以各段互相独立。`cont_run_stream.py --independent --state-in <continual_state.pt>` 会对每一段都从同一个冻结状态出发并行评测：
+
+```bash
+# v6a 第 5 轮的冻结权重，在留出流上评测
+python scripts/cont_run_stream.py --stream H7t3 --root eval_outputs/cmp_gd_v6a_s400 --arms cls6a_free --independent \
+    --state-in eval_outputs/cont_S7t3s400/cls6a_free/chunk_34_T/continual_state.pt --no-base-probes \
+    --chain-gpus 0,1 --probe-gpus 0 --extra planner.continual.save_deltas=false planner.sub_planner.cuda_graph=true
+# AdaJEPA 官方形状权重（AdaJEPA Google Drive 的 checkpoints/pushobj_shape_shift.zip，解压到 checkpoints/）
+python scripts/cont_run_stream.py --stream H7t3 --root eval_outputs/cmp_gd_official --ws 0 --independent \
+    --ckpt checkpoints/pushobj_shape_shift --epoch latest --no-base-probes \
+    --chain-gpus 2,3 --probe-gpus 2 --extra planner.continual.save_deltas=false planner.sub_planner.cuda_graph=true
+```
+
+注意：冻结时学习器若恰好不在成熟状态（最近 `mature_k` 次验证比的平均高于 `mature_ratio`），评测期间不会再验证，整段都只读 θ0。
+
+**出图**（论文风格，PDF + PNG，写到 `reports/figs/`；`reports/figs/fonts/` 下有 TrueType 字体时使用它，例如 Google Fonts 的 Arimo，否则用 DejaVu Sans）：
+
+```bash
+python scripts/fig_rounds.py                                 # 三组种子的五轮逐轮成功率：v6a 对 AdaJEPA，GD 与 CEM 各一张
+python scripts/cmp_official_stats.py && python scripts/fig_cmp_official.py   # 冻结 v6a 对官方权重：总体与各形状
+```
+
+`fig_rounds.py` 默认读 `eval_outputs/cont_<流>`（GD）和 `eval_outputs/cont_<流>_cem`（CEM）；某条流的输出在别处时用 `--root gd:S7t3=/路径` 指定。
