@@ -11,7 +11,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib import font_manager as fm  # noqa: E402
 
-BLUE, GREY = "#1f5fae", "#6b7280"  # v6a / reference method
+BLUE, GREY = "#1f5fae", "#6b7280"  # ours / reference method
 
 
 def setup(font_dir=None):

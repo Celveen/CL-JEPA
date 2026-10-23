@@ -1,8 +1,9 @@
-"""Paper-style figures: round-by-round success of v6a (online continual learning) vs AdaJEPA, GD and CEM.
+"""Paper-style figures: round-by-round success of ours (online continual learning, arm cls6a_free) vs AdaJEPA (arm
+w0), GD and CEM.
 
 Each planner has three seed streams (S7t3, S7t3s400, S7t3s700) run for five rounds (5-round manifests S7t5,
 S7t5s400, S7t5s700); a round is 7 shapes x 50 episodes. Lines are the mean over the three streams with a light
-+-1 s.e.m. band (n = 3 streams); the arrow at round 5 marks v6a - AdaJEPA in points when that gap is significant. Per-round paired McNemar tests
++-1 s.e.m. band (n = 3 streams); the arrow at round 5 marks ours - AdaJEPA in points when that gap is significant. Per-round paired McNemar tests
 (pooled episodes) go to rounds_summary.{csv,md,json} rather than onto the figure. Only rounds that every stream
 has finished for both methods are drawn. Writes {gd,cem}_rounds{,_split}.{pdf,png} and the summary to --out.
 
@@ -33,7 +34,7 @@ STREAMS = {  # planner -> [(label, 5-round manifest, default output root)]
     "cem": [("S7t3", "S7t5", "eval_outputs/cont_S7t3_cem"), ("S7t3s400", "S7t5s400", "eval_outputs/cont_S7t3s400_cem"),
             ("S7t3s700", "S7t5s700", "eval_outputs/cont_S7t3s700_cem")],
 }
-ARMS = {"cls6a_free": "v6a (ours)", "w0": "AdaJEPA"}
+ARMS = {"cls6a_free": "Ours", "w0": "AdaJEPA"}  # figure labels: no internal arm names
 TITLE = {"gd": "GD", "cem": "CEM"}
 
 
@@ -88,7 +89,7 @@ def summarize(planner, roots):
                          **{f"{arm}_mean": float(np.mean(v)) for arm, v in rates.items()},
                          **{f"{arm}_sem": float(np.std(v, ddof=1) / np.sqrt(len(v))) for arm, v in rates.items()},
                          **{f"{arm}_streams": [round(t, 1) for t in v] for arm, v in rates.items()},
-                         "diff": float(np.mean(rates["cls6a_free"]) - np.mean(rates["w0"])), "only_v6a": b, "only_ada": c,
+                         "diff": float(np.mean(rates["cls6a_free"]) - np.mean(rates["w0"])), "only_ours": b, "only_ada": c,
                          "p": mcnemar_p(b, c)})
         out["groups"][g] = rows
     return out
@@ -164,18 +165,18 @@ def main():
         plt.close(fig)
 
     # the numbers behind the figures
-    lines = ["planner,group,round,n_episodes,v6a_mean,v6a_sem,adajepa_mean,adajepa_sem,diff_pp,only_v6a,only_adajepa,"
-             "p_mcnemar,v6a_per_stream,adajepa_per_stream"]
+    lines = ["planner,group,round,n_episodes,ours_mean,ours_sem,adajepa_mean,adajepa_sem,diff_pp,only_ours,only_adajepa,"
+             "p_mcnemar,ours_per_stream,adajepa_per_stream"]
     md = ["# Round-by-round success (mean over 3 seed streams ± s.e.m.)", "",
-          "Numbers = v6a − AdaJEPA (points); p = McNemar on the round's pooled episodes.", ""]
+          "Numbers = Ours − AdaJEPA (points); p = McNemar on the round's pooled episodes.", ""]
     for p, S in summ.items():
         md += [f"## {TITLE[p]} (streams: {', '.join(S['streams'])}; rounds drawn: {S['rounds']})", "",
-               "| group | round | v6a | AdaJEPA | v6a − AdaJEPA | McNemar p |", "|---|---:|---:|---:|---:|---:|"]
+               "| group | round | Ours | AdaJEPA | Ours − AdaJEPA | McNemar p |", "|---|---:|---:|---:|---:|---:|"]
         for g in ("all", "unseen", "seen"):
             for row in S["groups"][g]:
                 lines.append(",".join(str(x) for x in [
                     p, g, row["round"], row["n"], f"{row['cls6a_free_mean']:.2f}", f"{row['cls6a_free_sem']:.2f}",
-                    f"{row['w0_mean']:.2f}", f"{row['w0_sem']:.2f}", f"{row['diff']:.2f}", row["only_v6a"], row["only_ada"],
+                    f"{row['w0_mean']:.2f}", f"{row['w0_sem']:.2f}", f"{row['diff']:.2f}", row["only_ours"], row["only_ada"],
                     f"{row['p']:.3g}", "/".join(map(str, row["cls6a_free_streams"])), "/".join(map(str, row["w0_streams"]))]))
                 md.append(f"| {g} | {row['round']} | {row['cls6a_free_mean']:.1f} ± {row['cls6a_free_sem']:.1f} | "
                           f"{row['w0_mean']:.1f} ± {row['w0_sem']:.1f} | {row['diff']:+.1f} | {row['p']:.2g} |")
@@ -186,7 +187,7 @@ def main():
     for p, S in summ.items():
         print(p, "rounds drawn:", S["rounds"])
         for row in S["groups"]["all"]:
-            print(f"   round {row['round']}: v6a {row['cls6a_free_mean']:.1f}±{row['cls6a_free_sem']:.1f}  "
+            print(f"   round {row['round']}: ours {row['cls6a_free_mean']:.1f}±{row['cls6a_free_sem']:.1f}  "
                   f"AdaJEPA {row['w0_mean']:.1f}±{row['w0_sem']:.1f}  diff {row['diff']:+.1f}  p={row['p']:.2g}")
 
 

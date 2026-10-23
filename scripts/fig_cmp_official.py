@@ -1,9 +1,9 @@
-"""Paper-style figures: official AdaJEPA shape weights vs v6a frozen at round 5, on the held-out stream H7t3.
+"""Paper-style figures: official AdaJEPA shape weights vs ours frozen at round 5, on the held-out stream H7t3.
 
-Bars are the mean over experiments (official: 3 test seeds; v6a: round-5 states x 3 seeds); the number above a
-pair is the paired difference v6a - official in points (blue when its 95% bootstrap interval excludes 0; the
+Bars are the mean over experiments (official: 3 test seeds; ours: round-5 states x 3 seeds); the number above a
+pair is the paired difference ours - official in points (blue when its 95% bootstrap interval excludes 0; the
 per-shape figure shows only those). Unseen shapes are shaded and starred. Reads the statistics written by
-scripts/cmp_official_stats.py.
+scripts/cmp_official_stats.py, where ours is keyed "v6a" (internal name, never shown in a figure).
 
     python scripts/cmp_official_stats.py && python scripts/fig_cmp_official.py
     # -> reports/figs/cmp_overall.{pdf,png} (all / seen / unseen), reports/figs/cmp_shapes.{pdf,png} (per shape)
@@ -21,12 +21,13 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 C = {"official": "#c4c9d0", "v6a": fig_style.BLUE}
-LBL = {"official": "AdaJEPA (official weights)", "v6a": "v6a, round 5 (ours)"}
+LBL = {"official": "AdaJEPA (official weights)", "v6a": "Ours (round 5)"}
 TITLE = {"gd": "GD", "cem": "CEM"}
+SHAPE = {"square": "Square", "small_tee": "Small T"}  # tick labels; the letter shapes keep their id
 
 
 def bars(ax, P, keys, names, width=0.36, band=None, label="all"):
-    """Grouped bars (official, v6a); the gap v6a - official above each pair (label="all") or only where its 95%
+    """Grouped bars (official, ours); the gap ours - official above each pair (label="all") or only where its 95%
     interval excludes 0 (label="sig")."""
     x = np.arange(len(keys))
     if band:
@@ -79,7 +80,7 @@ def main():
         fig.savefig(out / f"cmp_overall.{ext}", bbox_inches="tight")
     plt.close(fig)
 
-    names = [s.replace("small_tee", "small T") + ("*" if s not in seen else "") for s in shapes]
+    names = [SHAPE.get(s, s) + ("*" if s not in seen else "") for s in shapes]
     fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.2), sharey=True)
     for ax, p in zip(axes, ("gd", "cem")):
         bars(ax, D["planners"][p], shapes, names, width=0.38, band=lambda k: k not in seen, label="sig")
