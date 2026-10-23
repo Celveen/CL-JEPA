@@ -44,6 +44,7 @@ class ContinualMPCPlanner(ProbeMPCPlanner):
         self.write_w = float(c.get("w", 0.0))
         self.tag = c.get("tag")
         self.state_out = c.get("state_out") or "continual_state.pt"
+        self.read_only = bool(c.get("read_only", False))
         self.memory_size = int(c.get("memory_size", 30))
         self.save_deltas = bool(c.get("save_deltas", False))
         self.save_frames = bool(c.get("save_frames", False))
@@ -93,7 +94,8 @@ class ContinualMPCPlanner(ProbeMPCPlanner):
 
     def plan(self, obs_0, obs_g, actions=None):
         out = super().plan(obs_0, obs_g, actions)
-        self._save_state(self.state_out)
+        if not self.read_only:  # a frozen evaluation leaves state_in as it was
+            self._save_state(self.state_out)
         with open("continual_episodes.jsonl", "w") as f:
             for rec in self._ep_records:
                 f.write(json.dumps(rec) + "\n")
@@ -354,6 +356,10 @@ class CLSMPCPlanner(ContinualMPCPlanner):
             self.domains = {}  # key -> {"n", "tags", "replay": [z], "fp_sum": [t] | None, "fp_n", "learner", "opt"}
         self._base = None  # domain key whose learner the episode uses (None: theta0)
         self._route_log = []
+        if self.read_only and not self.supports_read_only:
+            raise ValueError(f"{type(self).__name__} has no read-only mode (planner.continual.read_only)")
+
+    supports_read_only = False  # subclasses whose _end_episode can leave the state untouched set this
 
     # ------------------------------------------------------------------ helpers
     def _predict(self, module, z):

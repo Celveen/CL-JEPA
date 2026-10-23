@@ -35,7 +35,8 @@ out.mkdir(parents=True, exist_ok=True)
 cmd = [sys.executable, str(ROOT / "plan.py"), "--config-name", "cont_plan_gd_pushobj",
        f"ckpt_base_path={(ROOT / a.ckpt).resolve()}", f"model_epoch={a.epoch}",
        f"eval_data_path={ROOT / 'data/cont_streams' / a.stream / (a.chunk + '.pkl')}", f"n_evals={a.n}",
-       "+wandb_logging=false", f"hydra.run.dir={out}", *NAMED_ARMS[a.arm],
+       "+wandb_logging=false", f"hydra.run.dir={out}",
+       *(NAMED_ARMS[a.arm] if a.arm in NAMED_ARMS else [f"planner.continual.w={float(a.arm[1:]):g}"]),  # w0, w0.01, ...
        f"planner.continual.tag={block.get('tag', block['shape'])}", f"planner.continual.state_in={a.state_in}",
        "planner.continual.save_deltas=false", *a.extra]
 if "seed" in block:

@@ -90,8 +90,17 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
         if best != self._base:
             self._load_base(best, carry_fast=True)
 
+    supports_read_only = True
+
     # ------------------------------------------------------------------ write and learn
     def _end_episode(self):
+        if self.read_only:  # frozen evaluation: record what was read, change no domain, learner or pending episode
+            z = self._episode_latents()
+            fam = self._familiarity(z) if self.familiar_thr > 0 else float("nan")
+            ContinualMPCPlanner._end_episode(self)  # w = 0 here, so this only records the episode
+            self._ep_records[-1].update({"read": self._base, "route": self._route_log, "write": None,
+                                         "write_rule": "read_only", "familiar_score": fam})
+            return
         delta = [p.detach() - s for p, s in zip(self._params, self._start)]
         z = self._episode_latents()
         fam = self._familiarity(z) if self.familiar_thr > 0 else float("nan")

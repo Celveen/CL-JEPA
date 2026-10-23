@@ -247,15 +247,17 @@ def chain(name, overrides, w, gpu, blocks, root, a, probes, results):
 
 
 def independent_jobs(name, overrides, blocks, root, a, jobs):
-    """w = 0 (AdaJEPA) keeps no state between episodes, so its chunks can run in parallel."""
+    """w = 0 (AdaJEPA) keeps no state between episodes, and neither does an arm evaluated read-only from a frozen
+    --state-in, so their chunks can run in parallel."""
     for b in blocks:
         out = root / name / b["chunk"]
         if finished(out):
             continue
         data = ROOT / "data/cont_streams" / a.stream / f"{b['chunk']}.pkl"
         n = min(b["n"], a.max_episodes) if a.max_episodes else b["n"]
-        cmd = base_cmd(out, data, n, a) + overrides + [f"planner.continual.tag={b.get('tag', b['shape'])}",
-                                                        "planner.continual.state_in=null"] + a.extra
+        state = ([f"planner.continual.state_in={Path(a.state_in).resolve()}", "planner.continual.read_only=true"]
+                 if a.state_in else ["planner.continual.state_in=null"])
+        cmd = base_cmd(out, data, n, a) + overrides + [f"planner.continual.tag={b.get('tag', b['shape'])}"] + state + a.extra
         if "seed" in b:
             cmd.append(f"seed={b['seed']}")
         jobs.put((out, cmd))
@@ -309,7 +311,9 @@ def main():
                     help="if given, delete each chunk's slow state once the next chunk has used it, except these "
                          "chunk indices (and the last chunk); default keeps every state")
     ap.add_argument("--independent", action="store_true",
-                    help="w = 0 arms only: run all chunks in parallel (one job per --chain-gpus entry at a time)")
+                    help="w = 0 arms (or named arms with --state-in): run all chunks in parallel (one job per --chain-gpus entry at a time)")
+    ap.add_argument("--state-in", default=None,
+                    help="with --independent: evaluate this saved continual state frozen (read_only) on every chunk")
     ap.add_argument("--min-free-gb", type=float, default=40.0)
     ap.add_argument("--stagger", type=float, default=15.0)
     a = ap.parse_args()
@@ -325,7 +329,8 @@ def main():
     assert arms, "give --ws and/or --arms"
     gpus = a.chain_gpus.split(",")
     if a.independent:
-        assert all(w is not None and float(w) == 0 for _, _, w in arms), "--independent is for --ws 0 only"
+        assert a.state_in or all(w is not None and float(w) == 0 for _, _, w in arms), \
+            "--independent is for --ws 0, or for named arms evaluated frozen with --state-in"
         jobs = queue.Queue()
         for n, ov, _ in arms:
             independent_jobs(n, ov, blocks, root, a, jobs)

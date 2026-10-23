@@ -72,6 +72,8 @@ planner:
     tag: null                      # label of the chunk (its shape), used to split the transfer signal
     state_in: null                 # slow state from the previous chunk
     state_out: continual_state.pt
+    read_only: false               # evaluate state_in frozen: read learners as usual, write / train / merge nothing,
+                                   #   save no state (CLSv7MPCPlanner and w = 0 only); episodes become independent
     memory_size: 30                # recent episodes kept for the transfer signal
     save_deltas: true              # per-episode delta (fp16) -> deltas.pt
     save_frames: true              # executed frames at the model stride -> episode_frames.npz

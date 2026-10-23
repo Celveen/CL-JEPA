@@ -7,6 +7,11 @@ seed=seeds[r] (episode env seeds seed*n+1, as in the standard evaluation). So ro
 is the usual "seed 100, val_s, 50 targets" evaluation, round 2 the seed-200 one, and so on.
 
     python scripts/cont_build_seed_stream.py --name S7t3 --seeds 100 200 300 --n 50
+
+--exclude draws only from targets none of the listed streams used (a held-out evaluation set); without it the
+draw is exactly plan.py's.
+
+    python scripts/cont_build_seed_stream.py --name H7t3 --seeds 2000 2100 2200 --exclude S7t5 S7t5s400 S7t5s700
 """
 import argparse
 import json
@@ -25,14 +30,20 @@ def main():
     ap.add_argument("--n", type=int, default=50)
     ap.add_argument("--data", default="data/pushobj_eval")
     ap.add_argument("--out", default="data/cont_streams")
+    ap.add_argument("--exclude", nargs="*", default=[], help="streams whose targets this draw leaves out")
     a = ap.parse_args()
+    used = {}  # shape -> segment indices used by the excluded streams
+    for name in a.exclude:
+        for b in json.loads((ROOT / a.out / name / "manifest.json").read_text())["blocks"]:
+            used.setdefault(b["shape"], set()).update(b["indices"])
     out = ROOT / a.out / a.name
     out.mkdir(parents=True, exist_ok=True)
     blocks, k = [], 0
     for seed in a.seeds:
         for shape in a.shapes:
             segs = pickle.load(open(ROOT / a.data / f"val_{shape}" / "plan_targets.pkl", "rb"))["segments"]
-            idx = random.Random(seed).sample(range(len(segs)), min(a.n, len(segs)))  # same draw as plan.py
+            pool = [i for i in range(len(segs)) if i not in used.get(shape, ())]
+            idx = [pool[j] for j in random.Random(seed).sample(range(len(pool)), min(a.n, len(pool)))]  # plan.py's draw if no --exclude
             tag = shape.replace("+", "plus")
             chunk = f"chunk_{k:02d}_{tag}"
             with open(out / f"{chunk}.pkl", "wb") as f:
