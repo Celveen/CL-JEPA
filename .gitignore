@@ -15,7 +15,10 @@ checkpoints
 !env/wall/data/
 !env/wall/data/*.py
 
-# experiment reports and packaged zips stay local
-reports
+# experiment reports and packaged zips stay local; only the paper figures (reports/figs/*.pdf) are tracked
+reports/*
+!reports/figs/
+reports/figs/*
+!reports/figs/*.pdf
 dist
 !scripts/cont_frozen_chunks.sh

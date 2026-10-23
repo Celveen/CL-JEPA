@@ -76,8 +76,7 @@ def main():
     h, l = axes[0].get_legend_handles_labels()
     fig.legend(h, l, loc="upper center", ncol=2, frameon=False, bbox_to_anchor=(0.5, 1.15), handlelength=1.2)
     fig.tight_layout(pad=0.3, w_pad=1.0)
-    for ext in ("pdf", "png"):
-        fig.savefig(out / f"cmp_overall.{ext}", bbox_inches="tight")
+    fig_style.save(fig, out, "cmp_overall")
     plt.close(fig)
 
     names = [SHAPE.get(s, s) + ("*" if s not in seen else "") for s in shapes]
@@ -91,8 +90,7 @@ def main():
     h, l = axes[0].get_legend_handles_labels()
     fig.legend(h, l, loc="upper center", ncol=2, frameon=False, bbox_to_anchor=(0.5, 1.15), handlelength=1.2)
     fig.tight_layout(pad=0.3, w_pad=1.0)
-    for ext in ("pdf", "png"):
-        fig.savefig(out / f"cmp_shapes.{ext}", bbox_inches="tight")
+    fig_style.save(fig, out, "cmp_shapes")
     plt.close(fig)
     print("written:", sorted(p.name for p in out.glob("cmp_*.p*")))
 

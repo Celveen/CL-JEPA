@@ -153,15 +153,13 @@ def main():
         fig, ax = plt.subplots(figsize=(3.3, 2.35))
         draw(ax, S["groups"]["all"], TITLE[p])
         fig.tight_layout(pad=0.3)
-        for ext in ("pdf", "png"):
-            fig.savefig(out / f"{p}_rounds.{ext}", bbox_inches="tight")
+        fig_style.save(fig, out, f"{p}_rounds")
         plt.close(fig)
         fig, axes = plt.subplots(1, 3, figsize=(7.0, 2.15))
         for k, (g, t) in enumerate((("all", "All shapes"), ("unseen", "Unseen shapes"), ("seen", "Seen shapes"))):
             draw(axes[k], S["groups"][g], f"{TITLE[p]}: {t}", legend=(k == 0), ylabel=(k == 0), xlabel=True)
         fig.tight_layout(pad=0.3, w_pad=1.0)
-        for ext in ("pdf", "png"):
-            fig.savefig(out / f"{p}_rounds_split.{ext}", bbox_inches="tight")
+        fig_style.save(fig, out, f"{p}_rounds_split")
         plt.close(fig)
 
     # the numbers behind the figures

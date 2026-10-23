@@ -121,7 +121,7 @@ python scripts/cont_run_stream.py --stream H7t3 --root eval_outputs/cmp_gd_offic
 
 注意：冻结时学习器若恰好不在成熟状态（最近 `mature_k` 次验证比的平均高于 `mature_ratio`），评测期间不会再验证，整段都只读 θ0。
 
-**出图**（论文风格，PDF + PNG，写到 `reports/figs/`；`reports/figs/fonts/` 下有 TrueType 字体时使用它，例如 Google Fonts 的 Arimo，否则用 DejaVu Sans）：
+**出图**（论文风格，PDF + PNG，写到 `reports/figs/`；`reports/figs/fonts/` 下有 TrueType 字体时使用它，例如 Google Fonts 的 Arimo，否则用 DejaVu Sans）。图里我们的方法一律标为 Ours，不出现 v6a 等内部名称。`reports/figs/*.pdf` 纳入版本管理（`reports/` 下其余文件仍只留在本地）；PDF 不写创建时间，所以重画后没变的图不会出现在 `git status` 里：
 
 ```bash
 python scripts/fig_rounds.py                                 # 三组种子的五轮逐轮成功率：v6a 对 AdaJEPA，GD 与 CEM 各一张

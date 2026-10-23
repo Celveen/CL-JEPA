@@ -26,3 +26,10 @@ def setup(font_dir=None):
         "axes.spines.right": False, "pdf.fonttype": 42, "ps.fonttype": 42, "savefig.dpi": 300,
     })
     return family
+
+
+def save(fig, out, name):
+    """Write out/<name>.pdf and out/<name>.png. The PDF carries no creation date, so redrawing a figure that did not
+    change leaves the tracked file byte-identical."""
+    fig.savefig(out / f"{name}.pdf", bbox_inches="tight", metadata={"CreationDate": None})
+    fig.savefig(out / f"{name}.png", bbox_inches="tight")
