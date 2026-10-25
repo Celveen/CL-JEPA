@@ -536,9 +536,15 @@ class PlanWorkspace:
             obs_g=self.obs_g,
             actions=actions_init,
         )
-        logs, successes, _, _ = self.evaluator.eval_actions(
-            actions.detach(), action_len, save_video=True, filename="output_final"
-        )
+        final = getattr(self.planner, "final_eval", None)
+        if final is not None:
+            # planner.resim_from_start=False: the last MPC iteration already evaluated every sample at its final
+            # state, so the plan is not replayed from the start once more
+            logs, successes = final
+        else:
+            logs, successes, _, _ = self.evaluator.eval_actions(
+                actions.detach(), action_len, save_video=True, filename="output_final"
+            )
         # Preserve paired episode outcomes for reproducible comparisons/reports.
         np.savez_compressed(
             "final_eval_results.npz", successes=np.asarray(successes, dtype=bool),
@@ -766,7 +772,14 @@ def planning_main(cfg_dict):
             ]
         )
     # use dummy vector env for wall and deformable envs
-    elif model_cfg.env.name == "wall" or model_cfg.env.name == "deformable_env":
+    elif model_cfg.env.name == "deformable_env":
+        # PyFleX keeps one global scene per process, and initializing it again for every slot segfaults at random
+        # (seen on the third of ten inits). Each call (prepare / rollout / goal sampling) resets the robot and sets
+        # the particle state first, so the serial slots share a single env.
+        from env.serial_vector_env import SerialVectorEnv
+        shared_env = gym.make(model_cfg.env.name, *model_cfg.env.args, **env_kwargs)
+        env = SerialVectorEnv([shared_env] * cfg_dict["n_evals"])
+    elif model_cfg.env.name == "wall":
         from env.serial_vector_env import SerialVectorEnv
         env = SerialVectorEnv(
             [

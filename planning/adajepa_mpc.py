@@ -57,7 +57,7 @@ class AdaJEPAMPCPlanner(MPCPlanner):
     def plan(self, obs_0, obs_g, actions=None):
         """Plan one sample at a time, resetting the weights before each sample."""
         n_evals = obs_0["visual"].shape[0]
-        all_actions, all_action_lens = [], []
+        all_actions, all_action_lens, finals = [], [], []
         self._records = []
 
         for i in range(n_evals):
@@ -75,6 +75,14 @@ class AdaJEPAMPCPlanner(MPCPlanner):
             )
             all_actions.append(actions_i)
             all_action_lens.append(action_len_i)
+            finals.append(self.final_eval)  # set by the MPC loop when it does not re-simulate from the start
+
+        # one batch-level final evaluation from the per-sample ones (means of the per-sample means), if every
+        # sample has one; otherwise plan.py replays the plans as usual
+        self.final_eval = None
+        if finals and all(f is not None for f in finals):
+            logs = {k: float(np.mean([f[0][k] for f in finals])) for k in finals[0][0]}
+            self.final_eval = (logs, np.concatenate([np.asarray(f[1]) for f in finals]))
 
         self.plan_suffix = ""
         self.adajepa_trainer.reset()

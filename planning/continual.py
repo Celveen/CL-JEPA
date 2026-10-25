@@ -714,6 +714,27 @@ class SlowFrozenMPCPlanner(MPCPlanner):
         Path("slow_applied.json").write_text(json.dumps(meta, indent=2))
 
 
+class LearnerFrozenMPCPlanner(MPCPlanner):
+    """Frozen, batched MPC with one domain's slow predictor from a CLSMPCPlanner state file in place of theta0's.
+
+    The theta0 encoder stays: the learner was trained on its latents. continual.state_in is the state file and
+    continual.tag the domain; nothing adapts. learner_applied.json records what was loaded."""
+
+    def __init__(self, adapt=None, continual=None, probe=None, **kwargs):
+        super().__init__(**kwargs)
+        c = dict(continual or {})
+        if not c.get("state_in") or not c.get("tag"):
+            raise ValueError("LearnerFrozenMPCPlanner needs planner.continual.state_in and planner.continual.tag")
+        st = torch.load(c["state_in"], map_location="cpu")
+        d = st.get("domains", {}).get(c["tag"])
+        if d is None or d.get("learner") is None:
+            raise ValueError(f"{c['state_in']}: no trained learner for domain {c['tag']!r}")
+        self.wm.predictor.load_state_dict(d["learner"])  # the sub-planner and the evaluator share this model
+        Path("learner_applied.json").write_text(json.dumps({
+            "state_in": c["state_in"], "domain": c["tag"], "episode": st["episode"], "n": d["n"],
+            "tags": d["tags"], "val_last": d.get("val", [])[-3:]}, indent=2))
+
+
 def _check_shapes(shapes, params, path):
     if [tuple(s) for s in shapes] != [tuple(p.shape) for p in params]:
         raise ValueError(f"{path}: slow state does not match the adapted tensors")

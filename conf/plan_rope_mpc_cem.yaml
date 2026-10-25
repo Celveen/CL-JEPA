@@ -1,0 +1,52 @@
+# Rope (DINO-WM deformable env, PyFleX): MPC with a CEM sub-planner, scored by the Chamfer distance between the
+# final and the goal rope particles (the env never reports success). Start states come from the validation set;
+# the goal is the start rope rotated by 0-90 degrees and shifted (FlexEnvWrapper.sample_random_init_goal_states).
+# Each push takes ~12 s in the simulator, and every MPC iteration re-simulates all pushes so far from the start.
+#
+#   source /data/zjc/adaJEPA/PyFleX/env.sh
+#   DATASET_DIR=/data/zjc/adaJEPA/CL-JEPA/data python plan.py --config-name plan_rope_mpc_cem.yaml \
+#       ckpt_base_path=/data/zjc/adaJEPA/CL-JEPA/checkpoints/rope_h1_fs1_e100_seed0 model_epoch=latest \
+#       hydra.run.dir=eval_outputs/rope_plan/A_latest
+defaults:
+  - _self_
+  - override hydra/launcher: submitit_slurm
+
+hydra:
+  run:
+    dir: eval_outputs/rope_plan/${now:%Y%m%d_%H%M%S}
+  sweep:
+    dir: eval_outputs/rope_plan/${now:%Y%m%d_%H%M%S}
+    subdir: ${hydra.job.num}
+
+ckpt_base_path: ./checkpoints
+model_name: null
+model_epoch: latest
+seed: 99
+n_evals: 10
+goal_source: 'random_state'
+goal_H: 5
+n_plot_samples: 10
+decode_for_viz: true
+num_start_frames: 1
+debug_dset_init: False
+wandb_logging: false
+
+objective:
+  _target_: planning.objectives.create_objective_fn
+  alpha: 1
+  base: 2
+  mode: last
+
+planner:
+  _target_: planning.mpc.MPCPlanner
+  max_iter: 5  # the env never reports success, so the loop needs a bound: 5 pushes per episode
+  n_taken_actions: 1  # receding horizon: execute one push, then replan
+  sub_planner:
+    target: planning.cem.CEMPlanner
+    horizon: 5
+    topk: 30
+    num_samples: 300
+    var_scale: 1
+    opt_steps: 30
+    eval_every: -1  # no simulator rollouts inside the CEM loop (each would cost n_evals x horizon pushes)
+  name: mpc_cem

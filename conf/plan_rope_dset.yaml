@@ -1,0 +1,52 @@
+# Rope with the protocol DDP-WM uses for DINO-WM's deformable envs (HCPLab-SYSU/DDP-WM conf/plan_rope.yaml): the start
+# is a validation-set state and the goal is what the dataset's next 5 pushes produce from it (replayed in PyFleX), so
+# every goal is reachable. MPC with CEM executes 5 pushes per iteration for 3 iterations; DDP-WM reports the best
+# Chamfer distance of the 3 iterations, which the logs give per iteration next to the final one. The only change from
+# DDP-WM: no simulator rollouts inside the CEM loop (logging only there).
+#
+#   source /data/zjc/adaJEPA/PyFleX/env.sh
+#   DATASET_DIR=/data/zjc/adaJEPA/CL-JEPA/data python plan.py --config-name plan_rope_dset.yaml \
+#       ckpt_base_path=/data/zjc/adaJEPA/CL-JEPA/checkpoints/<model> model_epoch=latest hydra.run.dir=eval_outputs/rope_dset/<name>
+defaults:
+  - _self_
+  - override hydra/launcher: submitit_slurm
+
+hydra:
+  run:
+    dir: eval_outputs/rope_dset/${now:%Y%m%d_%H%M%S}
+  sweep:
+    dir: eval_outputs/rope_dset/${now:%Y%m%d_%H%M%S}
+    subdir: ${hydra.job.num}
+
+ckpt_base_path: ./checkpoints
+model_name: null
+model_epoch: latest
+seed: 99
+n_evals: 10
+goal_source: 'dset'
+goal_H: 5
+n_plot_samples: 10
+decode_for_viz: true
+num_start_frames: 1
+debug_dset_init: False
+wandb_logging: false
+
+objective:
+  _target_: planning.objectives.create_objective_fn
+  alpha: 1
+  base: 2
+  mode: last
+
+planner:
+  _target_: planning.mpc.MPCPlanner
+  max_iter: 3
+  n_taken_actions: 5
+  sub_planner:
+    target: planning.cem.CEMPlanner
+    horizon: 5
+    topk: 30
+    num_samples: 300
+    var_scale: 1
+    opt_steps: 10
+    eval_every: -1
+  name: mpc_cem

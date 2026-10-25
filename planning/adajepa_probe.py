@@ -141,6 +141,10 @@ class ProbeMPCPlanner(AdaJEPAMPCPlanner):
         finally:
             del evaluator.eval_actions
 
+    def _record_eval(self, out):
+        # resim_from_start=False: eval_and_keep saw only the last iteration's actions; keep the whole episode
+        self._last_eval = out
+
     # ------------------------------------------------------------------ MPC hook
     def _post_env_feedback(self, taken_actions, e_obses):
         obs_seq, act_seq = self._extract_adajepa_data(e_obses, taken_actions, self.iter)
@@ -269,6 +273,8 @@ class ProbeMPCPlanner(AdaJEPAMPCPlanner):
         e_states = self._last_eval[3]
         s = np.asarray(e_states[0, -1], dtype=np.float64)
         g = np.asarray(self.evaluator.state_g[0], dtype=np.float64)
+        if g.ndim != 1:  # not a PushT/PushObj state vector (rope: particles); the evaluator logs its own distance
+            return {}
         return {
             "dist4": float(np.linalg.norm(g[:4] - s[:4])),  # the success test uses < 20
             "dist_obj": float(np.linalg.norm(g[2:4] - s[2:4])),

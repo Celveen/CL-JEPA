@@ -33,6 +33,7 @@ class MPCPlanner(BasePlanner):
         logging_prefix="mpc",
         log_filename="logs.json",
         reuse_actions=True,
+        resim_from_start=True,
         **kwargs,
     ):
         super().__init__(
@@ -50,6 +51,11 @@ class MPCPlanner(BasePlanner):
         self.logging_prefix = logging_prefix
         # Warm-start each replan from the unexecuted tail of the previous plan.
         self.reuse_actions = reuse_actions
+        # True: every iteration re-simulates all actions so far from the start. False: it simulates only its own
+        # actions from where the previous one left off (cheaper for slow simulators such as PyFleX), and the final
+        # evaluation reuses the last iteration's (final_eval) instead of replaying the whole plan again.
+        self.resim_from_start = resim_from_start
+        self.final_eval = None  # (logs, successes) at the final state, set when resim_from_start is False
         # Appended to per-iter names, e.g. "_s3" when a subclass runs per-sample sub-plans.
         self.plan_suffix = ""
         sub_planner["_target_"] = sub_planner["target"]
@@ -86,6 +92,11 @@ class MPCPlanner(BasePlanner):
         Returns an optional dict of extra logs for this iteration."""
         return None
 
+    def _record_eval(self, out):
+        """Hook with (logs, successes, e_obses, e_states) of the whole trajectory so far, when iterations do not
+        re-simulate from the start (eval_actions then only saw the last iteration's actions)."""
+        return None
+
     def plan(self, obs_0, obs_g, actions=None):
         """
         actions is NOT used
@@ -97,6 +108,8 @@ class MPCPlanner(BasePlanner):
         self.action_len = np.full(n_evals, np.inf)
         self.iter = 0
         self.planned_actions = []
+        self.final_eval = None
+        traj = None  # (e_obses, e_states) executed so far, when not re-simulating from the start
         init_obs_0, init_state_0 = self.evaluator.get_init_cond()
 
         cur_obs_0 = obs_0
@@ -119,17 +132,34 @@ class MPCPlanner(BasePlanner):
             self.planned_actions.append(taken_actions)
 
             print(f"MPC iter {self.iter} Eval ------- ")
-            action_so_far = torch.cat(self.planned_actions, dim=1)
-            self.evaluator.assign_init_cond(
-                obs_0=init_obs_0,
-                state_0=init_state_0,
-            )
-            logs, successes, e_obses, e_states = self.evaluator.eval_actions(
-                action_so_far,
-                self.action_len,
-                filename=f"plan{self.iter}{self.plan_suffix}",
-                save_video=True,
-            )
+            if self.resim_from_start:
+                action_so_far = torch.cat(self.planned_actions, dim=1)
+                self.evaluator.assign_init_cond(
+                    obs_0=init_obs_0,
+                    state_0=init_state_0,
+                )
+                logs, successes, e_obses, e_states = self.evaluator.eval_actions(
+                    action_so_far,
+                    self.action_len,
+                    filename=f"plan{self.iter}{self.plan_suffix}",
+                    save_video=True,
+                )
+            else:
+                # The evaluator starts where the previous iteration left off: simulate this iteration's actions
+                # only and append them to the trajectory so far. Samples that already succeeded execute their
+                # zeroed actions, a no-op for relative actions (PushT/PushObj, mazes) but not for absolute ones.
+                logs, successes, e_obses, e_states = self.evaluator.eval_actions(
+                    taken_actions,
+                    None,
+                    filename=f"plan{self.iter}{self.plan_suffix}",
+                    save_video=True,
+                )
+                if traj is not None:
+                    e_obses = {k: np.concatenate([traj[0][k], v[:, 1:]], axis=1) for k, v in e_obses.items()}
+                    e_states = np.concatenate([traj[1], e_states[:, 1:]], axis=1)
+                traj = (e_obses, e_states)
+                final_logs = dict(logs)
+                self._record_eval((logs, successes, e_obses, e_states))
             new_successes = successes & ~self.is_success  # Identify new successes
             self.is_success = (
                 self.is_success | successes
@@ -160,5 +190,8 @@ class MPCPlanner(BasePlanner):
             obs_0=init_obs_0,
             state_0=init_state_0,
         )
+        if not self.resim_from_start and self.iter > 0:
+            final_logs["success_rate"] = float(np.mean(self.is_success))
+            self.final_eval = (final_logs, self.is_success.copy())
 
         return planned_actions, self.action_len
