@@ -13,9 +13,9 @@ batched planning on the held-out eval targets of each probe shape (seed
 
 Finished runs are skipped, so the script can be re-run to resume.
 
-    python scripts/cont_run_stream.py --stream S2 --ws 0 0.003 0.01 0.03 1 \
-        --chain-gpus 0,1,2,3,4 --probe-gpus 5,6,7,5
-    python scripts/cont_run_stream.py --stream S2 --arms mem_a1 mem_a2 mem_oracle_a1 --no-base-probes
+    python scripts/cont_run_stream.py --stream S7t3 --ws 0 --independent --no-base-probes \
+        --chain-gpus 0,1,4,5,6,7 --probe-gpus 0
+    python scripts/cont_run_stream.py --stream S7t3 --arms cls6a_free --no-base-probes --chain-gpus 0 --probe-gpus 0
 """
 import argparse
 import json
@@ -28,57 +28,14 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MEMORY = "planner._target_=planning.continual.MemoryMPCPlanner"
-NAMED_ARMS = {  # domain-separated memories (planning/continual.py: MemoryMPCPlanner); no frozen probes
-    "mem_a1": [MEMORY, "planner.continual.alpha=1.0", "planner.continual.write=delta"],
-    "mem_a2": [MEMORY, "planner.continual.alpha=2.0", "planner.continual.write=delta"],
-    "mem_oracle_a1": [MEMORY, "planner.continual.alpha=1.0", "planner.continual.write=oracle"],
-    # complementary fast/slow learning: per-domain slow predictors trained on replay (CLSMPCPlanner)
-    "cls_free": ["planner._target_=planning.continual.CLSMPCPlanner", "planner.continual.write=delta"],
-    "cls_oracle": ["planner._target_=planning.continual.CLSMPCPlanner", "planner.continual.write=oracle"],
-    # v2: maturity gate (read a learner only after it beats theta0 on unseen episodes) and a lower tau
-    "cls2_free": ["planner._target_=planning.continual.CLSMPCPlanner", "planner.continual.write=delta",
-                  "planner.continual.tau=0.04", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9"],
-    "cls2_oracle": ["planner._target_=planning.continual.CLSMPCPlanner", "planner.continual.write=oracle",
-                    "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9"],
-    # v3: v2 + validation-gated writing (an episode is not written into a domain whose learner predicts it
-    # worse than reject_ratio x theta0; it goes to the next aligned domain or a new one)
-    "cls3_free": ["planner._target_=planning.continual.CLSMPCPlanner", "planner.continual.write=delta",
-                  "planner.continual.tau=0.04", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
-                  "planner.continual.reject_ratio=1.2"],
-    "cls3_oracle": ["planner._target_=planning.continual.CLSMPCPlanner", "planner.continual.write=oracle",
-                    "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9"],
-    # v4: v3 + two-stage writing (familiar episodes never written; new domains need 3 aligned pending episodes;
-    # join threshold 0.10 on unit-norm fingerprints), settings from the offline screen (scripts/cont_route_sweep.py)
-    "cls4_free": ["planner._target_=planning.continual.CLSMPCPlanner", "planner.continual.write=delta",
-                  "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
-                  "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
-                  "planner.continual.pending_m=3", "planner.continual.tau_new=0.05", "planner.continual.fp_unit=true"],
-    # phase-1 fixed-w consolidation (slow_d <- slow_d + 0.003 delta) kept per domain under the v4 gates
-    # (planning/continual_fixw.py); maturity = "not worse than theta0" since a 0.003 slow moves predictions little
-    "fixw4_free": ["planner._target_=planning.continual_fixw.CLSFixedWMPCPlanner", "planner.continual.write=delta",
-                   "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=1.0",
-                   "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
-                   "planner.continual.pending_m=3", "planner.continual.tau_new=0.05", "planner.continual.fp_unit=true",
-                   "planner.continual.slow_w=0.003"],
-    # v5: v4 + validated, symmetric merging judged by transfer (planning/continual_merge.py)
+NAMED_ARMS = {  # per-domain slow predictors trained on replay; no frozen probes
+    # v5: per-domain learners (CLSMPCPlanner) with maturity/write gates, familiar episodes never written, new
+    # domains from 3 aligned pending episodes, + validated, symmetric merging (planning/continual_merge.py)
     "cls5_free": ["planner._target_=planning.continual_merge.CLSMergeMPCPlanner", "planner.continual.write=delta",
                   "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
                   "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
                   "planner.continual.pending_m=3", "planner.continual.tau_new=0.05", "planner.continual.fp_unit=true",
                   "planner.continual.merge_eps=0.3", "planner.continual.merge_k=3"],
-    # how the slow learner trains, with true-label routing (planning/continual_slow.py); compare with cls3_oracle
-    "cls3_oracle_ms": ["planner._target_=planning.continual_slow.CLSMultiStepMPCPlanner", "planner.continual.write=oracle",
-                       "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9", "planner.continual.ms_h=5"],
-    # v6 = v5 (classmate's settings) + familiar episodes learned in their own kind of domain + relaxed learner
-    # writes + relaxed merging (merge_k 2, merge_eps 0.5); planning/continual_v6.py
-    "cls6_free": ["planner._target_=planning.continual_v6.CLSv6MPCPlanner", "planner.continual.write=delta",
-                  "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
-                  "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
-                  "planner.continual.pending_m=3", "planner.continual.tau_new=0.05", "planner.continual.fp_unit=true",
-                  "planner.continual.merge_eps=0.5", "planner.continual.merge_k=2",
-                  f"planner.continual.seen_probe={ROOT / 'data/seen_probe/pushobj_bias_16k_e3_seed0.pt'}",
-                  "planner.continual.seen_conf=0.95"],
     # v7 = v5 (classmate's settings) + writes prefer existing domains (learner writes unless rejected, functional
     # join <= 0.9), new domains need 5 pending episodes, periodic absorption of immature domains (<= 0.8),
     # familiar data reads theta0, merge_k 2 / merge_eps 0.5; familiar episodes never written (planning/continual_v7.py)
@@ -108,8 +65,8 @@ NAMED_ARMS = {  # domain-separated memories (planning/continual.py: MemoryMPCPla
                    "planner.continual.learner_win=true", "planner.continual.absorb_ratio=0.8",
                    "planner.continual.absorb_every=25", "planner.continual.absorb_frag=6",
                    "planner.continual.absorb_pending=false"],
-    # v6a = v6 without the seen-shape probe (familiar episodes never written, as v5) + relaxed learner writes and
-    # relaxed merge (merge_k 2, merge_eps 0.5) as v6 + familiar data reads theta0 + fragment absorption (no joins)
+    # v6a = v5 + relaxed learner writes and relaxed merge (merge_k 2, merge_eps 0.5) + familiar data reads theta0
+    # + fragment absorption (no joins); familiar episodes never written, no shape labels
     "cls6a_free": ["planner._target_=planning.continual_v7.CLSv7MPCPlanner", "planner.continual.write=delta",
                    "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
                    "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
@@ -119,26 +76,6 @@ NAMED_ARMS = {  # domain-separated memories (planning/continual.py: MemoryMPCPla
                    "planner.continual.learner_win=false", "planner.continual.absorb_ratio=0.8",
                    "planner.continual.absorb_every=25", "planner.continual.absorb_frag=6",
                    "planner.continual.absorb_pending=false"],
-    # independent extensions of v5 (planning/continual_v5x.py)
-    "cls5s_free": ["planner._target_=planning.continual_v5x.CLSStickyReadMPCPlanner", "planner.continual.write=delta",
-                   "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
-                   "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
-                   "planner.continual.pending_m=3", "planner.continual.tau_new=0.05", "planner.continual.fp_unit=true",
-                   "planner.continual.merge_eps=0.3", "planner.continual.merge_k=3"],
-    "cls5k_free": ["planner._target_=planning.continual_v5x.CLSKnnReadMPCPlanner", "planner.continual.write=delta",
-                   "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
-                   "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
-                   "planner.continual.pending_m=3", "planner.continual.tau_new=0.05", "planner.continual.fp_unit=true",
-                   "planner.continual.merge_eps=0.3", "planner.continual.merge_k=3",
-                   "planner.continual.knn_k=5", "planner.continual.knn_vote=0.6"],
-    "cls5b_free": ["planner._target_=planning.continual_v5x.CLSMergeBMPCPlanner", "planner.continual.write=delta",
-                   "planner.continual.tau=0.10", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
-                   "planner.continual.reject_ratio=1.2", "planner.continual.familiar_thr=0.0146",
-                   "planner.continual.pending_m=3", "planner.continual.tau_new=0.05", "planner.continual.fp_unit=true",
-                   "planner.continual.mergeb_every=5", "planner.continual.mergeb_eps=0.1"],
-    "cls3_oracle_pr": ["planner._target_=planning.continual_slow.CLSPriorityMPCPlanner", "planner.continual.write=oracle",
-                       "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9",
-                       "planner.continual.pr_succ=2.0", "planner.continual.pr_contact=3.0"],
 }
 print_lock = threading.Lock()
 start_lock = threading.Lock()
@@ -291,7 +228,7 @@ def probe_worker(gpu, probes, chains_done, a, results):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stream", default="S2")
+    ap.add_argument("--stream", default="S7t3")
     ap.add_argument("--ws", nargs="*", default=[], help="fixed consolidation weights, e.g. 0 0.003 0.01 0.03 1")
     ap.add_argument("--arms", nargs="*", default=[], help=f"named arms: {list(NAMED_ARMS)}")
     ap.add_argument("--no-base-probes", action="store_true")

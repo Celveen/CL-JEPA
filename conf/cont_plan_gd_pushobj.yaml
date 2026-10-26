@@ -75,12 +75,10 @@ planner:
     memory_size: 30                # recent episodes kept for the transfer signal
     save_deltas: true              # per-episode delta (fp16) -> deltas.pt
     save_frames: true              # executed frames at the model stride -> episode_frames.npz
-    # MemoryMPCPlanner (domain-separated memories, prediction-gated reading) only:
-    alpha: 1.0                     # read theta0 + alpha * mu of the chosen memory
-    write: delta                   # delta: label-free (cosine to memory means) | oracle: the chunk's tag
-    tau: 0.06                      # new memory when no mean is this aligned with the episode's update
-    min_n: 3                       # a memory is readable once it holds this many episodes
     # CLSMPCPlanner (per-domain slow predictors trained on replay) only:
+    write: delta                   # delta: label-free (cosine to domain fingerprints) | oracle: the chunk's tag
+    tau: 0.06                      # new domain when no fingerprint is this aligned with the episode's update
+    min_n: 3                       # a domain is readable once it holds this many episodes
     slow_lr: 1e-4                  # Adam lr of a domain's slow predictor
     slow_steps: 15                 # replay updates after each episode written to the domain
     slow_batch: 8                  # replayed windows per update
@@ -95,21 +93,8 @@ planner:
     tau_new: 0.05                  # v4: alignment (cosine of fast changes) among pending episodes
     pending_max: 40                # v4: pending pool size
     fp_unit: false                 # v4: fingerprints from unit-norm fast changes
-    slow_w: 0.003                  # CLSFixedWMPCPlanner: slow_d <- slow_d + slow_w * delta per domain
     merge_eps: 0.3                 # CLSMergeMPCPlanner (v5): cross learner within (1 + eps) of the own one, and better than theta0
     merge_k: 3                     # CLSMergeMPCPlanner: unseen episodes of each domain the merge check looks at
-    ms_h: 5                        # CLSMultiStepMPCPlanner: open-loop rollout length of the training loss
-    pr_succ: 2.0                   # CLSPriorityMPCPlanner: replay weight of successful episodes (failed = 1)
-    pr_contact: 3.0                # CLSPriorityMPCPlanner: window weight 1 + pr_contact x contact transitions in it
-    knn_k: 5                       # CLSKnnReadMPCPlanner: neighbours of the start+goal encoder features
-    knn_vote: 0.6                  # CLSKnnReadMPCPlanner: share of votes a mature domain needs to be read from the first plan
-    knn_min_ref: 3                 # CLSKnnReadMPCPlanner: references the winning domain must have
-    mergeb_every: 5                # CLSMergeBMPCPlanner: merge check every this many written unfamiliar episodes
-    mergeb_eps: 0.1                # CLSMergeBMPCPlanner: candidate within (1 + eps) of each side's own validation
-    mergeb_hold: 2                 # CLSMergeBMPCPlanner: held-out validation episodes per side
-    mergeb_max_steps: 300          # CLSMergeBMPCPlanner: training steps of the candidate learner
-    seen_probe: null               # CLSv6MPCPlanner: linear probe over the training shapes (scripts/cont_train_seen_probe.py)
-    seen_conf: 0.95                # CLSv6MPCPlanner: probe confidence for a familiar episode to go to its training shape's domain
     familiar_read: true            # CLSv7MPCPlanner: data within familiar_thr reads theta0 while the read is re-decided
     join_ratio: 0.9                # CLSv7MPCPlanner: join the best mature domain if its learner's 5-step ratio is <= this
     absorb_ratio: 0.8              # CLSv7MPCPlanner: absorb an immature domain a mature learner predicts within this of theta0
