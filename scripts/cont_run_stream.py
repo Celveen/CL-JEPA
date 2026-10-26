@@ -192,7 +192,7 @@ def run(cmd, out, gpu, a):
 
 
 def base_cmd(out, data, n, a):
-    return [sys.executable, ROOT / "plan.py", "--config-name", "cont_plan_gd_pushobj",
+    return [sys.executable, ROOT / "plan.py", "--config-name", a.config,
             f"ckpt_base_path={(ROOT / a.ckpt).resolve()}", f"model_epoch={a.epoch}",
             f"eval_data_path={data}", f"n_evals={n}", "+wandb_logging=false", f"hydra.run.dir={out}"]
 
@@ -300,6 +300,7 @@ def main():
     ap.add_argument("--probe-shapes", nargs="+", default=["I", "square", "T", "L", "small_tee"])
     ap.add_argument("--probe-seed", type=int, default=100)
     ap.add_argument("--probe-n", type=int, default=50)
+    ap.add_argument("--config", default="cont_plan_gd_pushobj", help="plan config: cont_plan_gd_pushobj or cont_plan_cem_pushobj")
     ap.add_argument("--ckpt", default="checkpoints/pushobj_bias_16k_e3_seed0")
     ap.add_argument("--epoch", default="3")
     ap.add_argument("--root", default=None, help="default eval_outputs/cont_<stream>")

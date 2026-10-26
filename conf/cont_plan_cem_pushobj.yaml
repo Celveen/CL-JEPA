@@ -1,0 +1,130 @@
+# Continual fast/slow adaptation (main line, phase 1): theta = theta0 + slow + fast.
+# The within-episode update is AdaJEPA (planning/continual.py); at each episode end the
+# change is consolidated, slow <- slow + w * delta. Streams run as ordered chunks
+# (segments_order=file) chained through continual.state_in / state_out; runs go through
+# scripts/cont_run_stream.py, which sets hydra.run.dir per chunk. Frozen probes of the
+# consolidated weights use planner._target_=planning.continual.SlowFrozenMPCPlanner.
+defaults:
+  - _self_
+  - override hydra/launcher: submitit_slurm
+
+hydra:
+  run:
+    dir: eval_outputs/cont/w${planner.continual.w}_seed${seed}
+  sweep:
+    dir: eval_outputs/cont/w${planner.continual.w}_seed${seed}
+    subdir: ${hydra.job.num}
+  launcher:
+    submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+    nodes: 1
+    tasks_per_node: 1
+    cpus_per_task: 16
+    mem_gb: 64
+    gres: "gpu:1"
+    qos: "normal"
+    timeout_min: 720
+
+ckpt_base_path: ./checkpoints # model dir (contains hydra.yaml + checkpoints/)
+model_name: null
+model_epoch: latest
+
+seed: 100
+n_evals: 20
+segments_order: file      # run the chunk's targets in stored order (random: plan.py's usual draw)
+goal_source: 'segments'
+eval_data_path: null          # data/pushobj_eval/val_<shape>/plan_targets.pkl
+ood_corruption: null
+ood_level: null
+env_kwargs_override: null
+goal_H: 25
+n_plot_samples: 10
+decode_for_viz: false         # no per-replan videos; the diagnostics are in per_iter_logs.json
+num_start_frames: 1
+
+debug_dset_init: False
+
+objective:
+  _target_: planning.objectives.create_objective_fn
+  alpha: 1
+  base: 2
+  mode: staged
+
+planner:
+  _target_: planning.continual.ContinualMPCPlanner
+  max_iter: 30
+  n_taken_actions: 5
+
+  adapt:                           # the AdaJEPA step every adapting mode starts from
+    lr: 5e-4
+    steps: 1
+    optimizer: adam
+    finetune_every: 1
+    replay_buffer: recent5
+    finetune_encoder: true
+    encoder_lr: 1e-5
+    last_layer_only: true
+    encoder_last_layer_only: true
+
+  probe:
+    seed: 0                        # mode is fixed to grad: the within-episode update is AdaJEPA
+  continual:
+    w: 0.0                         # slow <- slow + w * delta at each episode end (0: AdaJEPA, 1: never reset)
+    tag: null                      # label of the chunk (its shape), used to split the transfer signal
+    state_in: null                 # slow state from the previous chunk
+    state_out: continual_state.pt
+    memory_size: 30                # recent episodes kept for the transfer signal
+    save_deltas: true              # per-episode delta (fp16) -> deltas.pt
+    save_frames: true              # executed frames at the model stride -> episode_frames.npz
+    # MemoryMPCPlanner (domain-separated memories, prediction-gated reading) only:
+    alpha: 1.0                     # read theta0 + alpha * mu of the chosen memory
+    write: delta                   # delta: label-free (cosine to memory means) | oracle: the chunk's tag
+    tau: 0.06                      # new memory when no mean is this aligned with the episode's update
+    min_n: 3                       # a memory is readable once it holds this many episodes
+    # CLSMPCPlanner (per-domain slow predictors trained on replay) only:
+    slow_lr: 1e-4                  # Adam lr of a domain's slow predictor
+    slow_steps: 15                 # replay updates after each episode written to the domain
+    slow_batch: 8                  # replayed windows per update
+    reroute: 3                     # replans over which the read is re-decided on all transitions so far
+    mature_k: 0                    # maturity gate: read a learner only when its last mature_k validations
+    mature_ratio: 0.9              #   (5-step error vs theta0 on unseen episodes) average <= mature_ratio; 0 = off
+    reject_ratio: 0.0              # label-free write gate: skip a domain whose learner predicts the episode
+                                   #   worse than this x theta0 (0 = off)
+    familiar_thr: 0.0              # v4: theta0 first-3-transition error at/below this -> familiar, never written (0 = off);
+                                   #   0.0146 = 90th percentile on theta0's training-validation windows (scripts/cont_route_screen.py)
+    pending_m: 1                   # v4: a new domain needs this many mutually aligned pending episodes (1 = off; use with fp_unit)
+    tau_new: 0.05                  # v4: alignment (cosine of fast changes) among pending episodes
+    pending_max: 40                # v4: pending pool size
+    fp_unit: false                 # v4: fingerprints from unit-norm fast changes
+    slow_w: 0.003                  # CLSFixedWMPCPlanner: slow_d <- slow_d + slow_w * delta per domain
+    merge_eps: 0.3                 # CLSMergeMPCPlanner (v5): cross learner within (1 + eps) of the own one, and better than theta0
+    merge_k: 3                     # CLSMergeMPCPlanner: unseen episodes of each domain the merge check looks at
+    ms_h: 5                        # CLSMultiStepMPCPlanner: open-loop rollout length of the training loss
+    pr_succ: 2.0                   # CLSPriorityMPCPlanner: replay weight of successful episodes (failed = 1)
+    pr_contact: 3.0                # CLSPriorityMPCPlanner: window weight 1 + pr_contact x contact transitions in it
+    knn_k: 5                       # CLSKnnReadMPCPlanner: neighbours of the start+goal encoder features
+    knn_vote: 0.6                  # CLSKnnReadMPCPlanner: share of votes a mature domain needs to be read from the first plan
+    knn_min_ref: 3                 # CLSKnnReadMPCPlanner: references the winning domain must have
+    mergeb_every: 5                # CLSMergeBMPCPlanner: merge check every this many written unfamiliar episodes
+    mergeb_eps: 0.1                # CLSMergeBMPCPlanner: candidate within (1 + eps) of each side's own validation
+    mergeb_hold: 2                 # CLSMergeBMPCPlanner: held-out validation episodes per side
+    mergeb_max_steps: 300          # CLSMergeBMPCPlanner: training steps of the candidate learner
+    seen_probe: null               # CLSv6MPCPlanner: linear probe over the training shapes (scripts/cont_train_seen_probe.py)
+    seen_conf: 0.95                # CLSv6MPCPlanner: probe confidence for a familiar episode to go to its training shape's domain
+    familiar_read: true            # CLSv7MPCPlanner: data within familiar_thr reads theta0 while the read is re-decided
+    join_ratio: 0.9                # CLSv7MPCPlanner: join the best mature domain if its learner's 5-step ratio is <= this
+    absorb_ratio: 0.8              # CLSv7MPCPlanner: absorb an immature domain a mature learner predicts within this of theta0
+    absorb_every: 25               # CLSv7MPCPlanner: episodes between absorption checks (0 = off)
+    learner_win: false             # CLSv7MPCPlanner: v5's learner rule (read learner must also beat theta0's 1-step error)
+    absorb_frag: 0                 # CLSv7MPCPlanner: absorb only domains with fewer episodes (and < mature_k validations); 0 = any immature
+    absorb_pending: true           # CLSv7MPCPlanner: absorption also moves well-predicted pending episodes
+  reuse_actions: true
+
+  sub_planner:                     # CEM settings of conf/adajepa_plan_cem_pushobj.yaml
+    target: planning.cem.CEMPlanner
+    horizon: 25
+    topk: 30
+    num_samples: 200
+    var_scale: 1
+    opt_steps: 10
+    eval_every: -1
+  name: cont_plan_cem_pushobj
