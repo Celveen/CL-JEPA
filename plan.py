@@ -718,6 +718,10 @@ def planning_main(cfg_dict):
             model_cfg.env.dataset.data_path = cfg_dict["eval_data_path"]
         if cfg_dict.get("eval_use_frame_files") is not None:
             model_cfg.env.dataset.use_frame_files = bool(cfg_dict["eval_use_frame_files"])
+        if cfg_dict.get("eval_object_name"):
+            # Deformable env: another object's data (e.g. granular for a rope model). The action normalization then
+            # comes from that data too, so use this to draw targets and plan from the dumped file (goal_source=file).
+            model_cfg.env.dataset.object_name = cfg_dict["eval_object_name"]
         _, dset = hydra.utils.call(
             model_cfg.env.dataset,
             num_hist=model_cfg.num_hist,
