@@ -5,7 +5,8 @@ Routing comes from continual_episodes.jsonl (label-free arm `free`; `oracle` use
 Chamfer distance (CD) is parsed from the logs (frozen: batched, iteration-major; free / oracle: per-sample,
 episode-major; resim_from_start=false, so the last MPC iteration's CD is the final one) and checked against
 logs.json. Only chunks finished by frozen and the arm are compared. Main metric: final CD (lower is better); success
-rate = final CD < 0.5 (our threshold, chosen on rope; the env's own test is CD < 0, never true). Writes RESULTS.md.
+rate = final CD < SUCCESS_CD[object] (our thresholds: rope 0.5; granular 0.2, since 22 / 50 granular instances start
+below 0.5 -- granular_single/RESULTS.md; the env's own test is CD < 0, never true). Writes RESULTS.md.
 
     /data/zjc/envs/cljepa/bin/python -I eval_outputs/rope_granular/analyze.py
 """
@@ -19,8 +20,10 @@ from scipy import stats
 
 OUT = Path(__file__).resolve().parent
 CHUNKS = [(0, "rope"), (1, "granular"), (2, "rope"), (3, "granular"), (4, "rope"), (5, "granular")]
-ARMS = {"frozen": "冻结 θ0", "free": "无标签路由（cls6a_free）", "oracle": "真实标签（每个领域一个慢学习器）"}
-SUCCESS_CD = 0.5
+ARMS = {"frozen": "冻结 θ0", "free": "无标签路由（cls6a_free）", "free_abs": "无标签路由 + 绝对误差写入检查（cls6a_free，abs_ratio=20）",
+        "oracle": "真实标签（每个领域一个慢学习器）"}
+COMPARED = ("free", "free_abs", "oracle")
+SUCCESS_CD = {"rope": 0.5, "granular": 0.2}
 FAMILIAR_THR = json.loads((OUT / "familiarity.json").read_text())["familiar_thr_rope_p90"]
 
 
@@ -49,10 +52,10 @@ def se(x):
     return x.std(ddof=1) / np.sqrt(len(x)) if len(x) > 1 else float("nan")
 
 
-def paired(a, b):
+def paired(a, b, thr):
     d = a - b
     ci = stats.t.ppf(0.975, len(d) - 1) * se(d)
-    sa, sb = a < SUCCESS_CD, b < SUCCESS_CD
+    sa, sb = a < thr, b < thr
     only_a, only_b = int((sa & ~sb).sum()), int((~sa & sb).sum())
     p_mc = stats.binomtest(min(only_a, only_b), only_a + only_b, 0.5).pvalue if only_a + only_b else 1.0
     p_w = stats.wilcoxon(d).pvalue if np.any(d != 0) else float("nan")
@@ -92,8 +95,8 @@ def routing(arm, chunks):
 
 
 def planning(chunks_by_arm):
-    L = ["## 规划结果（最终 CD 越低越好；成功率 = 最终 CD < 0.5）", ""]
-    for arm in ("free", "oracle"):
+    L = ["## 规划结果（最终 CD 越低越好；成功率 = 最终 CD 低于门槛：rope 0.5，granular 0.2）", ""]
+    for arm in COMPARED:
         chunks = chunks_by_arm.get(arm, [])
         if not chunks:
             continue
@@ -103,12 +106,13 @@ def planning(chunks_by_arm):
                 continue
             fa = np.concatenate([final_cd(arm, k, o) for k, o in cs])
             fz = np.concatenate([final_cd("frozen", k, o) for k, o in cs])
+            thr = SUCCESS_CD[obj]
             L += [f"**{ARMS[arm]}，{obj}**（{len(cs)} 段、{len(fa)} 个 episode）：", "",
-                  "| 组 | 最终 CD（均值 ± 标准误） | 中位数 | 成功率 |", "|---|---|---|---|",
-                  f"| 冻结 θ0 | {fz.mean():.3f} ± {se(fz):.3f} | {np.median(fz):.3f} | {(fz < SUCCESS_CD).mean() * 100:.0f}% |",
-                  f"| {ARMS[arm]} | {fa.mean():.3f} ± {se(fa):.3f} | {np.median(fa):.3f} | {(fa < SUCCESS_CD).mean() * 100:.0f}% |", "",
+                  f"| 组 | 最终 CD（均值 ± 标准误） | 中位数 | 成功率（CD < {thr}） |", "|---|---|---|---|",
+                  f"| 冻结 θ0 | {fz.mean():.3f} ± {se(fz):.3f} | {np.median(fz):.3f} | {(fz < thr).mean() * 100:.0f}% |",
+                  f"| {ARMS[arm]} | {fa.mean():.3f} ± {se(fa):.3f} | {np.median(fa):.3f} | {(fa < thr).mean() * 100:.0f}% |", "",
                   "| 对比 | CD 平均差（95% 置信区间） | CD 前者更好 / 后者更好 | Wilcoxon p | 成功率差 | 只有前者成功 / 只有后者成功 | McNemar p |",
-                  "|---|---|---|---|---|---|---|", f"| {ARMS[arm]} − 冻结 θ0 | {paired(fa, fz)} |", "",
+                  "|---|---|---|---|---|---|---|", f"| {ARMS[arm]} − 冻结 θ0 | {paired(fa, fz, thr)} |", "",
                   "按轮次（每轮 10 个 episode）的平均最终 CD，冻结 → 该组：" +
                   "，".join(f"第 {j + 1} 轮 {final_cd('frozen', k, o).mean():.3f} → {final_cd(arm, k, o).mean():.3f}" for j, (k, o) in enumerate(cs)) + "。", ""]
     return L
@@ -119,7 +123,7 @@ def main():
          "θ0 是我们训的 rope DINO-WM（`rope_dino_h1_fs1_e100_seed0`），所以 rope 是它自己的领域，granular 是新领域。"
          "流：6 段、每段 10 个 episode，rope / granular 交替（rope 种子 99、100、101，granular 种子 301、302、303）。", ""]
     chunks_by_arm = {}
-    for arm in ("free", "oracle"):
+    for arm in COMPARED:
         cs = [(k, o) for k, o in CHUNKS if done(arm, k, o) and done("frozen", k, o)]
         chunks_by_arm[arm] = cs
         if cs:

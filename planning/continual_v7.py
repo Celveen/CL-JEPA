@@ -37,6 +37,15 @@ the whole episode); absorb_frag > 0 limits absorption to domains with fewer epis
 mature_k validations (never mature); absorb_pending: false leaves the pending pool alone.
 Join and absorption writes do not count as validations: those episodes were chosen because the learner
 predicts them well, so they would bias the maturity gate.
+
+abs_ratio > 0 adds an absolute check to every write into an existing domain (learner, join, direction):
+the domain's module (its learner, or theta0 before it has one) must predict the episode within abs_ratio x
+its median 1-step error on the domain's own stored episodes. The relative gate (reject_ratio, learner vs
+theta0) cannot catch a domain whose learner is merely less bad than theta0 on data far from both: on rope +
+granular the rope learner predicted granular at 0.98 x theta0, yet at ~48 x its error on rope members (new
+rope episodes: 4-11 x). An episode that fails this check for the domain it read, or that planned with
+theta0 and joined no domain by direction, goes to the domain closest to its own level within abs_ratio
+(abs_join), else to the pending pool instead of being dropped, so such episodes can found their own domain.
 """
 import copy
 import math
@@ -63,6 +72,8 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
         self.learner_win = bool(c.get("learner_win", False))
         self.absorb_frag = int(c.get("absorb_frag", 0))
         self.absorb_pending = bool(c.get("absorb_pending", True))
+        self.abs_ratio = float(c.get("abs_ratio", 0.0))  # 0: off
+        self._abs_cache = {}
         super().__init__(continual=continual, **kwargs)
         if self.write_mode == "oracle":
             raise ValueError("CLSv7MPCPlanner routes label-free; use CLSMPCPlanner for write=oracle")
@@ -112,6 +123,7 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
             ratios = {dk: self._rollout_err(d["learner"], z) / e0 for dk, d in self.domains.items()
                       if d["learner"] is not None and not d.get("merged_into")}
         self._val_cache = dict(ratios)
+        self._abs_cache = {}
         rule, key, rejected, new_members = ("familiar" if familiar else "none"), None, [], []
         if not familiar:
             lost = False  # learner_win: the read learner did not beat theta0 on the whole episode
@@ -125,7 +137,10 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
             if key is None:  # the mature domain whose learner predicts the episode best
                 fit = sorted((r, dk) for dk, r in ratios.items() if dk not in rejected and self._mature(self.domains[dk]))
                 if fit and fit[0][0] <= self.join_ratio:
-                    rule, key = "join", fit[0][1]
+                    if self._abs_rejects(fit[0][1], z):
+                        rejected.append(fit[0][1])
+                    else:
+                        rule, key = "join", fit[0][1]
             if key is None and base is None:  # planned with theta0: v5's fingerprint join, then the pending pool
                 cands = sorted(((_cos(delta, [s / d["fp_n"] for s in d["fp_sum"]]), dk)
                                 for dk, d in self.domains.items() if d["fp_n"] > 0 and not d.get("merged_into")),
@@ -139,6 +154,14 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
                         continue
                     rule, key = "direction", dk
                     break
+                if key is None:
+                    key = self._abs_join(z, rejected)
+                    rule = "abs_join"
+                if key is None:
+                    rule, key, new_members = self._pend(delta, z)
+            elif key is None and any(dk in self._abs_cache and self._abs_cache[dk] > self.abs_ratio for dk in rejected):
+                # far from the domain it read: the closest other domain within abs_ratio, or the pending pool
+                rule, key = "abs_join", self._abs_join(z, rejected)
                 if key is None:
                     rule, key, new_members = self._pend(delta, z)
             elif key is None:
@@ -168,12 +191,42 @@ class CLSv7MPCPlanner(CLSMergeMPCPlanner):
             "read": base, "route": self._route_log, "write": key, "write_rule": rule, "slow_loss": slow_loss,
             "val_ratio": val_ratio, "rejected_by": rejected,
             "rejected_ratios": {dk: self._val_cache[dk] for dk in rejected if dk in self._val_cache},
+            "abs_ratios": dict(self._abs_cache),
             "familiar_score": fam, "pending_n": len(self.pending), "new_members": [m["tag"] for m in new_members],
             "val_all": ratios, "merges": merges, "absorbs": absorbs,
             "domains": {dk: {"n": d["n"], "tags": dict(d["tags"]), "learner": d["learner"] is not None,
                              "mature": d["learner"] is not None and self._mature(d), "val_last": d.get("val", [])[-3:]}
                         for dk, d in self.domains.items() if d["n"] >= 2},
         })
+
+    def _rejects(self, key, z):
+        return super()._rejects(key, z) or self._abs_rejects(key, z)
+
+    def _abs_rejects(self, key, z):
+        """The domain's module predicts the episode worse than abs_ratio x its median error on the domain's episodes."""
+        if self.abs_ratio <= 0 or key not in self.domains or not self.domains[key]["replay"]:
+            return False
+        return self._abs_of(key, z) > self.abs_ratio
+
+    @torch.no_grad()
+    def _abs_of(self, key, z):
+        if key not in self._abs_cache:
+            d = self.domains[key]
+            m = d["learner"] if d["learner"] is not None else self._pred0_module
+            ref = float(np.median([float(self._latent_loss(m, r)) for r in d["replay"]]))
+            self._abs_cache[key] = float(self._latent_loss(m, z)) / max(ref, 1e-12)
+        return self._abs_cache[key]
+
+    def _abs_join(self, z, rejected):
+        """The domain (mature or not) whose module is closest to its own level on the episode, if within abs_ratio.
+        Without it an episode turned away from the domain it read went straight to the pending pool, so one new
+        domain fragmented: on rope + granular, 10 granular episodes founded 3 domains of 3. Validations count,
+        as for direction writes: the choice does not use the learner-vs-theta0 ratio the maturity gate reads."""
+        if self.abs_ratio <= 0:
+            return None
+        fit = sorted((self._abs_of(dk, z), dk) for dk, d in self.domains.items()
+                     if d["replay"] and not d.get("merged_into") and dk not in rejected)
+        return fit[0][1] if fit and fit[0][0] <= self.abs_ratio else None
 
     @torch.no_grad()
     def _wins(self, key, z):

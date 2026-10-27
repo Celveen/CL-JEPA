@@ -9,6 +9,11 @@
 #   frozen  theta0, no adaptation (batched MPC; chunks independent)
 #   free    label-free routing: cls6a_free (planning.continual_v7.CLSv7MPCPlanner) with familiar_thr recalibrated for
 #           this model, 0.117 = 90th percentile of theta0's familiarity score on rope validation windows (familiarity.json)
+#   free_abs  free plus the absolute write check (abs_ratio=20: a domain's module must predict the episode within
+#           20 x its median 1-step error on the domain's episodes; offline on free's run, new rope episodes were
+#           4-11 x the rope learner's member error, granular 39-58 x); an episode it turns away joins the closest
+#           domain within 20 x (abs_join) before the pending pool. chunk 0 is shared with the first run of this arm
+#           (no abs_join decision arises in it); that run's fragmented chunks 1-2 are in free_abs_v1/
 #   oracle  planning.continual.CLSMPCPlanner write=oracle: one slow learner per true domain (tag rope / granular)
 # free and oracle run their chunks as one chain through continual_state.pt.
 #   bash eval_outputs/rope_granular/run_stream.sh <arm> <gpu list>     (from the CL-JEPA-cudagraph worktree)
@@ -42,6 +47,15 @@ case $arm in
                planner.continual.learner_win=false planner.continual.absorb_ratio=0.8
                planner.continual.absorb_every=25 planner.continual.absorb_frag=6
                planner.continual.absorb_pending=false); CHAIN=1 ;;
+  free_abs) ARM=(planner._target_=planning.continual_v7.CLSv7MPCPlanner planner.continual.write=delta
+               planner.continual.tau=0.10 planner.continual.mature_k=3 planner.continual.mature_ratio=0.9
+               planner.continual.reject_ratio=1.2 planner.continual.familiar_thr=0.117
+               planner.continual.pending_m=3 planner.continual.tau_new=0.05 planner.continual.fp_unit=true
+               planner.continual.merge_eps=0.5 planner.continual.merge_k=2
+               planner.continual.familiar_read=true planner.continual.join_ratio=0
+               planner.continual.learner_win=false planner.continual.absorb_ratio=0.8
+               planner.continual.absorb_every=25 planner.continual.absorb_frag=6
+               planner.continual.absorb_pending=false +planner.continual.abs_ratio=20); CHAIN=1 ;;
   oracle) ARM=(planner._target_=planning.continual.CLSMPCPlanner planner.continual.write=oracle
                planner.continual.mature_k=3 planner.continual.mature_ratio=0.9); CHAIN=1 ;;
   *) echo "unknown arm $arm"; exit 1 ;;
