@@ -1,0 +1,50 @@
+{
+  "complete": true,
+  "epochs_completed": 10,
+  "evaluations_completed": 14,
+  "updated_utc": "2026-09-24T11:10:10.646278+00:00",
+  "paired_results": {
+    "T": {
+      "both_success": 12,
+      "frozen_only": 4,
+      "adajepa_only": 9,
+      "both_fail": 25
+    },
+    "L": {
+      "both_success": 8,
+      "frozen_only": 3,
+      "adajepa_only": 4,
+      "both_fail": 35
+    },
+    "Z": {
+      "both_success": 6,
+      "frozen_only": 4,
+      "adajepa_only": 7,
+      "both_fail": 33
+    },
+    "+": {
+      "both_success": 10,
+      "frozen_only": 5,
+      "adajepa_only": 8,
+      "both_fail": 27
+    },
+    "I": {
+      "both_success": 1,
+      "frozen_only": 0,
+      "adajepa_only": 5,
+      "both_fail": 44
+    },
+    "small_tee": {
+      "both_success": 6,
+      "frozen_only": 3,
+      "adajepa_only": 7,
+      "both_fail": 34
+    },
+    "square": {
+      "both_success": 3,
+      "frozen_only": 1,
+      "adajepa_only": 8,
+      "both_fail": 38
+    }
+  }
+}

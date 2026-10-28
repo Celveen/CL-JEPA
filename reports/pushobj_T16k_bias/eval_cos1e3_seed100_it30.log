@@ -1,0 +1,30 @@
+14 jobs queued, 0 already finished
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/redBlock/adajepa GPU=4
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/redAnchor/adajepa GPU=5
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/snp/adajepa GPU=4
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/dark/adajepa GPU=5
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/blur/adajepa GPU=7
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/redAgent/adajepa GPU=6
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/redBlock/frozen GPU=7
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/default/adajepa GPU=6
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/redBlock/frozen seconds=468
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/redAnchor/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/redAnchor/frozen seconds=174
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/redAgent/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/redAgent/frozen seconds=173
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/blur/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/blur/frozen seconds=210
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/snp/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/snp/frozen seconds=239
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/dark/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/dark/frozen seconds=231
+START eval_outputs/pushobj_T16k_bias_cos1e3_e3/default/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/default/frozen seconds=196
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/default/adajepa seconds=1973
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/dark/adajepa seconds=2232
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/redAgent/adajepa seconds=2506
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/blur/adajepa seconds=2521
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/snp/adajepa seconds=2622
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/redAnchor/adajepa seconds=4238
+DONE eval_outputs/pushobj_T16k_bias_cos1e3_e3/redBlock/adajepa seconds=5850
+finished: 14 ok, 0 failed

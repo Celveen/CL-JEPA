@@ -1,0 +1,1767 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/Cython/Distutils/old_build_ext.py:15: DeprecationWarning: dep_util is Deprecated. Use functions from setuptools instead.
+  from distutils.dep_util import newer, newer_group
+/home/appuser/workspace/project/multimodal-test/adajepa/env/__init__.py:7: UserWarning: point_maze envs unavailable (mujoco_py missing): 
+Missing path to your environment variable. 
+Current values LD_LIBRARY_PATH=/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/cv2/../../lib64:
+Please add following line to .bashrc:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/appuser/.mujoco/mujoco210/bin
+  warnings.warn(f"point_maze envs unavailable (mujoco_py missing): {_e}")
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pygame/pkgdata.py:25: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import resource_stream, resource_exists
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/skimage/util/dtype.py:27: DeprecationWarning: `np.bool8` is a deprecated alias for `np.bool_`.  (Deprecated NumPy 1.24)
+  np.bool8: (False, True),
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+  family = Regex(
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:127: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  self._parser.parseString(pattern)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:134: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+  self._parser.resetCache()
+author T {'action_mag': 27.458, 'agent_speed': 10.825, 'nn_rms': 14.534, 'cos_to_block': 0.275, 'toward_frac': 0.667, 'contact_frac': 0.642, 'mean_gap': 7.944}
+author + {'action_mag': 28.416, 'agent_speed': 11.388, 'nn_rms': 13.748, 'cos_to_block': 0.316, 'toward_frac': 0.686, 'contact_frac': 0.727, 'mean_gap': 5.868}
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 7.0 sigma= 9.0 source score=0.123 T:[mag 28.6 spd 11.1 nn 13.7 cos 0.29 cf 0.70 gap 10.6] +:[mag 28.5 spd 11.1 nn 13.6 cos 0.36 cf 0.74 gap 7.7]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 7.0 sigma=10.0 source score=0.127 T:[mag 29.1 spd 11.2 nn 14.8 cos 0.24 cf 0.69 gap 10.7] +:[mag 28.9 spd 11.2 nn 14.8 cos 0.32 cf 0.75 gap 7.7]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 7.0 sigma=11.0 source score=0.222 T:[mag 30.0 spd 11.5 nn 15.9 cos 0.23 cf 0.68 gap 11.5] +:[mag 29.3 spd 11.3 nn 15.9 cos 0.30 cf 0.75 gap 8.2]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 8.0 sigma= 9.0 source score=0.171 T:[mag 28.6 spd 11.1 nn 14.0 cos 0.30 cf 0.70 gap 10.6] +:[mag 28.8 spd 11.2 nn 14.1 cos 0.40 cf 0.75 gap 8.0]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 8.0 sigma=10.0 source score=0.124 T:[mag 28.8 spd 11.1 nn 15.2 cos 0.27 cf 0.70 gap 10.3] +:[mag 28.9 spd 11.2 nn 15.2 cos 0.34 cf 0.75 gap 7.9]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 8.0 sigma=11.0 source score=0.178 T:[mag 29.8 spd 11.4 nn 16.4 cos 0.25 cf 0.69 gap 10.9] +:[mag 29.5 spd 11.3 nn 16.3 cos 0.30 cf 0.74 gap 8.0]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 9.0 sigma= 9.0 source score=0.147 T:[mag 28.4 spd 11.0 nn 14.4 cos 0.32 cf 0.70 gap 10.2] +:[mag 28.9 spd 11.2 nn 14.4 cos 0.41 cf 0.75 gap 7.5]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 9.0 sigma=10.0 source score=0.105 T:[mag 29.1 spd 11.2 nn 15.5 cos 0.27 cf 0.70 gap 10.4] +:[mag 29.0 spd 11.2 nn 15.5 cos 0.35 cf 0.75 gap 7.4]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 9.0 sigma=11.0 source score=0.126 T:[mag 29.5 spd 11.3 nn 16.7 cos 0.26 cf 0.69 gap 10.5] +:[mag 29.6 spd 11.4 nn 16.6 cos 0.33 cf 0.75 gap 7.3]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b=10.0 sigma= 9.0 source score=0.104 T:[mag 28.8 spd 11.2 nn 14.8 cos 0.31 cf 0.71 gap 9.8] +:[mag 28.8 spd 11.2 nn 14.8 cos 0.40 cf 0.75 gap 6.9]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b=10.0 sigma=10.0 source score=0.107 T:[mag 29.1 spd 11.2 nn 15.9 cos 0.29 cf 0.70 gap 10.1] +:[mag 29.0 spd 11.2 nn 15.9 cos 0.35 cf 0.74 gap 7.5]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b=10.0 sigma=11.0 source score=0.134 T:[mag 29.7 spd 11.4 nn 17.0 cos 0.26 cf 0.69 gap 10.0] +:[mag 29.8 spd 11.4 nn 16.9 cos 0.33 cf 0.74 gap 7.7]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b=11.0 sigma= 9.0 source score=0.138 T:[mag 29.5 spd 11.5 nn 15.3 cos 0.32 cf 0.70 gap 9.9] +:[mag 28.9 spd 11.3 nn 15.3 cos 0.41 cf 0.74 gap 7.3]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b=11.0 sigma=10.0 source score=0.144 T:[mag 30.0 spd 11.6 nn 16.3 cos 0.29 cf 0.68 gap 10.5] +:[mag 29.6 spd 11.5 nn 16.2 cos 0.37 cf 0.74 gap 7.5]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b=11.0 sigma=11.0 source score=0.160 T:[mag 30.2 spd 11.6 nn 17.3 cos 0.25 cf 0.69 gap 10.6] +:[mag 30.1 spd 11.6 nn 17.2 cos 0.35 cf 0.73 gap 7.3]
+
+best: [
+ {
+  "bias": 10.0,
+  "noise": 9.0,
+  "placement": "source",
+  "score": 0.10392725472678596,
+  "shapes": {
+   "T": {
+    "action_mag": 28.79190098978916,
+    "agent_speed": 11.18497253636833,
+    "cos_to_block": 0.30809385459005606,
+    "toward_frac": 0.6951366433358935,
+    "contact_frac": 0.7067929073727982,
+    "mean_gap": 9.832746234923027,
+    "nn_rms": 14.805166693506173,
+    "valid_frac": 0.868,
+    "score": 0.08643750992382429
+   },
+   "+": {
+    "action_mag": 28.809097244118043,
+    "agent_speed": 11.226140087180342,
+    "cos_to_block": 0.40271434438976217,
+    "toward_frac": 0.7455360548329736,
+    "contact_frac": 0.750651499611067,
+    "mean_gap": 6.905003388099761,
+    "nn_rms": 14.839194065565987,
+    "valid_frac": 0.756,
+    "score": 0.12141699952974763
+   }
+  }
+ },
+ {
+  "bias": 9.0,
+  "noise": 10.0,
+  "placement": "source",
+  "score": 0.10544118964501434,
+  "shapes": {
+   "T": {
+    "action_mag": 29.096655032042815,
+    "agent_speed": 11.206337522518298,
+    "cos_to_block": 0.27482957027990973,
+    "toward_frac": 0.6784473017373055,
+    "contact_frac": 0.7006324156008413,
+    "mean_gap": 10.405069865124762,
+    "nn_rms": 15.54332481187723,
+    "valid_frac": 0.884,
+    "score": 0.11412465657437401
+   },
+   "+": {
+    "action_mag": 29.04011288499579,
+    "agent_speed": 11.215084215949169,
+    "cos_to_block": 0.3477358018177392,
+    "toward_frac": 0.7138341975544827,
+    "contact_frac": 0.7517023100013733,
+    "mean_gap": 7.397305088572861,
+    "nn_rms": 15.451498938711431,
+    "valid_frac": 0.816,
+    "score": 0.09675772271565465
+   }
+  }
+ },
+ {
+  "bias": 10.0,
+  "noise": 10.0,
+  "placement": "source",
+  "score": 0.10722950061456364,
+  "shapes": {
+   "T": {
+    "action_mag": 29.136428994755256,
+    "agent_speed": 11.228140186200086,
+    "cos_to_block": 0.28740281384110583,
+    "toward_frac": 0.6829700333643544,
+    "contact_frac": 0.6952373350852019,
+    "mean_gap": 10.076750863992515,
+    "nn_rms": 15.887753430640938,
+    "valid_frac": 0.868,
+    "score": 0.09517937600996615
+   },
+   "+": {
+    "action_mag": 29.03386175445107,
+    "agent_speed": 11.236985158856063,
+    "cos_to_block": 0.3513021809414967,
+    "toward_frac": 0.7159995136164161,
+    "contact_frac": 0.7418725581190784,
+    "mean_gap": 7.5273653451628775,
+    "nn_rms": 15.876219698982926,
+    "valid_frac": 0.772,
+    "score": 0.11927962521916113
+   }
+  }
+ }
+]

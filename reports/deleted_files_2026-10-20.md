@@ -1,0 +1,145 @@
+# 2026-10-20 清理磁盘时删除的文件
+
+## 1. 已跑完实验的慢学习器状态（continual_state.pt）
+- eval_outputs/cont_S7b/cls5_free/chunk_13_Z/continual_state.pt
+- eval_outputs/cont_S7b/cls5_free/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7b/cls5_free/chunk_20_T/continual_state.pt
+- eval_outputs/cont_S7b/cls3_oracle/chunk_20_T/continual_state.pt
+- eval_outputs/cont_S7b/cls4_free/chunk_20_T/continual_state.pt
+- eval_outputs/cont_S7b/cls3_oracle/chunk_13_Z/continual_state.pt
+- eval_outputs/cont_S7b/cls3_oracle/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7b/cls4_free/chunk_13_Z/continual_state.pt
+- eval_outputs/cont_S7b/cls4_free/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7b/fixw4_free/chunk_13_Z/continual_state.pt
+- eval_outputs/cont_S7b/fixw4_free/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7b/fixw4_free/chunk_20_T/continual_state.pt
+- eval_outputs/cont_S7b/w0/chunk_13_Z/continual_state.pt
+- eval_outputs/cont_S7b/cls3_oracle_pr/chunk_20_T/continual_state.pt
+- eval_outputs/cont_S7b/w0/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7b/w0/chunk_20_T/continual_state.pt
+- eval_outputs/cont_S7b/cls3_oracle_ms/chunk_13_Z/continual_state.pt
+- eval_outputs/cont_S7b/cls3_oracle_ms/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7b/cls3_oracle_pr/chunk_13_Z/continual_state.pt
+- eval_outputs/cont_S7b/cls3_oracle_pr/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7b/cls3_oracle_ms/chunk_20_T/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_00_I/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_15_L/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_07_I/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_16_square/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_04_small_tee/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_11_small_tee/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_10_Z/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_18_small_tee/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_05_plus/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_01_L/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_19_plus/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_08_L/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_09_square/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_03_Z/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_20_T/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_02_square/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_14_I/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_12_plus/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_13_T/continual_state.pt
+- eval_outputs/cont_S7t3/w0/chunk_17_Z/continual_state.pt
+- eval_outputs/cont_S7t3/cls5_free/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7t3/cls5_free/chunk_13_T/continual_state.pt
+- eval_outputs/cont_S7t3/cls6_free/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7t3/cls6_free/chunk_13_T/continual_state.pt
+- eval_outputs/cont_S7t3/cls5s_free/chunk_06_T/continual_state.pt
+- eval_outputs/cont_S7t3/cls5s_free/chunk_13_T/continual_state.pt
+（共 48 个，19.7 GB；S7t3 三组的流末状态 chunk_20_T 保留）
+
+## 2. 训练过程中每 5000 步的中间快照（model_e*_it*.pth；每轮的 model_1/2/3.pth 与 model_latest.pth 保留）
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e1_it10000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e1_it15000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e1_it20000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e1_it25000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e1_it5000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e2_it10000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e2_it15000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e2_it20000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e2_it25000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e2_it5000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e3_it10000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e3_it15000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e3_it20000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e3_it25000.pth
+- checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_e3_it5000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e1_it10000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e1_it15000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e1_it20000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e1_it25000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e1_it5000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e2_it10000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e2_it15000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e2_it20000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e2_it25000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e2_it5000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e3_it10000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e3_it15000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e3_it20000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e3_it25000.pth
+- checkpoints/pushobj_bias_16k_e3_seed1/checkpoints/model_e3_it5000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e1_it10000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e1_it15000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e1_it20000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e1_it25000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e1_it5000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e2_it10000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e2_it15000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e2_it20000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e2_it25000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e2_it5000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e3_it10000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e3_it15000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e3_it20000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e3_it25000.pth
+- checkpoints/pushobj_bias_16k_e3_seed2/checkpoints/model_e3_it5000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e1_it10000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e1_it15000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e1_it20000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e1_it25000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e1_it5000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e2_it10000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e2_it15000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e2_it20000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e2_it25000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e2_it5000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e3_it10000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e3_it15000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e3_it20000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e3_it25000.pth
+- checkpoints/pushobj_T16k_bias_cos1e3_e3_seed0/checkpoints/model_e3_it5000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e1_it10000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e1_it15000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e1_it20000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e1_it25000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e1_it5000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e2_it10000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e2_it15000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e2_it20000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e2_it25000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e2_it5000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e3_it10000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e3_it15000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e3_it20000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e3_it25000.pth
+- checkpoints/pushobj_T16k_bias_e3_seed0/checkpoints/model_e3_it5000.pth
+（共 75 个，22.9 GB）
+
+## 3. 缓存、临时文件与重复副本
+- 已结束会话的临时目录（都是冒烟测试的输出）：`/tmp/claude-1001/-home-appuser-workspace-project-multimodal-test-adajepa/612e56d6-…/scratchpad`（8.1 GB）、`…/b9227da3-…/scratchpad`（6.9 GB）、`…/fbe8c32e-…/scratchpad`（0.4 GB）
+- 权重与数据压缩包的分卷副本：`checkpoints/pushobj_bias_16k_data_parts`（0.56 GB）、`checkpoints/pushobj_bias_16k_e3_parts`（0.36 GB）、`checkpoints/pushobj_T16k_bias_data_parts`（0.51 GB）、`checkpoints/pushobj_T16k_bias_e3_parts`（0.26 GB）；对应的 .zip 保留
+- pip 下载缓存 `~/.cache/pip`（11 GB，`pip cache purge`）
+- conda 安装包缓存（`conda clean --all`，1.1 GB；其余是各环境在用的包，删了也不释放空间）
+
+## 保留
+- 每轮训练的模型 `model_1/2/3.pth`、`model_latest.pth`；官方权重；所有 .zip
+- S7t3 主实验（cls5_free、cls6_free、cls5s_free）的流末状态 `chunk_20_T/continual_state.pt`
+- S2、S7、S7b3 上 AdaJEPA 的快适应变化和帧（离线回放要用）
+- 正在跑的 `eval_outputs/cont_S7t3_cem/`、paper2 的实验与输出、`~/.cache/torch`（加载模型时要用）
+- 本仓库之外的目录（`workspace/weight` 116 GB 等）都没有动
+
+清理前剩余 87 GB，清理后剩余 156 GB。

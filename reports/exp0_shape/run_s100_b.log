@@ -1,0 +1,26 @@
+12 jobs queued, 0 already finished
+START eval_outputs/exp0_shape/s100/T/R_sign GPU=0
+START eval_outputs/exp0_shape/s100/I/R_sign GPU=1
+START eval_outputs/exp0_shape/s100/square/R_sign GPU=2
+START eval_outputs/exp0_shape/s100/T/W_dom GPU=3
+START eval_outputs/exp0_shape/s100/I/W_dom GPU=4
+START eval_outputs/exp0_shape/s100/square/W_dom GPU=5
+START eval_outputs/exp0_shape/s100/T/P_restart GPU=6
+START eval_outputs/exp0_shape/s100/I/P_restart GPU=7
+START eval_outputs/exp0_shape/s100/square/P_restart GPU=0
+START eval_outputs/exp0_shape/s100/T/F_batch GPU=2
+DONE eval_outputs/exp0_shape/s100/T/F_batch seconds=199
+START eval_outputs/exp0_shape/s100/I/F_batch GPU=5
+START eval_outputs/exp0_shape/s100/square/F_batch GPU=7
+DONE eval_outputs/exp0_shape/s100/I/F_batch seconds=212
+DONE eval_outputs/exp0_shape/s100/square/F_batch seconds=199
+DONE eval_outputs/exp0_shape/s100/T/R_sign seconds=2358
+DONE eval_outputs/exp0_shape/s100/T/W_dom seconds=2440
+DONE eval_outputs/exp0_shape/s100/T/P_restart seconds=2669
+DONE eval_outputs/exp0_shape/s100/square/W_dom seconds=4076
+DONE eval_outputs/exp0_shape/s100/square/R_sign seconds=4148
+DONE eval_outputs/exp0_shape/s100/I/R_sign seconds=4576
+DONE eval_outputs/exp0_shape/s100/I/W_dom seconds=4523
+DONE eval_outputs/exp0_shape/s100/I/P_restart seconds=4706
+DONE eval_outputs/exp0_shape/s100/square/P_restart seconds=4449
+finished: 12 ok, 0 failed

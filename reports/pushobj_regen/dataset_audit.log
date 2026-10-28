@@ -1,0 +1,132 @@
+{
+  "train": {
+    "episodes": 1800,
+    "frames": 223700,
+    "length_quantiles": [
+      56.0,
+      98.75,
+      125.0,
+      149.0,
+      246.0
+    ],
+    "shapes": {
+      "T": 450,
+      "L": 450,
+      "Z": 450,
+      "+": 450
+    },
+    "unique_trajectories": 1800,
+    "unique_sources": 1712,
+    "video_sizes": [
+      [
+        224,
+        224,
+        3
+      ]
+    ],
+    "videos_checked": 1800,
+    "slices": 189500,
+    "agent_out_of_frame_frames": 0,
+    "action_mean": [
+      -0.007753380574285984,
+      0.008686213754117489
+    ],
+    "action_std": [
+      0.20757855474948883,
+      0.2066596895456314
+    ],
+    "proprio_mean": [
+      228.72042846679688,
+      294.0693054199219,
+      -2.9110522270202637,
+      3.2390735149383545
+    ],
+    "proprio_std": [
+      103.01820373535156,
+      96.33035278320312,
+      77.16614532470703,
+      76.82559967041016
+    ],
+    "episodes_with_contact": 1.0,
+    "contact_steps_per_episode_by_shape": {
+      "+": 43.095555555555556,
+      "L": 45.08888888888889,
+      "T": 54.06,
+      "Z": 36.76
+    },
+    "block_moved_gt5px_fraction": 0.9911110997200012,
+    "block_displacement_quantiles": [
+      0.05852963775396347,
+      64.38591575622559,
+      111.58597183227539,
+      165.88794326782227,
+      427.3127136230469
+    ]
+  },
+  "val": {
+    "episodes": 200,
+    "frames": 23916,
+    "length_quantiles": [
+      49.0,
+      96.0,
+      105.0,
+      139.0,
+      229.0
+    ],
+    "shapes": {
+      "T": 50,
+      "L": 50,
+      "Z": 50,
+      "+": 50
+    },
+    "unique_trajectories": 200,
+    "unique_sources": 196,
+    "video_sizes": [
+      [
+        224,
+        224,
+        3
+      ]
+    ],
+    "videos_checked": 200,
+    "slices": 20116,
+    "agent_out_of_frame_frames": 0,
+    "action_mean": [
+      -0.009857594035565853,
+      -7.008857210166752e-05
+    ],
+    "action_std": [
+      0.21289286017417908,
+      0.20686140656471252
+    ],
+    "proprio_mean": [
+      234.8192138671875,
+      274.3650817871094,
+      -3.6153128147125244,
+      -0.09665224701166153
+    ],
+    "proprio_std": [
+      101.59357452392578,
+      99.4510269165039,
+      79.12664794921875,
+      76.89301300048828
+    ],
+    "episodes_with_contact": 1.0,
+    "contact_steps_per_episode_by_shape": {
+      "+": 51.78,
+      "L": 46.44,
+      "T": 49.12,
+      "Z": 42.92
+    },
+    "block_moved_gt5px_fraction": 0.9750000238418579,
+    "block_displacement_quantiles": [
+      0.34549641609191895,
+      69.80137825012207,
+      120.71444320678711,
+      175.2928123474121,
+      413.9312744140625
+    ]
+  },
+  "duplicate_trajectories_across_splits": 0,
+  "shared_source_trajectories_across_splits": 0
+}

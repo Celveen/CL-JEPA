@@ -1,0 +1,5 @@
+DONE chunk_00_I "final_eval/success_rate": 0.2
+DONE chunk_01_L "final_eval/success_rate": 0.65
+DONE chunk_02_square "final_eval/success_rate": 0.2
+DONE chunk_03_Z "final_eval/success_rate": 0.85
+DONE chunk_04_small_tee "final_eval/success_rate": 0.85

@@ -1,0 +1,44 @@
+# training seed 1 (checkpoints/pushobj_bias_16k_e3_seed1, model_3.pth), GD planner, n_evals=50.
+# test seed 100: up to 20 replans (paired with the released checkpoint); test seeds 200/300: up to 30 replans (paper Figure 2).
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/I/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	I	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/square/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	square	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/small_tee/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	small_tee	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/T/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	T	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/L/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	L	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/Z/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	Z	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/+/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	+	100
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/I/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	I	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/square/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	square	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/small_tee/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	small_tee	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/T/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	T	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/L/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	L	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/Z/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	Z	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/+/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	+	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/I/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	I	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/square/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	square	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/small_tee/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	small_tee	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/T/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	T	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/L/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	L	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/Z/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	Z	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/+/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed1	3	+	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/I/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	I	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/square/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	square	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/small_tee/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	small_tee	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/T/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	T	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/L/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	L	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/Z/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	Z	100
+eval_outputs/pushobj_bias_16k_e3_train1/test100_it20/+/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	+	100
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/I/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	I	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/square/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	square	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/small_tee/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	small_tee	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/T/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	T	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/L/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	L	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/Z/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	Z	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test200_it30/+/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	+	200	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/I/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	I	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/square/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	square	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/small_tee/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	small_tee	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/T/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	T	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/L/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	L	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/Z/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	Z	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_train1/test300_it30/+/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed1	3	+	300	planner.max_iter=30

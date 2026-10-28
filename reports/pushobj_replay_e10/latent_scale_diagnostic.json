@@ -1,0 +1,25 @@
+{
+  "method": "encoder outputs of 96 val frames (24 episodes x 4 frames, seed 0), CPU, per-dim variance averaged over 384 dims",
+  "epochs": {
+    "2": {
+      "between_sample_var": 0.8353754878044128,
+      "mean_norm": 19.785066604614258
+    },
+    "4": {
+      "between_sample_var": 0.8676767349243164,
+      "mean_norm": 19.966020584106445
+    },
+    "6": {
+      "between_sample_var": 0.913821280002594,
+      "mean_norm": 20.14931297302246
+    },
+    "8": {
+      "between_sample_var": 0.892096996307373,
+      "mean_norm": 20.38593292236328
+    },
+    "10": {
+      "between_sample_var": 0.9663997292518616,
+      "mean_norm": 20.747045516967773
+    }
+  }
+}

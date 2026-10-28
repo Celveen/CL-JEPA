@@ -1,0 +1,11 @@
+{
+  "epoch": 20,
+  "all_model_tensors_finite": true,
+  "optimizer_steps": {
+    "encoder": 45580,
+    "predictor": 45580,
+    "action_and_proprio": 45580,
+    "decoder": 41022
+  },
+  "validation": "Loaded model_20.pth on CPU and asserted epoch, step counts, and finite values of every model state tensor."
+}

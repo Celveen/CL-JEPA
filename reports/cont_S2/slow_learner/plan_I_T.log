@@ -1,0 +1,4 @@
+1 jobs queued, 0 already finished
+START eval_outputs/slow_learner/I_learner/s100/T/F_batch GPU=3
+DONE eval_outputs/slow_learner/I_learner/s100/T/F_batch seconds=185
+finished: 1 ok, 0 failed

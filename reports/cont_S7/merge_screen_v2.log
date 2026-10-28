@@ -1,0 +1,79 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/wandb/util.py:118: SentryHubDeprecationWarning: `sentry_sdk.Hub` is deprecated and will be removed in a future major release. Please consult our 1.x to 2.x migration guide for details on how to migrate `Hub` usage to the new API: https://docs.sentry.io/platforms/python/migration/1.x-to-2.x
+  sentry_hub = sentry_sdk.Hub(sentry_client)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py:30: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import parse_version
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/Cython/Distutils/old_build_ext.py:15: DeprecationWarning: dep_util is Deprecated. Use functions from setuptools instead.
+  from distutils.dep_util import newer, newer_group
+/home/appuser/workspace/project/multimodal-test/adajepa/env/__init__.py:7: UserWarning: point_maze envs unavailable (mujoco_py missing): 
+Missing path to your environment variable. 
+Current values LD_LIBRARY_PATH=/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/cv2/../../lib64:
+Please add following line to .bashrc:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/appuser/.mujoco/mujoco210/bin
+  warnings.warn(f"point_maze envs unavailable (mujoco_py missing): {_e}")
+/home/appuser/workspace/project/multimodal-test/adajepa/custom_resolvers.py:4: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path=None)
+Using cache found in /home/appuser/.cache/torch/hub/facebookresearch_dinov2_main
+Resuming from epoch 3: /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_3.pth
+# 有验证的领域合并：离线设计（流 S7）
+
+写入沿用 v4：熟悉度门槛 90 分位（0.0146），确认池 m=3，tau_join 0.1，tau_new 0.05。每个领域按在线规则训练慢学习器；每来一个新 episode，先用所有已有学习器在它上面做验证（5 步开环误差 / θ0），再训练。
+
+## 交叉验证矩阵（不合并时）
+
+行 = 新 episode 所属领域，列 = 用哪个领域的学习器去预测它；数值 = 5 步误差 / θ0 的几何平均（越小越好），括号里是样本数。
+
+| episode 所属 \ 学习器 | d0(I19) | d1(I10) | d2(I10) | d3(square26) | d4(small_tee4,square2) | d5(small_tee2,square1) |
+|---|---:|---:|---:|---:|---:|---:|
+| d0(I19) | 0.69（16） | 0.88（14） | 0.94（11） | 1.11（9） | 1.13（9） | — |
+| d1(I10) | 1.00（10） | 0.80（7） | 1.25（5） | 1.23（4） | 1.02（4） | — |
+| d2(I10) | 0.85（10） | 1.07（10） | 0.59（7） | 1.21（7） | 1.01（7） | — |
+| d3(square26) | 1.03（26） | 1.03（26） | 1.09（26） | 0.91（23） | 1.07（13） | — |
+| d4(small_tee4,square2) | 1.38（6） | 1.59（6） | 1.04（6） | 1.61（6） | 0.86（3） | 3.11（1） |
+| d5(small_tee2,square1) | 1.17（3） | 0.95（3） | 1.06（3） | 0.98（3） | 1.08（3） | — |
+
+## 不合并
+
+合并记录：无
+
+最终领域构成：{0: {'I': 19}, 1: {'I': 10}, 2: {'I': 10}, 3: {'square': 26}, 4: {'square': 2, 'small_tee': 4}, 5: {'square': 1, 'small_tee': 2}}
+
+
+## 合并 eps=0.1
+
+合并记录：无
+
+最终领域构成：{0: {'I': 19}, 1: {'I': 10}, 2: {'I': 10}, 3: {'square': 26}, 4: {'square': 2, 'small_tee': 4}, 5: {'square': 1, 'small_tee': 2}}
+
+
+## 合并 eps=0.2
+
+合并记录：[{'at': 186, 'keep': 0, 'gone': 1, 'tags': {'I': 21}}, {'at': 190, 'keep': 0, 'gone': 2, 'tags': {'I': 30}}]
+
+最终领域构成：{0: {'I': 39}, 3: {'square': 26}, 4: {'square': 2, 'small_tee': 4}, 5: {'square': 1, 'small_tee': 2}}
+
+
+## 合并 eps=0.3
+
+合并记录：[{'at': 186, 'keep': 0, 'gone': 1, 'tags': {'I': 21}}, {'at': 188, 'keep': 0, 'gone': 2, 'tags': {'I': 28}}]
+
+最终领域构成：{0: {'I': 39}, 3: {'square': 26}, 4: {'square': 2, 'small_tee': 4}, 5: {'square': 1, 'small_tee': 2}}
+
+
+## 合并 eps=0.5
+
+合并记录：[{'at': 180, 'keep': 0, 'gone': 1, 'tags': {'I': 17}}, {'at': 188, 'keep': 0, 'gone': 2, 'tags': {'I': 28}}]
+
+最终领域构成：{0: {'I': 39}, 3: {'square': 26}, 4: {'square': 2, 'small_tee': 4}, 5: {'square': 1, 'small_tee': 2}}
+

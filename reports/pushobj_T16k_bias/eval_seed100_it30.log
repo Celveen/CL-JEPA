@@ -1,0 +1,30 @@
+14 jobs queued, 0 already finished
+START eval_outputs/pushobj_T16k_bias_e3/redAnchor/adajepa GPU=5
+START eval_outputs/pushobj_T16k_bias_e3/redAgent/adajepa GPU=6
+START eval_outputs/pushobj_T16k_bias_e3/redBlock/adajepa GPU=4
+START eval_outputs/pushobj_T16k_bias_e3/snp/adajepa GPU=4
+START eval_outputs/pushobj_T16k_bias_e3/blur/adajepa GPU=7
+START eval_outputs/pushobj_T16k_bias_e3/redBlock/frozen GPU=7
+START eval_outputs/pushobj_T16k_bias_e3/default/adajepa GPU=6
+START eval_outputs/pushobj_T16k_bias_e3/dark/adajepa GPU=5
+DONE eval_outputs/pushobj_T16k_bias_e3/redBlock/frozen seconds=201
+START eval_outputs/pushobj_T16k_bias_e3/redAnchor/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_e3/redAnchor/frozen seconds=182
+START eval_outputs/pushobj_T16k_bias_e3/redAgent/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_e3/redAgent/frozen seconds=188
+START eval_outputs/pushobj_T16k_bias_e3/blur/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_e3/blur/frozen seconds=228
+START eval_outputs/pushobj_T16k_bias_e3/snp/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_e3/snp/frozen seconds=197
+START eval_outputs/pushobj_T16k_bias_e3/dark/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_e3/dark/frozen seconds=196
+START eval_outputs/pushobj_T16k_bias_e3/default/frozen GPU=7
+DONE eval_outputs/pushobj_T16k_bias_e3/default/frozen seconds=188
+DONE eval_outputs/pushobj_T16k_bias_e3/default/adajepa seconds=1778
+DONE eval_outputs/pushobj_T16k_bias_e3/dark/adajepa seconds=1784
+DONE eval_outputs/pushobj_T16k_bias_e3/snp/adajepa seconds=1987
+DONE eval_outputs/pushobj_T16k_bias_e3/blur/adajepa seconds=2352
+DONE eval_outputs/pushobj_T16k_bias_e3/redAgent/adajepa seconds=2479
+DONE eval_outputs/pushobj_T16k_bias_e3/redAnchor/adajepa seconds=4325
+DONE eval_outputs/pushobj_T16k_bias_e3/redBlock/adajepa seconds=4984
+finished: 14 ok, 0 failed

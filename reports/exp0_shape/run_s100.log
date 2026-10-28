@@ -1,0 +1,142 @@
+27 jobs queued, 0 already finished
+START eval_outputs/exp0_shape/s100/I/F_seq GPU=0
+START eval_outputs/exp0_shape/s100/T/F_seq GPU=0
+START eval_outputs/exp0_shape/s100/square/F_seq GPU=1
+START eval_outputs/exp0_shape/s100/T/A GPU=1
+START eval_outputs/exp0_shape/s100/I/A GPU=2
+START eval_outputs/exp0_shape/s100/square/A GPU=2
+START eval_outputs/exp0_shape/s100/T/A_asc GPU=3
+START eval_outputs/exp0_shape/s100/I/A_asc GPU=4
+START eval_outputs/exp0_shape/s100/square/A_asc GPU=4
+START eval_outputs/exp0_shape/s100/T/R_tgt GPU=5
+START eval_outputs/exp0_shape/s100/I/R_tgt GPU=5
+START eval_outputs/exp0_shape/s100/square/R_tgt GPU=6
+START eval_outputs/exp0_shape/s100/T/R_tgt_fix GPU=7
+START eval_outputs/exp0_shape/s100/I/R_tgt_fix GPU=7
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    proc.stdout.close()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    proc.stdout.close()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-13:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    proc.stdout.close()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-10:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    proc.stdout.close()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-7:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    proc.stdout.close()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-6:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    rc = proc.wait()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    rc = proc.wait()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-5:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    rc = proc.wait()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-12:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    rc = proc.wait()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    rc = proc.wait()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-11:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    rc = proc.wait()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-14:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    rc = proc.wait()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-9:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    rc = proc.wait()
+AttributeError: 'NoneType' object has no attribute 'close'
+Exception in thread Thread-8:
+Traceback (most recent call last):
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 980, in _bootstrap_inner
+    self.run()
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/threading.py", line 917, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/scripts/exp0_run.py", line 98, in worker
+    rc = proc.wait()
+AttributeError: 'NoneType' object has no attribute 'close'
+finished: 0 ok, 0 failed

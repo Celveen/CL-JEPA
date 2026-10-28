@@ -1,0 +1,10 @@
+- ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0
+- model_epoch=3
+- eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/cont_streams/S7t3/chunk_11_small_tee.pkl
+- n_evals=50
+- +wandb_logging=false
+- planner.continual.w=0
+- planner.continual.tag=small_tee
+- planner.continual.state_in=null
+- planner.continual.save_deltas=false
+- seed=200

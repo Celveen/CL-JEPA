@@ -1,0 +1,132 @@
+{
+  "train": {
+    "episodes": 16000,
+    "frames": 1937205,
+    "length_quantiles": [
+      56.0,
+      97.0,
+      120.0,
+      143.0,
+      246.0
+    ],
+    "shapes": {
+      "T": 16000
+    },
+    "unique_trajectories": 16000,
+    "unique_sources": 13584,
+    "video_sizes": [
+      [
+        224,
+        224,
+        3
+      ]
+    ],
+    "videos_checked": 16000,
+    "slices": 1633205,
+    "agent_out_of_frame_frames": 0,
+    "invalid_start_states": 0,
+    "min_start_gap_agent_to_block_px": 12.011101802989916,
+    "block_step_px_q99_max": [
+      21.094314575195312,
+      77.22032928466797
+    ],
+    "action_mean": [
+      0.0008054639329202473,
+      0.0025698645040392876
+    ],
+    "action_std": [
+      0.24132204055786133,
+      0.24051755666732788
+    ],
+    "proprio_mean": [
+      245.0511932373047,
+      281.6966857910156,
+      0.23230038583278656,
+      1.008166790008545
+    ],
+    "proprio_std": [
+      107.74385833740234,
+      107.15851593017578,
+      89.70487213134766,
+      89.4072036743164
+    ],
+    "episodes_with_contact": 1.0,
+    "contact_steps_per_episode_by_shape": {
+      "T": 65.7920625
+    },
+    "block_moved_gt5px_fraction": 0.9989374876022339,
+    "block_displacement_quantiles": [
+      0.5455403923988342,
+      127.97952079772949,
+      197.17510986328125,
+      273.6630325317383,
+      583.6040649414062
+    ]
+  },
+  "val": {
+    "episodes": 1000,
+    "frames": 120784,
+    "length_quantiles": [
+      49.0,
+      97.0,
+      104.0,
+      139.0,
+      229.0
+    ],
+    "shapes": {
+      "T": 1000
+    },
+    "unique_trajectories": 1000,
+    "unique_sources": 1000,
+    "video_sizes": [
+      [
+        224,
+        224,
+        3
+      ]
+    ],
+    "videos_checked": 1000,
+    "slices": 101784,
+    "agent_out_of_frame_frames": 0,
+    "invalid_start_states": 0,
+    "min_start_gap_agent_to_block_px": 12.039068108941784,
+    "block_step_px_q99_max": [
+      20.93705177307129,
+      73.16608428955078
+    ],
+    "action_mean": [
+      -0.003939175046980381,
+      -0.011807515285909176
+    ],
+    "action_std": [
+      0.24908624589443207,
+      0.23921653628349304
+    ],
+    "proprio_mean": [
+      245.1443634033203,
+      256.4404296875,
+      -1.4572581052780151,
+      -4.400087833404541
+    ],
+    "proprio_std": [
+      109.94235229492188,
+      109.0408706665039,
+      92.58007049560547,
+      88.9395980834961
+    ],
+    "episodes_with_contact": 1.0,
+    "contact_steps_per_episode_by_shape": {
+      "T": 64.729
+    },
+    "block_moved_gt5px_fraction": 0.9990000128746033,
+    "block_displacement_quantiles": [
+      1.2555866241455078,
+      103.71918487548828,
+      191.1677703857422,
+      254.74847793579102,
+      472.5503234863281
+    ]
+  },
+  "duplicate_trajectories_across_splits": 0,
+  "shared_source_trajectories_across_splits": 0
+}

@@ -1,0 +1,49 @@
+== failure anatomy (failed episodes); miss = max(dist4 / 20 px, angle / 20 deg), success needs miss < 1
+w0           unseen fails= 49  closest<1.5x 0.43  final<2x 0.43  final>4x 0.31  stalled(last 10) 0.80  | final median: object 28px pusher 25px angle 17deg
+w0           seen   fails= 14  closest<1.5x 0.43  final<2x 0.43  final>4x 0.43  stalled(last 10) 0.71  | final median: object 26px pusher 18px angle 16deg
+cls_oracle   unseen fails= 43  closest<1.5x 0.40  final<2x 0.40  final>4x 0.35  stalled(last 10) 0.74  | final median: object 24px pusher 24px angle 12deg
+cls_oracle   seen   fails= 14  closest<1.5x 0.29  final<2x 0.36  final>4x 0.43  stalled(last 10) 0.64  | final median: object 25px pusher 25px angle 28deg
+cls3_oracle  unseen fails= 46  closest<1.5x 0.50  final<2x 0.52  final>4x 0.30  stalled(last 10) 0.80  | final median: object 26px pusher 21px angle 13deg
+cls3_oracle  seen   fails= 19  closest<1.5x 0.42  final<2x 0.47  final>4x 0.37  stalled(last 10) 0.68  | final median: object 20px pusher 21px angle 10deg
+cls3_free    unseen fails= 51  closest<1.5x 0.35  final<2x 0.35  final>4x 0.29  stalled(last 10) 0.82  | final median: object 28px pusher 24px angle 22deg
+cls3_free    seen   fails= 19  closest<1.5x 0.37  final<2x 0.53  final>4x 0.32  stalled(last 10) 0.74  | final median: object 20px pusher 24px angle 12deg
+
+== prediction gain vs paired outcome (unseen shapes); ratio = newest-frame error at replans 2-3, start weights / theta0
+cls_oracle   visit1 ratio [0,0.6) n= 13  arm  84.6%  w0  84.6%  gained 1 lost 1
+cls_oracle   visit1 ratio [0.6,0.9) n= 23  arm  56.5%  w0  43.5%  gained 6 lost 3
+cls_oracle   visit1 ratio [0.9,inf) n= 24  arm  54.2%  w0  58.3%  gained 1 lost 2
+cls_oracle   visit2 ratio [0,0.6) n= 34  arm  70.6%  w0  55.9%  gained 6 lost 1
+cls_oracle   visit2 ratio [0.6,0.9) n= 16  arm  56.2%  w0  56.2%  gained 1 lost 1
+cls_oracle   visit2 ratio [0.9,inf) n= 10  arm  70.0%  w0  80.0%  gained 1 lost 2
+cls3_oracle  visit1 ratio [0,0.6) n=  9  arm  88.9%  w0  88.9%  gained 0 lost 0
+cls3_oracle  visit1 ratio [0.6,0.9) n= 11  arm  45.5%  w0  54.5%  gained 1 lost 2
+cls3_oracle  visit1 ratio [0.9,inf) n= 40  arm  52.5%  w0  52.5%  gained 1 lost 1
+cls3_oracle  visit2 ratio [0,0.6) n= 29  arm  65.5%  w0  55.2%  gained 6 lost 3
+cls3_oracle  visit2 ratio [0.6,0.9) n=  8  arm  75.0%  w0  87.5%  gained 0 lost 1
+cls3_oracle  visit2 ratio [0.9,inf) n= 23  arm  65.2%  w0  56.5%  gained 3 lost 1
+cls3_free    visit1 ratio [0,0.6) n= 14  arm  71.4%  w0  71.4%  gained 0 lost 0
+cls3_free    visit1 ratio [0.6,0.9) n= 17  arm  58.8%  w0  52.9%  gained 1 lost 0
+cls3_free    visit1 ratio [0.9,inf) n= 29  arm  55.2%  w0  55.2%  gained 2 lost 2
+cls3_free    visit2 ratio [0,0.6) n= 20  arm  55.0%  w0  55.0%  gained 3 lost 3
+cls3_free    visit2 ratio [0.6,0.9) n= 20  arm  55.0%  w0  60.0%  gained 1 lost 2
+cls3_free    visit2 ratio [0.9,inf) n= 20  arm  55.0%  w0  65.0%  gained 1 lost 3
+
+== post-hoc evidence read gate: arm outcome if early ratio < tau else w0 outcome
+cls_oracle   tau=0.5  learner used  13%  all  78.6% (w0 77.5; 5/2 p=0.45)  unseen-return  65.0% (w0 60.0)  seen  90.6% (w0 91.2)
+cls_oracle   tau=0.6  learner used  19%  all  78.6% (w0 77.5; 7/4 p=0.55)  unseen-return  68.3% (w0 60.0)  seen  90.0% (w0 91.2)
+cls_oracle   tau=0.7  learner used  28%  all  79.6% (w0 77.5; 11/5 p=0.21)  unseen-return  68.3% (w0 60.0)  seen  90.0% (w0 91.2)
+cls_oracle   tau=0.8  learner used  37%  all  78.9% (w0 77.5; 13/9 p=0.52)  unseen-return  68.3% (w0 60.0)  seen  88.8% (w0 91.2)
+cls_oracle   tau=0.9  learner used  48%  all  79.3% (w0 77.5; 15/10 p=0.42)  unseen-return  68.3% (w0 60.0)  seen  89.4% (w0 91.2)
+cls_oracle   tau=inf  learner used 100%  all  79.6% (w0 77.5; 21/15 p=0.41)  unseen-return  66.7% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_oracle  tau=0.5  learner used  11%  all  77.9% (w0 77.5; 4/3 p=1)  unseen-return  61.7% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_oracle  tau=0.6  learner used  14%  all  78.6% (w0 77.5; 6/3 p=0.51)  unseen-return  65.0% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_oracle  tau=0.7  learner used  16%  all  78.2% (w0 77.5; 6/4 p=0.75)  unseen-return  63.3% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_oracle  tau=0.8  learner used  20%  all  77.9% (w0 77.5; 7/6 p=1)  unseen-return  63.3% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_oracle  tau=0.9  learner used  22%  all  77.9% (w0 77.5; 7/6 p=1)  unseen-return  63.3% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_oracle  tau=inf  learner used 100%  all  76.8% (w0 77.5; 11/13 p=0.84)  unseen-return  66.7% (w0 60.0)  seen  88.1% (w0 91.2)
+cls3_free    tau=0.5  learner used   7%  all  77.5% (w0 77.5; 2/2 p=1)  unseen-return  60.0% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_free    tau=0.6  learner used  14%  all  77.5% (w0 77.5; 3/3 p=1)  unseen-return  60.0% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_free    tau=0.7  learner used  19%  all  78.2% (w0 77.5; 5/3 p=0.73)  unseen-return  60.0% (w0 60.0)  seen  91.9% (w0 91.2)
+cls3_free    tau=0.8  learner used  28%  all  77.9% (w0 77.5; 5/4 p=1)  unseen-return  60.0% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_free    tau=0.9  learner used  39%  all  77.5% (w0 77.5; 7/7 p=1)  unseen-return  58.3% (w0 60.0)  seen  91.2% (w0 91.2)
+cls3_free    tau=inf  learner used 100%  all  75.0% (w0 77.5; 10/17 p=0.25)  unseen-return  55.0% (w0 60.0)  seen  88.1% (w0 91.2)

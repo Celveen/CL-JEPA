@@ -1,0 +1,175 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/Cython/Distutils/old_build_ext.py:15: DeprecationWarning: dep_util is Deprecated. Use functions from setuptools instead.
+  from distutils.dep_util import newer, newer_group
+/home/appuser/workspace/project/multimodal-test/adajepa/env/__init__.py:7: UserWarning: point_maze envs unavailable (mujoco_py missing): 
+Missing path to your environment variable. 
+Current values LD_LIBRARY_PATH=/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/cv2/../../lib64:
+Please add following line to .bashrc:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/appuser/.mujoco/mujoco210/bin
+  warnings.warn(f"point_maze envs unavailable (mujoco_py missing): {_e}")
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pygame/pkgdata.py:25: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import resource_stream, resource_exists
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/skimage/util/dtype.py:27: DeprecationWarning: `np.bool8` is a deprecated alias for `np.bool_`.  (Deprecated NumPy 1.24)
+  np.bool8: (False, True),
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+  family = Regex(
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:127: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  self._parser.parseString(pattern)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:134: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+  self._parser.resetCache()
+author L {'action_mag': 26.645, 'agent_speed': 10.497, 'nn_rms': 14.091, 'cos_to_block': 0.269, 'toward_frac': 0.661, 'contact_frac': 0.629, 'mean_gap': 8.705}
+author Z {'action_mag': 28.101, 'agent_speed': 11.216, 'nn_rms': 13.778, 'cos_to_block': 0.329, 'toward_frac': 0.694, 'contact_frac': 0.67, 'mean_gap': 8.528}
+author + {'action_mag': 28.416, 'agent_speed': 11.388, 'nn_rms': 13.748, 'cos_to_block': 0.316, 'toward_frac': 0.686, 'contact_frac': 0.727, 'mean_gap': 5.868}
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 9.0 sigma=10.0 source score=0.132 L:[mag 29.3 spd 11.3 nn 15.5 cos 0.33 cf 0.66 gap 11.8] Z:[mag 29.0 spd 11.2 nn 15.4 cos 0.34 cf 0.68 gap 10.1] +:[mag 29.3 spd 11.3 nn 15.3 cos 0.35 cf 0.74 gap 7.7]
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+b= 9.0 sigma=10.0 cog    score=0.160 L:[mag 29.1 spd 11.2 nn 15.4 cos 0.33 cf 0.65 gap 11.8] Z:[mag 28.9 spd 11.2 nn 15.7 cos 0.35 cf 0.67 gap 10.7] +:[mag 28.9 spd 11.2 nn 15.5 cos 0.35 cf 0.74 gap 8.2]
+
+best: [
+ {
+  "bias": 9.0,
+  "noise": 10.0,
+  "placement": "source",
+  "score": 0.1321862056982609,
+  "shapes": {
+   "L": {
+    "action_mag": 29.329272681662065,
+    "agent_speed": 11.323760345295705,
+    "cos_to_block": 0.3339711794032698,
+    "toward_frac": 0.7081999404941127,
+    "contact_frac": 0.6614754325105787,
+    "mean_gap": 11.758392027343442,
+    "nn_rms": 15.517580857537645,
+    "valid_frac": 0.876,
+    "score": 0.21625758622126262
+   },
+   "Z": {
+    "action_mag": 29.010779058981225,
+    "agent_speed": 11.18958497500896,
+    "cos_to_block": 0.34448429275339837,
+    "toward_frac": 0.7166789291136179,
+    "contact_frac": 0.6805672939730639,
+    "mean_gap": 10.106469556042528,
+    "nn_rms": 15.361773361482765,
+    "valid_frac": 0.828,
+    "score": 0.05199539430482113
+   },
+   "+": {
+    "action_mag": 29.32953073196907,
+    "agent_speed": 11.348155059357872,
+    "cos_to_block": 0.34755091731469834,
+    "toward_frac": 0.714417803372184,
+    "contact_frac": 0.7412049932112935,
+    "mean_gap": 7.745798169028191,
+    "nn_rms": 15.307833879336663,
+    "valid_frac": 0.824,
+    "score": 0.12830563656869892
+   }
+  }
+ },
+ {
+  "bias": 9.0,
+  "noise": 10.0,
+  "placement": "cog",
+  "score": 0.15965664360143084,
+  "shapes": {
+   "L": {
+    "action_mag": 29.054063427182246,
+    "agent_speed": 11.193210984146912,
+    "cos_to_block": 0.32722553505140284,
+    "toward_frac": 0.7051655294083131,
+    "contact_frac": 0.6518325527488876,
+    "mean_gap": 11.830819337258522,
+    "nn_rms": 15.430316885988375,
+    "valid_frac": 0.864,
+    "score": 0.20363816250495467
+   },
+   "Z": {
+    "action_mag": 28.93499961597779,
+    "agent_speed": 11.15033564240873,
+    "cos_to_block": 0.35260806446809284,
+    "toward_frac": 0.7195866143816095,
+    "contact_frac": 0.6713675864849598,
+    "mean_gap": 10.700071907299515,
+    "nn_rms": 15.669519575834032,
+    "valid_frac": 0.9,
+    "score": 0.09102799285665467
+   },
+   "+": {
+    "action_mag": 28.926924735070404,
+    "agent_speed": 11.197944437084066,
+    "cos_to_block": 0.3520298343286437,
+    "toward_frac": 0.7198636287040342,
+    "contact_frac": 0.7368588964481269,
+    "mean_gap": 8.157813846612777,
+    "nn_rms": 15.480809117845325,
+    "valid_frac": 0.892,
+    "score": 0.18430377544268317
+   }
+  }
+ }
+]

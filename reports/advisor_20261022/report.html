@@ -1,0 +1,791 @@
+<title>选择性巩固论文汇报</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700&display=swap">
+<style>
+/* Layout: one reading column (max 1000px). Results first (shape line, visual line, the gate), then the paper plan drawn as pictures (reference layouts, argument, main figure, page storyboard), then the planner line and the questions.
+   Color = identity: blue AdaJEPA, orange our continual method (hollow = oracle labels), green planner line, gray frozen / older / familiar. */
+:root{
+  --bg:#f4f6f8; --surface:#fdfdfe; --sunk:#eceff3;
+  --ink:#121821; --ink-2:#485160; --muted:#7a828f;
+  --grid:#e3e6eb; --axis:#bfc5cf; --line:rgba(18,24,33,.11);
+  --ada:#2a78d6; --slow:#eb6834; --plan:#1baf7a; --frozen:#a0a6b0;
+  --ada-wash:rgba(42,120,214,.09); --slow-wash:rgba(235,104,52,.10); --plan-wash:rgba(27,175,122,.11);
+  --on-accent:#ffffff;
+  --good:#0ca30c; --warn:#e09a00; --crit:#d03b3b; --info:#6d7685;
+  --link:#1c5cab;
+  --f-display:"Noto Serif SC","Songti SC","STSong",serif;
+  --f-body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1013; --surface:#16191d; --sunk:#1e2227;
+    --ink:#f1f3f6; --ink-2:#c0c6cf; --muted:#8b929c;
+    --grid:#272b31; --axis:#3b4048; --line:rgba(255,255,255,.10);
+    --ada:#3987e5; --slow:#d95926; --plan:#199e70; --frozen:#68707a;
+    --ada-wash:rgba(57,135,229,.15); --slow-wash:rgba(217,89,38,.16); --plan-wash:rgba(25,158,112,.15);
+    --on-accent:#ffffff;
+    --good:#0ca30c; --warn:#fab219; --crit:#e66767; --info:#8b929c;
+    --link:#86b6ef; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1013; --surface:#16191d; --sunk:#1e2227;
+  --ink:#f1f3f6; --ink-2:#c0c6cf; --muted:#8b929c;
+  --grid:#272b31; --axis:#3b4048; --line:rgba(255,255,255,.10);
+  --ada:#3987e5; --slow:#d95926; --plan:#199e70; --frozen:#68707a;
+  --ada-wash:rgba(57,135,229,.15); --slow-wash:rgba(217,89,38,.16); --plan-wash:rgba(25,158,112,.15);
+  --on-accent:#ffffff;
+  --good:#0ca30c; --warn:#fab219; --crit:#e66767; --info:#8b929c;
+  --link:#86b6ef; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+a{color:var(--link);text-underline-offset:2px}
+a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+h1,h2{font-family:var(--f-display);font-weight:700;text-wrap:balance;letter-spacing:.01em}
+h1{font-size:clamp(26px,4.2vw,36px);line-height:1.25;margin:6px 0 14px}
+h2{font-size:clamp(21px,3vw,26px);line-height:1.3;margin:0}
+h3{font-size:17px;font-weight:700;margin:0;text-wrap:balance}
+p{margin:0}
+.prose{max-width:42em}
+.eyebrow{font-size:12.5px;letter-spacing:.08em;color:var(--muted);font-weight:500}
+.eyebrow b{font-family:var(--f-mono);font-weight:500;margin-right:6px}
+.lede{font-size:16.5px;color:var(--ink-2);max-width:44em}
+code{font-family:var(--f-mono);font-size:12px;padding:1px 6px;border-radius:4px;background:var(--sunk);color:var(--ink-2);white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.meta span{font-size:12.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin:26px 0 8px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13.5px}
+nav.toc a{text-decoration:none;color:var(--ink-2)}
+nav.toc a:hover{color:var(--link)}
+nav.toc b{font-family:var(--f-mono);font-weight:500;color:var(--muted);margin-right:4px;font-size:12px}
+.findings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:26px}
+.finding{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.finding .tag{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}
+.finding .tag i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.finding .big{font-size:28px;font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-top:4px}
+.finding .big small{font-size:15px;font-weight:500;color:var(--ink-2);margin-left:3px}
+.finding .ttl{font-family:var(--f-mono);font-size:12.5px;line-height:1.5;color:var(--ink);margin-top:4px}
+.finding p{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+@media (max-width:860px){.findings{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.findings{grid-template-columns:minmax(0,1fr)}}
+section{margin-top:56px;display:flex;flex-direction:column;gap:18px}
+.sec-head{display:flex;flex-direction:column;gap:6px;padding-top:6px}
+.line-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;border-radius:999px;padding:2px 10px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface);width:fit-content}
+.line-tag i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.sub{margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.bullets{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;max-width:46em}
+.bullets li::marker{color:var(--muted)}
+.callout{border-left:3px solid var(--axis);padding:4px 0 4px 14px;color:var(--ink-2);max-width:46em}
+.callout b{color:var(--ink)}
+.callout.warn{border-left-color:var(--warn)}
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+figure .fig-title{font-weight:700;font-size:15px;line-height:1.45}
+figure .fig-sub{font-size:13px;color:var(--muted);margin-top:-6px}
+figcaption{font-size:13px;color:var(--ink-2);line-height:1.65;max-width:56em}
+figcaption.en{font-family:Georgia,"Times New Roman",serif;font-size:13.5px;color:var(--ink)}
+.chart{width:100%;min-width:0;position:relative}
+.chart svg{display:block;overflow:visible}
+.scroll{overflow-x:auto}
+.scroll > svg{display:block;min-width:760px;width:100%;height:auto}
+.fig-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:760px){.fig-row{grid-template-columns:minmax(0,1fr)}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;flex:none}
+.sw.dot{width:10px;height:10px;border-radius:50%}
+.sw.hollow{width:10px;height:10px;border-radius:50%;border:2px solid;background:transparent}
+.sw.bar{width:12px;height:10px;border-radius:2px}
+details.data{font-size:12.5px;color:var(--ink-2)}
+details.data summary{cursor:pointer;color:var(--muted);width:fit-content}
+.tbl{overflow-x:auto;margin-top:8px}
+table{border-collapse:collapse;font-size:13px;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{font-weight:500;color:var(--muted);font-size:12px;white-space:nowrap}
+td.r,th.r{text-align:right}
+.t-ink{fill:var(--ink)} .t-2{fill:var(--ink-2)} .t-mu{fill:var(--muted)} .t-on{fill:var(--on-accent)} .t-surf{fill:var(--surface)}
+.hit{fill:transparent;outline:none}
+.hit:hover,.hit:focus{fill:var(--line)}
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--surface);border:1px solid var(--line);box-shadow:0 6px 24px rgba(0,0,0,.14);border-radius:8px;padding:8px 11px;max-width:300px;font-size:12.5px;line-height:1.5}
+#tip .tv{font-weight:700;font-size:14px;color:var(--ink)}
+#tip .tl{color:var(--ink-2)}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:1px 9px 1px 7px;color:var(--ink-2);background:var(--surface);white-space:nowrap}
+.chip svg{width:12px;height:12px;flex:none}
+.chip.good svg{color:var(--good)} .chip.warn svg{color:var(--warn)} .chip.bad svg{color:var(--crit)} .chip.info svg{color:var(--info)}
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.timeline li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--grid)}
+.timeline li:last-child{border-bottom:0}
+.timeline .n{font-family:var(--f-mono);font-size:12px;color:var(--muted);padding-top:2px}
+.timeline .h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.timeline .d{color:var(--ink-2);font-size:13.5px;margin-top:3px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.mini{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.mini h3{font-size:14.5px}
+.mini p{font-size:13px;color:var(--ink-2)}
+.mini .sig{font-size:12px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.stat .v{font-size:22px;font-weight:700;line-height:1.2}
+.stat .v small{font-size:13px;color:var(--ink-2);font-weight:500;margin-left:2px}
+.stat .l{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+.titlecard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.titlecard .en{font-family:var(--f-display);font-size:clamp(19px,2.6vw,24px);line-height:1.35;text-wrap:balance}
+.titlecard p{font-size:13.5px;color:var(--ink-2)}
+blockquote.abs{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;font-size:14px;line-height:1.75;color:var(--ink);font-family:Georgia,"Times New Roman",var(--f-body)}
+/* argument flow */
+.argue{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;position:relative}
+.argue .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:6px;position:relative;min-width:0}
+.argue .step:not(:last-child)::after{content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px}
+.argue .k{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em}
+.argue h3{font-size:15px}
+.argue p{font-size:13px;color:var(--ink-2)}
+.argue .ref{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px}
+.argue .ref span{font-size:11.5px;border-radius:4px;padding:1px 7px;background:var(--slow-wash);color:var(--ink)}
+.argue .step.key{border-color:var(--slow)}
+@media (max-width:820px){.argue{grid-template-columns:repeat(2,minmax(0,1fr))}.argue .step:nth-child(2)::after{content:none}}
+@media (max-width:480px){.argue{grid-template-columns:minmax(0,1fr)}.argue .step::after{content:none!important}}
+/* storyboard */
+.story{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.page{display:flex;flex-direction:column;gap:6px;min-width:0}
+.page svg{width:100%;height:auto;display:block}
+.page .pn{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.page .pd{font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.qs{counter-reset:q;display:flex;flex-direction:column;gap:12px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px}
+.q::before{counter-increment:q;content:"Q" counter(q);font-family:var(--f-mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+.q h3{font-size:15.5px;margin-bottom:6px}
+.q p{font-size:13.5px;color:var(--ink-2)}
+footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+footer code{font-size:11.5px;white-space:normal}
+@media (max-width:520px){
+  .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  figure{padding:14px 12px 12px}
+  body{font-size:14.5px}
+}
+@media (prefers-reduced-motion:no-preference){.hit{transition:fill .12s}}
+</style>
+
+<div id="tip" hidden role="status"></div>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">组会汇报 · 2026-10-22</div>
+  <h1>从回合内适应到跨回合积累：一周进展与论文写作计划</h1>
+  <p class="lede">这一周持续学习在两类偏移上都超过了 AdaJEPA。形状偏移上，无标签的 v6a 在 1050 个配对回合上 +4.2 pp。视觉偏移上 +9 到 +11 pp，第五轮达到 +15 到 +17 pp，而且门控几乎只巩固了原模型做不好的红色偏移。论文一已进入写作阶段，第 4 节用图说明怎么写：参考论文怎么排图、论证主线、主图草图和逐页版面。</p>
+  <div class="meta">
+    <span>门控统一为 v6a（无标签）</span>
+    <span>形状线：bias16k 权重，S7t3 流 1050 个配对回合</span>
+    <span>视觉线：T16k 权重，6 种视觉偏移 × 5 轮 × 3 个种子</span>
+  </div>
+</header>
+
+<div class="findings" aria-label="主要结论">
+  <div class="finding">
+    <div class="tag"><i style="background:var(--slow)"></i>形状线 · 无标签门控</div>
+    <div class="big">+4.2<small>pp</small></div>
+    <p>7 个形状 × 3 次访问，1050 个配对回合（CEM），p=1.4×10⁻⁴。知道形状标签的上限是 +6.3。</p>
+  </div>
+  <div class="finding">
+    <div class="tag"><i style="background:var(--slow)"></i>视觉线 · 六种视觉偏移</div>
+    <div class="big">+11.3<small>pp</small></div>
+    <p>CEM 下 v6a 68.2%，AdaJEPA 56.9%；GD 下 +9.2。第 5 轮分别高 17.0 和 15.3 个百分点。各轮用的是同一批目标。</p>
+  </div>
+  <div class="finding">
+    <div class="tag"><i style="background:var(--ink-2)"></i>写作 · 工作题目</div>
+    <div class="ttl">Selective Consolidation Enables Continual Test-Time Learning in Latent World Models</div>
+    <p>核心：测试时适应本身不会积累，要有选择地巩固进慢学习器。</p>
+  </div>
+  <div class="finding">
+    <div class="tag"><i style="background:var(--plan)"></i>第二篇 · 保留集复现</div>
+    <div class="big">+3.6<small>pp</small></div>
+    <p>短时加权 K2P，seed 100 + 200 共 700 个保留回合，26 胜 1 负，p=4×10⁻⁷。</p>
+  </div>
+</div>
+
+<nav class="toc" aria-label="目录">
+  <a href="#shape"><b>1</b>形状线</a>
+  <a href="#visual"><b>2</b>视觉线</a>
+  <a href="#gate"><b>3</b>v6a 门控</a>
+  <a href="#paper"><b>4</b>论文怎么写</a>
+  <a href="#planner"><b>5</b>第二篇</a>
+  <a href="#ask"><b>6</b>请导师决定的事</a>
+</nav>
+
+<section id="shape">
+  <div class="sec-head">
+    <div class="eyebrow"><b>1</b>论文一 · 形状偏移</div>
+    <h2>持续学习第一次稳定地超过 AdaJEPA</h2>
+    <span class="line-tag"><i style="background:var(--slow)"></i>回合内快适应 + 按领域分开、用回放训练的慢学习器 + 无标签门控</span>
+  </div>
+  <div class="sub">
+    <h3>1.1 这一周做了什么</h3>
+    <ol class="timeline">
+      <li><span class="n">10-15</span><div><div class="h"><b>S7b3：三轮长流，420 个回合</b><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>首个显著结果</span></div><div class="d">真实标签路由 +4.3 pp（p=0.013）。没见过的形状随访问累积到 53 / 60 / 70%，AdaJEPA 一直在 52–53%。当时的无标签版本 v4 与 AdaJEPA 持平。</div></div></li>
+      <li><span class="n">10-19</span><div><div class="h"><b>S7t3（GD）：1050 个回合，三轮分别是测试种子 100 / 200 / 300</b><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>复现</span></div><div class="d">v6 和 v5 + 早读都是 +3.0 pp（p≈0.01），收益全在没见过形状的回访上。I 和 square 共用一个学习器时，square 回访 +18–20。</div></div></li>
+      <li><span class="n">10-20</span><div><div class="h"><b>门控规则收紧，得到 v6a</b><span class="chip info"><svg viewBox="0 0 12 12"><path d="M2.5 6h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>设计决定</span></div><div class="d">方法里不用任何形状标签或形状分类器；熟悉的数据不学、也不调用学习器；"放宽写入"指更容易写进已有领域。</div></div></li>
+      <li><span class="n">10-21</span><div><div class="h"><b>S7t3（CEM）与视觉线跑完</b><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>最强结果</span></div><div class="d">形状线 v6a +4.2 pp（p=1.4×10⁻⁴）；视觉线 CEM +11.3、GD +9.2（第 2 节）。</div></div></li>
+      <li><span class="n">10-22</span><div><div class="h"><b>门控定为 v6a，开始写论文</b><span class="chip info"><svg viewBox="0 0 12 12"><path d="M2.5 6h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>进入写作</span></div><div class="d">文献速览、定位、工作题目、大纲与主图草图（第 4 节）。</div></div></li>
+    </ol>
+  </div>
+  <div class="sub">
+    <h3>1.2 三条形状流上相对 AdaJEPA 的成功率差</h3>
+    <figure>
+      <div class="fig-title">各组相对 AdaJEPA 的成功率差（pp），逐回合配对</div>
+      <div class="legend" id="lg-streams"></div>
+      <div class="chart" id="c-streams"></div>
+      <figcaption>三条流都是 7 个形状各访问 3 次。真实标签路由是慢学习器本身的上限，门控决定不用标签时能拿回多少。v6 用了形状分类器，按新规则已不采用，只作对照。右侧是"仅该组成功 / 仅 AdaJEPA 成功"。</figcaption>
+      <details class="data"><summary>数据表</summary><div class="tbl" id="t-streams"></div></details>
+    </figure>
+  </div>
+  <div class="sub">
+    <h3>1.3 收益只在没见过的形状上</h3>
+    <figure>
+      <div class="fig-title">按访问次数的成功率（S7t3，CEM）</div>
+      <div class="legend" id="lg-visits"></div>
+      <div class="chart" id="c-visits"></div>
+      <figcaption>没见过的形状上，AdaJEPA 三次访问都在 53–56%，因为每个回合都从头适应；v6a 和真实标签高出 8–19 个百分点。见过的形状上三组几乎重合：熟悉的回合只用原模型，而原模型从不改动。I 上 v6a 与真实标签一样好；和上限的差距主要在 square，它的学习器混进了 small_tee。</figcaption>
+      <details class="data"><summary>数据表</summary><div class="tbl" id="t-visits"></div></details>
+    </figure>
+  </div>
+</section>
+
+<section id="visual">
+  <div class="sec-head">
+    <div class="eyebrow"><b>2</b>论文一 · 视觉偏移（新）</div>
+    <h2>视觉偏移上 +9 到 +11 pp，门控只巩固了红色偏移</h2>
+    <span class="line-tag"><i style="background:var(--slow)"></i>同一套 v6a 参数，未改动；T16k 权重只在 T 形上训练</span>
+  </div>
+  <p class="prose">和 AdaJEPA 原文一样，论文一的主结果包括形状偏移和视觉偏移两部分，视觉线是正式的第二部分。</p>
+  <div class="stats">
+    <div class="stat"><div class="v">6 <small>种偏移</small></div><div class="l">模糊、椒盐噪声、变暗、红色推杆、红色物体、红色目标，依次轮换</div></div>
+    <div class="stat"><div class="v">5 <small>轮 × 300</small></div><div class="l">每种偏移 50 个回合；种子 100 / 200 / 300 各 1500 个回合</div></div>
+    <div class="stat"><div class="v">68.2 <small>对 56.9%</small></div><div class="l">CEM：v6a 对 AdaJEPA，三个种子分别 +10.5 / +12.1 / +11.1</div></div>
+    <div class="stat"><div class="v">67.6 <small>对 58.3%</small></div><div class="l">GD：v6a 对 AdaJEPA，三个种子分别 +11.5 / +9.6 / +6.6</div></div>
+  </div>
+  <figure>
+    <div class="fig-title">每轮成功率（三个种子合计，每轮 900 个回合）</div>
+    <div class="legend" id="lg-vrounds"></div>
+    <div class="chart" id="c-vrounds"></div>
+    <figcaption>AdaJEPA 每个回合都重置，所以五轮完全相同。v6a 每轮都在积累，第 5 轮比 AdaJEPA 高 15–17 个百分点；平均 MPC 步数也从 18.5 降到 15.3（CEM）、从 17.6 降到 13.8（GD）。</figcaption>
+    <details class="data"><summary>数据表</summary><div class="tbl" id="t-vrounds"></div></details>
+  </figure>
+  <div class="fig-row">
+    <figure>
+      <div class="fig-title">每种偏移的成功率：AdaJEPA → v6a</div>
+      <div class="fig-sub">五轮合计，每格 750 个回合</div>
+      <div class="legend" id="lg-vdom"></div>
+      <div class="chart" id="c-vdom"></div>
+      <figcaption>收益全在三种红色偏移上（+11 到 +37）。模糊、噪点、变暗的变化都在 ±2 个百分点以内。</figcaption>
+    </figure>
+    <figure>
+      <div class="fig-title">每种偏移有多少回合被巩固</div>
+      <div class="fig-sub">进入最终领域库的回合数 / 750</div>
+      <div class="legend" id="lg-vshare"></div>
+      <div class="chart" id="c-vshare"></div>
+      <figcaption>没有任何标签，门控把红色偏移的 86–99% 写进了学习器，模糊、噪点、变暗只写入 2–8%：后三种被判为熟悉，正好也是 AdaJEPA 本来就做得好的。</figcaption>
+    </figure>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>最终领域库</th><th>CEM</th><th>GD</th></tr></thead>
+      <tbody>
+        <tr><td>种子 100</td><td>红色推杆 + 红色物体（525）；红色目标（248）</td><td>红色推杆 + 红色物体（499）；红色目标（252）；2 个未成熟小碎片</td></tr>
+        <tr><td>种子 200</td><td>红色推杆 + 红色物体（469）；红色目标（258）；1 个 22 回合的混合领域</td><td>三种红色合在一起（740）；1 个 9 回合的小领域</td></tr>
+        <tr><td>种子 300</td><td>红色推杆（107）；红色推杆 + 红色物体（368）；红色目标（261）；1 个未成熟碎片</td><td>三种红色合在一起（747）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="callout">这和形状线是同一个结论：<b>只有原模型有系统性误差的地方才值得巩固</b>。合并按"能否互相预测"来决定，所以领域数不等于 6；GD 下三种红色偏移被合进同一个学习器，照样有收益。</p>
+  <p class="callout warn"><b>进论文前要补齐的两点：</b>一是协议对齐 AdaJEPA 原文。原文的三个种子是三批不同的测试目标（3 × 50），现在三个种子和五轮都复用同一批 50 个目标；需要用测试种子 100 / 200 / 300 各抽一批目标重跑，并保存逐回合结果做配对检验。二是熟悉度门槛 0.0146 是为形状线的权重标定的，需要为 T16k 权重重新标定，或者在论文里说明沿用。</p>
+</section>
+
+<section id="gate">
+  <div class="sec-head">
+    <div class="eyebrow"><b>3</b>方法</div>
+    <h2>v6a 门控：学不学、写到哪、何时用</h2>
+  </div>
+  <p class="prose">所有判断都只用模型自身的预测误差和快权重改动，不用任何标签。视觉线没改任何参数就能用，说明这一点成立。</p>
+  <div class="cards">
+    <div class="mini"><h3>学不学</h3><p>原模型 θ0 在回合前 3 次转移上的预测误差，低于它在自己训练验证集上的 90 分位，就算熟悉：只用 θ0，不写入。</p><div class="sig">形状线 AUROC 0.96；视觉线熟悉的偏移只写入 2–8%</div></div>
+    <div class="mini"><h3>写到哪</h3><p>读过哪个学习器就写进哪个领域，除非它比 θ0 差 1.2 倍以上；否则按快权重改动的方向归类，攒够 3 个对齐的回合才建新领域。</p><div class="sig">v6a 相对 v5：放宽了写入</div></div>
+    <div class="mini"><h3>何时用</h3><p>学习器在没训练过的新回合上，连续 3 次 5 步误差 ≤ 0.9 倍 θ0，才允许读取。读取时在 θ0 和成熟学习器里选误差最小的。</p><div class="sig">防止数据太少的学习器有害</div></div>
+    <div class="mini"><h3>合并与吸收</h3><p>两个领域的学习器互相预测对方的回合，都比 θ0 好且在 1.5 倍以内就合并；小碎片被成熟学习器以 ≤ 0.8 倍预测时并入。</p><div class="sig">v6a 相对 v5：放宽了合并</div></div>
+  </div>
+</section>
+
+<section id="paper">
+  <div class="sec-head">
+    <div class="eyebrow"><b>4</b>写作</div>
+    <h2>论文一怎么写</h2>
+  </div>
+
+  <div class="titlecard">
+    <div class="en">Selective Consolidation Enables Continual Test-Time Learning in Latent World Models</div>
+    <p>consolidation 指把回合内的适应用回放巩固进慢学习器；selective 指整套门控决定学什么、存到哪、什么时候用。定位：接上 AdaJEPA 原文写的"与持续学习结合"这一步；补上 JEPA-TTT 局限里写明的空白（偏移序列、回到训练分布、遗忘）；引言用 Dupoux、LeCun、Malik 的 System M 作钩子。</p>
+  </div>
+
+  <div class="sub">
+    <h3>4.1 参考论文怎么排图</h3>
+    <figure>
+      <div class="fig-title">五篇参考论文的图表出现在第几页，以及我们的计划</div>
+      <div class="legend">
+        <span><i class="sw bar" style="background:var(--slow)"></i>概览 / 主图</span>
+        <span><i class="sw bar" style="background:var(--slow-wash);border:1px solid var(--slow)"></i>方法图</span>
+        <span><i class="sw bar" style="background:var(--ink-2)"></i>主结果</span>
+        <span><i class="sw bar" style="background:var(--frozen)"></i>分析 / 消融</span>
+        <span><i class="sw bar" style="background:var(--sunk);border:1px solid var(--axis)"></i>环境 / 定性示例</span>
+      </div>
+      <div class="chart" id="c-refs"></div>
+      <figcaption>页码按 arXiv 版本统计。五篇都在第 1–3 页放一张整宽的概览图，让读者先看懂"问题是什么、我们怎么做"；方法图紧随其后，或者与概览图合并（AdaJEPA）；主结果在第 6–9 页。我们的计划沿用这个模式：主图放第 2 页，主结果放第 7 页。</figcaption>
+    </figure>
+  </div>
+
+  <div class="sub">
+    <h3>4.2 论证主线</h3>
+    <div class="argue">
+      <div class="step"><span class="k">PROBLEM</span><h3>问题</h3><p>AdaJEPA 每个回合都从预训练权重开始，同一种偏移再出现时要从头再学。部署时偏移会反复出现，中间还夹着熟悉的数据。</p><div class="ref"><span>图 1(a)</span><span>§1、§3</span></div></div>
+      <div class="step key"><span class="k">DIAGNOSIS</span><h3>诊断</h3><p>测试时适应本身不会积累：增益来自本回合的信息；不同回合的更新几乎正交（余弦 0.06）；直接沿用会伤害规划（−14 pp）。</p><div class="ref"><span>图 2</span><span>§4</span></div></div>
+      <div class="step key"><span class="k">METHOD</span><h3>方法</h3><p>选择性巩固：回合内照常快适应；跨回合把经验用回放巩固进慢学习器，由无标签门控决定学什么、存到哪、何时用。</p><div class="ref"><span>图 1(b)</span><span>算法 1</span><span>§5</span></div></div>
+      <div class="step"><span class="k">EVIDENCE</span><h3>证据</h3><p>形状偏移 +4.2 pp，视觉偏移 +9 到 +11 pp；门控几乎只巩固原模型做不好的偏移，熟悉的数据不受影响。</p><div class="ref"><span>图 3、图 4</span><span>表 1、表 2</span><span>§6</span></div></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>4.3 主图（图 1）草图</h3>
+    <figure>
+      <div class="fig-title">Figure 1 草图：放在第 2 页上半，整宽</div>
+      <div class="scroll">
+        <svg viewBox="0 0 980 548" role="img" aria-label="主图草图：左边是回合流，AdaJEPA 每回合重置，选择性巩固把新偏移写进领域记忆并在回访时读取；右边是一个回合内外的流程；左下是视觉偏移每轮的成功率">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+          <text x="16" y="26" class="t-ink" font-size="15" font-weight="700">(a) 一条回合流</text>
+          <text x="16" y="46" class="t-mu" font-size="12">同一类偏移会反复出现；字母表示偏移类型，C 是熟悉的</text>
+          <text x="16" y="98" class="t-ink" font-size="13" font-weight="700">AdaJEPA</text>
+          <text x="16" y="116" class="t-mu" font-size="11.5">每回合从 θ0 开始</text>
+          <text x="16" y="208" class="t-ink" font-size="13" font-weight="700">选择性巩固</text>
+          <text x="16" y="226" class="t-mu" font-size="11.5">回访时读取学习器</text>
+          <g font-size="15" font-weight="700" text-anchor="middle">
+            <rect x="150" y="76" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="172" y="104" class="t-ink">A</text>
+            <rect x="206" y="76" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="228" y="104" class="t-ink">B</text>
+            <rect x="262" y="76" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="284" y="104" class="t-ink">A</text>
+            <rect x="318" y="76" width="44" height="44" rx="6" style="fill:var(--sunk);stroke:var(--axis)"/><text x="340" y="104" class="t-2">C</text>
+            <rect x="374" y="76" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="396" y="104" class="t-ink">B</text>
+            <rect x="430" y="76" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="452" y="104" class="t-ink">A</text>
+          </g>
+          <g font-size="14" text-anchor="middle" class="t-mu">
+            <text x="172" y="140">↺</text><text x="228" y="140">↺</text><text x="284" y="140">↺</text><text x="340" y="140">↺</text><text x="396" y="140">↺</text><text x="452" y="140">↺</text>
+          </g>
+          <text x="474" y="160" class="t-mu" font-size="11.5" text-anchor="end">学到的东西每回合都被丢掉</text>
+          <g font-size="15" font-weight="700" text-anchor="middle">
+            <rect x="150" y="188" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="172" y="216" class="t-ink">A</text>
+            <rect x="206" y="188" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="228" y="216" class="t-ink">B</text>
+            <rect x="262" y="188" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="284" y="216" class="t-ink">A</text>
+            <rect x="318" y="188" width="44" height="44" rx="6" style="fill:var(--sunk);stroke:var(--axis)"/><text x="340" y="216" class="t-2">C</text>
+            <rect x="374" y="188" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="396" y="216" class="t-ink">B</text>
+            <rect x="430" y="188" width="44" height="44" rx="6" style="fill:var(--slow-wash);stroke:var(--slow)"/><text x="452" y="216" class="t-ink">A</text>
+          </g>
+          <g style="stroke:var(--slow);stroke-width:1.6;fill:none" marker-end="url(#ah)">
+            <path d="M166 234 V296"/><path d="M222 234 V296"/><path d="M278 234 V296"/><path d="M390 234 V296"/><path d="M446 234 V296"/>
+          </g>
+          <g style="stroke:var(--ink-2);stroke-width:1.6;fill:none" marker-end="url(#ah)">
+            <path d="M290 298 V236"/><path d="M402 298 V236"/><path d="M458 298 V236"/>
+          </g>
+          <text x="340" y="256" class="t-mu" font-size="11.5" text-anchor="middle">熟悉：不写入</text>
+          <rect x="150" y="300" width="324" height="96" rx="10" style="fill:var(--slow-wash);stroke:var(--slow)"/>
+          <text x="162" y="320" class="t-ink" font-size="12.5" font-weight="700">领域记忆：每类一个慢学习器</text>
+          <g text-anchor="middle">
+            <rect x="162" y="332" width="92" height="50" rx="6" style="fill:var(--surface);stroke:var(--slow)"/><text x="208" y="352" class="t-ink" font-size="12.5">学习器 A</text><text x="208" y="370" class="t-mu" font-size="11">成熟</text>
+            <rect x="266" y="332" width="92" height="50" rx="6" style="fill:var(--surface);stroke:var(--slow)"/><text x="312" y="352" class="t-ink" font-size="12.5">学习器 B</text><text x="312" y="370" class="t-mu" font-size="11">成熟</text>
+            <rect x="370" y="332" width="92" height="50" rx="6" style="fill:var(--surface);stroke:var(--axis)"/><text x="416" y="352" class="t-2" font-size="12.5">暂存池</text><text x="416" y="370" class="t-mu" font-size="11">等待确认</text>
+          </g>
+          <line x1="150" y1="418" x2="168" y2="418" style="stroke:var(--slow);stroke-width:1.6"/><text x="174" y="422" class="t-2" font-size="11.5">巩固进学习器</text>
+          <line x1="268" y1="418" x2="286" y2="418" style="stroke:var(--ink-2);stroke-width:1.6"/><text x="292" y="422" class="t-2" font-size="11.5">回访时读取</text>
+          <text x="16" y="452" class="t-ink" font-size="13" font-weight="700">(c) 视觉偏移</text>
+          <text x="16" y="470" class="t-mu" font-size="11.5">CEM，每轮成功率</text>
+          <line x1="150" y1="520" x2="474" y2="520" style="stroke:var(--axis)"/>
+          <polyline points="150,501.6 231,501.6 312,501.6 393,501.6 474,501.6" style="fill:none;stroke:var(--ada);stroke-width:2"/>
+          <polyline points="150,496.9 231,475.0 312,466.7 393,463.1 474,456.3" style="fill:none;stroke:var(--slow);stroke-width:2"/>
+          <g style="fill:var(--slow)"><circle cx="150" cy="496.9" r="3.5"/><circle cx="231" cy="475.0" r="3.5"/><circle cx="312" cy="466.7" r="3.5"/><circle cx="393" cy="463.1" r="3.5"/><circle cx="474" cy="456.3" r="3.5"/></g>
+          <text x="482" y="460" class="t-2" font-size="11.5">73.9%</text>
+          <text x="482" y="505" class="t-2" font-size="11.5">56.9%</text>
+          <g class="t-mu" font-size="11" text-anchor="middle"><text x="150" y="536">第 1 轮</text><text x="312" y="536">第 3 轮</text><text x="474" y="536">第 5 轮</text></g>
+          <text x="520" y="26" class="t-ink" font-size="15" font-weight="700">(b) 一个回合里发生什么</text>
+          <text x="520" y="46" class="t-mu" font-size="12">回合内照 AdaJEPA 适应；回合结束由门控决定巩固什么</text>
+          <g text-anchor="middle">
+            <rect x="540" y="64" width="400" height="50" rx="8" style="fill:var(--slow-wash);stroke:var(--slow)"/>
+            <text x="740" y="84" class="t-ink" font-size="13.5" font-weight="700">回合开始：选定起点</text>
+            <text x="740" y="103" class="t-2" font-size="11.5">θ0 与成熟学习器中，前几步预测误差最小的那个</text>
+            <rect x="540" y="138" width="400" height="50" rx="8" style="fill:var(--ada-wash);stroke:var(--ada)"/>
+            <text x="740" y="158" class="t-ink" font-size="13.5" font-weight="700">回合内快适应（AdaJEPA）↻</text>
+            <text x="740" y="177" class="t-2" font-size="11.5">规划 → 执行 → 用新转移更新 → 再规划，每次重规划 1 步</text>
+            <rect x="540" y="212" width="400" height="50" rx="8" style="fill:var(--slow-wash);stroke:var(--slow)"/>
+            <text x="740" y="232" class="t-ink" font-size="13.5" font-weight="700">回合结束：θ0 熟悉这个回合吗？</text>
+            <text x="740" y="251" class="t-2" font-size="11.5">前 3 步预测误差低于 θ0 训练验证集的 90 分位 → 熟悉</text>
+            <rect x="540" y="300" width="180" height="50" rx="8" style="fill:var(--sunk);stroke:var(--axis)"/>
+            <text x="630" y="320" class="t-ink" font-size="13.5" font-weight="700">熟悉</text>
+            <text x="630" y="339" class="t-2" font-size="11.5">只用 θ0，不写入</text>
+            <rect x="760" y="300" width="180" height="50" rx="8" style="fill:var(--slow-wash);stroke:var(--slow)"/>
+            <text x="850" y="320" class="t-ink" font-size="13.5" font-weight="700">新的：写到哪个领域</text>
+            <text x="850" y="339" class="t-2" font-size="11.5">读过的领域 / 改动方向 / 暂存池</text>
+            <rect x="700" y="374" width="240" height="50" rx="8" style="fill:var(--slow-wash);stroke:var(--slow)"/>
+            <text x="820" y="394" class="t-ink" font-size="13.5" font-weight="700">领域学习器：回放巩固</text>
+            <text x="820" y="413" class="t-2" font-size="11.5">新回合上 ≤0.9×θ0 才成熟、可读</text>
+            <rect x="700" y="448" width="240" height="50" rx="8" style="fill:var(--slow-wash);stroke:var(--slow)"/>
+            <text x="820" y="468" class="t-ink" font-size="13.5" font-weight="700">合并与吸收</text>
+            <text x="820" y="487" class="t-2" font-size="11.5">互相预测都优于 θ0 才合并</text>
+          </g>
+          <g style="stroke:var(--ink-2);stroke-width:1.4;fill:none" marker-end="url(#ah)">
+            <path d="M740 114 V134"/><path d="M740 188 V208"/>
+            <path d="M660 262 V281 H630 V296"/><path d="M820 262 V281 H850 V296"/>
+            <path d="M850 350 V370"/><path d="M820 424 V444"/>
+            <path d="M940 473 H958 V89 H944"/>
+          </g>
+          <text x="954" y="440" class="t-mu" font-size="11.5" text-anchor="end">下一回合</text>
+        </svg>
+      </div>
+      <figcaption class="en">Figure 1: Selective consolidation. (a) AdaJEPA adapts within an episode and restarts from the pretrained weights, so every recurrence of a shift is solved from scratch. Selective consolidation keeps what was learned: experience from unfamiliar episodes is consolidated into slow learners for the shifts it discovers, and later episodes of the same shift start from the matching learner; familiar episodes are left to the pretrained model. (b) Within an episode, planning and fast adaptation run as in AdaJEPA. At the end of the episode, label-free gates built from prediction errors decide whether the episode is consolidated, which learner it updates, and when a learner is mature enough to be read. (c) On recurring visual shifts, success grows round after round while AdaJEPA stays flat.</figcaption>
+      <figcaption>这是结构草图，正式版还要配上 PushObj 的真实画面，例如在 (a) 的格子里放偏移后的观测缩略图。</figcaption>
+    </figure>
+  </div>
+
+  <div class="sub">
+    <h3>4.4 逐页版面（正文 9 页）</h3>
+    <div class="legend">
+      <span><i class="sw bar" style="background:var(--slow)"></i>主图</span>
+      <span><i class="sw bar" style="background:var(--slow-wash);border:1px solid var(--slow)"></i>其他图</span>
+      <span><i class="sw bar" style="background:var(--frozen)"></i>表</span>
+      <span><i class="sw bar" style="background:var(--surface);border:1px solid var(--ink-2)"></i>算法</span>
+      <span><i class="sw bar" style="background:var(--grid)"></i>正文</span>
+    </div>
+    <div class="story" id="story"></div>
+  </div>
+
+  <div class="sub">
+    <h3>4.5 摘要草稿</h3>
+    <blockquote class="abs">Latent world models plan by optimizing actions against their own predictions, so prediction errors under distribution shift turn directly into planning failures. AdaJEPA corrects such errors at test time by updating the world model from the transitions it causes inside the model-predictive-control loop, but every episode restarts from the pretrained weights: whatever the model learned about a new object or a new appearance is discarded and must be relearned at the next encounter. We study continual test-time learning, in which an agent faces a stream of episodes whose shifts recur and are interleaved with familiar data, and should improve on recurring shifts without losing what it already does well. We find that test-time adaptation does not accumulate on its own: updates from different episodes are nearly orthogonal, carrying them across episodes degrades planning, and a single model consolidating all experience interferes across shifts. We therefore propose selective consolidation. Within each episode the model adapts as in AdaJEPA; across episodes, experience is consolidated by replay into slow learners for the shifts it discovers, and label-free gates computed from the model's own prediction errors decide whether an episode is consolidated, which learner it updates, and when a learner is trusted for planning. On recurring object-shape shifts (1,050 paired episodes), selective consolidation raises planning success over AdaJEPA by 4.2 points (p &lt; 10⁻³) and recovers two thirds of the gain of an oracle that knows the shift labels; on recurring visual shifts it raises success by 9 to 11 points, and by 15 to 17 points after five rounds. In both settings the gates consolidate almost only the shifts the pretrained model fails on, and performance on familiar data is unchanged.</blockquote>
+    <p class="prose" style="font-size:13px;color:var(--muted)">还缺实验支撑的说法："carrying them across episodes degrades planning"（只有 S2 上 100 个回合）、"a single model … interferes"（只有离线证据）、视觉线的数字（目前复用同一批目标，待按原文协议补跑）。</p>
+  </div>
+
+  <div class="sub">
+    <h3>4.6 图表清单与数据状态</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>图表</th><th>页</th><th>内容</th><th>状态</th></tr></thead>
+        <tbody id="t-figs"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>4.7 还缺的实验</h3>
+    <div class="cards">
+      <div class="mini"><h3>P0 · 形状线的基线</h3><p>S7t3 上：冻结 θ0、沿用快权重（w=1）、EMA 慢权重（w=0.003）、单一学习器回放全部回合（类似 JEPA-TTT）。冻结组几小时，三条链并行约 1 天。</p></div>
+      <div class="mini"><h3>P0 · 形状线 GD 下的 v6a</h3><p>v6a 和真实标签路由在 GD 下各一条链（约 15 小时）。视觉线已有 GD 和 CEM。</p></div>
+      <div class="mini"><h3>P0 · 视觉线对齐原文协议</h3><p>测试种子 100 / 200 / 300 各抽一批目标（同原文 3 × 50），跑 v6a、AdaJEPA、冻结，保存逐回合结果做配对检验。</p></div>
+      <div class="mini"><h3>P1 · 消融与标定</h3><p>逐个关掉熟悉度门、成熟门、写入门、合并；为 T16k 权重重新标定门槛，测 80 / 90 / 95 分位；实验 0 补 seed 200 / 300。</p></div>
+      <div class="mini"><h3>P2 · 补充</h3><p>官方权重上的结果；另一种流顺序；开销（每个领域的存储、每回合的训练时间）。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="planner">
+  <div class="sec-head">
+    <div class="eyebrow"><b>5</b>第二篇候选</div>
+    <h2>规划器侧：推杆归位在保留集上复现</h2>
+    <span class="line-tag"><i style="background:var(--plan)"></i>与第一篇独立：不含持续学习，代码在单独分支</span>
+  </div>
+  <figure>
+    <div class="fig-title">与 AdaJEPA 逐回合配对：谁救回了谁</div>
+    <div class="legend" id="lg-wl"></div>
+    <div class="chart" id="c-wl"></div>
+    <figcaption>K2P：卡住时把推杆推向它的目标，推杆项权重 ×10 只在推动那次和之后 2 次生效，加防穿墙约束。阈值和权重都在 S7 上确定，两批保留集都没参与调参。停滞正则是纯潜空间的方法，安全但增益小。</figcaption>
+    <details class="data"><summary>数据表</summary><div class="tbl" id="t-wl"></div></details>
+  </figure>
+  <ul class="bullets">
+    <li><b>剩下的失败：</b>主要是"物体没到位"，推杆停在物体朝目标的一侧，要先绕到背后才能推对。</li>
+    <li><b>不是模型的问题：</b>换成真实模拟器后，在剩余预算内仍只解开 2/71，视野加倍也只有 4/71。</li>
+    <li><b>终端代价 V 没有过关：</b>方向判断 49%（过关线 60%），真实动态下只解开 4/71，按事先的规则不接入。</li>
+    <li><b>上限检查：</b>给足 60 次重规划，67/71 都能解开，但平均要 32 次，而发现卡住时只剩约 16 次。下一步：更早发现卡住，并在迷宫上验证通用性。</li>
+  </ul>
+</section>
+
+<section id="ask">
+  <div class="sec-head">
+    <div class="eyebrow"><b>6</b>讨论</div>
+    <h2>请导师决定的事</h2>
+  </div>
+  <div class="qs">
+    <div class="q"><div><h3>主表用哪个规划器</h3><p>视觉线 GD、CEM 都有，结论一致；形状线还要补 GD 下的 v6a（约 15 小时）。建议主表两种都放。</p></div></div>
+    <div class="q"><div><h3>基础模型怎么写</h3><p>bias16k / T16k 权重用了带接触偏置的数据生成，这可能是第二篇的素材。建议第一篇里只简要说明，并补官方权重上的结果。</p></div></div>
+    <div class="q"><div><h3>投稿目标和时间线</h3><p>决定 P0、P1 的实验能做多少，以及两篇的先后。</p></div></div>
+    <div class="q"><div><h3>第二篇的下一步</h3><p>K2P 已在 700 个保留回合上复现。方法主线是先做"更早发现卡住"，还是先在迷宫上验证通用性。</p></div></div>
+  </div>
+</section>
+
+<footer>
+  <div>数据来源：<code>reports/cont_S7b3/conclusions.md</code> · <code>reports/cont_S7t3/</code> · <code>reports/cont_S7t3_cem/</code> · <code>reports/visual_v6a/</code>（两份原始 docx 与摘要）· <code>reports/paper1/{outline,jepa_survey_and_title}.md</code> · <code>reports/escape_EVAL50s200/</code> · <code>reports/stag_EVAL50/</code> · <code>reports/ctg_offline/</code>。</div>
+  <div>参考论文页码来自 arXiv 版本：AdaJEPA 2606.32026、Temporal Straightening 2603.12231、JEPA-TTT 2610.00722、DINO-WM 2411.04983、H-JEPA 2610.06805。</div>
+</footer>
+</div>
+
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+const tip=document.getElementById('tip');
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function txt(parent,x,y,s,attrs){const t=el('text',Object.assign({x:x,y:y},attrs||{}),parent);t.textContent=s;return t;}
+function place(x,y){const w=tip.offsetWidth,h=tip.offsetHeight;let L=x+14,T=y-h-12;if(L+w>innerWidth-8)L=x-w-14;if(L<8)L=8;if(T<8)T=y+18;tip.style.left=L+'px';tip.style.top=T+'px';}
+function bindTip(node,lines){
+  node.setAttribute('tabindex','0');node.setAttribute('class','hit');node.setAttribute('aria-label',lines.join('，'));
+  const show=(x,y)=>{tip.replaceChildren();lines.forEach((s,i)=>{const d=document.createElement('div');d.className=i===0?'tv':'tl';d.textContent=s;tip.appendChild(d);});tip.hidden=false;place(x,y);};
+  node.addEventListener('pointermove',e=>show(e.clientX,e.clientY));
+  node.addEventListener('pointerleave',()=>{tip.hidden=true;});
+  node.addEventListener('focus',()=>{const r=node.getBoundingClientRect();show(r.left+r.width/2,r.top+4);});
+  node.addEventListener('blur',()=>{tip.hidden=true;});
+}
+function svgFor(host,w,h){return el('svg',{width:w,height:h,viewBox:'0 0 '+w+' '+h,role:'img'},host);}
+function chart(id,render){
+  const host=document.getElementById(id);if(!host)return;
+  const run=()=>{const w=Math.max(260,Math.round(host.clientWidth));if(w===host._w)return;host._w=w;host.replaceChildren();render(host,w);};
+  run();
+  if('ResizeObserver' in window)new ResizeObserver(run).observe(host);else addEventListener('resize',run);
+}
+function legend(id,items){
+  const L=document.getElementById(id);if(!L)return;
+  items.forEach(it=>{const s=document.createElement('span');const sw=document.createElement('i');sw.className='sw '+(it.kind||'dot');
+    if(it.kind==='hollow')sw.style.borderColor=it.color;else sw.style.background=it.color;
+    if(it.opacity)sw.style.opacity=it.opacity;
+    s.appendChild(sw);s.appendChild(document.createTextNode(it.label));L.appendChild(s);});
+}
+function table(id,head,rows){
+  const host=document.getElementById(id);if(!host)return;
+  const t=document.createElement('table');const th=document.createElement('thead');const tr=document.createElement('tr');
+  head.forEach((h,i)=>{const c=document.createElement('th');c.textContent=h;if(i>0)c.className='r';tr.appendChild(c);});th.appendChild(tr);t.appendChild(th);
+  const tb=document.createElement('tbody');
+  rows.forEach(r=>{const row=document.createElement('tr');r.forEach((v,i)=>{const c=document.createElement('td');c.textContent=v;if(i>0)c.className='r';row.appendChild(c);});tb.appendChild(row);});
+  t.appendChild(tb);host.appendChild(t);
+}
+const sgn=v=>(v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(1);
+const ci=(lo,hi)=>'['+sgn(lo)+', '+sgn(hi)+']';
+function barPath(x0,y,x1,h,r){const len=x1-x0;if(len<=0)return '';r=Math.min(r,len,h/2);
+  return 'M'+x0+' '+y+'H'+(x1-r)+'Q'+x1+' '+y+' '+x1+' '+(y+r)+'V'+(y+h-r)+'Q'+x1+' '+(y+h)+' '+(x1-r)+' '+(y+h)+'H'+x0+'Z';}
+function barPathL(x1,y,x0,h,r){const len=x1-x0;if(len<=0)return '';r=Math.min(r,len,h/2);
+  return 'M'+x1+' '+y+'H'+(x0+r)+'Q'+x0+' '+y+' '+x0+' '+(y+r)+'V'+(y+h-r)+'Q'+x0+' '+(y+h)+' '+(x0+r)+' '+(y+h)+'H'+x1+'Z';}
+const narrow=w=>w<560;
+
+/* ---------- generic multi-panel line chart ---------- */
+function lines(host,w,cfg){
+  const nw=narrow(w), cols=nw?1:cfg.panels.length, gap=28, pw=cols===1?w:(w-gap*(cols-1))/cols, ph=cfg.ph||230;
+  const H=cols===1?ph*cfg.panels.length+16*(cfg.panels.length-1):ph;const svg=svgFor(host,w,H);
+  cfg.panels.forEach((p,i)=>{
+    const ox=cols===1?0:i*(pw+gap), oy=cols===1?i*(ph+16):0;
+    const L=ox+36, R=ox+pw-56, T=oy+30, B=oy+ph-28, n=p.xs.length;
+    const sy=v=>B-(v-cfg.ymin)/(cfg.ymax-cfg.ymin)*(B-T), sx=k=>L+k*(R-L)/(n-1);
+    txt(svg,ox,oy+14,p.title,{'font-size':13,class:'t-ink','font-weight':700});
+    cfg.yticks.forEach(t=>{el('line',{x1:L,x2:R,y1:sy(t),y2:sy(t),style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,L-8,sy(t)+4,t+(t===cfg.yticks[cfg.yticks.length-1]?'%':''),{'text-anchor':'end','font-size':11,class:'t-mu'});});
+    p.xs.forEach((s,k)=>{if(n<=3||k%2===0||k===n-1)txt(svg,sx(k),B+18,s,{'text-anchor':k===0?'start':k===n-1?'end':'middle','font-size':11.5,class:'t-2'});});
+    const ends=[];
+    p.series.forEach(s=>{
+      el('polyline',{points:s[3].map((v,k)=>sx(k)+','+sy(v)).join(' '),style:'fill:none;stroke:'+s[1]+';stroke-width:2;stroke-linejoin:round;stroke-linecap:round;opacity:'+(s[2]?.6:1)},svg);
+      s[3].forEach((v,k)=>{el('circle',{cx:sx(k),cy:sy(v),r:6.5,style:'fill:var(--surface)'},svg);
+        el('circle',{cx:sx(k),cy:sy(v),r:s[2]?4:4.5,style:s[2]?('fill:var(--surface);stroke:'+s[1]+';stroke-width:2'):('fill:'+s[1])},svg);
+        const hit=el('circle',{cx:sx(k),cy:sy(v),r:12},svg);bindTip(hit,[v.toFixed(1)+'%',s[0]+' · '+p.title+' · '+p.xs[k]]);});
+      ends.push([sy(s[3][n-1]),s[3][n-1].toFixed(1)]);
+    });
+    ends.sort((a,b)=>a[0]-b[0]);let last=-99;
+    ends.forEach(e=>{if(e[0]-last>=13){txt(svg,R+8,e[0]+4,e[1],{'font-size':11.5,class:'t-2'});last=e[0];}});
+  });
+}
+
+/* ---------- 1.2 shape-line differences ---------- */
+const STYLE={ours:{color:'var(--slow)'},oracle:{color:'var(--slow)',hollow:true},old:{color:'var(--frozen)'}};
+legend('lg-streams',[{label:'v6a（现在的门控）',color:'var(--slow)'},{label:'真实标签路由（上限）',color:'var(--slow)',kind:'hollow'},{label:'早期版本',color:'var(--frozen)'}]);
+const STREAMS=[
+  {h:'S7b3 · GD · 420 个回合'},
+  ['真实标签路由','cls3_oracle','oracle',4.3,1,8,'33/15','p=0.013'],
+  ['固定 w=0.003 + v4 门控','fixw4_free','old',2.4,0,5,'16/6','p=0.052'],
+  ['v4 无标签','cls4_free','old',-0.2,-3,3,'18/19','p=1'],
+  {h:'S7t3 · GD · 1050 个回合'},
+  ['v6（含形状分类器）','cls6_free','old',3.0,1,5,'95/63','p=0.013'],
+  ['v5 + 早读','cls5s_free','old',3.0,1,5,'91/59','p=0.011'],
+  ['v5','cls5_free','old',1.2,-1,4,'84/71','p=0.34'],
+  {h:'S7t3 · CEM · 1050 个回合'},
+  ['真实标签路由','cls3_oracle','oracle',6.3,4,9,'139/73','p=6.8×10⁻⁶'],
+  ['v6a','cls6a_free','ours',4.2,2,6,'87/43','p=1.4×10⁻⁴'],
+  ['v5a','cls5a_free','old',3.6,1,6,'90/52','p=0.002']];
+chart('c-streams',(host,w)=>{
+  const nw=narrow(w), lw=nw?132:200, rp=nw?60:96, x0=lw, x1=w-rp, per=34, hh=28, top=4;
+  let H=top;const pos=STREAMS.map(r=>{const y=H;H+=r.h?hh:per;return y;});const axisY=H+2;H+=24;
+  const svg=svgFor(host,w,H);const mn=-4,mx=10;const sx=v=>x0+(v-mn)/(mx-mn)*(x1-x0);
+  [-4,-2,0,2,4,6,8,10].forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:top,y2:axisY,style:'stroke:var(--grid);stroke-width:1'},svg);
+    if(!nw||t%4===0)txt(svg,sx(t),axisY+16,(t>0?'+':t<0?'−':'')+Math.abs(t),{'text-anchor':'middle','font-size':11.5,class:'t-mu'});});
+  el('line',{x1:sx(0),x2:sx(0),y1:top,y2:axisY,style:'stroke:var(--axis);stroke-width:1.5'},svg);
+  STREAMS.forEach((r,i)=>{const y0=pos[i];
+    if(r.h){el('rect',{x:0,y:y0,width:w,height:hh,style:'fill:var(--surface)'},svg);
+      if(i>0)el('line',{x1:0,x2:w,y1:y0+3.5,y2:y0+3.5,style:'stroke:var(--grid);stroke-width:1'},svg);
+      txt(svg,0,y0+20,r.h,{'font-size':12,class:'t-mu','font-weight':500});return;}
+    const cy=y0+per/2, S=STYLE[r[2]];
+    txt(svg,0,cy-1,r[0],{'font-size':nw?12.5:13.5,class:'t-ink','font-weight':r[2]==='ours'?700:400});
+    txt(svg,0,cy+14,r[1],{'font-size':11,class:'t-mu'});
+    el('line',{x1:sx(r[4]),x2:sx(r[5]),y1:cy,y2:cy,style:'stroke:'+S.color+';stroke-width:2;stroke-linecap:round'},svg);
+    el('circle',{cx:sx(r[3]),cy:cy,r:7,style:'fill:var(--surface)'},svg);
+    el('circle',{cx:sx(r[3]),cy:cy,r:S.hollow?4.2:5,style:S.hollow?('fill:var(--surface);stroke:'+S.color+';stroke-width:2.2'):('fill:'+S.color)},svg);
+    txt(svg,x1+10,cy+4,sgn(r[3])+(nw?'':'  '+r[6]),{'font-size':12,class:'t-2'});
+    const hit=el('rect',{x:x0-6,y:y0,width:w-x0+6,height:per},svg);
+    bindTip(hit,[sgn(r[3])+' pp '+ci(r[4],r[5]),r[0]+'（'+r[1]+'）','仅该组 / 仅 AdaJEPA：'+r[6]+'，'+r[7]]);
+  });
+});
+{let g='';const rows=[];STREAMS.forEach(r=>{if(r.h){g=r.h;return;}rows.push([g+' · '+r[0],sgn(r[3]),ci(r[4],r[5]),r[6],r[7]]);});
+ table('t-streams',['组','相对 AdaJEPA（pp）','95% 区间','仅该组/仅 AdaJEPA','p'],rows);}
+
+/* ---------- 1.3 shape line by visit ---------- */
+legend('lg-visits',[{label:'AdaJEPA',color:'var(--ada)'},{label:'v6a',color:'var(--slow)'},{label:'真实标签路由',color:'var(--slow)',kind:'hollow'}]);
+const VISITS={ymin:40,ymax:95,yticks:[40,50,60,70,80,90],panels:[
+  {title:'没见过的形状',xs:['第 1 次','第 2 次','第 3 次'],series:[['AdaJEPA','var(--ada)',false,[53.3,56.0,52.7]],['v6a','var(--slow)',false,[61.3,63.3,64.7]],['真实标签','var(--slow)',true,[68.0,68.0,71.3]]]},
+  {title:'见过的形状',xs:['第 1 次','第 2 次','第 3 次'],series:[['AdaJEPA','var(--ada)',false,[86.0,85.0,87.0]],['v6a','var(--slow)',false,[86.0,86.5,87.0]],['真实标签','var(--slow)',true,[85.5,85.0,86.5]]]}]};
+chart('c-visits',(host,w)=>lines(host,w,VISITS));
+{const rows=[];VISITS.panels.forEach(p=>p.series.forEach(s=>rows.push([p.title+' · '+s[0]].concat(s[3].map(v=>v.toFixed(1))))));
+ table('t-visits',['分组','第 1 次（%）','第 2 次（%）','第 3 次（%）'],rows);}
+
+/* ---------- 2 visual line ---------- */
+legend('lg-vrounds',[{label:'AdaJEPA',color:'var(--ada)'},{label:'v6a',color:'var(--slow)'}]);
+const VROUNDS={ymin:50,ymax:80,yticks:[50,55,60,65,70,75,80],ph:220,panels:[
+  {title:'CEM',xs:['第 1 轮','第 2 轮','第 3 轮','第 4 轮','第 5 轮'],series:[['AdaJEPA','var(--ada)',false,[56.89,56.89,56.89,56.89,56.89]],['v6a','var(--slow)',false,[58.67,66.89,70.00,71.33,73.89]]]},
+  {title:'GD',xs:['第 1 轮','第 2 轮','第 3 轮','第 4 轮','第 5 轮'],series:[['AdaJEPA','var(--ada)',false,[58.33,58.33,58.33,58.33,58.33]],['v6a','var(--slow)',false,[59.00,65.22,70.00,69.89,73.67]]]}]};
+chart('c-vrounds',(host,w)=>lines(host,w,VROUNDS));
+{const rows=[];VROUNDS.panels.forEach(p=>p.series.forEach(s=>rows.push([p.title+' · '+s[0]].concat(s[3].map(v=>v.toFixed(1))))));
+ table('t-vrounds',['分组','第 1 轮','第 2 轮','第 3 轮','第 4 轮','第 5 轮'],rows);}
+
+const VDOM=[['模糊',80.00,80.27,90.00,89.73,2.8,3.6],['椒盐噪声',78.00,79.73,89.33,89.33,7.2,7.9],['变暗',87.33,85.87,82.67,83.33,2.3,5.6],
+  ['红色推杆',56.00,71.47,45.33,56.67,91.1,86.0],['红色物体',13.33,28.00,10.67,29.07,99.1,98.5],['红色目标',26.67,63.60,32.00,57.20,99.3,98.9]];
+legend('lg-vdom',[{label:'AdaJEPA',color:'var(--ada)'},{label:'v6a',color:'var(--slow)'}]);
+chart('c-vdom',(host,w)=>{
+  const lw=72, sublw=38, rp=46, x0=lw+sublw, x1=w-rp, sub=20, gap=12, top=4;
+  const H0=top+VDOM.length*(2*sub+gap), H=H0+22;const svg=svgFor(host,w,H);const sx=v=>x0+v/100*(x1-x0);
+  [0,25,50,75,100].forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:top,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,sx(t),H0+16,t+(t===100?'%':''),{'text-anchor':'middle','font-size':11,class:'t-mu'});});
+  VDOM.forEach((d,i)=>{const y0=top+i*(2*sub+gap);
+    txt(svg,0,y0+sub+4,d[0],{'font-size':12.5,class:'t-ink','font-weight':i>=3?700:400});
+    [['CEM',d[1],d[2]],['GD',d[3],d[4]]].forEach((r,j)=>{const cy=y0+j*sub+sub/2;
+      txt(svg,lw,cy+4,r[0],{'font-size':11,class:'t-mu'});
+      el('line',{x1:sx(r[1]),x2:sx(r[2]),y1:cy,y2:cy,style:'stroke:var(--axis);stroke-width:2'},svg);
+      el('circle',{cx:sx(r[1]),cy:cy,r:4,style:'fill:var(--ada)'},svg);
+      el('circle',{cx:sx(r[2]),cy:cy,r:4.5,style:'fill:var(--slow)'},svg);
+      txt(svg,x1+8,cy+4,sgn(r[2]-r[1]),{'font-size':11.5,class:'t-2'});
+      const hit=el('rect',{x:0,y:cy-sub/2,width:w,height:sub},svg);bindTip(hit,[r[1].toFixed(1)+'% → '+r[2].toFixed(1)+'%（'+sgn(r[2]-r[1])+'）',d[0]+' · '+r[0]+' · 五轮合计 750 个回合']);
+    });
+  });
+});
+legend('lg-vshare',[{label:'CEM',color:'var(--slow)',kind:'bar'},{label:'GD',color:'var(--slow)',kind:'bar',opacity:.5}]);
+chart('c-vshare',(host,w)=>{
+  const lw=72, rp=46, x0=lw, x1=w-rp, sub=20, gap=12, bh=12, top=4;
+  const H0=top+VDOM.length*(2*sub+gap), H=H0+22;const svg=svgFor(host,w,H);const sx=v=>x0+v/100*(x1-x0);
+  [0,25,50,75,100].forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:top,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,sx(t),H0+16,t+(t===100?'%':''),{'text-anchor':'middle','font-size':11,class:'t-mu'});});
+  VDOM.forEach((d,i)=>{const y0=top+i*(2*sub+gap);
+    txt(svg,0,y0+sub+4,d[0],{'font-size':12.5,class:'t-ink','font-weight':i>=3?700:400});
+    [['CEM',d[5],1],['GD',d[6],.5]].forEach((r,j)=>{const y=y0+j*sub+(sub-bh)/2;
+      el('path',{d:barPath(x0,y,Math.max(sx(r[1]),x0+2),bh,3),style:'fill:var(--slow);opacity:'+r[2]},svg);
+      txt(svg,Math.max(sx(r[1]),x0+2)+6,y+bh/2+4,r[1].toFixed(1)+'%',{'font-size':11.5,class:'t-2'});
+      const hit=el('rect',{x:0,y:y0+j*sub,width:w,height:sub},svg);bindTip(hit,[r[1].toFixed(1)+'% 被巩固',d[0]+' · '+r[0]+' · 三个种子合计 750 个回合']);
+    });
+  });
+});
+
+/* ---------- 4.1 reference layouts ---------- */
+const REFS=[
+  ['AdaJEPA',[[2,'图1','ov','plan–execute–adapt–replan 循环 + 世界模型结构'],[7,'图2','res','形状与视觉偏移下的成功率'],[8,'表1','res','动力学与布局偏移'],[8,'图4','oth','迷宫轨迹'],[9,'表2','ana','不同实现的对比'],[10,'图7','oth','视觉与形状偏移下的规划示例']]],
+  ['Temporal Straightening',[[1,'图1','ov','预训练编码器的潜轨迹是弯的'],[2,'图2','oth','拉直前后的潜轨迹'],[3,'图3','me','训练示意'],[6,'图5','ana','曲率与成功率、距离热图'],[7,'图7','oth','开环 GD 规划对比'],[8,'表1','res','GD 规划成功率'],[8,'图8','res','成功率随 MPC 步数'],[9,'图9','oth','长视野规划示例']]],
+  ['JEPA-TTT',[[2,'图1','ov','动力学偏移让规划失败'],[3,'图2','me','方法概览'],[6,'图3','ana','测试时训练纠正方案排序'],[8,'图4','oth','八种动力学偏移'],[9,'图5','res','偏移下的规划表现'],[10,'图6','res','500 回合的曲线'],[11,'图7','ana','自回归预测误差'],[12,'表1','ana','更新规则消融']]],
+  ['DINO-WM',[[3,'图1','ov','方法概览'],[4,'图2','me','架构'],[5,'图3','oth','六个环境'],[6,'表1','res','六个环境的规划结果'],[7,'图4','ana','开环 rollout'],[8,'表3','res','更多环境']]],
+  ['H-JEPA',[[1,'图1','ov','分层抽象示意'],[3,'图2','me','跨时间尺度的训练'],[4,'图3','me','自上而下的规划'],[5,'图4','ana','选择性抽象'],[6,'图6','res','不同算力与层数下的规划'],[7,'表1','ana','代价消融'],[8,'图8','ana','规划代价分解'],[9,'图9','res','真实机器人数据']]],
+  ['我们的计划',[[2,'图1','ov','主图：回合流 + 一个回合内外 + 视觉偏移每轮成功率'],[4,'图2','ana','诊断：适应为什么不会自己积累'],[5,'算法1','me','选择性巩固的伪代码'],[7,'图3','res','主结果：上行形状偏移、下行视觉偏移（同 AdaJEPA 图 2）'],[7,'表1','res','主表：各基线与 v6a'],[8,'图4','ana','巩固了什么'],[8,'表2','ana','门控消融'],[9,'图5','ana','预测改善与规划成功']]]];
+const CAT={ov:['var(--slow)','var(--slow)','t-on','概览 / 主图'],me:['var(--slow-wash)','var(--slow)','t-ink','方法图'],res:['var(--ink-2)','var(--ink-2)','t-surf','主结果'],ana:['var(--frozen)','var(--frozen)','t-ink','分析 / 消融'],oth:['var(--sunk)','var(--axis)','t-2','环境 / 定性示例']};
+chart('c-refs',(host,w)=>{
+  const nw=narrow(w), lw=nw?92:170, P=12, x0=lw, x1=w-4, cw=(x1-x0)/P, rh=54, top=22, H0=top+REFS.length*rh, H=H0+6;
+  const svg=svgFor(host,w,H);
+  for(let p=1;p<=P;p++){const x=x0+(p-1)*cw;txt(svg,x+cw/2,14,(nw&&p%2===0)?'':String(p),{'text-anchor':'middle','font-size':11,class:'t-mu'});
+    el('line',{x1:x,x2:x,y1:top-2,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);}
+  el('line',{x1:x1,x2:x1,y1:top-2,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);
+  if(!nw)txt(svg,0,14,'页码 →',{'font-size':11,class:'t-mu'});
+  REFS.forEach((r,i)=>{const y0=top+i*rh, ours=i===REFS.length-1;
+    if(ours)el('rect',{x:0,y:y0+2,width:w,height:rh-4,rx:6,style:'fill:var(--slow-wash)'},svg);
+    el('line',{x1:0,x2:w,y1:y0,y2:y0,style:'stroke:var(--grid);stroke-width:1'},svg);
+    txt(svg,4,y0+rh/2+4,r[0],{'font-size':nw?11.5:13,class:'t-ink','font-weight':ours?700:400});
+    const byPage={};r[1].forEach(it=>{(byPage[it[0]]=byPage[it[0]]||[]).push(it);});
+    Object.keys(byPage).forEach(pg=>{const items=byPage[pg], n=items.length, bh=n>1?19:24;
+      items.forEach((it,k)=>{const c=CAT[it[2]], x=x0+(it[0]-1)*cw+2, bw=cw-4, y=y0+(rh-(n*bh+(n-1)*3))/2+k*(bh+3);
+        el('rect',{x:x,y:y,width:bw,height:bh,rx:4,style:'fill:'+c[0]+';stroke:'+c[1]+';stroke-width:1'},svg);
+        if(bw>=30)txt(svg,x+bw/2,y+bh/2+4,it[1],{'text-anchor':'middle','font-size':10.5,class:c[2],'font-weight':500});
+        const hit=el('rect',{x:x,y:y,width:bw,height:bh},svg);bindTip(hit,[r[0]+' · 第 '+it[0]+' 页 · '+it[1],c[3]+'：'+it[3]]);});
+    });
+  });
+});
+
+/* ---------- 4.4 page storyboard ---------- */
+const PAGES=[
+  ['题目、摘要、引言前半',[['title',6,7],['meta',15,3],['box',22,30,'摘要'],['text',57,66]]],
+  ['图 1 主图（整宽）；引言后半与贡献点',[['main',6,50,'图 1 主图'],['text',61,62]]],
+  ['相关工作；问题设定',[['text',6,52],['text',63,60]]],
+  ['§4 测试时适应会自己积累吗？＋图 2',[['text',6,30],['fig',40,40,'图 2 诊断'],['text',85,38]]],
+  ['§5 方法：快与慢、门控；算法 1',[['text',6,40],['alg',50,36,'算法 1'],['text',91,32]]],
+  ['§5.3 开销；§6.1 实验设置',[['text',6,117]]],
+  ['图 3 主结果（整宽）；表 1；§6.2',[['fig',6,44,'图 3 主结果'],['table',54,22,'表 1'],['text',81,42]]],
+  ['图 4 巩固了什么；表 2 消融',[['fig',6,36,'图 4'],['table',46,20,'表 2 消融'],['text',70,53]]],
+  ['§6.5 通用性；§7 分析与局限（图 5）；§8 结论',[['text',6,40],['fig',50,26,'图 5'],['text',80,43]]]];
+{const host=document.getElementById('story');
+ PAGES.forEach((p,i)=>{const d=document.createElement('div');d.className='page';
+  const s=el('svg',{viewBox:'0 0 100 130',role:'img'});s.setAttribute('aria-label','第 '+(i+1)+' 页：'+p[0]);
+  el('rect',{x:0.5,y:0.5,width:99,height:129,rx:3,style:'fill:var(--surface);stroke:var(--axis);stroke-width:1'},s);
+  p[1].forEach(b=>{const t=b[0],y=b[1],h=b[2];
+    if(t==='text'){for(let yy=y;yy<y+h-2;yy+=4.2)el('rect',{x:8,y:yy,width:(yy+4.2>=y+h-2)?52:84,height:1.8,rx:.9,style:'fill:var(--grid)'},s);}
+    else if(t==='title'){el('rect',{x:18,y:y,width:64,height:h-1,rx:1.5,style:'fill:var(--ink-2)'},s);}
+    else if(t==='meta'){el('rect',{x:30,y:y,width:40,height:h,rx:1,style:'fill:var(--axis)'},s);}
+    else{const st={main:['var(--slow)','var(--slow)','t-on'],fig:['var(--slow-wash)','var(--slow)','t-ink'],table:['var(--frozen)','var(--frozen)','t-ink'],alg:['var(--surface)','var(--ink-2)','t-ink'],box:['var(--sunk)','var(--axis)','t-2']}[t];
+      el('rect',{x:8,y:y,width:84,height:h,rx:2,style:'fill:'+st[0]+';stroke:'+st[1]+';stroke-width:1'},s);
+      if(b[3])txt(s,50,y+h/2+3,b[3],{'text-anchor':'middle','font-size':8,class:st[2],'font-weight':700});}
+  });
+  const pn=document.createElement('div');pn.className='pn';pn.textContent='第 '+(i+1)+' 页';
+  const pd=document.createElement('div');pd.className='pd';pd.textContent=p[0];
+  d.appendChild(s);d.appendChild(pn);d.appendChild(pd);host.appendChild(d);});}
+
+/* ---------- 4.6 figure status ---------- */
+const ICON={good:'M2.5 6.2l2.3 2.3L9.5 3.8',warn:'M6 1.8L11 10.5H1z',bad:'M3 3l6 6M9 3l-6 6',info:'M2.5 6h7'};
+const FIGS=[
+  ['图 1 主图（整宽）','2','回合流 + 一个回合内外 + 视觉偏移每轮成功率','info','草图见 4.3，要正式绘制'],
+  ['图 2 诊断','4','实验 0；更新几乎正交；直接持续不行','warn','实验 0 只有 seed 100，直接持续只有 S2'],
+  ['算法 1','5','选择性巩固的伪代码','info','要写'],
+  ['图 3 主结果（整宽）','7','上行形状偏移、下行视觉偏移，与 AdaJEPA 图 2 的排法相同；GD 与 CEM','warn','形状线 GD 缺 v6a；视觉线待按原文协议补跑'],
+  ['表 1 主表','7','冻结、AdaJEPA、三种直接持续、真实标签、v6a','warn','缺冻结与三个直接持续基线'],
+  ['图 4 巩固了什么','8','视觉线各偏移被巩固的比例；形状线的领域构成与迁移','good','有'],
+  ['表 2 消融','8','逐个关掉门控、门槛敏感性、只快 / 只慢','bad','缺 v6a 版本'],
+  ['图 5 分析','9','预测改善 vs 成功率；剩下的失败是规划器卡住','warn','S7 上有，S7t3 需重算']];
+{const tb=document.getElementById('t-figs');FIGS.forEach(f=>{const tr=document.createElement('tr');
+  [f[0],f[1],f[2]].forEach((v,i)=>{const td=document.createElement('td');td.textContent=v;if(i===0)td.style.whiteSpace='nowrap';tr.appendChild(td);});
+  const c=document.createElement('td');const s=document.createElement('span');s.className='chip '+f[3];
+  const ic=el('svg',{viewBox:'0 0 12 12'});
+  if(f[3]==='warn')el('path',{d:ICON.warn,fill:'currentColor'},ic);else el('path',{d:ICON[f[3]],fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round'},ic);
+  s.appendChild(ic);s.appendChild(document.createTextNode(f[4]));c.appendChild(s);tr.appendChild(c);tb.appendChild(tr);});}
+
+/* ---------- 5 planner line ---------- */
+legend('lg-wl',[{label:'仅 AdaJEPA 成功',color:'var(--ada)',kind:'bar'},{label:'仅该组成功',color:'var(--plan)',kind:'bar'}]);
+const WL=[['K2P · seed 100','保留集 350 个回合',10,1,'+2.6 pp，p=0.012'],['K2P · seed 200','保留集 350 个回合',16,0,'+4.6 pp，p=3×10⁻⁵'],['K2P · 合计','700 个回合',26,1,'+3.6 pp [+2.1, +5.0]，p=4×10⁻⁷',true],['停滞正则（潜空间）','seed 100，350 个回合',4,0,'+1.1 pp，p=0.125']];
+chart('c-wl',(host,w)=>{
+  const nw=narrow(w), lw=nw?118:190, rp=10, x0=lw, x1=w-rp, mid=x0+(x1-x0)*0.2, rh=40, bh=14, top=20, H0=top+WL.length*rh, H=H0+22;
+  const svg=svgFor(host,w,H);const max=28;const sc=v=>v/max*(x1-mid-30);
+  txt(svg,mid-6,12,'← 仅 AdaJEPA',{'text-anchor':'end','font-size':11.5,class:'t-mu'});txt(svg,mid+6,12,'仅该组 →',{'font-size':11.5,class:'t-mu'});
+  [0,10,20].forEach(t=>{const x=mid+sc(t);el('line',{x1:x,x2:x,y1:top,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,x,H0+16,String(t),{'text-anchor':'middle','font-size':11,class:'t-mu'});});
+  el('line',{x1:mid,x2:mid,y1:top-4,y2:H0,style:'stroke:var(--axis);stroke-width:1.5'},svg);
+  WL.forEach((r,i)=>{const cy=top+i*rh+rh/2, y=cy-bh/2;
+    txt(svg,0,cy-1,r[0],{'font-size':nw?12.5:13,class:'t-ink','font-weight':r[5]?700:400});
+    txt(svg,0,cy+14,r[1],{'font-size':11,class:'t-mu'});
+    if(r[3]>0)el('path',{d:barPathL(mid-1,y,mid-1-sc(r[3]),bh,4),style:'fill:var(--ada)'},svg);
+    if(r[2]>0)el('path',{d:barPath(mid+1,y,mid+1+sc(r[2]),bh,4),style:'fill:var(--plan)'},svg);
+    txt(svg,mid+1+sc(r[2])+6,cy+4,String(r[2]),{'font-size':12,class:'t-2'});
+    txt(svg,mid-1-sc(r[3])-6,cy+4,String(r[3]),{'font-size':12,class:'t-2','text-anchor':'end'});
+    const hit=el('rect',{x:0,y:cy-rh/2,width:w,height:rh},svg);bindTip(hit,[r[2]+' / '+r[3]+'：'+r[4],r[0]+'，'+r[1]]);
+  });
+});
+table('t-wl',['组','仅该组成功','仅 AdaJEPA 成功','净效果'],WL.map(r=>[r[0]+'（'+r[1]+'）',String(r[2]),String(r[3]),r[4]]));
+})();
+</script>

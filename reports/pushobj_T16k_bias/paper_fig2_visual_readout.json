@@ -1,0 +1,100 @@
+{
+ "source": "arXiv:2606.32026v1 Figure 2 (bottom row, pusht_visual_shifts_gd_cem_ttt.png): PushObj-T-16k model, mean over 3 test seeds x 50; values read by eye from the plot, about +-2 pp",
+ "conditions": [
+  "default",
+  "blur",
+  "snp",
+  "dark",
+  "redAgent",
+  "redBlock",
+  "redAnchor"
+ ],
+ "gd": {
+  "default": [
+   65,
+   83,
+   65,
+   86
+  ],
+  "blur": [
+   56,
+   76,
+   56,
+   80
+  ],
+  "snp": [
+   65,
+   79,
+   65,
+   81
+  ],
+  "dark": [
+   70,
+   80,
+   70,
+   82
+  ],
+  "redAgent": [
+   45,
+   59,
+   45,
+   62
+  ],
+  "redBlock": [
+   13,
+   13,
+   13,
+   14
+  ],
+  "redAnchor": [
+   33,
+   33,
+   33,
+   37
+  ]
+ },
+ "cem": {
+  "default": [
+   73,
+   79,
+   75,
+   81
+  ],
+  "blur": [
+   58,
+   76,
+   61,
+   81
+  ],
+  "snp": [
+   64,
+   78,
+   67,
+   80
+  ],
+  "dark": [
+   72,
+   84,
+   75,
+   87
+  ],
+  "redAgent": [
+   57,
+   70,
+   60,
+   75
+  ],
+  "redBlock": [
+   17,
+   17,
+   18,
+   18
+  ],
+  "redAnchor": [
+   34,
+   37,
+   37,
+   45
+  ]
+ }
+}

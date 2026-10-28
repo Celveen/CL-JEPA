@@ -1,0 +1,14 @@
+START reference L GPU=7START reference T GPU=5
+
+DONE reference L exit=0
+START reference Z GPU=7
+DONE reference T exit=0
+START reference + GPU=5
+DONE reference Z exit=0
+START reference I GPU=7
+DONE reference + exit=0
+START reference small_tee GPU=5
+DONE reference small_tee exit=0
+START reference square GPU=5
+DONE reference I exit=0
+DONE reference square exit=0

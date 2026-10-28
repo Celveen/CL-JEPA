@@ -1,0 +1,15 @@
+# our model (epoch 3), test seed 300, up to 30 MPC replans as in the paper's Figure 2 (GD planner)
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/I/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed0	3	I	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/small_tee/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed0	3	small_tee	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/square/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed0	3	square	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/T/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed0	3	T	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/L/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed0	3	L	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/Z/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed0	3	Z	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/+/adajepa	adajepa	checkpoints/pushobj_bias_16k_e3_seed0	3	+	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/T/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	T	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/L/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	L	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/Z/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	Z	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/+/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	+	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/I/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	I	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/small_tee/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	small_tee	300	planner.max_iter=30
+eval_outputs/pushobj_bias_16k_e3_seed300_it30/square/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	square	300	planner.max_iter=30

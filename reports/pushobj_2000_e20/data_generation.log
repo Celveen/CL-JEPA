@@ -1,0 +1,175 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/Cython/Distutils/old_build_ext.py:15: DeprecationWarning: dep_util is Deprecated. Use functions from setuptools instead.
+  from distutils.dep_util import newer, newer_group
+/home/appuser/workspace/project/multimodal-test/adajepa/env/__init__.py:7: UserWarning: point_maze envs unavailable (mujoco_py missing): 
+Missing path to your environment variable. 
+Current values LD_LIBRARY_PATH=/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/cv2/../../lib64:
+Please add following line to .bashrc:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/appuser/.mujoco/mujoco210/bin
+  warnings.warn(f"point_maze envs unavailable (mujoco_py missing): {_e}")
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pygame/pkgdata.py:25: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import resource_stream, resource_exists
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/skimage/util/dtype.py:27: DeprecationWarning: `np.bool8` is a deprecated alias for `np.bool_`.  (Deprecated NumPy 1.24)
+  np.bool8: (False, True),
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+  family = Regex(
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:127: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  self._parser.parseString(pattern)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:134: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+  self._parser.resetCache()
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-vbuqmxi6 because the default path (/home/appuser/.config/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+  episodes 0..15 done
+  episodes 16..31 done
+  episodes 32..47 done
+  episodes 48..63 done
+  episodes 64..79 done
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+  episodes 80..95 done
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+  episodes 96..111 done
+  episodes 112..127 done
+  episodes 128..143 done
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+  episodes 144..159 done
+  episodes 160..175 done
+  episodes 176..191 done
+  episodes 192..207 done
+  episodes 208..223 done
+  episodes 224..239 done
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+  episodes 240..255 done
+  episodes 256..271 done
+  episodes 272..287 done
+  episodes 288..303 done
+  episodes 304..319 done
+  episodes 320..335 done
+  episodes 336..351 done
+  episodes 352..367 done
+  episodes 368..383 done
+  episodes 384..399 done
+  episodes 400..415 done
+  episodes 416..431 done
+  episodes 432..447 done
+  episodes 448..463 done
+  episodes 464..479 done
+  episodes 480..495 done
+  episodes 496..511 done
+  episodes 512..527 done
+  episodes 528..543 done
+  episodes 544..559 done
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+  episodes 560..575 done
+  episodes 576..591 done
+  episodes 592..607 done
+  episodes 608..623 done
+  episodes 624..639 done
+  episodes 640..655 done
+  episodes 656..671 done
+  episodes 672..687 done
+  episodes 688..703 done
+  episodes 704..719 done
+  episodes 720..735 done
+  episodes 736..751 done
+  episodes 752..767 done
+  episodes 768..783 done
+  episodes 784..799 done
+  episodes 800..815 done
+  episodes 816..831 done
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+  episodes 832..847 done
+  episodes 848..863 done
+  episodes 864..879 done
+  episodes 880..895 done
+  episodes 896..911 done
+  episodes 912..927 done
+  episodes 928..943 done
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+  episodes 944..959 done
+  episodes 960..975 done
+  episodes 976..991 done
+  episodes 992..1007 done
+  episodes 1008..1023 done
+  episodes 1024..1039 done
+  episodes 1040..1055 done
+  episodes 1056..1071 done
+  episodes 1072..1087 done
+  episodes 1088..1103 done
+  episodes 1104..1119 done
+  episodes 1120..1135 done
+  episodes 1136..1151 done
+  episodes 1152..1167 done
+  episodes 1168..1183 done
+  episodes 1184..1199 done
+  episodes 1200..1215 done
+  episodes 1216..1231 done
+  episodes 1232..1247 done
+  episodes 1248..1263 done
+  episodes 1264..1279 done
+  episodes 1280..1295 done
+  episodes 1296..1311 done
+  episodes 1312..1327 done
+  episodes 1328..1343 done
+  episodes 1344..1359 done
+  episodes 1360..1375 done
+  episodes 1376..1391 done
+  episodes 1392..1407 done
+  episodes 1408..1423 done
+  episodes 1424..1439 done
+  episodes 1440..1455 done
+  episodes 1456..1471 done
+  episodes 1472..1487 done
+  episodes 1488..1503 done
+  episodes 1504..1519 done
+  episodes 1520..1535 done
+  episodes 1536..1551 done
+  episodes 1552..1567 done
+  episodes 1568..1583 done
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: invalid value encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+  episodes 1584..1599 done
+  episodes 1600..1615 done
+  episodes 1616..1631 done
+  episodes 1632..1647 done
+  episodes 1648..1663 done
+  episodes 1664..1679 done
+  episodes 1680..1695 done
+  episodes 1696..1711 done
+  episodes 1712..1727 done
+  episodes 1728..1743 done
+  episodes 1744..1759 done
+  episodes 1760..1775 done
+  episodes 1776..1791 done
+  episodes 1792..1807 done
+  episodes 1808..1823 done
+  episodes 1824..1839 done
+  episodes 1840..1855 done
+  episodes 1856..1871 done
+  episodes 1872..1887 done
+  episodes 1888..1903 done
+  episodes 1904..1919 done
+  episodes 1920..1935 done
+  episodes 1936..1951 done
+  episodes 1952..1967 done
+  episodes 1968..1983 done
+  episodes 1984..1999 done
+  train: 1800 episodes
+  val: 200 episodes
+
+wrote 2000 episodes to data/pushobj_train_2000
+  shapes: {'T': 500, 'L': 500, 'Z': 500, '+': 500}
+  episodes where the block moved >5px: 1496/2000 (75%)

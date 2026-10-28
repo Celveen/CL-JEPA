@@ -1,0 +1,30 @@
+{
+  "T": {
+    "selected_eval_episodes": 50,
+    "initial_pose_matches_training_frames_rounded_1e3": 0
+  },
+  "L": {
+    "selected_eval_episodes": 50,
+    "initial_pose_matches_training_frames_rounded_1e3": 0
+  },
+  "Z": {
+    "selected_eval_episodes": 50,
+    "initial_pose_matches_training_frames_rounded_1e3": 0
+  },
+  "+": {
+    "selected_eval_episodes": 50,
+    "initial_pose_matches_training_frames_rounded_1e3": 0
+  },
+  "I": {
+    "selected_eval_episodes": 50,
+    "initial_pose_matches_training_frames_rounded_1e3": 0
+  },
+  "small_tee": {
+    "selected_eval_episodes": 50,
+    "initial_pose_matches_training_frames_rounded_1e3": 0
+  },
+  "square": {
+    "selected_eval_episodes": 50,
+    "initial_pose_matches_training_frames_rounded_1e3": 0
+  }
+}

@@ -1,0 +1,51 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/Cython/Distutils/old_build_ext.py:15: DeprecationWarning: dep_util is Deprecated. Use functions from setuptools instead.
+  from distutils.dep_util import newer, newer_group
+/home/appuser/workspace/project/multimodal-test/adajepa/env/__init__.py:7: UserWarning: point_maze envs unavailable (mujoco_py missing): 
+Missing path to your environment variable. 
+Current values LD_LIBRARY_PATH=/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/cv2/../../lib64:
+Please add following line to .bashrc:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/appuser/.mujoco/mujoco210/bin
+  warnings.warn(f"point_maze envs unavailable (mujoco_py missing): {_e}")
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pygame/pkgdata.py:25: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import resource_stream, resource_exists
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/skimage/util/dtype.py:27: DeprecationWarning: `np.bool8` is a deprecated alias for `np.bool_`.  (Deprecated NumPy 1.24)
+  np.bool8: (False, True),
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+  family = Regex(
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:127: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  self._parser.parseString(pattern)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/matplotlib/fontconfig_pattern.py:134: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+  self._parser.resetCache()
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/shapely/set_operations.py:131: RuntimeWarning: divide by zero encountered in intersection
+  return lib.intersection(a, b, **kwargs)
+Loaded 2000 rollouts
+{'ours val T (held-out pusht_noise replays)': (50, 1147), 'author test T segments (replayed)': (40, 200)}
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/wandb/util.py:118: SentryHubDeprecationWarning: `sentry_sdk.Hub` is deprecated and will be removed in a future major release. Please consult our 1.x to 2.x migration guide for details on how to migrate `Hub` usage to the new API: https://docs.sentry.io/platforms/python/migration/1.x-to-2.x
+  sentry_hub = sentry_sdk.Hub(sentry_client)
+/home/appuser/workspace/project/multimodal-test/adajepa/custom_resolvers.py:4: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path=None)
+Using cache found in /home/appuser/.cache/torch/hub/facebookresearch_dinov2_main
+Resuming from epoch 3: /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_shape_shift/checkpoints/model_latest.pth
+released (e3) | ours val T (held-out pusht_noise replays) | {"n": 1047, "buffer_fit_ratio_gmean": 0.8022792371819276, "next1_ratio_gmean": 0.8684036666954982, "next1_improved_frac": 0.6934097421203438, "rollout_ratio_gmean": 0.923015710300154, "rollout_improved_frac": 0.5606494746895893, "rollout_ratio_gmean_t>=6": 0.9230739325045524, "frozen_rollout_median": 0.018143991008400917, "frozen_next1_median": 0.007917852140963078}
+released (e3) | author test T segments (replayed) | {"n": 120, "buffer_fit_ratio_gmean": 0.7772546136078005, "next1_ratio_gmean": 0.9026998725728419, "next1_improved_frac": 0.6666666666666666, "rollout_ratio_gmean": 0.9008731906636402, "rollout_improved_frac": 0.6666666666666666, "rollout_ratio_gmean_t>=6": null, "frozen_rollout_median": 0.006944430293515325, "frozen_next1_median": 0.005120057379826903}
+Using cache found in /home/appuser/.cache/torch/hub/facebookresearch_dinov2_main
+Resuming from epoch 3: /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_replay_20k_e5_seed0/checkpoints/model_3.pth
+ours e3 | ours val T (held-out pusht_noise replays) | {"n": 1047, "buffer_fit_ratio_gmean": 0.8556018362829145, "next1_ratio_gmean": 1.08200574223306, "next1_improved_frac": 0.3638968481375358, "rollout_ratio_gmean": 1.062170066232888, "rollout_improved_frac": 0.38108882521489973, "rollout_ratio_gmean_t>=6": 1.0751440741519915, "frozen_rollout_median": 0.030243420973420143, "frozen_next1_median": 0.00853773858398199}
+ours e3 | author test T segments (replayed) | {"n": 120, "buffer_fit_ratio_gmean": 0.8318373567148153, "next1_ratio_gmean": 0.9651840707419773, "next1_improved_frac": 0.5583333333333333, "rollout_ratio_gmean": 0.9697172641823885, "rollout_improved_frac": 0.5166666666666667, "rollout_ratio_gmean_t>=6": null, "frozen_rollout_median": 0.09187953174114227, "frozen_next1_median": 0.05553797259926796}
+Using cache found in /home/appuser/.cache/torch/hub/facebookresearch_dinov2_main
+Resuming from epoch 5: /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_replay_20k_e5_seed0/checkpoints/model_5.pth
+ours e5 | ours val T (held-out pusht_noise replays) | {"n": 1047, "buffer_fit_ratio_gmean": 0.8547005860650733, "next1_ratio_gmean": 1.1780371880353184, "next1_improved_frac": 0.2817574021012416, "rollout_ratio_gmean": 1.1183544691307479, "rollout_improved_frac": 0.37058261700095513, "rollout_ratio_gmean_t>=6": 1.1277080158727804, "frozen_rollout_median": 0.01666031777858734, "frozen_next1_median": 0.0038706783670932055}
+ours e5 | author test T segments (replayed) | {"n": 120, "buffer_fit_ratio_gmean": 0.8247345428075661, "next1_ratio_gmean": 0.9884915514244098, "next1_improved_frac": 0.5166666666666667, "rollout_ratio_gmean": 0.9898567089723538, "rollout_improved_frac": 0.5166666666666667, "rollout_ratio_gmean_t>=6": null, "frozen_rollout_median": 0.052238743752241135, "frozen_next1_median": 0.03229021839797497}
+wrote /home/appuser/workspace/project/multimodal-test/adajepa/reports/pushobj_replay_20k_e5/diagnostics/adaptivity.json

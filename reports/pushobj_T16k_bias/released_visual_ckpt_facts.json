@@ -1,0 +1,20 @@
+{
+ "checkpoint": "checkpoints/pusht_visual_shift/checkpoints/model_latest.pth",
+ "zip_bytes": 310210277,
+ "epoch": 3,
+ "adam_steps": 79509,
+ "iters_per_epoch": 26503,
+ "batch": 64,
+ "released_shape_adam_steps": 79509,
+ "ours_T16k_iters_per_epoch": 25519,
+ "windows_range": [
+  1696129,
+  1696192
+ ],
+ "inferred": {
+  "first_16000_sources_once_iters": 26535,
+  "first_16000_excluding_agent_out_iters": 25602,
+  "all_18685_sources_iters": 30965
+ },
+ "note": "load_pusht_slice_train_val trains on <data_path>/train entirely (split_ratio unused); windows per trajectory = length - 19 (4 frames x frameskip 5)"
+}

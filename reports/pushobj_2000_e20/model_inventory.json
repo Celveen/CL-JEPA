@@ -1,0 +1,101 @@
+{
+  "checkpoint_epoch": 2,
+  "modules": {
+    "encoder": {
+      "class": "models.encoder.resnet.SmallResNetGeM",
+      "parameters": 4269144,
+      "trainable_parameters": 4269144
+    },
+    "predictor": {
+      "class": "models.vit.ViTPredictor",
+      "parameters": 19886260,
+      "trainable_parameters": 19886260
+    },
+    "action_encoder": {
+      "class": "models.proprio.ProprioceptiveEmbedding",
+      "parameters": 130,
+      "trainable_parameters": 130
+    },
+    "proprio_encoder": {
+      "class": "models.proprio.ProprioceptiveEmbedding",
+      "parameters": 70,
+      "trainable_parameters": 70
+    },
+    "decoder": {
+      "class": "models.vqvae.VQVAE",
+      "parameters": 10140163,
+      "trainable_parameters": 10140163
+    }
+  },
+  "optimizers": {
+    "encoder_optimizer": [
+      {
+        "lr": 1e-05,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0,
+        "amsgrad": false,
+        "maximize": false,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null
+      }
+    ],
+    "predictor_optimizer": [
+      {
+        "lr": 0.0005,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.01,
+        "amsgrad": false,
+        "foreach": null,
+        "maximize": false,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null
+      }
+    ],
+    "decoder_optimizer": [
+      {
+        "lr": 0.0003,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0,
+        "amsgrad": false,
+        "maximize": false,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null
+      }
+    ],
+    "action_encoder_optimizer": [
+      {
+        "lr": 0.0005,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.01,
+        "amsgrad": false,
+        "foreach": null,
+        "maximize": false,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null
+      }
+    ]
+  },
+  "total_parameters": 34295767
+}

@@ -1,0 +1,4 @@
+1 jobs queued, 0 already finished
+START eval_outputs/exp0_shape/s100/square/R_tgt_fix GPU=6
+DONE eval_outputs/exp0_shape/s100/square/R_tgt_fix seconds=4391
+finished: 1 ok, 0 failed

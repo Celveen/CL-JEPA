@@ -1,0 +1,19 @@
+== learner / theta0 1-step error on held-out return visits
+shape       contact share   learner/theta0 on contact   on free motion
+square                24%         0.58 (n= 91)         0.59 (n=281)
+T                     46%         1.05 (n= 72)         1.07 (n= 86)
+I                     33%         0.58 (n=124)         0.52 (n=249)
++                     84%         0.92 (n=114)         1.02 (n= 22)
+L                     41%         1.27 (n= 86)         1.39 (n=124)
+small_tee             31%         0.82 (n= 72)         1.07 (n=162)
+Z                     58%         0.99 (n= 92)         1.17 (n= 67)
+
+== error-based reads over the first 3 transitions
+all learners           familiarity gate on reads: off  seen    right 15/80 = 19%  {'other': 42, 'θ0': 15, 'own': 23}
+all learners           familiarity gate on reads: off  unseen  right 47/60 = 78%  {'own': 47, 'θ0': 2, 'other': 11}
+all learners           familiarity gate on reads: on   seen    right 75/80 = 94%  {'θ0': 75, 'other': 4, 'own': 1}
+all learners           familiarity gate on reads: on   unseen  right 30/60 = 50%  {'own': 30, 'θ0': 25, 'other': 5}
+unseen-shape learners  familiarity gate on reads: off  seen    right 71/80 = 89%  {'θ0': 71, 'other': 9}
+unseen-shape learners  familiarity gate on reads: off  unseen  right 48/60 = 80%  {'own': 48, 'θ0': 9, 'other': 3}
+unseen-shape learners  familiarity gate on reads: on   seen    right 78/80 = 98%  {'θ0': 78, 'other': 2}
+unseen-shape learners  familiarity gate on reads: on   unseen  right 30/60 = 50%  {'own': 30, 'θ0': 27, 'other': 3}

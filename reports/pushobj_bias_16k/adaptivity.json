@@ -1,0 +1,59 @@
+{
+  "config": {
+    "lr": 0.0005,
+    "encoder_lr": 1e-05,
+    "buffer": 5,
+    "horizon": 5,
+    "frameskip": 5
+  },
+  "results": {
+    "bias16k e3": {
+      "ours val T (held-out pusht_noise replays)": {
+        "n": 1047,
+        "buffer_fit_ratio_gmean": 0.8139958376840785,
+        "next1_ratio_gmean": 0.921101710783861,
+        "next1_improved_frac": 0.5854823304680038,
+        "rollout_ratio_gmean": 0.9520577641875841,
+        "rollout_improved_frac": 0.501432664756447,
+        "rollout_ratio_gmean_t>=6": 0.9672848803100398,
+        "frozen_rollout_median": 0.012593235820531845,
+        "frozen_next1_median": 0.005159805063158274
+      },
+      "author test T segments (replayed)": {
+        "n": 120,
+        "buffer_fit_ratio_gmean": 0.756604042536483,
+        "next1_ratio_gmean": 0.9750782426683202,
+        "next1_improved_frac": 0.4666666666666667,
+        "rollout_ratio_gmean": 1.018513567878202,
+        "rollout_improved_frac": 0.4583333333333333,
+        "rollout_ratio_gmean_t>=6": null,
+        "frozen_rollout_median": 0.006904025562107563,
+        "frozen_next1_median": 0.005170886404812336
+      }
+    },
+    "bias16k e2": {
+      "ours val T (held-out pusht_noise replays)": {
+        "n": 1047,
+        "buffer_fit_ratio_gmean": 0.7982157327209133,
+        "next1_ratio_gmean": 0.9013648450329398,
+        "next1_improved_frac": 0.5988538681948424,
+        "rollout_ratio_gmean": 0.9510269259444901,
+        "rollout_improved_frac": 0.556829035339064,
+        "rollout_ratio_gmean_t>=6": 0.9440821521620972,
+        "frozen_rollout_median": 0.017142683267593384,
+        "frozen_next1_median": 0.00751669704914093
+      },
+      "author test T segments (replayed)": {
+        "n": 120,
+        "buffer_fit_ratio_gmean": 0.7395357450169051,
+        "next1_ratio_gmean": 0.9025320448182717,
+        "next1_improved_frac": 0.6083333333333333,
+        "rollout_ratio_gmean": 0.9134313843352689,
+        "rollout_improved_frac": 0.6,
+        "rollout_ratio_gmean_t>=6": null,
+        "frozen_rollout_median": 0.011200916953384876,
+        "frozen_next1_median": 0.008227023761719465
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+stream S7t5: 14 independent chunk runs on GPUs ['4', '4']
+START eval_outputs/cont_S7t3_cem/w0/chunk_21_I GPU=4
+START eval_outputs/cont_S7t3_cem/w0/chunk_22_L GPU=4
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_22_L seconds=1144
+START eval_outputs/cont_S7t3_cem/w0/chunk_23_square GPU=4
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_21_I seconds=1729
+START eval_outputs/cont_S7t3_cem/w0/chunk_24_Z GPU=4

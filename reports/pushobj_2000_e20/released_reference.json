@@ -1,0 +1,65 @@
+[
+  {
+    "shape": "T",
+    "final_eval/success_rate": 0.54,
+    "final_eval/mean_state_dist": 49.614803314208984,
+    "final_eval/mean_visual_dist": 3.6160867081207484,
+    "final_eval/mean_proprio_dist": 19.32475471496582,
+    "final_eval/mean_div_visual_emb": 78.37066650390625,
+    "final_eval/mean_div_proprio_emb": 4.241349220275879
+  },
+  {
+    "shape": "L",
+    "final_eval/success_rate": 0.58,
+    "final_eval/mean_state_dist": 57.16230773925781,
+    "final_eval/mean_visual_dist": 3.022501594387755,
+    "final_eval/mean_proprio_dist": 20.987546920776367,
+    "final_eval/mean_div_visual_emb": 65.59675598144531,
+    "final_eval/mean_div_proprio_emb": 3.566941022872925
+  },
+  {
+    "shape": "Z",
+    "final_eval/success_rate": 0.46,
+    "final_eval/mean_state_dist": 75.6084976196289,
+    "final_eval/mean_visual_dist": 3.2360230654761906,
+    "final_eval/mean_proprio_dist": 28.712125778198242,
+    "final_eval/mean_div_visual_emb": 80.94589233398438,
+    "final_eval/mean_div_proprio_emb": 3.9651296138763428
+  },
+  {
+    "shape": "+",
+    "final_eval/success_rate": 0.52,
+    "final_eval/mean_state_dist": 68.74247741699219,
+    "final_eval/mean_visual_dist": 3.8591192336309526,
+    "final_eval/mean_proprio_dist": 27.444467544555664,
+    "final_eval/mean_div_visual_emb": 67.11356353759766,
+    "final_eval/mean_div_proprio_emb": 3.7032012939453125
+  },
+  {
+    "shape": "I",
+    "final_eval/success_rate": 0.24,
+    "final_eval/mean_state_dist": 151.5911407470703,
+    "final_eval/mean_visual_dist": 4.141235517644557,
+    "final_eval/mean_proprio_dist": 60.647342681884766,
+    "final_eval/mean_div_visual_emb": 118.70301818847656,
+    "final_eval/mean_div_proprio_emb": 5.410313606262207
+  },
+  {
+    "shape": "small_tee",
+    "final_eval/success_rate": 0.46,
+    "final_eval/mean_state_dist": 145.0395965576172,
+    "final_eval/mean_visual_dist": 3.2306559576955785,
+    "final_eval/mean_proprio_dist": 56.606075286865234,
+    "final_eval/mean_div_visual_emb": 90.78157043457031,
+    "final_eval/mean_div_proprio_emb": 3.96844220161438
+  },
+  {
+    "shape": "square",
+    "final_eval/success_rate": 0.26,
+    "final_eval/mean_state_dist": 168.16732788085938,
+    "final_eval/mean_visual_dist": 3.5952936330782315,
+    "final_eval/mean_proprio_dist": 57.409690856933594,
+    "final_eval/mean_div_visual_emb": 119.79413604736328,
+    "final_eval/mean_div_proprio_emb": 5.3093767166137695
+  }
+]

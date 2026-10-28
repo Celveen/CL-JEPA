@@ -1,0 +1,3 @@
+stream S7b3: 21 chunks x 2 arms (['cls5k_free', 'cls5b_free']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S7b/cls5k_free/chunk_00_I GPU=0
+START eval_outputs/cont_S7b/cls5b_free/chunk_00_I GPU=1

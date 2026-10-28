@@ -1,0 +1,96 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/wandb/util.py:118: SentryHubDeprecationWarning: `sentry_sdk.Hub` is deprecated and will be removed in a future major release. Please consult our 1.x to 2.x migration guide for details on how to migrate `Hub` usage to the new API: https://docs.sentry.io/platforms/python/migration/1.x-to-2.x
+  sentry_hub = sentry_sdk.Hub(sentry_client)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py:30: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import parse_version
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/Cython/Distutils/old_build_ext.py:15: DeprecationWarning: dep_util is Deprecated. Use functions from setuptools instead.
+  from distutils.dep_util import newer, newer_group
+/home/appuser/workspace/project/multimodal-test/adajepa/env/__init__.py:7: UserWarning: point_maze envs unavailable (mujoco_py missing): 
+Missing path to your environment variable. 
+Current values LD_LIBRARY_PATH=/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/cv2/../../lib64:
+Please add following line to .bashrc:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/appuser/.mujoco/mujoco210/bin
+  warnings.warn(f"point_maze envs unavailable (mujoco_py missing): {_e}")
+/home/appuser/workspace/project/multimodal-test/adajepa/custom_resolvers.py:4: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path=None)
+Using cache found in /home/appuser/.cache/torch/hub/facebookresearch_dinov2_main
+Resuming from epoch 3: /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_3.pth
+w0 (AdaJEPA) {0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0} {'I': 1.0, 'square': 1.0, 'T': 1.0, 'L': 1.0, 'Z': 1.0, '+': 1.0, 'small_tee': 1.0}
+shared fixed w=0.003 {0: 0.999, 1: 0.998, 2: 0.995, 3: 0.992, 4: 0.994} {'I': 0.989, 'square': 0.997, 'T': 1.011, 'L': 1.011, 'Z': 1.015, '+': 0.989, 'small_tee': 0.988}
+shared fixed w=0.01 {0: 0.995, 1: 0.993, 2: 0.988, 3: 0.976, 4: 0.982} {'I': 0.962, 'square': 0.991, 'T': 1.048, 'L': 1.05, 'Z': 1.061, '+': 0.959, 'small_tee': 0.965}
+shared fixed w=0.03 {0: 0.987, 1: 0.986, 2: 0.996, 3: 0.938, 4: 0.983} {'I': 0.964, 'square': 0.964, 'T': 1.232, 'L': 1.182, 'Z': 1.37, '+': 1.062, 'small_tee': 1.005}
+oracle fixed w=0.03 {0: 0.987, 1: 0.965, 2: 1.002, 3: 0.927, 4: 0.932} {'I': 0.975, 'square': 0.938, 'T': 0.999, 'L': 1.0, 'Z': 1.0, '+': 1.0, 'small_tee': 1.0}
+mean a=1 write=shared read=same {0: 0.975, 1: 0.994, 2: 0.989, 3: 0.968, 4: 0.982} {'I': 0.962, 'square': 0.991, 'T': 1.048, 'L': 1.05, 'Z': 1.061, '+': 0.959, 'small_tee': 0.965}
+mean a=1 write=oracle read=same {0: 0.975, 1: 0.904, 2: 1.004, 3: 0.92, 4: 0.923} {'I': 0.965, 'square': 0.951, 'T': 1.002, 'L': 1.0, 'Z': 1.0, '+': 1.0, 'small_tee': 1.0}
+mean a=2 write=oracle read=same {0: 0.981, 1: 0.857, 2: 1.068, 3: 0.876, 4: 0.873} {'I': 1.011, 'square': 0.87, 'T': 1.019, 'L': 1.0, 'Z': 1.0, '+': 1.0, 'small_tee': 1.0}
+mean a=1 write=oracle read=pred {0: 0.983, 1: 0.913, 2: 0.956, 3: 0.919, 4: 0.931} {'I': 0.935, 'square': 0.948, 'T': 0.964, 'L': 0.999, 'Z': 0.941, '+': 0.82, 'small_tee': 0.945}
+mean a=1 write=delta read=pred {0: 0.937, 1: 0.962, 2: 0.955, 3: 0.975, 4: 0.981} {'I': 0.932, 'square': 0.974, 'T': 0.999, 'L': 1.01, 'Z': 0.975, '+': 0.895, 'small_tee': 0.93}
+mean a=2 write=delta read=pred {0: 0.927, 1: 0.929, 2: 0.946, 3: 0.944, 4: 0.976} {'I': 0.92, 'square': 0.937, 'T': 1.001, 'L': 0.968, 'Z': 1.007, '+': 0.936, 'small_tee': 0.897}
+# 离线写入规则筛选（S2，不重跑规划）
+
+数值 = 用 episode 开始时的权重（θ0 + 读取的慢记忆）预测该 episode 自己的转移，相对 θ0 的误差比（几何平均）；<1 表示慢记忆已经有帮助，>1 表示干扰。
+roll = 从单帧出发 5 步开环预测（与规划器的用法相同）；new3 = 前 3 次重规划的最新帧误差（在线实验记录的同一指标）。
+
+## 模拟器校验：共享固定 w 的 new3，模拟 vs 在线实测
+
+| 规则 | 0:I | 1:square | 2:T | 3:I | 4:square |
+|---|---:|---:|---:|---:|---:|
+| 模拟 w=0.003 | 1.00 | 0.99 | 1.00 | 0.99 | 0.98 |
+| 实测 w=0.003 | 1.00 | 0.99 | 1.00 | 0.99 | 0.98 |
+| 模拟 w=0.01 | 0.99 | 0.98 | 1.00 | 0.97 | 0.95 |
+| 实测 w=0.01 | 0.99 | 0.98 | 1.00 | 0.97 | 0.95 |
+| 模拟 w=0.03 | 0.98 | 0.96 | 1.04 | 0.91 | 0.90 |
+| 实测 w=0.03 | 0.98 | 0.96 | 1.04 | 0.91 | 0.89 |
+
+## 各规则：开环 5 步预测误差比（每段几何平均）
+
+| 规则 | 0:I | 1:square | 2:T | 3:I | 4:square |
+|---|---:|---:|---:|---:|---:|
+| w0 (AdaJEPA) | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+| shared fixed w=0.003 | 0.999 | 0.998 | 0.995 | 0.992 | 0.994 |
+| shared fixed w=0.01 | 0.995 | 0.993 | 0.988 | 0.976 | 0.982 |
+| shared fixed w=0.03 | 0.987 | 0.986 | 0.996 | 0.938 | 0.983 |
+| oracle fixed w=0.03 | 0.987 | 0.965 | 1.002 | 0.927 | 0.932 |
+| mean a=1 write=shared read=same | 0.975 | 0.994 | 0.989 | 0.968 | 0.982 |
+| mean a=1 write=oracle read=same | 0.975 | 0.904 | 1.004 | 0.920 | 0.923 |
+| mean a=2 write=oracle read=same | 0.981 | 0.857 | 1.068 | 0.876 | 0.873 |
+| mean a=1 write=oracle read=pred | 0.983 | 0.913 | 0.956 | 0.919 | 0.931 |
+| mean a=1 write=delta read=pred | 0.937 | 0.962 | 0.955 | 0.975 | 0.981 |
+| mean a=2 write=delta read=pred | 0.927 | 0.929 | 0.946 | 0.944 | 0.976 |
+
+## 流结束后，各形状保留数据上的开环误差比（按规则的读取方式选择记忆）
+
+| 规则 | I | square | T | L | Z | + | small_tee |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| w0 (AdaJEPA) | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+| shared fixed w=0.003 | 0.989 | 0.997 | 1.011 | 1.011 | 1.015 | 0.989 | 0.988 |
+| shared fixed w=0.01 | 0.962 | 0.991 | 1.048 | 1.050 | 1.061 | 0.959 | 0.965 |
+| shared fixed w=0.03 | 0.964 | 0.964 | 1.232 | 1.182 | 1.370 | 1.062 | 1.005 |
+| oracle fixed w=0.03 | 0.975 | 0.938 | 0.999 | 1.000 | 1.000 | 1.000 | 1.000 |
+| mean a=1 write=shared read=same | 0.962 | 0.991 | 1.048 | 1.050 | 1.061 | 0.959 | 0.965 |
+| mean a=1 write=oracle read=same | 0.965 | 0.951 | 1.002 | 1.000 | 1.000 | 1.000 | 1.000 |
+| mean a=2 write=oracle read=same | 1.011 | 0.870 | 1.019 | 1.000 | 1.000 | 1.000 | 1.000 |
+| mean a=1 write=oracle read=pred | 0.935 | 0.948 | 0.964 | 0.999 | 0.941 | 0.820 | 0.945 |
+| mean a=1 write=delta read=pred | 0.932 | 0.974 | 0.999 | 1.010 | 0.975 | 0.895 | 0.930 |
+| mean a=2 write=delta read=pred | 0.920 | 0.937 | 1.001 | 0.968 | 1.007 | 0.936 | 0.897 |
+
+## 无标签路由的质量
+
+- mean a=1 write=shared read=same：写入聚类纯度 0.40，聚类构成 {'shared': {'I': 40, 'T': 20, 'square': 40}}
+- mean a=1 write=oracle read=same：写入聚类纯度 1.00，聚类构成 {'I': {'I': 40}, 'T': {'T': 20}, 'square': {'square': 40}}
+- mean a=2 write=oracle read=same：写入聚类纯度 1.00，聚类构成 {'I': {'I': 40}, 'T': {'T': 20}, 'square': {'square': 40}}
+- mean a=1 write=oracle read=pred：写入聚类纯度 1.00，聚类构成 {'I': {'I': 40}, 'T': {'T': 20}, 'square': {'square': 40}}
+- mean a=1 write=delta read=pred：写入聚类纯度 0.67，聚类构成 {'m0': {'I': 16, 'square': 39}, 'm1': {'I': 24, 'T': 16, 'square': 1}, 'm2': {'T': 4}}
+- mean a=2 write=delta read=pred：写入聚类纯度 0.67，聚类构成 {'m0': {'I': 16, 'square': 39}, 'm1': {'I': 24, 'T': 16, 'square': 1}, 'm2': {'T': 4}}
+

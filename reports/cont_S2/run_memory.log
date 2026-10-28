@@ -1,0 +1,32 @@
+stream S2: 5 chunks x 3 arms (['mem_a1', 'mem_a2', 'mem_oracle_a1']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S2/mem_a1/chunk_00_I GPU=0
+START eval_outputs/cont_S2/mem_a2/chunk_00_I GPU=1
+START eval_outputs/cont_S2/mem_oracle_a1/chunk_00_I GPU=2
+DONE eval_outputs/cont_S2/mem_a1/chunk_00_I seconds=2242
+START eval_outputs/cont_S2/mem_a1/chunk_01_square GPU=0
+DONE eval_outputs/cont_S2/mem_oracle_a1/chunk_00_I seconds=2291
+START eval_outputs/cont_S2/mem_oracle_a1/chunk_01_square GPU=2
+DONE eval_outputs/cont_S2/mem_a2/chunk_00_I seconds=2343
+START eval_outputs/cont_S2/mem_a2/chunk_01_square GPU=1
+DONE eval_outputs/cont_S2/mem_oracle_a1/chunk_01_square seconds=1696
+START eval_outputs/cont_S2/mem_oracle_a1/chunk_02_T GPU=2
+DONE eval_outputs/cont_S2/mem_a1/chunk_01_square seconds=1842
+START eval_outputs/cont_S2/mem_a1/chunk_02_T GPU=0
+DONE eval_outputs/cont_S2/mem_a2/chunk_01_square seconds=1774
+START eval_outputs/cont_S2/mem_a2/chunk_02_T GPU=1
+DONE eval_outputs/cont_S2/mem_a1/chunk_02_T seconds=945
+START eval_outputs/cont_S2/mem_a1/chunk_03_I GPU=0
+DONE eval_outputs/cont_S2/mem_a2/chunk_02_T seconds=1063
+START eval_outputs/cont_S2/mem_a2/chunk_03_I GPU=1
+DONE eval_outputs/cont_S2/mem_oracle_a1/chunk_02_T seconds=1461
+START eval_outputs/cont_S2/mem_oracle_a1/chunk_03_I GPU=2
+DONE eval_outputs/cont_S2/mem_a1/chunk_03_I seconds=1393
+START eval_outputs/cont_S2/mem_a1/chunk_04_square GPU=0
+DONE eval_outputs/cont_S2/mem_a2/chunk_03_I seconds=1919
+START eval_outputs/cont_S2/mem_a2/chunk_04_square GPU=1
+DONE eval_outputs/cont_S2/mem_oracle_a1/chunk_03_I seconds=2056
+START eval_outputs/cont_S2/mem_oracle_a1/chunk_04_square GPU=2
+DONE eval_outputs/cont_S2/mem_a1/chunk_04_square seconds=1842
+DONE eval_outputs/cont_S2/mem_a2/chunk_04_square seconds=1799
+DONE eval_outputs/cont_S2/mem_oracle_a1/chunk_04_square seconds=1484
+finished: 15 ok, 0 failed

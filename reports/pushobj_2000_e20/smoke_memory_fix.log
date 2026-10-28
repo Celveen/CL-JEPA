@@ -1,0 +1,279 @@
+/home/appuser/workspace/project/multimodal-test/adajepa/custom_resolvers.py:4: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path=None)
+[2026-09-23 17:43:02,336][__main__][INFO] - Model saved dir: /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_smoke_b64_20260923
+[2026-09-23 17:43:02,435][__main__][INFO] - Accelerate mixed precision: bf16
+[2026-09-23 17:43:02,435][__main__][INFO] - rank: 0  model_name: pushobj_smoke_b64_20260923_f5_h3_p1
+[2026-09-23 17:43:02,435][__main__][INFO] - device: cuda   model_name: pushobj_smoke_b64_20260923_f5_h3_p1
+[2026-09-23 17:43:02,436][__main__][INFO] - Decoder training will start at epoch 3
+[2026-09-23 17:43:02,448][__main__][INFO] - Resuming Wandb run tmzme16i
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id tmzme16i.
+wandb: Tracking run with wandb version 0.13.1
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+[2026-09-23 17:43:06,995][__main__][INFO] - Loading dataset from /home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_train ...
+Loaded 2 rollouts
+Loaded 2 rollouts
+[2026-09-23 17:43:07,049][__main__][INFO] - dataloader batch size: 64
+[2026-09-23 17:43:07,049][__main__][INFO] - Train encoder, predictor, decoder:            True            True            True
+[2026-09-23 17:43:07,402][__main__][INFO] - Resuming from epoch 4: /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_smoke_b64_20260923/checkpoints/model_latest.pth
+[2026-09-23 17:43:07,403][__main__][INFO] - Encoder base_model frozen; non-backbone encoder modules are trainable.
+Proprio encoder type: <class 'models.proprio.ProprioceptiveEmbedding'>
+Action encoder type: <class 'models.proprio.ProprioceptiveEmbedding'>
+[2026-09-23 17:43:07,561][models.visual_world_model][INFO] - num_action_repeat: 1
+[2026-09-23 17:43:07,562][models.visual_world_model][INFO] - num_proprio_repeat: 1
+[2026-09-23 17:43:07,562][models.visual_world_model][INFO] - proprio encoder: ProprioceptiveEmbedding(
+  (patch_embed): Conv1d(4, 10, kernel_size=(1,), stride=(1,))
+  (norm): LayerNorm((10,), eps=1e-05, elementwise_affine=True)
+)
+[2026-09-23 17:43:07,562][models.visual_world_model][INFO] - action encoder: ProprioceptiveEmbedding(
+  (patch_embed): Conv1d(10, 10, kernel_size=(1,), stride=(1,))
+  (norm): LayerNorm((10,), eps=1e-05, elementwise_affine=True)
+)
+[2026-09-23 17:43:07,562][models.visual_world_model][INFO] - proprio_dim: 10, after repeat: 10
+[2026-09-23 17:43:07,562][models.visual_world_model][INFO] - action_dim: 10, after repeat: 10
+[2026-09-23 17:43:07,563][models.visual_world_model][INFO] - emb_dim: 404
+[2026-09-23 17:43:07,563][models.visual_world_model][INFO] - Straightening enabled: mode=cos, scale=0.01
+[2026-09-23 17:43:07,563][models.visual_world_model][INFO] - Stop-grad enabled: True
+[2026-09-23 17:43:07,563][models.visual_world_model][INFO] - VCReg enabled: False, apply_to=enc, std_coeff=0.0, cov_coeff=0.0
+[2026-09-23 17:43:07,563][models.visual_world_model][INFO] - Model emb_dim: 404
+[2026-09-23 17:43:07,564][__main__][INFO] - [model] trainable params: 34295767 / 34295767
+[2026-09-23 17:43:07,564][__main__][INFO] - [model] trainable: encoder.rb1.skip.1.weight shape=(32, 3, 3, 3)
+[2026-09-23 17:43:07,564][__main__][INFO] - [model] trainable: encoder.rb1.skip.1.bias shape=(32,)
+[2026-09-23 17:43:07,564][__main__][INFO] - [model] trainable: encoder.rb1.conv1.weight shape=(3, 3, 3, 3)
+[2026-09-23 17:43:07,564][__main__][INFO] - [model] trainable: encoder.rb1.conv2.0.weight shape=(32, 3, 3, 3)
+[2026-09-23 17:43:07,565][__main__][INFO] - [model] trainable: encoder.rb1.conv2.0.bias shape=(32,)
+[2026-09-23 17:43:07,565][__main__][INFO] - [model] trainable: encoder.rb1.norm1.weight shape=(3,)
+[2026-09-23 17:43:07,565][__main__][INFO] - [model] trainable: encoder.rb1.norm1.bias shape=(3,)
+[2026-09-23 17:43:07,565][__main__][INFO] - [model] trainable: encoder.rb1.norm2.weight shape=(32,)
+[2026-09-23 17:43:07,565][__main__][INFO] - [model] trainable: encoder.rb1.norm2.bias shape=(32,)
+[2026-09-23 17:43:07,565][__main__][INFO] - [model] trainable: encoder.rb2.skip.1.weight shape=(64, 32, 3, 3)
+[2026-09-23 17:43:07,565][__main__][INFO] - [model] trainable: encoder.rb2.skip.1.bias shape=(64,)
+[2026-09-23 17:43:07,565][__main__][INFO] - [model] trainable: encoder.rb2.conv1.weight shape=(32, 32, 3, 3)
+[2026-09-23 17:43:07,565][__main__][INFO] - [model] trainable: encoder.rb2.conv2.0.weight shape=(64, 32, 3, 3)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb2.conv2.0.bias shape=(64,)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb2.norm1.weight shape=(32,)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb2.norm1.bias shape=(32,)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb2.norm2.weight shape=(64,)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb2.norm2.bias shape=(64,)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb3.skip.1.weight shape=(128, 64, 3, 3)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb3.skip.1.bias shape=(128,)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb3.conv1.weight shape=(64, 64, 3, 3)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb3.conv2.0.weight shape=(128, 64, 3, 3)
+[2026-09-23 17:43:07,566][__main__][INFO] - [model] trainable: encoder.rb3.conv2.0.bias shape=(128,)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb3.norm1.weight shape=(64,)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb3.norm1.bias shape=(64,)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb3.norm2.weight shape=(128,)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb3.norm2.bias shape=(128,)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb4.skip.1.weight shape=(256, 128, 3, 3)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb4.skip.1.bias shape=(256,)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb4.conv1.weight shape=(128, 128, 3, 3)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb4.conv2.0.weight shape=(256, 128, 3, 3)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb4.conv2.0.bias shape=(256,)
+[2026-09-23 17:43:07,567][__main__][INFO] - [model] trainable: encoder.rb4.norm1.weight shape=(128,)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb4.norm1.bias shape=(128,)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb4.norm2.weight shape=(256,)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb4.norm2.bias shape=(256,)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb5.skip.1.weight shape=(512, 256, 3, 3)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb5.skip.1.bias shape=(512,)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb5.conv1.weight shape=(256, 256, 3, 3)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb5.conv2.0.weight shape=(512, 256, 3, 3)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb5.conv2.0.bias shape=(512,)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb5.norm1.weight shape=(256,)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb5.norm1.bias shape=(256,)
+[2026-09-23 17:43:07,568][__main__][INFO] - [model] trainable: encoder.rb5.norm2.weight shape=(512,)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: encoder.rb5.norm2.bias shape=(512,)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: encoder.gem.p shape=(1,)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: encoder.projection.0.weight shape=(384, 512)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: encoder.projection.0.bias shape=(384,)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: encoder.projection.2.weight shape=(384, 384)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: encoder.projection.2.bias shape=(384,)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: encoder.projection.3.weight shape=(384,)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: encoder.projection.3.bias shape=(384,)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: proprio_encoder.patch_embed.weight shape=(10, 4, 1)
+[2026-09-23 17:43:07,569][__main__][INFO] - [model] trainable: proprio_encoder.patch_embed.bias shape=(10,)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: proprio_encoder.norm.weight shape=(10,)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: proprio_encoder.norm.bias shape=(10,)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: action_encoder.patch_embed.weight shape=(10, 10, 1)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: action_encoder.patch_embed.bias shape=(10,)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: action_encoder.norm.weight shape=(10,)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: action_encoder.norm.bias shape=(10,)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.0.weight shape=(384, 384, 3, 3)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.0.bias shape=(384,)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.1.conv.1.weight shape=(128, 384, 3, 3)
+[2026-09-23 17:43:07,570][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.1.conv.1.bias shape=(128,)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.1.conv.3.weight shape=(384, 128, 1, 1)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.1.conv.3.bias shape=(384,)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.2.conv.1.weight shape=(128, 384, 3, 3)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.2.conv.1.bias shape=(128,)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.2.conv.3.weight shape=(384, 128, 1, 1)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.2.conv.3.bias shape=(384,)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.3.conv.1.weight shape=(128, 384, 3, 3)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.3.conv.1.bias shape=(128,)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.3.conv.3.weight shape=(384, 128, 1, 1)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.3.conv.3.bias shape=(384,)
+[2026-09-23 17:43:07,571][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.4.conv.1.weight shape=(128, 384, 3, 3)
+[2026-09-23 17:43:07,572][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.4.conv.1.bias shape=(128,)
+[2026-09-23 17:43:07,572][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.4.conv.3.weight shape=(384, 128, 1, 1)
+[2026-09-23 17:43:07,575][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.4.conv.3.bias shape=(384,)
+[2026-09-23 17:43:07,575][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.6.weight shape=(384, 192, 4, 4)
+[2026-09-23 17:43:07,575][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.6.bias shape=(192,)
+[2026-09-23 17:43:07,575][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.8.weight shape=(192, 384, 4, 4)
+[2026-09-23 17:43:07,575][__main__][INFO] - [model] trainable: decoder.upsample_b.blocks.8.bias shape=(384,)
+[2026-09-23 17:43:07,576][__main__][INFO] - [model] trainable: decoder.dec.blocks.0.weight shape=(384, 384, 3, 3)
+[2026-09-23 17:43:07,576][__main__][INFO] - [model] trainable: decoder.dec.blocks.0.bias shape=(384,)
+[2026-09-23 17:43:07,576][__main__][INFO] - [model] trainable: decoder.dec.blocks.1.conv.1.weight shape=(128, 384, 3, 3)
+[2026-09-23 17:43:07,576][__main__][INFO] - [model] trainable: decoder.dec.blocks.1.conv.1.bias shape=(128,)
+[2026-09-23 17:43:07,576][__main__][INFO] - [model] trainable: decoder.dec.blocks.1.conv.3.weight shape=(384, 128, 1, 1)
+[2026-09-23 17:43:07,576][__main__][INFO] - [model] trainable: decoder.dec.blocks.1.conv.3.bias shape=(384,)
+[2026-09-23 17:43:07,576][__main__][INFO] - [model] trainable: decoder.dec.blocks.2.conv.1.weight shape=(128, 384, 3, 3)
+[2026-09-23 17:43:07,576][__main__][INFO] - [model] trainable: decoder.dec.blocks.2.conv.1.bias shape=(128,)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.2.conv.3.weight shape=(384, 128, 1, 1)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.2.conv.3.bias shape=(384,)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.3.conv.1.weight shape=(128, 384, 3, 3)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.3.conv.1.bias shape=(128,)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.3.conv.3.weight shape=(384, 128, 1, 1)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.3.conv.3.bias shape=(384,)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.4.conv.1.weight shape=(128, 384, 3, 3)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.4.conv.1.bias shape=(128,)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.4.conv.3.weight shape=(384, 128, 1, 1)
+[2026-09-23 17:43:07,577][__main__][INFO] - [model] trainable: decoder.dec.blocks.4.conv.3.bias shape=(384,)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: decoder.dec.blocks.6.weight shape=(384, 192, 4, 4)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: decoder.dec.blocks.6.bias shape=(192,)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: decoder.dec.blocks.8.weight shape=(192, 3, 4, 4)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: decoder.dec.blocks.8.bias shape=(3,)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: predictor.pos_embedding shape=(1, 3, 404)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: predictor.transformer.norm.weight shape=(404,)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: predictor.transformer.norm.bias shape=(404,)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.norm.weight shape=(404,)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.norm.bias shape=(404,)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.to_qkv.weight shape=(3072, 404)
+[2026-09-23 17:43:07,578][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.to_out.0.weight shape=(404, 1024)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.0.to_out.0.bias shape=(404,)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.0.weight shape=(404,)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.0.bias shape=(404,)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.1.weight shape=(2048, 404)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.1.bias shape=(2048,)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.4.weight shape=(404, 2048)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.0.1.net.4.bias shape=(404,)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.norm.weight shape=(404,)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.norm.bias shape=(404,)
+[2026-09-23 17:43:07,579][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.to_qkv.weight shape=(3072, 404)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.to_out.0.weight shape=(404, 1024)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.0.to_out.0.bias shape=(404,)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.0.weight shape=(404,)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.0.bias shape=(404,)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.1.weight shape=(2048, 404)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.1.bias shape=(2048,)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.4.weight shape=(404, 2048)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.1.1.net.4.bias shape=(404,)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.norm.weight shape=(404,)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.norm.bias shape=(404,)
+[2026-09-23 17:43:07,580][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.to_qkv.weight shape=(3072, 404)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.to_out.0.weight shape=(404, 1024)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.0.to_out.0.bias shape=(404,)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.0.weight shape=(404,)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.0.bias shape=(404,)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.1.weight shape=(2048, 404)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.1.bias shape=(2048,)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.4.weight shape=(404, 2048)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.2.1.net.4.bias shape=(404,)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.norm.weight shape=(404,)
+[2026-09-23 17:43:07,581][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.norm.bias shape=(404,)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.to_qkv.weight shape=(3072, 404)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.to_out.0.weight shape=(404, 1024)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.0.to_out.0.bias shape=(404,)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.0.weight shape=(404,)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.0.bias shape=(404,)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.1.weight shape=(2048, 404)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.1.bias shape=(2048,)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.4.weight shape=(404, 2048)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.3.1.net.4.bias shape=(404,)
+[2026-09-23 17:43:07,582][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.norm.weight shape=(404,)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.norm.bias shape=(404,)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.to_qkv.weight shape=(3072, 404)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.to_out.0.weight shape=(404, 1024)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.0.to_out.0.bias shape=(404,)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.0.weight shape=(404,)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.0.bias shape=(404,)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.1.weight shape=(2048, 404)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.1.bias shape=(2048,)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.4.weight shape=(404, 2048)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.4.1.net.4.bias shape=(404,)
+[2026-09-23 17:43:07,583][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.norm.weight shape=(404,)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.norm.bias shape=(404,)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.to_qkv.weight shape=(3072, 404)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.to_out.0.weight shape=(404, 1024)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.0.to_out.0.bias shape=(404,)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.0.weight shape=(404,)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.0.bias shape=(404,)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.1.weight shape=(2048, 404)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.1.bias shape=(2048,)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.4.weight shape=(404, 2048)
+[2026-09-23 17:43:07,584][__main__][INFO] - [model] trainable: predictor.transformer.layers.5.1.net.4.bias shape=(404,)
+[2026-09-23 17:43:07,594][__main__][INFO] - Loaded encoder optimizer state from checkpoint.
+[2026-09-23 17:43:07,613][__main__][INFO] - Loaded predictor optimizer state from checkpoint.
+[2026-09-23 17:43:07,613][__main__][INFO] - Loaded action/proprio optimizer state from checkpoint.
+[2026-09-23 17:43:07,635][__main__][INFO] - Loaded decoder optimizer state from checkpoint.
+[2026-09-23 17:43:07,635][__main__][INFO] - Epoch 5 decoder_active=True (train_decoder=True, decoder_start_epoch=3)
+Epoch 5 Train:   0%|          | 0/3 [00:00<?, ?it/s]Epoch 5 Train:  33%|███▎      | 1/3 [00:04<00:08,  4.17s/it]Epoch 5 Train:  33%|███▎      | 1/3 [00:04<00:09,  4.52s/it]
+Error executing job with overrides: ['env.dataset.data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_train', 'env.dataset.n_rollout=2', 'env.num_workers=2', 'training.batch_size=64', 'training.epochs=5']
+Traceback (most recent call last):
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/train.py", line 991, in main
+    trainer.run()
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/train.py", line 516, in run
+    self.train()
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/train.py", line 594, in train
+    z_out, visual_out, visual_reconstructed, loss, loss_components = self.model(
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/models/visual_world_model.py", line 381, in forward
+    obs_reconstructed, diff_reconstructed = self.decode(
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/models/visual_world_model.py", line 204, in decode
+    obs, diff = self.decode_obs(z_obs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/models/visual_world_model.py", line 213, in decode_obs
+    visual, diff = self.decoder(z_obs["visual"])  # (b*num_frames, 3, 224, 224)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/accelerate/utils/operations.py", line 687, in forward
+    return model_forward(*args, **kwargs)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/accelerate/utils/operations.py", line 675, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/amp/autocast_mode.py", line 16, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/models/vqvae.py", line 251, in forward
+    dec = self.decode(quant_b)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/models/vqvae.py", line 262, in decode
+    dec = self.dec(upsample_b) # quant: (128, 64, 64)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/appuser/workspace/project/multimodal-test/adajepa/models/vqvae.py", line 163, in forward
+    return self.blocks(input)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/torch/nn/modules/conv.py", line 952, in forward
+    return F.conv_transpose2d(
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.15 GiB. GPU 
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+wandb: Waiting for W&B process to finish... (failed 1).
+wandb: - 0.000 MB of 0.000 MB uploaded (0.000 MB deduped)wandb: \ 0.000 MB of 0.000 MB uploaded (0.000 MB deduped)wandb: | 0.000 MB of 0.000 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_smoke_b64_20260923/wandb/offline-run-20260923_174302-tmzme16i
+wandb: Find logs at: ./wandb/offline-run-20260923_174302-tmzme16i/logs

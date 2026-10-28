@@ -1,0 +1,287 @@
+{
+  "stage": "complete",
+  "jobs": {
+    "T/frozen": {
+      "status": "complete",
+      "gpu": "4",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_T/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/T/frozen",
+        "planner._target_=planning.mpc.MPCPlanner",
+        "~planner.adapt"
+      ],
+      "wall_seconds": 114.58477647788823
+    },
+    "L/frozen": {
+      "status": "complete",
+      "gpu": "5",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_L/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/L/frozen",
+        "planner._target_=planning.mpc.MPCPlanner",
+        "~planner.adapt"
+      ],
+      "wall_seconds": 116.25971625838429
+    },
+    "Z/frozen": {
+      "status": "complete",
+      "gpu": "6",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_Z/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/Z/frozen",
+        "planner._target_=planning.mpc.MPCPlanner",
+        "~planner.adapt"
+      ],
+      "wall_seconds": 119.52212470304221
+    },
+    "+/frozen": {
+      "status": "complete",
+      "gpu": "7",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_+/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/+/frozen",
+        "planner._target_=planning.mpc.MPCPlanner",
+        "~planner.adapt"
+      ],
+      "wall_seconds": 121.43656414095312
+    },
+    "I/frozen": {
+      "status": "complete",
+      "gpu": "4",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_I/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/I/frozen",
+        "planner._target_=planning.mpc.MPCPlanner",
+        "~planner.adapt"
+      ],
+      "wall_seconds": 110.14895305316895
+    },
+    "small_tee/frozen": {
+      "status": "complete",
+      "gpu": "5",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_small_tee/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/small_tee/frozen",
+        "planner._target_=planning.mpc.MPCPlanner",
+        "~planner.adapt"
+      ],
+      "wall_seconds": 109.38986130058765
+    },
+    "square/frozen": {
+      "status": "complete",
+      "gpu": "6",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_square/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/square/frozen",
+        "planner._target_=planning.mpc.MPCPlanner",
+        "~planner.adapt"
+      ],
+      "wall_seconds": 111.57937300112098
+    },
+    "T/adajepa": {
+      "status": "complete",
+      "gpu": "7",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_T/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/T/adajepa"
+      ],
+      "wall_seconds": 1677.8118795631453
+    },
+    "L/adajepa": {
+      "status": "complete",
+      "gpu": "4",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_L/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/L/adajepa"
+      ],
+      "wall_seconds": 1687.1680874973536
+    },
+    "Z/adajepa": {
+      "status": "complete",
+      "gpu": "5",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_Z/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/Z/adajepa"
+      ],
+      "wall_seconds": 1642.7908485159278
+    },
+    "+/adajepa": {
+      "status": "complete",
+      "gpu": "6",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_+/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/+/adajepa"
+      ],
+      "wall_seconds": 1584.1530312877148
+    },
+    "I/adajepa": {
+      "status": "complete",
+      "gpu": "7",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_I/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/I/adajepa"
+      ],
+      "wall_seconds": 2881.69140525721
+    },
+    "small_tee/adajepa": {
+      "status": "complete",
+      "gpu": "6",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_small_tee/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/small_tee/adajepa"
+      ],
+      "wall_seconds": 2251.335074855946
+    },
+    "square/adajepa": {
+      "status": "complete",
+      "gpu": "5",
+      "command": [
+        "/home/appuser/anaconda3/envs/ts/bin/python",
+        "/home/appuser/workspace/project/multimodal-test/adajepa/plan.py",
+        "--config-name",
+        "adajepa_plan_gd_pushobj",
+        "ckpt_base_path=/home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0",
+        "model_epoch=3",
+        "eval_data_path=/home/appuser/workspace/project/multimodal-test/adajepa/data/pushobj_eval/val_square/plan_targets.pkl",
+        "n_evals=50",
+        "seed=100",
+        "+wandb_logging=false",
+        "decode_for_viz=false",
+        "hydra.run.dir=/home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_bias_16k_e3/square/adajepa"
+      ],
+      "wall_seconds": 2632.914893154986
+    }
+  },
+  "pid": 3280569,
+  "updated_utc": "2026-09-30T03:07:12.144226+00:00"
+}

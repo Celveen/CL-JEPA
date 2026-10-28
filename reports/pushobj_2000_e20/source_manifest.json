@@ -1,0 +1,17 @@
+{
+  "git_head": "51d8665b7978824bd218decab9e05ddb6eb1f47b",
+  "files": {
+    "train.py": "9e1716a005859b3e7560cf5d990c0d08fdbba5c1a336a962a228f154af326489",
+    "models/vit.py": "e8b3e04f7315045cae8d91f94d8df5b01f437a89bd6274959ac1ac645bf01f75",
+    "models/visual_world_model.py": "1771f784fa4870281c729895364a29a57fb4f053a48ecaf114ac5c191378fda4",
+    "metrics/image_metrics.py": "af819660336108ad5cf96e998c8c9e304b35f65bca8c94e192092966c85b81a7",
+    "plan.py": "1f006038e1e88b515b294def985effded293f03d62d9f2651f9f9d10f5eef380",
+    "conf/train_pushobj.yaml": "9daa1d401894b95bae20cf55bd0dfa046ef0d0a15edd2f873bdb9bd80626f4a7",
+    "conf/train.yaml": "8ca42a2f15a0743d546c7961b8b23914dabbd73b2e02c61bf86479a007c0abd8",
+    "conf/adajepa_plan_gd_pushobj.yaml": "6940f45dace18eaf82ccb46b191a3d8c13d83f66f0f90accd50cfe01cc20774d",
+    "scripts/gen_pushobj_dataset.py": "1368c43c94293e2ac6cd7f61336003c745fd0a76637fcb8df346fd1c7b25aa3d",
+    "scripts/check_training_resume.py": "10ee28e887495de55eb1095d1d8ee53ffc35ad073e06375ffff0014010c8614f",
+    "datasets/pusht_dset.py": "7e630c07f34f83ed06d6ccd558d189679ab7869a4cd817ad0199d151ffe939e7"
+  },
+  "note": "Final source after diagnostic graph memory fixes; epochs 1-2 used the same optimized loss."
+}

@@ -1,0 +1,16 @@
+stream S7b3: 21 chunks x 1 arms (['cls4_free']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S7b/cls4_free/chunk_14_I GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_14_I seconds=1725
+START eval_outputs/cont_S7b/cls4_free/chunk_15_L GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_15_L seconds=726
+START eval_outputs/cont_S7b/cls4_free/chunk_16_square GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_16_square seconds=1655
+START eval_outputs/cont_S7b/cls4_free/chunk_17_Z GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_17_Z seconds=806
+START eval_outputs/cont_S7b/cls4_free/chunk_18_small_tee GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_18_small_tee seconds=1207
+START eval_outputs/cont_S7b/cls4_free/chunk_19_plus GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_19_plus seconds=854
+START eval_outputs/cont_S7b/cls4_free/chunk_20_T GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_20_T seconds=781
+finished: 7 ok, 0 failed

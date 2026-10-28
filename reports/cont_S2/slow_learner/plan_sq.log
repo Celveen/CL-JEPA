@@ -1,0 +1,6 @@
+2 jobs queued, 0 already finished
+START eval_outputs/slow_learner/square_learner/s100/square/F_batch GPU=5
+START eval_outputs/slow_learner/square_learner/s100/square/A GPU=4
+DONE eval_outputs/slow_learner/square_learner/s100/square/F_batch seconds=183
+DONE eval_outputs/slow_learner/square_learner/s100/square/A seconds=3317
+finished: 2 ok, 0 failed

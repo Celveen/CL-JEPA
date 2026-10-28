@@ -1,0 +1,26 @@
+{
+  "train": {
+    "agent_mean": [
+      245.24331665039062,
+      253.70591735839844
+    ],
+    "agent_std": [
+      215.2805938720703,
+      215.2833709716797
+    ],
+    "outside_canvas_fraction": 0.36601666666666666,
+    "near_border_30_fraction": 0.43845
+  },
+  "released_selected_seen_shape_segments": {
+    "agent_mean": [
+      237.69561767578125,
+      264.00115966796875
+    ],
+    "agent_std": [
+      95.41062927246094,
+      91.63509368896484
+    ],
+    "outside_canvas_fraction": 0.0,
+    "near_border_30_fraction": 0.0
+  }
+}

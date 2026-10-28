@@ -1,0 +1,22 @@
+stream S2: 5 chunks x 2 arms (['cls_free', 'cls_oracle']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S2/cls_free/chunk_00_I GPU=0
+START eval_outputs/cont_S2/cls_oracle/chunk_00_I GPU=1
+DONE eval_outputs/cont_S2/cls_free/chunk_00_I seconds=1676
+START eval_outputs/cont_S2/cls_free/chunk_01_square GPU=0
+DONE eval_outputs/cont_S2/cls_oracle/chunk_00_I seconds=1795
+START eval_outputs/cont_S2/cls_oracle/chunk_01_square GPU=1
+DONE eval_outputs/cont_S2/cls_free/chunk_01_square seconds=1265
+START eval_outputs/cont_S2/cls_free/chunk_02_T GPU=0
+DONE eval_outputs/cont_S2/cls_oracle/chunk_01_square seconds=1585
+START eval_outputs/cont_S2/cls_oracle/chunk_02_T GPU=1
+DONE eval_outputs/cont_S2/cls_free/chunk_02_T seconds=911
+START eval_outputs/cont_S2/cls_free/chunk_03_I GPU=0
+DONE eval_outputs/cont_S2/cls_oracle/chunk_02_T seconds=1006
+START eval_outputs/cont_S2/cls_oracle/chunk_03_I GPU=1
+DONE eval_outputs/cont_S2/cls_free/chunk_03_I seconds=1685
+START eval_outputs/cont_S2/cls_free/chunk_04_square GPU=0
+DONE eval_outputs/cont_S2/cls_oracle/chunk_03_I seconds=1342
+START eval_outputs/cont_S2/cls_oracle/chunk_04_square GPU=1
+DONE eval_outputs/cont_S2/cls_oracle/chunk_04_square seconds=1413
+DONE eval_outputs/cont_S2/cls_free/chunk_04_square seconds=1627
+finished: 10 ok, 0 failed

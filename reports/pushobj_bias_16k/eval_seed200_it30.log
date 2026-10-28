@@ -1,0 +1,30 @@
+14 jobs queued, 0 already finished
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/I/adajepa GPU=4
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/L/adajepa GPU=4
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/T/adajepa GPU=7
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/Z/adajepa GPU=5
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/small_tee/adajepa GPU=5
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/square/adajepa GPU=6
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/T/frozen GPU=7
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/+/adajepa GPU=6
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/T/frozen seconds=188
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/L/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/L/frozen seconds=179
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/Z/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/Z/frozen seconds=182
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/+/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/+/frozen seconds=177
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/I/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/I/frozen seconds=182
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/small_tee/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/small_tee/frozen seconds=181
+START eval_outputs/pushobj_bias_16k_e3_seed200_it30/square/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/square/frozen seconds=173
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/T/adajepa seconds=1744
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/L/adajepa seconds=1757
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/Z/adajepa seconds=1797
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/+/adajepa seconds=2162
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/small_tee/adajepa seconds=2774
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/square/adajepa seconds=3793
+DONE eval_outputs/pushobj_bias_16k_e3_seed200_it30/I/adajepa seconds=4180
+finished: 14 ok, 0 failed

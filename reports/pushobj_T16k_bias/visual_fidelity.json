@@ -1,0 +1,30 @@
+{
+  "train": {
+    "episodes": 24,
+    "frames": 120,
+    "repeat_draw_episodes": 8,
+    "psnr_median_db": 42.03425713188001,
+    "psnr_min_db": 40.18255045809232,
+    "mean_abs_diff": 0.3638741075857426,
+    "agent_mean_abs_diff": 6.702184493193675,
+    "frame_size": [
+      224,
+      224,
+      3
+    ]
+  },
+  "val": {
+    "episodes": 16,
+    "frames": 80,
+    "repeat_draw_episodes": 0,
+    "psnr_median_db": 42.10901648966542,
+    "psnr_min_db": 40.820850446064185,
+    "mean_abs_diff": 0.3624667835884353,
+    "agent_mean_abs_diff": 6.476149531046607,
+    "frame_size": [
+      224,
+      224,
+      3
+    ]
+  }
+}

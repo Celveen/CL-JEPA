@@ -1,0 +1,38 @@
+stream S7b: 14 chunks x 3 arms (['cls4_free', 'cls3_free', 'cls3_oracle']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S7b/cls3_free/chunk_00_I GPU=2
+START eval_outputs/cont_S7b/cls4_free/chunk_00_I GPU=1
+START eval_outputs/cont_S7b/cls3_oracle/chunk_00_I GPU=4
+FAIL eval_outputs/cont_S7b/cls3_free/chunk_00_I seconds=1645 exit=-15
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_00_I seconds=1877
+START eval_outputs/cont_S7b/cls3_oracle/chunk_01_L GPU=4
+DONE eval_outputs/cont_S7b/cls4_free/chunk_00_I seconds=2159
+START eval_outputs/cont_S7b/cls4_free/chunk_01_L GPU=1
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_01_L seconds=1270
+START eval_outputs/cont_S7b/cls3_oracle/chunk_02_square GPU=4
+DONE eval_outputs/cont_S7b/cls4_free/chunk_01_L seconds=1151
+START eval_outputs/cont_S7b/cls4_free/chunk_02_square GPU=1
+FAIL eval_outputs/cont_S7b/cls4_free/chunk_02_square seconds=539 exit=1
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_02_square seconds=1806
+START eval_outputs/cont_S7b/cls3_oracle/chunk_03_Z GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_03_Z seconds=563
+START eval_outputs/cont_S7b/cls3_oracle/chunk_04_small_tee GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_04_small_tee seconds=1071
+START eval_outputs/cont_S7b/cls3_oracle/chunk_05_plus GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_05_plus seconds=921
+START eval_outputs/cont_S7b/cls3_oracle/chunk_06_T GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_06_T seconds=933
+START eval_outputs/cont_S7b/cls3_oracle/chunk_07_square GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_07_square seconds=1420
+START eval_outputs/cont_S7b/cls3_oracle/chunk_08_T GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_08_T seconds=863
+START eval_outputs/cont_S7b/cls3_oracle/chunk_09_I GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_09_I seconds=1801
+START eval_outputs/cont_S7b/cls3_oracle/chunk_10_plus GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_10_plus seconds=862
+START eval_outputs/cont_S7b/cls3_oracle/chunk_11_L GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_11_L seconds=926
+START eval_outputs/cont_S7b/cls3_oracle/chunk_12_small_tee GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_12_small_tee seconds=872
+START eval_outputs/cont_S7b/cls3_oracle/chunk_13_Z GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_13_Z seconds=700
+finished: 16 ok, 2 failed

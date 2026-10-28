@@ -1,0 +1,16 @@
+stream S7b3: 21 chunks x 1 arms (['cls3_oracle']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S7b/cls3_oracle/chunk_14_I GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_14_I seconds=1575
+START eval_outputs/cont_S7b/cls3_oracle/chunk_15_L GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_15_L seconds=992
+START eval_outputs/cont_S7b/cls3_oracle/chunk_16_square GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_16_square seconds=1257
+START eval_outputs/cont_S7b/cls3_oracle/chunk_17_Z GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_17_Z seconds=1004
+START eval_outputs/cont_S7b/cls3_oracle/chunk_18_small_tee GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_18_small_tee seconds=1155
+START eval_outputs/cont_S7b/cls3_oracle/chunk_19_plus GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_19_plus seconds=865
+START eval_outputs/cont_S7b/cls3_oracle/chunk_20_T GPU=4
+DONE eval_outputs/cont_S7b/cls3_oracle/chunk_20_T seconds=1094
+finished: 7 ok, 0 failed

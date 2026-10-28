@@ -1,0 +1,16 @@
+# visual shifts (paper Figure 2, bottom row): our T-16k model, epoch 3, seed 100, GD, up to 30 MPC replans
+# blur sigma=2, snp1 = 1% salt-and-pepper, dark x0.9 (README + paper thumbnail), colour shifts rendered by the env
+eval_outputs/pushobj_T16k_bias_e3/redBlock/adajepa	adajepa	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ++env_kwargs_override.color=Red
+eval_outputs/pushobj_T16k_bias_e3/redAnchor/adajepa	adajepa	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ++env_kwargs_override.goal_color=Red
+eval_outputs/pushobj_T16k_bias_e3/redAgent/adajepa	adajepa	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ++env_kwargs_override.agent_color=Red
+eval_outputs/pushobj_T16k_bias_e3/blur/adajepa	adajepa	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ood_corruption=blur
+eval_outputs/pushobj_T16k_bias_e3/snp/adajepa	adajepa	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ood_corruption=snp1
+eval_outputs/pushobj_T16k_bias_e3/dark/adajepa	adajepa	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ood_corruption=dark ood_level=0.9
+eval_outputs/pushobj_T16k_bias_e3/default/adajepa	adajepa	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30
+eval_outputs/pushobj_T16k_bias_e3/redBlock/frozen	frozen	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ++env_kwargs_override.color=Red
+eval_outputs/pushobj_T16k_bias_e3/redAnchor/frozen	frozen	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ++env_kwargs_override.goal_color=Red
+eval_outputs/pushobj_T16k_bias_e3/redAgent/frozen	frozen	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ++env_kwargs_override.agent_color=Red
+eval_outputs/pushobj_T16k_bias_e3/blur/frozen	frozen	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ood_corruption=blur
+eval_outputs/pushobj_T16k_bias_e3/snp/frozen	frozen	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ood_corruption=snp1
+eval_outputs/pushobj_T16k_bias_e3/dark/frozen	frozen	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30 ood_corruption=dark ood_level=0.9
+eval_outputs/pushobj_T16k_bias_e3/default/frozen	frozen	checkpoints/pushobj_T16k_bias_e3_seed0	3	T	100	planner.max_iter=30

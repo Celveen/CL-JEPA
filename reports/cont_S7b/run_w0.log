@@ -1,0 +1,2 @@
+stream S7b: 14 chunks x 1 arms (['w0']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S7b/w0/chunk_00_I GPU=0

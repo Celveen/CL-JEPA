@@ -1,0 +1,30 @@
+14 jobs queued, 0 already finished
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/I/adajepa GPU=4
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/square/adajepa GPU=6
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/T/adajepa GPU=7
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/small_tee/adajepa GPU=5
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/L/adajepa GPU=4
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/+/adajepa GPU=6
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/Z/adajepa GPU=5
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/T/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/T/frozen seconds=198
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/L/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/L/frozen seconds=182
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/Z/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/Z/frozen seconds=179
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/+/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/+/frozen seconds=194
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/I/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/I/frozen seconds=182
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/small_tee/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/small_tee/frozen seconds=177
+START eval_outputs/pushobj_bias_16k_e3_seed300_it30/square/frozen GPU=7
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/square/frozen seconds=184
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/L/adajepa seconds=1728
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/Z/adajepa seconds=1923
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/T/adajepa seconds=2017
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/+/adajepa seconds=2242
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/small_tee/adajepa seconds=2814
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/I/adajepa seconds=3863
+DONE eval_outputs/pushobj_bias_16k_e3_seed300_it30/square/adajepa seconds=4242
+finished: 14 ok, 0 failed

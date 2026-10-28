@@ -1,0 +1,27 @@
+{
+  "data": "data/pushobj_T16k_bias",
+  "windows": 1024,
+  "models": {
+    "released visual (1e-3)": {
+      "one_minus_cos": 0.9219160974025726,
+      "latent_var_per_dim": 1.0338367223739624,
+      "pred_mse_visual": 0.08231097413226962,
+      "pred_mse_visual_over_var": 0.07961699594425498,
+      "straighten": "cos1e-3"
+    },
+    "ours 1e-2": {
+      "one_minus_cos": 0.5000234711915255,
+      "latent_var_per_dim": 1.0427147150039673,
+      "pred_mse_visual": 0.012346268020337448,
+      "pred_mse_visual_over_var": 0.011840504255558024,
+      "straighten": "cos1e-2"
+    },
+    "ours 1e-3": {
+      "one_minus_cos": 0.8625288158655167,
+      "latent_var_per_dim": 0.9211533665657043,
+      "pred_mse_visual": 0.03281424951273948,
+      "pred_mse_visual_over_var": 0.03562300340396019,
+      "straighten": "cos1e-3"
+    }
+  }
+}

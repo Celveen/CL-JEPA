@@ -1,0 +1,26 @@
+stream S7b: 14 chunks x 1 arms (['cls4_free']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S7b/cls4_free/chunk_02_square GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_02_square seconds=2087
+START eval_outputs/cont_S7b/cls4_free/chunk_03_Z GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_03_Z seconds=490
+START eval_outputs/cont_S7b/cls4_free/chunk_04_small_tee GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_04_small_tee seconds=955
+START eval_outputs/cont_S7b/cls4_free/chunk_05_plus GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_05_plus seconds=973
+START eval_outputs/cont_S7b/cls4_free/chunk_06_T GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_06_T seconds=1047
+START eval_outputs/cont_S7b/cls4_free/chunk_07_square GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_07_square seconds=1618
+START eval_outputs/cont_S7b/cls4_free/chunk_08_T GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_08_T seconds=943
+START eval_outputs/cont_S7b/cls4_free/chunk_09_I GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_09_I seconds=1971
+START eval_outputs/cont_S7b/cls4_free/chunk_10_plus GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_10_plus seconds=827
+START eval_outputs/cont_S7b/cls4_free/chunk_11_L GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_11_L seconds=932
+START eval_outputs/cont_S7b/cls4_free/chunk_12_small_tee GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_12_small_tee seconds=1153
+START eval_outputs/cont_S7b/cls4_free/chunk_13_Z GPU=1
+DONE eval_outputs/cont_S7b/cls4_free/chunk_13_Z seconds=786
+finished: 12 ok, 0 failed

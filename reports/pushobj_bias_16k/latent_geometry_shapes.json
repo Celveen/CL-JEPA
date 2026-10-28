@@ -1,0 +1,20 @@
+{
+  "data": "data/pushobj_bias_16k",
+  "windows": 1024,
+  "models": {
+    "released shape (1e-2)": {
+      "one_minus_cos": 0.5323596149682999,
+      "latent_var_per_dim": 1.035613775253296,
+      "pred_mse_visual": 0.014290778082795441,
+      "pred_mse_visual_over_var": 0.013799331782063372,
+      "straighten": "cos1e-2"
+    },
+    "ours shape seed0 (1e-2)": {
+      "one_minus_cos": 0.532479414716363,
+      "latent_var_per_dim": 1.026299238204956,
+      "pred_mse_visual": 0.01200284986407496,
+      "pred_mse_visual_over_var": 0.011695273091178056,
+      "straighten": "cos1e-2"
+    }
+  }
+}

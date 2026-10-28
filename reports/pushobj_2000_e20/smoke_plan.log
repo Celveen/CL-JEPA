@@ -1,0 +1,84 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/wandb/util.py:118: SentryHubDeprecationWarning: `sentry_sdk.Hub` is deprecated and will be removed in a future major release. Please consult our 1.x to 2.x migration guide for details on how to migrate `Hub` usage to the new API: https://docs.sentry.io/platforms/python/migration/1.x-to-2.x
+  sentry_hub = sentry_sdk.Hub(sentry_client)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py:30: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import parse_version
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/Cython/Distutils/old_build_ext.py:15: DeprecationWarning: dep_util is Deprecated. Use functions from setuptools instead.
+  from distutils.dep_util import newer, newer_group
+/home/appuser/workspace/project/multimodal-test/adajepa/env/__init__.py:7: UserWarning: point_maze envs unavailable (mujoco_py missing): 
+Missing path to your environment variable. 
+Current values LD_LIBRARY_PATH=/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/cv2/../../lib64:
+Please add following line to .bashrc:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/appuser/.mujoco/mujoco210/bin
+  warnings.warn(f"point_maze envs unavailable (mujoco_py missing): {_e}")
+/home/appuser/workspace/project/multimodal-test/adajepa/custom_resolvers.py:4: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path=None)
+[2026-09-23 17:25:00,492][__main__][INFO] - Planning result saved dir: /home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_2000_e20_smoke
+Using cache found in /home/appuser/.cache/torch/hub/facebookresearch_dinov2_main
+Resuming from epoch 3: /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_smoke_b64_20260923/checkpoints/model_latest.pth
+[2026-09-23 17:25:04,187][models.visual_world_model][INFO] - num_action_repeat: 1
+[2026-09-23 17:25:04,187][models.visual_world_model][INFO] - num_proprio_repeat: 1
+[2026-09-23 17:25:04,187][models.visual_world_model][INFO] - proprio encoder: ProprioceptiveEmbedding(
+  (patch_embed): Conv1d(4, 10, kernel_size=(1,), stride=(1,))
+  (norm): LayerNorm((10,), eps=1e-05, elementwise_affine=True)
+)
+[2026-09-23 17:25:04,187][models.visual_world_model][INFO] - action encoder: ProprioceptiveEmbedding(
+  (patch_embed): Conv1d(10, 10, kernel_size=(1,), stride=(1,))
+  (norm): LayerNorm((10,), eps=1e-05, elementwise_affine=True)
+)
+[2026-09-23 17:25:04,187][models.visual_world_model][INFO] - proprio_dim: 10, after repeat: 10
+[2026-09-23 17:25:04,188][models.visual_world_model][INFO] - action_dim: 10, after repeat: 10
+[2026-09-23 17:25:04,188][models.visual_world_model][INFO] - emb_dim: 404
+[2026-09-23 17:25:04,188][models.visual_world_model][INFO] - Straightening disabled
+[2026-09-23 17:25:04,188][models.visual_world_model][INFO] - Stop-grad enabled: True
+[2026-09-23 17:25:04,188][models.visual_world_model][INFO] - VCReg enabled: False, apply_to=enc, std_coeff=0.0, cov_coeff=0.0
+[2026-09-23 17:25:04,188][models.visual_world_model][INFO] - Model emb_dim: 404
+[timing] setup_model_s=3.696
+eval_seed:  [1, 101]
+[2026-09-23 17:25:04,757][planning.adajepa][INFO] - AdaJEPA predictor adaptation restricted to last transformer layer (13 tensors).
+[2026-09-23 17:25:04,757][planning.adajepa][INFO] - AdaJEPA encoder adaptation restricted to last submodule 'projection' (6 tensors).
+Dumped plan targets to /home/appuser/workspace/project/multimodal-test/adajepa/eval_outputs/pushobj_2000_e20_smoke/plan_targets.pkl
+[timing] setup_workspace_s=0.573
+  0%|          | 0/5 [00:00<?, ?it/s] 20%|██        | 1/5 [00:00<00:00,  4.84it/s] 80%|████████  | 4/5 [00:00<00:00, 14.14it/s]100%|██████████| 5/5 [00:00<00:00, 13.82it/s]
+MPC iter 0 Eval ------- 
+Success rate:  0.0
+{'success': array([False]), 'state_dist': array([210.91803], dtype=float32)}
+self.is_success:  [False]
+[2026-09-23 17:25:05,452][planning.adajepa][INFO] - AdaJEPA optimizer: predictor_lr=5.00e-04  encoder_lr=1.00e-05
+[2026-09-23 17:25:05,516][planning.adajepa][INFO] - AdaJEPA step 1/1  pred_loss=0.068618
+  0%|          | 0/5 [00:00<?, ?it/s] 60%|██████    | 3/5 [00:00<00:00, 25.94it/s]100%|██████████| 5/5 [00:00<00:00, 26.29it/s]
+MPC iter 1 Eval ------- 
+Success rate:  0.0
+{'success': array([False]), 'state_dist': array([224.75749], dtype=float32)}
+self.is_success:  [False]
+[2026-09-23 17:25:05,763][planning.adajepa][INFO] - AdaJEPA optimizer: predictor_lr=5.00e-04  encoder_lr=1.00e-05
+[2026-09-23 17:25:05,809][planning.adajepa][INFO] - AdaJEPA step 1/1  pred_loss=0.055071
+  0%|          | 0/5 [00:00<?, ?it/s] 60%|██████    | 3/5 [00:00<00:00, 20.73it/s]100%|██████████| 5/5 [00:00<00:00, 22.73it/s]
+MPC iter 0 Eval ------- 
+Success rate:  0.0
+{'success': array([False]), 'state_dist': array([232.1459], dtype=float32)}
+self.is_success:  [False]
+[2026-09-23 17:25:06,065][planning.adajepa][INFO] - AdaJEPA optimizer: predictor_lr=5.00e-04  encoder_lr=1.00e-05
+[2026-09-23 17:25:06,077][planning.adajepa][INFO] - AdaJEPA step 1/1  pred_loss=0.073280
+  0%|          | 0/5 [00:00<?, ?it/s] 60%|██████    | 3/5 [00:00<00:00, 22.50it/s]100%|██████████| 5/5 [00:00<00:00, 23.88it/s]
+MPC iter 1 Eval ------- 
+Success rate:  0.0
+{'success': array([False]), 'state_dist': array([204.52605], dtype=float32)}
+self.is_success:  [False]
+[2026-09-23 17:25:06,338][planning.adajepa][INFO] - AdaJEPA optimizer: predictor_lr=5.00e-04  encoder_lr=1.00e-05
+[2026-09-23 17:25:06,350][planning.adajepa][INFO] - AdaJEPA step 1/1  pred_loss=0.053628
+Success rate:  0.0
+{'success': array([False, False]), 'state_dist': array([224.75749, 204.52605], dtype=float32)}
+[timing] perform_planning_s=1.645
+[timing] total_planning_main_s=5.914

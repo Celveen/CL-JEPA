@@ -1,0 +1,440 @@
+diff --git a/metrics/image_metrics.py b/metrics/image_metrics.py
+index d06922b..9698693 100644
+--- a/metrics/image_metrics.py
++++ b/metrics/image_metrics.py
+@@ -69,12 +69,13 @@ def psnr(img1, img2): # batched input only
+     mse = (((img1 - img2)) ** 2).reshape(img1.shape[0], -1).mean()
+     return 20 * torch.log10(1.0 / torch.sqrt(mse))
+ 
+-def eval_images(img1, img2, item_only=True):
++def eval_images(img1, img2, item_only=True, include_lpips=True):
+     metrics = {}
+     metrics['l1'] = l1_loss(img1, img2)
+     metrics['l2'] = l2_loss(img1, img2)
+     metrics['ssim'] = ssim(img1, img2)
+     metrics['mse'] = mse(img1, img2)
+     metrics['psnr'] = psnr(img1, img2)
+-    metrics['lpips'] = lpips(img1, img2, net_type='vgg')
+-    return metrics
+\ No newline at end of file
++    if include_lpips:
++        metrics['lpips'] = lpips(img1, img2, net_type='vgg')
++    return metrics
+diff --git a/models/visual_world_model.py b/models/visual_world_model.py
+index 0aba4ad..4a00dc0 100644
+--- a/models/visual_world_model.py
++++ b/models/visual_world_model.py
+@@ -271,7 +271,9 @@ class VWorldModel(nn.Module):
+             step1 = v1.norm(dim=-1)
+             step2 = v2.norm(dim=-1)
+             mask = (step1 > step_thresh) & (step2 > step_thresh)
+-            loss = loss[mask]
++            # Stationary windows have no defined turning angle. An empty mean
++            # produces NaN, even though these windows should contribute zero.
++            return (loss * mask).sum() / mask.sum().clamp_min(1)
+         return loss.mean()
+ 
+     def total_curvature(self, features, mode="cos"):
+@@ -314,9 +316,12 @@ class VWorldModel(nn.Module):
+         if self.predictor is not None:
+             z_pred = self.predict(z_src)
+             if decoder_enabled:
+-                obs_pred, diff_pred = self.decode(
+-                    z_pred.detach()
+-                )  # recon loss should only affect decoder
++                # This prediction decode is diagnostic only: decoder_loss_pred
++                # is logged, but never added to the optimized loss below.
++                # Keeping its unused graph retains a full decoder activation
++                # batch until the next forward, causing avoidable GPU OOMs.
++                with torch.no_grad():
++                    obs_pred, diff_pred = self.decode(z_pred.detach())
+                 visual_pred = obs_pred['visual']
+                 recon_loss_pred = self.decoder_criterion(visual_pred, visual_tgt)
+                 decoder_loss_pred = (
+@@ -432,4 +437,4 @@ class VWorldModel(nn.Module):
+         z_new = z_pred[:, -1 :, ...] # take only the next pred
+         z = torch.cat([z, z_new], dim=1)
+         z_obses, z_acts = self.separate_emb(z)
+-        return z_obses, z
+\ No newline at end of file
++        return z_obses, z
+diff --git a/models/vit.py b/models/vit.py
+index 55c58bd..29821f6 100644
+--- a/models/vit.py
++++ b/models/vit.py
+@@ -55,7 +55,7 @@ class Attention(nn.Module):
+             nn.Linear(inner_dim, dim),
+             nn.Dropout(dropout)
+         ) if project_out else nn.Identity()
+-        self.bias = generate_mask_matrix(NUM_PATCHES, NUM_FRAMES).to('cuda')
++        self.register_buffer("bias", generate_mask_matrix(NUM_PATCHES, NUM_FRAMES), persistent=False)
+ 
+     def forward(self, x):
+         (
+@@ -70,7 +70,9 @@ class Attention(nn.Module):
+ 
+         dots = torch.matmul(q, k.transpose(-1, -2)) * self.scale
+         # apply causal mask
+-        dots = dots.masked_fill(self.bias[:, :, :T, :T] == 0, float("-inf"))
++        # Older whole-module checkpoints stored bias as an ordinary attribute.
++        mask = self.bias[:, :, :T, :T].to(dots.device)
++        dots = dots.masked_fill(mask == 0, float("-inf"))
+ 
+         attn = self.attend(dots)
+         attn = self.dropout(attn)
+@@ -117,4 +119,4 @@ class ViTPredictor(nn.Module):
+         x = x + self.pos_embedding[:, :n]
+         x = self.dropout(x) 
+         x = self.transformer(x) 
+-        return x
+\ No newline at end of file
++        return x
+diff --git a/plan.py b/plan.py
+index d8ae30b..4b26b43 100644
+--- a/plan.py
++++ b/plan.py
+@@ -327,11 +327,30 @@ class PlanWorkspace:
+         observations = []
+         env_info = []
+ 
++        def _load_traj(i):
++            """(obs, act, state, env_info) for trajectory i.
++
++            Released states-only datasets (e.g. point_maze_medium_states) carry
++            states and actions but no rendered observations. Both callers of
++            this method discard the returned observations -- only states,
++            actions and env_info are consumed -- so fall back to a visual-free
++            load rather than failing on the missing frames.
++            """
++            try:
++                return self.dset[i]
++            except (ValueError, FileNotFoundError, KeyError):
++                frames = list(range(int(self.dset.get_seq_length(i))))
++                obs = {"proprio": self.dset.proprios[i, frames]}
++                return obs, self.dset.actions[i, frames], self.dset.states[i, frames], {}
++
++        def _obs_len(obs):
++            return obs["visual"].shape[0] if "visual" in obs else obs["proprio"].shape[0]
++
+         # Check if any trajectory is long enough
+         valid_traj = [
+-            self.dset[i][0]["visual"].shape[0]
++            _obs_len(_load_traj(i)[0])
+             for i in range(len(self.dset))
+-            if self.dset[i][0]["visual"].shape[0] >= traj_len
++            if _obs_len(_load_traj(i)[0]) >= traj_len
+         ]
+         if len(valid_traj) == 0:
+             raise ValueError("No trajectory in the dataset is long enough.")
+@@ -341,8 +360,8 @@ class PlanWorkspace:
+             max_offset = -1
+             while max_offset < 0:  # filter out traj that are not long enough
+                 traj_id = random.randint(0, len(self.dset) - 1)
+-                obs, act, state, e_info = self.dset[traj_id]
+-                max_offset = obs["visual"].shape[0] - traj_len
++                obs, act, state, e_info = _load_traj(traj_id)
++                max_offset = _obs_len(obs) - traj_len
+             state = state.numpy()
+             offset = random.randint(0, max_offset)
+             obs = {
+@@ -516,6 +535,12 @@ class PlanWorkspace:
+         logs, successes, _, _ = self.evaluator.eval_actions(
+             actions.detach(), action_len, save_video=True, filename="output_final"
+         )
++        # Preserve paired episode outcomes for reproducible comparisons/reports.
++        np.savez_compressed(
++            "final_eval_results.npz", successes=np.asarray(successes, dtype=bool),
++            actions=actions.detach().cpu().numpy(), action_len=np.asarray(action_len),
++            state_0=self.state_0, state_g=self.state_g,
++        )
+         logs = {f"final_eval/{k}": v for k, v in logs.items()}
+         self.wandb_run.log(logs)
+         logs_entry = {
+@@ -533,13 +558,21 @@ class PlanWorkspace:
+ 
+ def load_ckpt(snapshot_path, device):
+     from models.dino import DinoV2Encoder
+-    _ = DinoV2Encoder('dinov2_vits14', 'x_norm_patchtokens')
++    try:
++        # Warms the torch.hub cache so DINO-based checkpoints unpickle cleanly.
++        # Not needed for checkpoints with other encoders (e.g. SmallResNetGeM),
++        # and upstream dinov2@main needs Python >= 3.10, so it fails on 3.9.
++        _ = DinoV2Encoder('dinov2_vits14', 'x_norm_patchtokens')
++    except Exception as e:
++        warnings.warn(f"DinoV2 hub warm-up skipped ({type(e).__name__}: {e})")
+     with snapshot_path.open("rb") as f:
+         payload = torch.load(f, map_location=device)
+     loaded_keys = []
+     result = {}
+     for k, v in payload.items():
+-        if k in ALL_MODEL_KEYS:
++        # A run with has_decoder=false stores decoder=None; skip it so load_model
++        # takes its own "no decoder" path instead of crashing on None.to(device).
++        if k in ALL_MODEL_KEYS and v is not None:
+             loaded_keys.append(k)
+             result[k] = v.to(device)
+     result["epoch"] = payload["epoch"]
+diff --git a/train.py b/train.py
+index 7c03baa..55989ca 100644
+--- a/train.py
++++ b/train.py
+@@ -1,4 +1,6 @@
+ import os
++import json
++import random
+ import time
+ import hydra
+ import torch
+@@ -20,6 +22,7 @@ from hydra.types import RunMode
+ from hydra.core.hydra_config import HydraConfig
+ from datetime import timedelta
+ from concurrent.futures import ThreadPoolExecutor
++from functools import partial
+ from metrics.image_metrics import eval_images
+ from utils import slice_trajdict_with_t, cfg_to_dict, seed, sample_tensors
+ import custom_resolvers  # noqa: F401  # Registers OmegaConf resolvers at import time.
+@@ -72,6 +75,7 @@ class Trainer:
+         self.base_path = os.path.dirname(os.path.abspath(__file__))
+ 
+         self.num_reconstruct_samples = self.cfg.training.num_reconstruct_samples
++        self.eval_images = partial(eval_images, include_lpips=self.cfg.training.get("eval_lpips", True))
+         self.total_epochs = self.cfg.training.epochs
+         self.epoch = 0
+         self.decoder_start_epoch = int(self.cfg.training.get("decoder_start_epoch", 1))
+@@ -97,7 +101,7 @@ class Trainer:
+             wandb_run_id = None
+             if os.path.exists("hydra.yaml"):
+                 existing_cfg = OmegaConf.load("hydra.yaml")
+-                wandb_run_id = existing_cfg["wandb_run_id"]
++                wandb_run_id = existing_cfg.get("wandb_run_id")
+                 log.info(f"Resuming Wandb run {wandb_run_id}")
+ 
+             wandb_dict = OmegaConf.to_container(cfg, resolve=True)
+@@ -143,7 +147,8 @@ class Trainer:
+                 num_workers=self.cfg.env.num_workers,
+                 collate_fn=None,
+                 pin_memory=True,
+-                persistent_workers=True,
++                persistent_workers=self.cfg.env.num_workers > 0,
++                generator=torch.Generator().manual_seed(cfg.training.seed + (101 if x == "train" else 102)),
+             )
+             for x in ["train", "valid"]
+         }
+@@ -182,9 +187,19 @@ class Trainer:
+             ["decoder", "decoder_optimizer"] if self.train_decoder else []
+         )
+         self._keys_to_save += ["action_encoder", "proprio_encoder"]
++        if self.train_predictor and self.cfg.has_predictor:
++            self._keys_to_save += ["action_encoder_optimizer"]
+ 
+         self.init_models()
+         self.init_optimizers()
++        # Restore after initialization, which itself consumes random numbers.
++        if getattr(self, "_loaded_rng_state", None) is not None:
++            rng = self._loaded_rng_state
++            random.setstate(rng["python"])
++            np.random.set_state(rng["numpy"])
++            torch.set_rng_state(rng["torch"].cpu())
++            if torch.cuda.is_available() and rng.get("cuda") is not None:
++                torch.cuda.set_rng_state_all([s.cpu() for s in rng["cuda"]])
+ 
+         self.epoch_log = OrderedDict()
+ 
+@@ -238,8 +253,16 @@ class Trainer:
+                     ckpt[k] = self.accelerator.unwrap_model(v)
+                 else:
+                     ckpt[k] = v
+-            torch.save(ckpt, "checkpoints/model_latest.pth")
+-            torch.save(ckpt, f"checkpoints/model_{self.epoch}.pth")
++            if self.accelerator.num_processes == 1:
++                ckpt["rng_state"] = {
++                    "python": random.getstate(), "numpy": np.random.get_state(),
++                    "torch": torch.get_rng_state(),
++                    "cuda": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None,
++                }
++            for name in ("model_latest.pth", f"model_{self.epoch}.pth"):
++                path = Path("checkpoints") / name
++                torch.save(ckpt, str(path) + ".tmp")
++                os.replace(str(path) + ".tmp", path)
+             log.info("Saved model to {}".format(os.getcwd()))
+             ckpt_path = os.path.join(os.getcwd(), f"checkpoints/model_{self.epoch}.pth")
+         else:
+@@ -249,10 +272,12 @@ class Trainer:
+         return ckpt_path, model_name, model_epoch
+ 
+     def load_ckpt(self, filename="model_latest.pth"):
+-        ckpt = torch.load(filename)
++        ckpt = torch.load(filename, map_location="cpu", weights_only=False)
+         self._loaded_optim_state = {}
+         for k, v in ckpt.items():
+-            if k.endswith("_optimizer") and isinstance(v, dict):
++            if k == "rng_state":
++                self._loaded_rng_state = v
++            elif k.endswith("_optimizer") and isinstance(v, dict):
+                 self._loaded_optim_state[k] = v
+             else:
+                 self.__dict__[k] = v
+@@ -282,20 +307,22 @@ class Trainer:
+             )
+         self._configure_encoder_trainability()
+ 
+-        self.proprio_encoder = hydra.utils.instantiate(
+-            self.cfg.proprio_encoder,
+-            in_chans=self.datasets["train"].proprio_dim,
+-            emb_dim=self.cfg.proprio_emb_dim,
+-        )
++        if self.proprio_encoder is None:
++            self.proprio_encoder = hydra.utils.instantiate(
++                self.cfg.proprio_encoder,
++                in_chans=self.datasets["train"].proprio_dim,
++                emb_dim=self.cfg.proprio_emb_dim,
++            )
+         proprio_emb_dim = self.proprio_encoder.emb_dim
+         print(f"Proprio encoder type: {type(self.proprio_encoder)}")
+         self.proprio_encoder = self.accelerator.prepare(self.proprio_encoder)
+ 
+-        self.action_encoder = hydra.utils.instantiate(
+-            self.cfg.action_encoder,
+-            in_chans=self.datasets["train"].action_dim,
+-            emb_dim=self.cfg.action_emb_dim,
+-        )
++        if self.action_encoder is None:
++            self.action_encoder = hydra.utils.instantiate(
++                self.cfg.action_encoder,
++                in_chans=self.datasets["train"].action_dim,
++                emb_dim=self.cfg.action_emb_dim,
++            )
+         action_emb_dim = self.action_encoder.emb_dim
+         print(f"Action encoder type: {type(self.action_encoder)}")
+ 
+@@ -473,7 +500,8 @@ class Trainer:
+             self.monitor_thread.start()
+ 
+         init_epoch = self.epoch + 1  # epoch starts from 1
+-        for epoch in range(init_epoch, init_epoch + self.total_epochs):
++        for epoch in range(init_epoch, self.total_epochs + 1):
++            self._epoch_started_at = time.perf_counter()
+             self.epoch = epoch
+             if self.accelerator.is_main_process:
+                 decoder_active = self.decoder_training_active()
+@@ -537,7 +565,7 @@ class Trainer:
+         slices = {
+             "full": (None, None),
+             "pred": (-self.model.num_pred, None),
+-            "next1": (-self.model.num_pred, -self.model.num_pred + 1),
++            "next1": (-self.model.num_pred, (-self.model.num_pred + 1) or None),
+         }
+         for name, (start_idx, end_idx) in slices.items():
+             z_out_slice = slice_trajdict_with_t(
+@@ -567,6 +595,9 @@ class Trainer:
+                 obs, act
+             )
+ 
++            if not torch.isfinite(loss).all():
++                raise FloatingPointError(f"Non-finite training loss at epoch {self.epoch}, batch {i}")
++
+             self.encoder_optimizer.zero_grad()
+             if decoder_active:
+                 self.decoder_optimizer.zero_grad()
+@@ -594,7 +625,10 @@ class Trainer:
+                 # only eval images when plotting due to speed
+                 if self.cfg.has_predictor:
+                     z_obs_out, z_act_out = self.model.separate_emb(z_out)
+-                    z_gt = self.model.encode_obs(obs)
++                    # Diagnostic re-encoding must not retain a second encoder
++                    # graph across batches; it never contributes to backward.
++                    with torch.no_grad():
++                        z_gt = self.model.encode_obs(obs)
+                     z_tgt = slice_trajdict_with_t(z_gt, start_idx=self.model.num_pred)
+ 
+                     state_tgt = state[:, -self.model.num_hist :]  # (b, num_hist, dim)
+@@ -612,7 +646,7 @@ class Trainer:
+                     for t in range(
+                         self.cfg.num_hist, self.cfg.num_hist + self.cfg.num_pred
+                     ):
+-                        img_pred_scores = eval_images(
++                        img_pred_scores = self.eval_images(
+                             visual_out[:, t - self.cfg.num_pred], obs["visual"][:, t]
+                         )
+                         img_pred_scores = self.accelerator.gather_for_metrics(
+@@ -626,7 +660,7 @@ class Trainer:
+ 
+                 if visual_reconstructed is not None:
+                     for t in range(obs["visual"].shape[1]):
+-                        img_reconstruction_scores = eval_images(
++                        img_reconstruction_scores = self.eval_images(
+                             visual_reconstructed[:, t], obs["visual"][:, t]
+                         )
+                         img_reconstruction_scores = self.accelerator.gather_for_metrics(
+@@ -649,7 +683,7 @@ class Trainer:
+                 )
+ 
+             loss_components = {f"train_{k}": [v] for k, v in loss_components.items()}
+-            self.logs_update(loss_components)
++            self.logs_update(loss_components, weight=obs["visual"].shape[0])
+ 
+             if (
+                 self.cfg.training.save_every_x_iterations > 0
+@@ -717,7 +751,7 @@ class Trainer:
+                     for t in range(
+                         self.cfg.num_hist, self.cfg.num_hist + self.cfg.num_pred
+                     ):
+-                        img_pred_scores = eval_images(
++                        img_pred_scores = self.eval_images(
+                             visual_out[:, t - self.cfg.num_pred], obs["visual"][:, t]
+                         )
+                         img_pred_scores = self.accelerator.gather_for_metrics(
+@@ -731,7 +765,7 @@ class Trainer:
+ 
+                 if visual_reconstructed is not None:
+                     for t in range(obs["visual"].shape[1]):
+-                        img_reconstruction_scores = eval_images(
++                        img_reconstruction_scores = self.eval_images(
+                             visual_reconstructed[:, t], obs["visual"][:, t]
+                         )
+                         img_reconstruction_scores = self.accelerator.gather_for_metrics(
+@@ -753,7 +787,7 @@ class Trainer:
+                     phase="valid",
+                 )
+             loss_components = {f"val_{k}": [v] for k, v in loss_components.items()}
+-            self.logs_update(loss_components)
++            self.logs_update(loss_components, weight=obs["visual"].shape[0])
+ 
+     def openloop_rollout(
+         self, dset, num_rollout=10, rand_start_end=True, min_horizon=2, mode="train"
+@@ -845,15 +879,16 @@ class Trainer:
+         }
+         return logs
+ 
+-    def logs_update(self, logs):
++    def logs_update(self, logs, weight=1):
+         for key, value in logs.items():
+             if isinstance(value, torch.Tensor):
+-                value = value.detach().cpu().item()
++                value = [value.detach().cpu().item()]
++            value = [v.detach().cpu().item() if isinstance(v, torch.Tensor) else v for v in value]
+             length = len(value)
+             count, total = self.epoch_log.get(key, (0, 0.0))
+             self.epoch_log[key] = (
+-                count + length,
+-                total + sum(value),
++                count + length * weight,
++                total + sum(value) * weight,
+             )
+ 
+     def logs_flash(self, step):
+@@ -863,11 +898,14 @@ class Trainer:
+             to_log = sum / count
+             epoch_log[key] = to_log
+         epoch_log["epoch"] = step
++        epoch_log["epoch_seconds"] = time.perf_counter() - self._epoch_started_at
+         log.info(f"Epoch {self.epoch}  Training loss: {epoch_log['train_loss']:.4f}  \
+                 Validation loss: {epoch_log['val_loss']:.4f}")
+ 
+         if self.accelerator.is_main_process:
+             self.wandb_run.log(epoch_log)
++            with open("metrics.jsonl", "a") as f:
++                f.write(json.dumps(epoch_log, allow_nan=False) + "\n")
+         self.epoch_log = OrderedDict()
+ 
+     def logs_flash_iter(self, iteration):

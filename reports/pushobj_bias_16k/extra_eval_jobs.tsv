@@ -1,0 +1,35 @@
+# released checkpoint, AdaJEPA on the shapes not run yet (seed 100)
+eval_outputs/pushobj_released_reference_adajepa/I	adajepa	checkpoints/pushobj_shape_shift	-	I	100
+eval_outputs/pushobj_released_reference_adajepa/small_tee	adajepa	checkpoints/pushobj_shape_shift	-	small_tee	100
+eval_outputs/pushobj_released_reference_adajepa/L	adajepa	checkpoints/pushobj_shape_shift	-	L	100
+eval_outputs/pushobj_released_reference_adajepa/Z	adajepa	checkpoints/pushobj_shape_shift	-	Z	100
+eval_outputs/pushobj_released_reference_adajepa/+	adajepa	checkpoints/pushobj_shape_shift	-	+	100
+# frozen, extra test seeds (different 50 targets per shape)
+eval_outputs/pushobj_bias_16k_e3_seed200/T/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	T	200
+eval_outputs/pushobj_released_reference_seed200/T	frozen	checkpoints/pushobj_shape_shift	-	T	200
+eval_outputs/pushobj_bias_16k_e3_seed200/L/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	L	200
+eval_outputs/pushobj_released_reference_seed200/L	frozen	checkpoints/pushobj_shape_shift	-	L	200
+eval_outputs/pushobj_bias_16k_e3_seed200/Z/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	Z	200
+eval_outputs/pushobj_released_reference_seed200/Z	frozen	checkpoints/pushobj_shape_shift	-	Z	200
+eval_outputs/pushobj_bias_16k_e3_seed200/+/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	+	200
+eval_outputs/pushobj_released_reference_seed200/+	frozen	checkpoints/pushobj_shape_shift	-	+	200
+eval_outputs/pushobj_bias_16k_e3_seed200/I/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	I	200
+eval_outputs/pushobj_released_reference_seed200/I	frozen	checkpoints/pushobj_shape_shift	-	I	200
+eval_outputs/pushobj_bias_16k_e3_seed200/small_tee/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	small_tee	200
+eval_outputs/pushobj_released_reference_seed200/small_tee	frozen	checkpoints/pushobj_shape_shift	-	small_tee	200
+eval_outputs/pushobj_bias_16k_e3_seed200/square/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	square	200
+eval_outputs/pushobj_released_reference_seed200/square	frozen	checkpoints/pushobj_shape_shift	-	square	200
+eval_outputs/pushobj_bias_16k_e3_seed300/T/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	T	300
+eval_outputs/pushobj_released_reference_seed300/T	frozen	checkpoints/pushobj_shape_shift	-	T	300
+eval_outputs/pushobj_bias_16k_e3_seed300/L/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	L	300
+eval_outputs/pushobj_released_reference_seed300/L	frozen	checkpoints/pushobj_shape_shift	-	L	300
+eval_outputs/pushobj_bias_16k_e3_seed300/Z/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	Z	300
+eval_outputs/pushobj_released_reference_seed300/Z	frozen	checkpoints/pushobj_shape_shift	-	Z	300
+eval_outputs/pushobj_bias_16k_e3_seed300/+/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	+	300
+eval_outputs/pushobj_released_reference_seed300/+	frozen	checkpoints/pushobj_shape_shift	-	+	300
+eval_outputs/pushobj_bias_16k_e3_seed300/I/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	I	300
+eval_outputs/pushobj_released_reference_seed300/I	frozen	checkpoints/pushobj_shape_shift	-	I	300
+eval_outputs/pushobj_bias_16k_e3_seed300/small_tee/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	small_tee	300
+eval_outputs/pushobj_released_reference_seed300/small_tee	frozen	checkpoints/pushobj_shape_shift	-	small_tee	300
+eval_outputs/pushobj_bias_16k_e3_seed300/square/frozen	frozen	checkpoints/pushobj_bias_16k_e3_seed0	3	square	300
+eval_outputs/pushobj_released_reference_seed300/square	frozen	checkpoints/pushobj_shape_shift	-	square	300

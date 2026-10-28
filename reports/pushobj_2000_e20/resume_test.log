@@ -1,0 +1,17 @@
+/home/appuser/workspace/project/multimodal-test/adajepa/custom_resolvers.py:4: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path=None)
+Loaded 1 rollouts
+Loaded 1 rollouts
+using 3d prop position use_3d_pos=False
+Proprio encoder type: <class 'models.proprio.ProprioceptiveEmbedding'>
+using 3d prop position use_3d_pos=False
+Action encoder type: <class 'models.proprio.ProprioceptiveEmbedding'>
+Loaded 1 rollouts
+Loaded 1 rollouts
+Proprio encoder type: <class 'models.proprio.ProprioceptiveEmbedding'>
+Action encoder type: <class 'models.proprio.ProprioceptiveEmbedding'>
+PASS: all model weights restored; next loss/weights exactly match uninterrupted training
+PASS: optimizer moments restored; total epoch limit respected; next-step metrics finite

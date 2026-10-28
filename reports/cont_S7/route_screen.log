@@ -1,0 +1,165 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/wandb/util.py:118: SentryHubDeprecationWarning: `sentry_sdk.Hub` is deprecated and will be removed in a future major release. Please consult our 1.x to 2.x migration guide for details on how to migrate `Hub` usage to the new API: https://docs.sentry.io/platforms/python/migration/1.x-to-2.x
+  sentry_hub = sentry_sdk.Hub(sentry_client)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py:30: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import parse_version
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/pkg_resources/__init__.py:2825: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/Cython/Distutils/old_build_ext.py:15: DeprecationWarning: dep_util is Deprecated. Use functions from setuptools instead.
+  from distutils.dep_util import newer, newer_group
+/home/appuser/workspace/project/multimodal-test/adajepa/env/__init__.py:7: UserWarning: point_maze envs unavailable (mujoco_py missing): 
+Missing path to your environment variable. 
+Current values LD_LIBRARY_PATH=/home/appuser/anaconda3/envs/ts/lib/python3.9/site-packages/cv2/../../lib64:
+Please add following line to .bashrc:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/appuser/.mujoco/mujoco210/bin
+  warnings.warn(f"point_maze envs unavailable (mujoco_py missing): {_e}")
+/home/appuser/workspace/project/multimodal-test/adajepa/custom_resolvers.py:4: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path=None)
+Using cache found in /home/appuser/.cache/torch/hub/facebookresearch_dinov2_main
+Resuming from epoch 3: /home/appuser/workspace/project/multimodal-test/adajepa/checkpoints/pushobj_bias_16k_e3_seed0/checkpoints/model_3.pth
+Loaded 4000 rollouts
+S7 done
+S2 done
+# 无标签路由的离线筛选
+
+θ0 在训练分布验证集上（400 个窗口，T/L/Z/+）的前 3 步误差：中位数 0.0058；90 分位 0.0146，95 分位 0.0220，99 分位 0.0925。熟悉度门槛取这些分位数，不用任何流上的标签。
+
+## 流 S7（280 个 episode）
+
+### 熟悉度门（θ0 前 3 步误差 > 门槛 → 不熟悉）
+
+| 门槛 | 没见过形状判为不熟悉 | 见过形状判为不熟悉（误报） | 各形状判为不熟悉的比例 |
+|---|---:|---:|---|
+| 90 分位（0.0146） | 68% | 4% | I 100%，L 8%，square 72%，Z 5%，small_tee 32%，+ 0%，T 2% |
+| 95 分位（0.0220） | 53% | 1% | I 95%，L 5%，square 42%，Z 0%，small_tee 22%，+ 0%，T 0% |
+| 99 分位（0.0925） | 2% | 0% | I 8%，L 0%，square 0%，Z 0%，small_tee 0%，+ 0%，T 0% |
+
+### 用真实标签时各指纹能把没见过的形状分得多准（首访训练、回访测试；只是上限诊断）
+
+| 指纹 | 最近质心 | 1-NN | 逻辑回归 | MLP（64 隐层） |
+|---|---:|---:|---:|---:|
+| delta | 93% | 95% | 98% | 97% |
+| grad | 88% | 72% | 90% | 90% |
+| resid | 88% | 95% | 97% | 98% |
+| resid3 | 83% | 90% | 93% | 98% |
+| enc | 37% | 32% | 37% | 33% |
+| resid3+enc | 60% | 68% | 88% | 80% |
+| grad+resid+enc | 82% | 77% | 93% | 93% |
+
+### 写入规则回放（只对判为不熟悉的 episode 分领域）
+
+每行：熟悉度门槛 / 指纹 / tau_join / tau_new / m（m=1 即现有规则）。纯度按被写入的 episode 算；覆盖率 = 被写入的不熟悉 episode 比例；碎片 = 每个形状平均要几个领域才装下它 80% 的 episode（理想为 1）。
+
+| 门槛 | 指纹 | tau_join | tau_new | m | 领域数（≥3 个） | 纯度 | 覆盖率 | 碎片 |
+|---|---|---:|---:|---:|---|---:|---:|---:|
+| 95 | delta | 0.033 | 0.011 | 1 | 6（4） | 0.86 | 1.00 | 2.2 |
+| 95 | delta | 0.116 | 0.033 | 3 | 5（5） | 1.00 | 0.88 | 1.2 |
+| 95 | delta | 0.116 | 0.061 | 2 | 7（5） | 0.98 | 0.92 | 1.5 |
+| 95 | grad | 0.160 | 0.021 | 1 | 10（7） | 0.77 | 1.00 | 3.8 |
+| 95 | grad | 0.327 | 0.021 | 1 | 30（8） | 0.89 | 1.00 | 6.5 |
+| 95 | grad | 0.327 | 0.109 | 2 | 17（8） | 0.86 | 0.95 | 4.5 |
+| 95 | resid | 0.066 | 0.066 | 1 | 4（3） | 0.80 | 1.00 | 2.0 |
+| 95 | resid | 0.539 | 0.066 | 1 | 26（8） | 0.98 | 1.00 | 4.5 |
+| 95 | resid | 0.267 | 0.539 | 2 | 5（5） | 0.94 | 0.80 | 1.8 |
+| 95 | enc | -0.000 | -0.000 | 1 | 4（4） | 0.62 | 1.00 | 2.5 |
+| 95 | enc | 0.673 | -0.000 | 1 | 25（9） | 0.74 | 1.00 | 7.2 |
+| 95 | enc | 0.673 | -0.000 | 2 | 16（10） | 0.74 | 0.98 | 5.2 |
+| 95 | grad+resid+enc | 0.137 | 0.022 | 1 | 5（4） | 0.65 | 1.00 | 2.8 |
+| 95 | grad+resid+enc | 0.406 | 0.022 | 1 | 31（9） | 0.97 | 1.00 | 5.8 |
+| 95 | grad+resid+enc | 0.406 | 0.306 | 2 | 14（8） | 0.91 | 0.86 | 3.2 |
+| 99 | delta | 0.037 | 0.037 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | delta | 0.037 | 0.037 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | delta | 0.065 | 0.037 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | grad | -0.025 | -0.025 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | grad | -0.025 | -0.025 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | grad | 0.011 | -0.025 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | resid | 0.090 | 0.090 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | resid | 0.090 | 0.090 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | resid | 0.115 | 0.090 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | enc | 0.065 | 0.065 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | enc | 0.065 | 0.065 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | enc | 0.225 | 0.065 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | grad+resid+enc | 0.010 | 0.010 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | grad+resid+enc | 0.010 | 0.010 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+| 99 | grad+resid+enc | 0.080 | 0.010 | 1 | 2（0） | 1.00 | 1.00 | 2.0 |
+
+最佳设置的领域构成（99 分位门槛，delta，tau_join 0.037，tau_new 0.037，m 1）：
+
+```
+{}
+```
+
+## 流 S2（100 个 episode）
+
+### 熟悉度门（θ0 前 3 步误差 > 门槛 → 不熟悉）
+
+| 门槛 | 没见过形状判为不熟悉 | 见过形状判为不熟悉（误报） | 各形状判为不熟悉的比例 |
+|---|---:|---:|---|
+| 90 分位（0.0146） | 84% | 5% | I 100%，square 68%，T 5% |
+| 95 分位（0.0220） | 69% | 5% | I 95%，square 42%，T 5% |
+| 99 分位（0.0925） | 6% | 0% | I 8%，square 5%，T 0% |
+
+### 用真实标签时各指纹能把没见过的形状分得多准（首访训练、回访测试；只是上限诊断）
+
+| 指纹 | 最近质心 | 1-NN | 逻辑回归 | MLP（64 隐层） |
+|---|---:|---:|---:|---:|
+| delta | 95% | 100% | 100% | 100% |
+| grad | 80% | 80% | 80% | 85% |
+| resid | 88% | 98% | 100% | 100% |
+| resid3 | 85% | 98% | 95% | 92% |
+| enc | 38% | 55% | 52% | 48% |
+| resid3+enc | 70% | 88% | 88% | 92% |
+| grad+resid+enc | 85% | 95% | 95% | 95% |
+
+### 写入规则回放（只对判为不熟悉的 episode 分领域）
+
+每行：熟悉度门槛 / 指纹 / tau_join / tau_new / m（m=1 即现有规则）。纯度按被写入的 episode 算；覆盖率 = 被写入的不熟悉 episode 比例；碎片 = 每个形状平均要几个领域才装下它 80% 的 episode（理想为 1）。
+
+| 门槛 | 指纹 | tau_join | tau_new | m | 领域数（≥3 个） | 纯度 | 覆盖率 | 碎片 |
+|---|---|---:|---:|---:|---|---:|---:|---:|
+| 95 | delta | 0.084 | 0.016 | 1 | 7（5） | 1.00 | 1.00 | 1.7 |
+| 95 | delta | 0.053 | 0.084 | 3 | 3（3） | 1.00 | 0.89 | 1.0 |
+| 95 | delta | 0.053 | 0.181 | 2 | 3（3） | 1.00 | 0.86 | 1.0 |
+| 95 | grad | 0.041 | 0.041 | 1 | 3（3） | 0.79 | 1.00 | 2.0 |
+| 95 | grad | 0.369 | 0.041 | 1 | 24（7） | 0.93 | 1.00 | 6.0 |
+| 95 | grad | 0.288 | 0.041 | 2 | 11（8） | 0.91 | 1.00 | 3.3 |
+| 95 | resid | 0.236 | 0.095 | 1 | 7（5） | 0.98 | 1.00 | 1.7 |
+| 95 | resid | 0.337 | 0.337 | 2 | 4（4） | 1.00 | 0.95 | 1.3 |
+| 95 | resid | 0.337 | 0.484 | 2 | 4（4） | 1.00 | 0.91 | 1.3 |
+| 95 | enc | 0.012 | 0.012 | 1 | 3（3） | 0.68 | 1.00 | 2.3 |
+| 95 | enc | 0.717 | 0.012 | 1 | 25（7） | 0.80 | 1.00 | 7.0 |
+| 95 | enc | 0.717 | 0.420 | 2 | 15（9） | 0.80 | 0.91 | 5.0 |
+| 95 | grad+resid+enc | 0.162 | 0.040 | 1 | 6（5） | 0.88 | 1.00 | 2.0 |
+| 95 | grad+resid+enc | 0.446 | 0.162 | 2 | 15（8） | 0.96 | 0.98 | 3.7 |
+| 95 | grad+resid+enc | 0.446 | 0.237 | 2 | 13（10） | 0.96 | 0.91 | 3.3 |
+| 99 | delta | 0.031 | 0.031 | 1 | 2（1） | 1.00 | 1.00 | 1.0 |
+| 99 | delta | 0.031 | 0.052 | 2 | 2（0） | 1.00 | 0.80 | 1.0 |
+| 99 | delta | 0.039 | 0.052 | 2 | 2（0） | 1.00 | 0.80 | 1.0 |
+| 99 | grad | 0.307 | -0.031 | 1 | 5（0） | 1.00 | 1.00 | 2.5 |
+| 99 | grad | 0.307 | -0.031 | 1 | 5（0） | 1.00 | 1.00 | 2.5 |
+| 99 | grad | 0.150 | -0.031 | 1 | 4（0） | 0.80 | 1.00 | 2.5 |
+| 99 | resid | 0.397 | 0.099 | 1 | 5（0） | 1.00 | 1.00 | 2.5 |
+| 99 | resid | 0.397 | 0.099 | 1 | 5（0） | 1.00 | 1.00 | 2.5 |
+| 99 | resid | 0.193 | 0.099 | 1 | 4（0） | 0.80 | 1.00 | 2.5 |
+| 99 | enc | 0.571 | 0.095 | 1 | 4（0） | 0.80 | 1.00 | 2.5 |
+| 99 | enc | 0.571 | 0.095 | 1 | 4（0） | 0.80 | 1.00 | 2.5 |
+| 99 | enc | 0.634 | 0.095 | 1 | 4（0） | 0.80 | 1.00 | 2.5 |
+| 99 | grad+resid+enc | 0.186 | 0.069 | 1 | 4（0） | 0.80 | 1.00 | 2.5 |
+| 99 | grad+resid+enc | 0.186 | 0.069 | 1 | 4（0） | 0.80 | 1.00 | 2.5 |
+| 99 | grad+resid+enc | 0.240 | 0.069 | 1 | 4（0） | 0.80 | 1.00 | 2.5 |
+
+最佳设置的领域构成（99 分位门槛，delta，tau_join 0.031，tau_new 0.052，m 2）：
+
+```
+{}
+```
+

@@ -1,0 +1,900 @@
+<title>持续 AdaJEPA 阶段汇报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700&display=swap">
+<style>
+/* Layout: one reading column (max 1000px). Sections follow the argument: setup → exp 0 → main line → bottleneck → planner line → decisions.
+   Color = identity, fixed across the whole page: blue AdaJEPA, orange slow learner, green planner escape, gray frozen / controls. */
+:root{
+  --bg:#f4f6f8; --surface:#fdfdfe; --sunk:#eceff3;
+  --ink:#121821; --ink-2:#485160; --muted:#7a828f;
+  --grid:#e3e6eb; --axis:#bfc5cf; --line:rgba(18,24,33,.11);
+  --ada:#2a78d6; --slow:#eb6834; --plan:#1baf7a; --frozen:#a0a6b0;
+  --ada-wash:rgba(42,120,214,.08); --slow-wash:rgba(235,104,52,.09); --plan-wash:rgba(27,175,122,.11);
+  --good:#0ca30c; --warn:#e09a00; --crit:#d03b3b; --info:#6d7685;
+  --link:#1c5cab;
+  --f-display:"Noto Serif SC","Songti SC","STSong",serif;
+  --f-body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1013; --surface:#16191d; --sunk:#1e2227;
+    --ink:#f1f3f6; --ink-2:#c0c6cf; --muted:#8b929c;
+    --grid:#272b31; --axis:#3b4048; --line:rgba(255,255,255,.10);
+    --ada:#3987e5; --slow:#d95926; --plan:#199e70; --frozen:#68707a;
+    --ada-wash:rgba(57,135,229,.12); --slow-wash:rgba(217,89,38,.13); --plan-wash:rgba(25,158,112,.15);
+    --good:#0ca30c; --warn:#fab219; --crit:#e66767; --info:#8b929c;
+    --link:#86b6ef; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1013; --surface:#16191d; --sunk:#1e2227;
+  --ink:#f1f3f6; --ink-2:#c0c6cf; --muted:#8b929c;
+  --grid:#272b31; --axis:#3b4048; --line:rgba(255,255,255,.10);
+  --ada:#3987e5; --slow:#d95926; --plan:#199e70; --frozen:#68707a;
+  --ada-wash:rgba(57,135,229,.12); --slow-wash:rgba(217,89,38,.13); --plan-wash:rgba(25,158,112,.15);
+  --good:#0ca30c; --warn:#fab219; --crit:#e66767; --info:#8b929c;
+  --link:#86b6ef; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:20px;padding-block:28px 64px}
+a{color:var(--link);text-underline-offset:2px}
+a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+h1,h2{font-family:var(--f-display);font-weight:700;text-wrap:balance;letter-spacing:.01em}
+h1{font-size:clamp(26px,4.4vw,38px);line-height:1.25;margin:6px 0 14px}
+h2{font-size:clamp(21px,3vw,26px);line-height:1.3;margin:0}
+h3{font-size:17px;font-weight:700;margin:0;text-wrap:balance}
+p{margin:0}
+.prose{max-width:40em}
+.eyebrow{font-size:12.5px;letter-spacing:.08em;color:var(--muted);font-weight:500}
+.lede{font-size:16.5px;color:var(--ink-2);max-width:40em}
+.mono{font-family:var(--f-mono);font-size:.86em}
+code,.arm{font-family:var(--f-mono);font-size:12px;padding:1px 6px;border-radius:4px;background:var(--sunk);color:var(--ink-2);white-space:nowrap}
+.muted{color:var(--muted)}
+.ink2{color:var(--ink-2)}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.meta span{font-size:12.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin:26px 0 8px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13.5px}
+nav.toc a{text-decoration:none;color:var(--ink-2)}
+nav.toc a:hover{color:var(--link)}
+nav.toc b{font-family:var(--f-mono);font-weight:500;color:var(--muted);margin-right:4px;font-size:12px}
+
+/* findings */
+.findings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:26px}
+.finding{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.finding .tag{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}
+.finding .tag i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.finding .big{font-size:28px;font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-top:4px}
+.finding .big small{font-size:15px;font-weight:500;color:var(--ink-2);margin-left:3px}
+.finding p{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+@media (max-width:860px){.findings{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.findings{grid-template-columns:minmax(0,1fr)}}
+
+/* sections */
+section{margin-top:56px;display:flex;flex-direction:column;gap:18px}
+.sec-head{display:flex;flex-direction:column;gap:6px;padding-top:6px}
+.sec-head .eyebrow b{font-family:var(--f-mono);font-weight:500;margin-right:6px}
+.line-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;border-radius:999px;padding:2px 10px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface);width:fit-content}
+.line-tag i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.sub{margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.bullets{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;max-width:44em}
+.bullets li{padding-left:2px}
+.bullets li::marker{color:var(--muted)}
+.callout{border-left:3px solid var(--axis);padding:4px 0 4px 14px;color:var(--ink-2);max-width:44em}
+.callout b{color:var(--ink)}
+
+/* figures */
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+figure .fig-title{font-weight:700;font-size:15px;line-height:1.45}
+figure .fig-sub{font-size:13px;color:var(--muted);margin-top:-6px}
+figcaption{font-size:13px;color:var(--ink-2);line-height:1.65;max-width:52em}
+.chart{width:100%;min-width:0;position:relative}
+.chart svg{display:block;overflow:visible}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;flex:none}
+.sw.dot{width:10px;height:10px;border-radius:50%}
+.sw.hollow{width:10px;height:10px;border-radius:50%;border:2px solid;background:transparent}
+.sw.bar{width:12px;height:10px;border-radius:2px}
+.sw.ln{width:16px;height:2px;border-radius:1px}
+.fig-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:760px){.fig-row{grid-template-columns:minmax(0,1fr)}}
+details.data{font-size:12.5px;color:var(--ink-2)}
+details.data summary{cursor:pointer;color:var(--muted);width:fit-content}
+.tbl{overflow-x:auto;margin-top:8px}
+table{border-collapse:collapse;font-size:13px;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{font-weight:500;color:var(--muted);font-size:12px;white-space:nowrap}
+td.r,th.r{text-align:right}
+tr.hl td{background:var(--slow-wash)}
+
+/* svg text */
+.t-ink{fill:var(--ink)} .t-2{fill:var(--ink-2)} .t-mu{fill:var(--muted)}
+.hit{fill:transparent;cursor:default;outline:none}
+.hit:hover,.hit:focus{fill:var(--line)}
+
+/* tooltip */
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--surface);border:1px solid var(--line);box-shadow:0 6px 24px rgba(0,0,0,.14);border-radius:8px;padding:8px 11px;max-width:280px;font-size:12.5px;line-height:1.5}
+#tip .tv{font-weight:700;font-size:14px;color:var(--ink)}
+#tip .tl{color:var(--ink-2)}
+
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.timeline li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--grid)}
+.timeline li:last-child{border-bottom:0}
+.timeline .n{font-family:var(--f-mono);font-size:12px;color:var(--muted);padding-top:2px}
+.timeline .h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.timeline .h b{font-weight:700}
+.timeline .d{color:var(--ink-2);font-size:13.5px;margin-top:3px}
+
+/* status chips: icon + label, never color alone */
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:1px 9px 1px 7px;color:var(--ink-2);background:var(--surface);white-space:nowrap}
+.chip svg{width:12px;height:12px;flex:none}
+.chip.good svg{color:var(--good)} .chip.warn svg{color:var(--warn)} .chip.bad svg{color:var(--crit)} .chip.info svg{color:var(--info)} .chip.run svg{color:var(--link)}
+
+/* gate cards */
+.gates{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.gate{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 15px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.gate .gh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.gate .what{font-size:13px;color:var(--ink-2)}
+.gate .ev{font-size:13px;line-height:1.6;border-top:1px solid var(--grid);padding-top:8px}
+.gate .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.mini{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.mini h3{font-size:14.5px}
+.mini p{font-size:13px;color:var(--ink-2)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.stat .v{font-size:22px;font-weight:700;line-height:1.2}
+.stat .v small{font-size:13px;color:var(--ink-2);font-weight:500;margin-left:2px}
+.stat .l{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+
+.qs{counter-reset:q;display:flex;flex-direction:column;gap:12px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px}
+.q::before{counter-increment:q;content:"Q" counter(q);font-family:var(--f-mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+.q h3{font-size:15.5px;margin-bottom:6px}
+.q p,.q li{font-size:13.5px;color:var(--ink-2)}
+.q ul{margin:6px 0 0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+
+footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+footer code{font-size:11.5px}
+@media (max-width:520px){
+  .wrap{padding-inline:16px}
+  figure{padding:14px 12px 12px}
+  body{font-size:14.5px}
+}
+@media (prefers-reduced-motion:no-preference){ .hit{transition:fill .12s} }
+</style>
+
+<div id="tip" hidden role="status"></div>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">阶段汇报 · 2026-10-15 · 17:40 更新</div>
+  <h1>持续 AdaJEPA：在哪里巩固，卡住时怎么办</h1>
+  <p class="lede">两条线的阶段结果。主线（第一篇）做跨 episode 的慢学习器和门控：慢学习器的规划收益只出现在没见过的形状上，门控能把伤害降到零，但带不来额外增益。第二篇候选在规划器侧：卡住时把推杆推回目标并加大推杆项权重，在 S7 上 6 胜 0 负，并在原文协议的保留集上复现为 +2.6 pp（11 胜 2 负）。</p>
+  <div class="meta">
+    <span>基础模型 bias16k seed0（训练形状 T / L / Z / +）</span>
+    <span>主评测：S7 流，280 个逐例配对 episode</span>
+    <span>统计：McNemar 精确检验 + 配对 bootstrap 95% 区间</span>
+  </div>
+</header>
+
+<div class="findings" aria-label="主要结论">
+  <div class="finding">
+    <div class="tag"><i style="background:var(--ada)"></i>基础 · 实验 0</div>
+    <div class="big">+11.3<small>pp</small></div>
+    <p>AdaJEPA 相对冻结模型的增益来自本 episode 的转移信息。等幅但无信息的扰动只有 +1.3 到 +3.3 pp。</p>
+  </div>
+  <div class="finding">
+    <div class="tag"><i style="background:var(--slow)"></i>主线 · 慢学习器</div>
+    <div class="big">+6.7<small>pp</small></div>
+    <p>只在回访没见过的形状时出现（S7，n=60；S2 为 +10）。见过的形状上 AdaJEPA 已有 91%，慢学习器在 −5 到 +2.5 之间，没有稳定收益。</p>
+  </div>
+  <div class="finding">
+    <div class="tag"><i style="background:var(--slow)"></i>主线 · 门控</div>
+    <div class="big">0.58 → 0.88</div>
+    <p>无标签路由的在线写入纯度（v3 在 S7 → v4 在 S7b）。各个门在机制上都做对了，但没有一个显著提高成功率，作用是"不伤害"。</p>
+  </div>
+  <div class="finding">
+    <div class="tag"><i style="background:var(--plan)"></i>第二篇 · 规划器侧</div>
+    <div class="big">+2.6<small>pp</small></div>
+    <p>K2P 在保留集（原文协议 7 形状 × 50，没参与调参）上 11 胜 2 负（p=0.022），S7 上 6 胜 0 负。增益来自"物体已到位、只差推杆"的卡住。</p>
+  </div>
+</div>
+
+<nav class="toc" aria-label="目录">
+  <a href="#setup"><b>1</b>实验设定</a>
+  <a href="#exp0"><b>2</b>实验 0：信息还是扰动</a>
+  <a href="#main"><b>3</b>主线：慢学习器与门控</a>
+  <a href="#stall"><b>4</b>瓶颈：卡住</a>
+  <a href="#planner"><b>5</b>第二篇候选：规划器侧</a>
+  <a href="#ask"><b>6</b>需要讨论的问题</a>
+</nav>
+
+<!-- 1 -->
+<section id="setup">
+  <div class="sec-head">
+    <div class="eyebrow"><b>1</b>实验设定</div>
+    <h2>S7 流：7 个形状各访问两次</h2>
+  </div>
+  <p class="prose">基础模型只在 T、L、Z、+ 四个形状上训练，I、square、small_tee 是没见过的形状。S7 流每段 20 个 episode，共 14 段 280 个；所有组走同一批目标、同一顺序，逐 episode 配对。成功判定：推杆和物体到目标的联合距离 &lt; 20 px，且物体角度差 &lt; 20°。规划器与 AdaJEPA 原文一致：GD，规划长度 5 个模型步，最多 30 次重规划。</p>
+  <figure>
+    <div class="fig-title">每段的成功率：AdaJEPA 与冻结 θ0</div>
+    <div class="legend" id="lg-stream"></div>
+    <div class="chart" id="c-stream"></div>
+    <figcaption>AdaJEPA 整体 77.5%，冻结 θ0 67.9%（+9.6 pp，仅 AdaJEPA 成功 35 / 仅冻结成功 8，p=4×10⁻⁵）。见过的形状上 AdaJEPA 约 91%，没见过的约 59%，剩余空间主要在没见过的形状上。形状图标为示意。</figcaption>
+    <details class="data"><summary>数据表</summary><div class="tbl" id="t-stream"></div></details>
+  </figure>
+</section>
+
+<!-- 2 -->
+<section id="exp0">
+  <div class="sec-head">
+    <div class="eyebrow"><b>2</b>基础 · 实验 0</div>
+    <h2>AdaJEPA 的增益来自信息，不是扰动</h2>
+  </div>
+  <p class="prose">seed 100，T / I / square 各 50 个目标（n=150）。基准是逐例规划的冻结模型 F_seq（50.7%）。每个对照都与 AdaJEPA 的更新幅度对齐，只去掉其中的信息。</p>
+  <figure>
+    <div class="fig-title">各组相对冻结模型的成功率差（pp）</div>
+    <div class="fig-sub">点为配对差，横线为 bootstrap 95% 区间</div>
+    <div class="chart" id="c-exp0"></div>
+    <figcaption>AdaJEPA 显著高于每一个无信息对照（p ≤ 0.044）。随机目标对照只恢复了 AdaJEPA 增益的 29%（区间 −0.38 到 0.75）。</figcaption>
+    <details class="data"><summary>数据表</summary><div class="tbl" id="t-exp0"></div></details>
+  </figure>
+  <ul class="bullets">
+    <li>用同形状其他 episode 的数据更新只有 +2.0 pp，新帧预测误差几乎不降（0.96×）；AdaJEPA 把新帧误差降到 0.35×。有用的信息主要是<b>本 episode 特有</b>的。</li>
+    <li>反方向一步 −12.7 pp（8/27，p=0.002）：起作用的是更新方向，不是权重被扰动本身。</li>
+    <li>冻结模型的失败 85% 在最后 10 次重规划里没有进展；规划器随机重启能让它动起来，但转化不成成功。</li>
+  </ul>
+  <p class="callout">对持续学习的含义：跨 episode 能巩固的，只有 θ0 对某一类数据的<b>系统性误差</b>。这预告了第 3 节的结果。</p>
+</section>
+
+<!-- 3 -->
+<section id="main">
+  <div class="sec-head">
+    <div class="eyebrow"><b>3</b>主线 · 第一篇</div>
+    <h2>慢学习器只在没见过的领域有用，门控负责不伤害</h2>
+    <span class="line-tag"><i style="background:var(--slow)"></i>持续学习：θ_base + 每领域慢学习器 + AdaJEPA 快适应</span>
+  </div>
+
+  <div class="sub">
+    <h3>3.1 方法演进</h3>
+    <p class="prose">每一步只改一个部件，与 AdaJEPA（每个 episode 重置）逐例配对比较。</p>
+    <ol class="timeline">
+      <li><span class="n">01</span><div><div class="h"><b>S2 · 固定写入 slow ← slow + w·Δ</b><span class="chip bad"><svg viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>否定</span></div><div class="d">w ≥ 0.03 有害（w=1 时 −14 pp，p=0.029），w ≤ 0.01 无效。快权重改动大多是瞬时的，相邻 episode 的余弦只有 0.06。</div></div></li>
+      <li><span class="n">02</span><div><div class="h"><b>S2 · 领域记忆（存 Δ 的均值，按预测误差读取）</b><span class="chip bad"><svg viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>否定</span></div><div class="d">episode 起始预测误差降到 0.81–0.94×，成功率 61% 对 62%，没有增益。</div></div></li>
+      <li><span class="n">03</span><div><div class="h"><b>S2 · CLS v1：每领域一个整 predictor 慢学习器（回放训练）+ 快适应</b><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>找到方向</span></div><div class="d">回访 +15 pp（65% 对 50%），但首访 −17.5 pp：数据太少的学习器有害。</div></div></li>
+      <li><span class="n">04</span><div><div class="h"><b>S2 · v2：加成熟门</b><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>改进</span></div><div class="d">首访伤害消除（57.5% 对 60%），回访 +10 pp，整体 66% 对 62%（12/8，p=0.50）。</div></div></li>
+      <li><span class="n">05</span><div><div class="h"><b>S7 · v3：加写入门，扩到 7 个形状、280 个 episode</b><span class="chip warn"><svg viewBox="0 0 12 12"><path d="M6 1.8L11 10.5H1z" fill="currentColor"/></svg>定位问题</span></div><div class="d">整体没有显著差异；只在回访没见过的形状上 +6.7 pp。无标签路由在 7 个形状上失效（纯度 0.58，29 个领域）。</div></div></li>
+      <li><span class="n">06</span><div><div class="h"><b>离线 · v4：熟悉度门 + 确认池</b><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>离线验证</span></div><div class="d">S7 回放：领域 29 → 6，纯度 0.58 → 0.96；S2 回放：4 个领域，纯度 1.00。</div></div></li>
+      <li><span class="n">07</span><div><div class="h"><b>S7b · v4 在线，v5 有验证合并，多步 rollout 损失，优先回放</b><span class="chip run"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 3.6V6l1.6 1.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>进行中</span></div><div class="d">v4 在线写入纯度 0.88，但成功率比 Oracle 低 5 pp（p=0.029）；多步 rollout 损失在前 8 段暂时最好（+4.4 pp）。见 3.6。</div></div></li>
+    </ol>
+  </div>
+
+  <div class="sub">
+    <h3>3.2 S7 整体：加慢学习器没有显著变化</h3>
+    <figure>
+      <div class="fig-title">各组相对 AdaJEPA 的成功率差（pp），S7 全部 280 个 episode</div>
+      <div class="fig-sub">右侧数字为该组的整体成功率；AdaJEPA 为 77.5%</div>
+      <div class="chart" id="c-s7"></div>
+      <figcaption>四个慢学习器组都在 ±2.5 pp 以内，没有一组显著。≤10 / ≤15 步的成功率和平均步数（12.0–12.8 对 12.4）也持平。作为参照，AdaJEPA 本身相对冻结 θ0 为 +9.6 pp。</figcaption>
+      <details class="data"><summary>数据表</summary><div class="tbl" id="t-s7"></div></details>
+    </figure>
+  </div>
+
+  <div class="sub">
+    <h3>3.3 拆开看：增益只在"回访没见过的形状"</h3>
+    <figure>
+      <div class="fig-title">按"见过 / 没见过 × 首次 / 回访"拆分，相对 AdaJEPA 的差（pp）</div>
+      <div class="legend" id="lg-cells"></div>
+      <div class="chart" id="c-cells"></div>
+      <figcaption>两个带真实标签路由的组（慢学习器的上限）。阴影行是唯一一致为正的格子。括号里是（仅该组成功 / 仅 AdaJEPA 成功）。</figcaption>
+      <details class="data"><summary>数据表</summary><div class="tbl" id="t-cells"></div></details>
+    </figure>
+    <ul class="bullets">
+      <li><b>回访没见过的形状：</b>两组都是 +6.7 pp。S2 上同样的格子 v2 为 +10（9/5），v1 为 +15。方向在两条流上一致，但单条流 n=60，都不显著（p≈0.4）。</li>
+      <li><b>见过的形状：</b>AdaJEPA 已有 91%，慢学习器在 −5 到 +2.5 之间，没有稳定收益；带成熟门的回访 −5.0 pp（0/4，区间 [−10, −1]）。</li>
+      <li><b>首次访问：</b>学习器还没有积累，有没有门都接近 0。</li>
+      <li><b>保留集检验</b>（seed 100，每形状 50 个目标，离线训练的慢学习器）：只用慢学习器 43%，θ0 为 35%，接近 AdaJEPA 的 49%；两者叠加 51%，增益基本不叠加。</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>3.4 原因：θ0 只在没见过的形状上有可巩固的系统性误差</h3>
+    <div class="fig-row">
+      <figure>
+        <div class="fig-title">回访时的预测误差：慢学习器 / θ0</div>
+        <div class="fig-sub">episode 开始的最新帧误差，Oracle 组；&lt; 1 表示更准</div>
+        <div class="chart" id="c-ratio"></div>
+        <figcaption>没见过的形状降到 0.47–0.69 倍；见过的形状在 0.92–1.07 倍，基本没有可学的。</figcaption>
+        <details class="data"><summary>数据表</summary><div class="tbl" id="t-ratio"></div></details>
+      </figure>
+      <figure>
+        <div class="fig-title">预测改善多大，才变成成功</div>
+        <div class="fig-sub">回访没见过形状的 60 个 episode，按误差比分组</div>
+        <div class="legend" id="lg-bucket"></div>
+        <div class="chart" id="c-bucket"></div>
+        <figcaption>只有误差降到 θ0 的 0.6 倍以下时成功率才明显提高（6 胜 1 负）；0.6 以上没有稳定收益。</figcaption>
+        <details class="data"><summary>数据表</summary><div class="tbl" id="t-bucket"></div></details>
+      </figure>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">0.29× <small>对 0.44×</small></div><div class="l">新帧误差 / θ0：学习器 + AdaJEPA 对只有 AdaJEPA（67 个配对 episode）</div></div>
+      <div class="stat"><div class="v">0.48× <small>对 0.84×</small></div><div class="l">同上，只看第 2–4 次重规划（episode 早期）</div></div>
+      <div class="stat"><div class="v">0.58 / 0.52</div><div class="l">I 上学习器对接触转移 / 自由运动的误差比；接触不是短板</div></div>
+      <div class="stat"><div class="v">AUROC 0.96</div><div class="l">θ0 前 3 步误差区分见过与没见过的形状</div></div>
+    </div>
+    <p class="callout">慢学习器确实在 AdaJEPA 之上让预测更准 30–50%，但这只在改善很大时才变成规划成功。剩下的失败主要是规划器卡住（第 4 节），更准的平均动力学解决不了。</p>
+  </div>
+
+  <div class="sub">
+    <h3>3.5 门控：何时写、写到哪、何时读</h3>
+    <p class="prose">每个门单独做消融，不叠加比较。"机制"看门是否按设计做出了正确判断，"成功率"看它对规划的净效果。</p>
+    <div class="gates">
+      <div class="gate">
+        <div class="gh"><h3>熟悉度门</h3><code>v4 · 写入</code></div>
+        <div class="what">θ0 在前 3 次转移上的预测误差低于其训练验证集 90 分位，就判为"熟悉"，不写入任何领域。不用流上的标签。</div>
+        <div class="ev">AUROC 0.96；没见过的形状判为不熟悉 68%，见过形状误报 4%。S7b 在线（v4）：只写入 59 个 episode，5 个领域，纯度 0.88。但成功率比 Oracle 低 5.0 pp（11/25，p=0.029），比 AdaJEPA 低 2.8 pp（4/9，p=0.27，前 9 段）。</div>
+        <div class="chips"><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>机制有效</span><span class="chip warn"><svg viewBox="0 0 12 12"><path d="M6 1.8L11 10.5H1z" fill="currentColor"/></svg>成功率 −2.8（不显著）</span></div>
+      </div>
+      <div class="gate">
+        <div class="gh"><h3>成熟门</h3><code>v2 · 读取</code></div>
+        <div class="what">学习器在没训练过的 episode 上，5 步预测误差连续 3 次 ≤ 0.9× θ0，才允许读取。</div>
+        <div class="ev">正确关掉了见过形状的学习器（验证比 1.01–1.42）。S2 首访 42.5% → 57.5%。但在 S7 上 −2.9 pp（15/23，p=0.26）：它也挡掉了有用的早期读取（small_tee 首访 75% 对 90%）。</div>
+        <div class="chips"><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>机制有效</span><span class="chip warn"><svg viewBox="0 0 12 12"><path d="M6 1.8L11 10.5H1z" fill="currentColor"/></svg>成功率 −2.9</span></div>
+      </div>
+      <div class="gate">
+        <div class="gh"><h3>写入门</h3><code>v3 · 写入</code></div>
+        <div class="what">某领域的学习器预测新 episode 比 θ0 差 1.2 倍以上，就拒绝写入该领域。</div>
+        <div class="ev">拒绝 132 次，85% 拒对了；写入纯度 0.43 → 0.58。代价是领域从 12 个碎成 29 个。成功率 −0.7 pp（12/14）。</div>
+        <div class="chips"><span class="chip warn"><svg viewBox="0 0 12 12"><path d="M6 1.8L11 10.5H1z" fill="currentColor"/></svg>机制部分有效</span><span class="chip info"><svg viewBox="0 0 12 12"><path d="M2.5 6h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>成功率 ≈ 0</span></div>
+      </div>
+      <div class="gate">
+        <div class="gh"><h3>有验证的合并</h3><code>v5 · 合并</code></div>
+        <div class="what">两个领域的学习器互相预测对方最近 3 个 episode：两个方向都要比 θ0 好，且不比对方自己的学习器差 30% 以上，才合并。</div>
+        <div class="ev">离线：容差 0.2–0.5 都只合并 3 个 I 子领域，没有错误合并。去掉"比 θ0 好"这一条，容差 0.2 就会把 I 和 square 错误合并。</div>
+        <div class="chips"><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>离线有效</span><span class="chip run"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 3.6V6l1.6 1.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>在线进行中</span></div>
+      </div>
+      <div class="gate">
+        <div class="gh"><h3>单 episode 证据门</h3><code>事后分析</code></div>
+        <div class="what">学习器在本 episode 前几步的预测误差 &lt; 0.7× θ0 才用它，否则退回 AdaJEPA。</div>
+        <div class="ev">见过形状上的伤害全部消除（回到 90–91%）。整体 79.6% 对 77.5%（11/5，p=0.21），回访没见过的形状 68.3% 对 60.0%。</div>
+        <div class="chips"><span class="chip good"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3L9.5 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>伤害归零</span><span class="chip info"><svg viewBox="0 0 12 12"><path d="M2.5 6h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>成功率 ≤ +2</span></div>
+      </div>
+    </div>
+    <figure>
+      <div class="fig-title">无标签路由的写入纯度</div>
+      <div class="fig-sub">纯度 = 每个领域里多数形状所占比例；右侧为领域数</div>
+      <div class="chart" id="c-purity"></div>
+      <figcaption>v3 用快权重改动的方向分领域。见过的形状上 θ0 没有系统性误差，改动方向随机（最近邻认对形状只有 48%，没见过的形状为 92%），所以会不断新建或混入领域。v4 先用熟悉度门挡掉这些 episode，再要求 3 个互相对齐的 episode 才建新领域；在 S7b 上在线运行时为 5 个领域、纯度 0.88。</figcaption>
+    </figure>
+    <p class="callout">门控能做到该关的关、该写的写，把伤害降到零。收益上限由慢学习器本身决定，而在我们这个已经很强的基础模型上，这个上限很低。</p>
+  </div>
+
+  <div class="sub">
+    <h3>3.6 S7b 在线验证（进行中，17:30 快照）</h3>
+    <p class="prose">S7b 与 S7 顺序相同，换了种子，与 S2 / S7 没有重叠的 episode；S7b3 在后面再加第 3 轮。AdaJEPA 参照组已跑完前 9 段。下图只比较所有组都跑完的前 8 段（160 个 episode）：其中 7 段是首次访问，只有 square² 是回访，所以主要反映学习器积累初期的效果。</p>
+    <figure>
+      <div class="fig-title">S7b 前 8 段：各组相对 AdaJEPA 的成功率差（pp）</div>
+      <div class="fig-sub">右侧数字为该组成功率，AdaJEPA 为 68.1%；★ 表示按真实形状写入</div>
+      <div class="chart" id="c-s7b"></div>
+      <figcaption>多步 rollout 损失（与规划器的 5 步展开对齐）暂时最好：+4.4 pp（11/4，p=0.12），区间下限为 0，见过的形状上 +5.0（5/1）。v5 在合并发生之前（I 第二次访问）与 v4 逐例相同。优先回放用到了仿真里的接触信息，属于特权信息。</figcaption>
+      <details class="data"><summary>数据表</summary><div class="tbl" id="t-s7b"></div></details>
+    </figure>
+    <div class="stats">
+      <div class="stat"><div class="v">70.0 <small>对 75.0%</small></div><div class="l">v4 对 Oracle，两轮完整 280 个 episode：−5.0 pp [−9, −1]（11/25，p=0.029）</div></div>
+      <div class="stat"><div class="v">59 <small>/ 280</small></div><div class="l">v4 写入的 episode 数：5 个领域，纯度 0.88；学习器的数据比 Oracle 少得多</div></div>
+      <div class="stat"><div class="v">36% <small>对 44%</small></div><div class="l">回访时读到本领域学习器的 36 个 episode，v4 对 Oracle 同批</div></div>
+      <div class="stat"><div class="v">91% <small>对 73%</small></div><div class="l">首访读到其他领域学习器的 11 个 episode（10 个是 small_tee 读 square 学习器），v4 对 Oracle 同批</div></div>
+    </div>
+    <p class="callout">路由在线也做对了，但 v4 只写入了 1/5 的 episode，学习器积累不够，读到时反而不如 Oracle。相近形状之间可能有真实迁移（small_tee 读 square 学习器 91%），按"能否迁移"写入是合理的，但样本很小。慢学习器"学什么"比"写到哪"更值得投入：多步 rollout 损失在前 8 段最好，需要等后两轮（回访更多）确认。</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>组</th><th>内容</th><th class="r">进度（S7b3，共 21 段）</th></tr></thead>
+        <tbody>
+          <tr><td><code>w0</code></td><td>AdaJEPA 参照</td><td class="r">9 段</td></tr>
+          <tr><td><code>cls3_oracle</code></td><td>真实标签路由（上限）</td><td class="r">21 段，已完成</td></tr>
+          <tr><td><code>cls4_free</code></td><td>v4：熟悉度门 + 确认池</td><td class="r">17 段</td></tr>
+          <tr><td><code>fixw4_free</code></td><td>v4 门控 + 固定 w=0.003 写入</td><td class="r">12 段</td></tr>
+          <tr><td><code>cls5_free</code></td><td>v5 = v4 + 有验证合并</td><td class="r">8 段</td></tr>
+          <tr><td><code>cls3_oracle_ms</code></td><td>慢学习器用 5 步开环 rollout 损失</td><td class="r">8 段</td></tr>
+          <tr><td><code>cls3_oracle_pr</code></td><td>优先回放（成功 ×2，接触转移加权）</td><td class="r">8 段</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section id="stall">
+  <div class="sec-head">
+    <div class="eyebrow"><b>4</b>两条线的交汇点</div>
+    <h2>剩下的失败是"卡住"，不是预测不准</h2>
+  </div>
+  <p class="prose">S7 上 AdaJEPA 的 63 个失败 episode，在最后 10 次重规划里的状态：</p>
+  <div class="stats">
+    <div class="stat"><div class="v">94%</div><div class="l">物体完全不动（每次重规划移动 &lt; 2 px）</div></div>
+    <div class="stat"><div class="v">≈ 20 <small>px</small></div><div class="l">推杆边缘到物体表面的间隙中位数（21–24 px）：推杆就在物体旁边，但没有接触</div></div>
+    <div class="stat"><div class="v">76–88%</div><div class="l">物体没到位的失败中，推杆停在物体朝向目标的那一侧，要先绕到背后才能推对</div></div>
+    <div class="stat"><div class="v">≈ 10%</div><div class="l">推杆穿墙跑出场地；AdaJEPA 本身就有，与干预无关（见 5.5）</div></div>
+    <div class="stat"><div class="v">4 <small>对 29 px</small></div><div class="l">推杆每次重规划的移动：失败 episode 对成功 episode 收尾</div></div>
+  </div>
+  <p class="prose muted" style="font-size:13px">更正：上一版写的"推杆离物体约 84 px、根本没在推"，量的是到物块参考点的距离。I、T 等长条形状的参考点离边缘 60 px 以上，按多边形重新计算后改为上面的数字。</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>卡住检测触发时</th><th class="r">物体误差</th><th class="r">推杆误差</th><th class="r">角度</th><th class="r">物体已在容差内</th></tr></thead>
+      <tbody>
+        <tr><td>AdaJEPA 晚成功（第 10 步后才成功，n=12）</td><td class="r">12 px</td><td class="r">20 px</td><td class="r">4°</td><td class="r">100%</td></tr>
+        <tr><td>AdaJEPA 失败（n=55）</td><td class="r">26 px</td><td class="r">21 px</td><td class="r">17°</td><td class="r">16%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="callout">卡住分两类：<b>只差推杆</b>（物体已到位，规划器不在乎推杆归位）和<b>物体没到位</b>（推杆先到了自己的目标，正好挡在物体和物体目标之间，要绕行才能推对）。两类都和"已执行转移预测得准不准"无关，这把我们引到第二篇：直接在规划器上处理卡住。</p>
+</section>
+
+<!-- 5 -->
+<section id="planner">
+  <div class="sec-head">
+    <div class="eyebrow"><b>5</b>第二篇候选</div>
+    <h2>规划器侧：卡住检测与逃逸</h2>
+    <span class="line-tag"><i style="background:var(--plan)"></i>与第一篇独立：只新增文件，不改第一篇的代码与输出</span>
+  </div>
+  <p class="prose">同一模型、同一 S7 流，AdaJEPA 规划循环不变（规划长度、步数上限都不改，便于与原文对比）。卡住检测只用推杆 proprio：从第 11 次重规划起，推杆最近 3 次重规划净位移 &lt; 10 px 就干预，每个 episode 最多 5 次。每个 episode 开头固定随机种子，各组在第一次干预前与基线 none 逐位相同。检测阈值和 λ=10 在 S7 上确定，再到原文协议的保留集 EVAL50（7 形状 × 50 个目标，seed 100，没参与调参）上验证。</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>组</th><th>卡住时做什么</th></tr></thead>
+      <tbody>
+        <tr><td><code>K1</code></td><td>随机方向推推杆 5 / 10 px 每步</td></tr>
+        <tr><td><code>K2</code></td><td>朝推杆目标位置推，每步最多 10 px</td></tr>
+        <tr><td><code>K2P</code></td><td>K2，并且从第一次干预起把目标函数中的推杆（proprio）项权重 ×10</td></tr>
+        <tr><td><code>K2P7</code></td><td>K2P，最多 7 次，间隔 3 次重规划</td></tr>
+        <tr><td><code>KS</code></td><td>先物体后推杆：第 1 次把推杆项权重设为 0；之后同 K2P</td></tr>
+        <tr><td><code>K3</code></td><td>8 个初始化（暖启动 + 7 个随机）一起做 GD，执行预测代价最低的</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub">
+    <h3>5.1 结果：小而干净，并在保留集上复现</h3>
+    <figure>
+      <div class="fig-title">与 AdaJEPA（none）逐例配对：谁救回了谁</div>
+      <div class="legend" id="lg-wl"></div>
+      <div class="chart" id="c-wl"></div>
+      <figcaption>S7 上 K2P / KS 只赢不输。保留集上 K2P 11/2、KS 9/1，幅度与 S7 一致（S7 +2.1，保留集 +2.6）；保留集的设置是干预上限 7 次、每步 15 px、最多 40 次重规划。最后一行是不固定种子重跑 AdaJEPA：8/8，净效果为 0，这就是 dropout 带来的运行间噪声，不做逐 episode 固定种子，这样的效应会被淹没。K1 只跑了前 120 个 episode。</figcaption>
+      <details class="data"><summary>数据表</summary><div class="tbl" id="t-wl"></div></details>
+    </figure>
+    <div class="stats">
+      <div class="stat"><div class="v">74.9 → 77.4<small>%</small></div><div class="l">保留集：AdaJEPA → K2P（KS 77.1%）</div></div>
+      <div class="stat"><div class="v">87.5 → 90.5<small>%</small></div><div class="l">保留集上见过的形状；没见过的 58.0 → 60.0%</div></div>
+      <div class="stat"><div class="v">0/15 · 2/32</div><div class="l">被弄坏的晚成功：S7 上 K2P 0 个，保留集上 K2P 2 个（KS 1 个）</div></div>
+      <div class="stat"><div class="v">15.2 → 12.1</div><div class="l">S7 上晚成功 episode 所需重规划次数（K2P）</div></div>
+      <div class="stat"><div class="v">+0</div><div class="l">AdaJEPA 在第 31–40 次重规划多成功的个数；以后回到原文的 30 次</div></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>5.2 增益从哪来：只差推杆的那一类卡住</h3>
+    <figure>
+      <div class="fig-title">保留集上失败的构成：AdaJEPA 对 K2P</div>
+      <div class="fig-sub">按结束时的真实状态分类（只用于分析）；AdaJEPA 88 个失败，K2P 79 个</div>
+      <div class="legend" id="lg-fail"></div>
+      <div class="chart" id="c-fail"></div>
+      <figcaption>K2P 只减少了"只差推杆"这一类（9 → 1），其余三类几乎不变。剩下的以"只差物体位置"为主：物体角度基本对，位置还差约 30 px，I 形常常沿长轴错开。物体或目标贴墙（&lt; 15 px）的失败占 14–17%，这时推杆很难绕到物体背后。</figcaption>
+      <details class="data"><summary>数据表</summary><div class="tbl" id="t-fail"></div></details>
+    </figure>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>第一次触发时的真实状态</th><th class="r">物体已在容差内</th><th class="r">物体误差</th><th class="r">角度</th></tr></thead>
+        <tbody>
+          <tr><td>被 K2 / K2P 救回的 episode</td><td class="r">80–83%</td><td class="r">16 px</td><td class="r">7–8°</td></tr>
+          <tr><td>仍失败的 episode</td><td class="r">6–7%</td><td class="r">27–28 px</td><td class="r">22°</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>5.3 机制：目标函数不在乎推杆有没有归位</h3>
+    <div class="fig-row">
+      <figure>
+        <div class="fig-title">推杆偏离目标时，目标函数多出的代价</div>
+        <div class="fig-sub">阴影为卡住时的总代价范围（以视觉项为主）</div>
+        <div class="chart" id="c-cost"></div>
+        <figcaption>目标帧里推杆速度为 0。推杆偏 20 px 只多 0.008，而卡住时总代价在 0.02–0.17，规划器几乎感觉不到推杆没归位。λ=10 由此确定。</figcaption>
+      </figure>
+      <figure>
+        <div class="fig-title">推杆到目标的距离（px）</div>
+        <div class="fig-sub">干预触发前、刚推完、3 次重规划后的中位数</div>
+        <div class="legend" id="lg-slope"></div>
+        <div class="chart" id="c-slope"></div>
+        <figcaption>只推（K2）会被规划器拉回原处；同时加大推杆项权重（K2P）才能稳住。</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>5.4 其他策略为什么无效</h3>
+    <div class="cards">
+      <div class="mini"><h3>K1 随机推</h3><p>3 次重规划后，推杆被拉回到只剩推开距离的 0.22（10 px 档）和 0.53（5 px 档）。120 个 episode 上 +0 和 +0.8 pp。</p></div>
+      <div class="mini"><h3>K3 多初始化</h3><p>8 个候选里 85% 的时候赢的还是原来的暖启动。卡住是 5 步目标本身的局部最优，不是 GD 初始化的问题。</p></div>
+      <div class="mini"><h3>KS 的物体阶段</h3><p>去掉推杆项后，规划器仍不会绕到物体背后，因为绕行途中图像代价也会先变大。S7 上物体误差改善 &gt; 5 px 的只有 4%；保留集上物体阶段的物体误差变化中位数为 0，改善与变差各约 5%。KS 不比 K2P 好。</p></div>
+      <div class="mini"><h3>K2P7 更多次数</h3><p>与 K2P 逐例相同（0/0）。能救的在前一两次干预就解决了，剩下的干预多少次都没用。</p></div>
+    </div>
+    <p class="callout">结论：K2P 是一个可解释的目标函数校准修正，S7 和保留集上都是 +2 到 +2.6 pp。剩下的失败主要是推杆挡在物体朝目标的一侧（保留集上 86–96%）：要先绕行，而绕行时代价先升后降，5 步视野内的梯度规划看不到这条路，属于潜空间目标的<b>短视</b>。第二篇主方法候选：在潜空间学一个终端代价（到目标的距离或剩余步数），接在 5 步视野终点上，不改规划长度。</p>
+  </div>
+
+  <div class="sub">
+    <h3>5.5 新发现：约 12% 的失败是推杆穿墙跑出场地</h3>
+    <div class="stats">
+      <div class="stat"><div class="v">10 <small>个 / 组</small></div><div class="l">保留集上三组各恰好 10 个 episode 推杆出界，全部失败</div></div>
+      <div class="stat"><div class="v">第 5 次</div><div class="l">出界时的中位重规划次数，早于最早的干预（第 11 次），与干预无关</div></div>
+      <div class="stat"><div class="v">75–81 <small>px/步</small></div><div class="l">出界那次的最大动作；正常中位 22 px，数据标准差 20 px</div></div>
+      <div class="stat"><div class="v">≤ +2.9 <small>pp</small></div><div class="l">全部修好时的收益上限，对 AdaJEPA 基线同样适用</div></div>
+    </div>
+    <p class="prose">GD 偶尔给出远超数据范围的动作，而推杆在仿真中是不受碰撞约束的运动学刚体，相对动作也没有裁剪，于是直接穿过墙；推杆出了画面后观测异常，episode 必败。建议在规划器侧修复、不改环境，以保持与原文和第一篇的可比性。两种做法各自单独测：</p>
+    <ul class="bullets">
+      <li><b>工作区约束：</b>执行前把每个 env 步的推杆目标点裁剪到场地内（离墙 ≥ 推杆半径 15 px），只作用于要出界的那几次重规划。代码开关 <code>workspace_clip</code> 已加，尚未评测。</li>
+      <li><b>动作幅度上限：</b>每个 env 步的偏移限制在约 3 倍数据标准差（60 px）以内，GD 优化时同步投影。作用面更广，可能顺带改善规划。</li>
+    </ul>
+    <ul class="bullets">
+      <li><b>局限：</b>保留集目前只有 seed 100（原文协议还有 seed 200 / 300）。只测了我们的权重和 AdaJEPA 基线，官方权重和冻结规划器基线都还没测。</li>
+      <li>K2 利用了"成功判定要求推杆也归位"这一任务特性，论文中需要说明。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 6 -->
+<section id="ask">
+  <div class="sec-head">
+    <div class="eyebrow"><b>6</b>讨论</div>
+    <h2>需要您意见的问题</h2>
+  </div>
+  <div class="qs">
+    <div class="q"><div>
+      <h3>第一篇的故事线怎么定</h3>
+      <p>现有证据支持"选择性巩固"：只在基础模型覆盖不足的地方巩固，门控保证不伤害，并配上"预测更准 ≠ 规划更好"的分析。但增益本身（回访没见过的形状 +6.7 到 +10 pp）在单条流上不显著。可选的加强方式：</p>
+      <ul>
+        <li>换覆盖更差的基础模型：官方 checkpoint 冻结时 I 24%、square 26%、small_tee 46%，空间更大，也是原文设定；</li>
+        <li>只用没见过的形状建流，把回访样本加到 120–180，确认 +7 pp 是否真实；</li>
+        <li>让巩固对规划更有用：多步 rollout 损失、优先回放（S7b 上在跑；多步 rollout 损失在前 8 段 +4.4 pp，暂时最好）。</li>
+      </ul>
+    </div></div>
+    <div class="q"><div>
+      <h3>视觉线何时启动</h3>
+      <p>设想：用我们的形状权重 + 慢学习器应对原文的视觉偏移（模糊、噪点、变暗、颜色），对比原文专门训练的视觉偏移权重，作为泛化性实验。建议先做第 0 阶段（冻结 / AdaJEPA，两套权重，原文协议），再设计持续学习部分。</p>
+    </div></div>
+    <div class="q"><div>
+      <h3>第二篇的定位</h3>
+      <p>K2P 已在保留集上复现（+2.6 pp），但幅度小。它是作为独立贡献，还是作为主方法（潜空间终端代价，针对"推杆挡在错误一侧"的失败）的诊断与前置实验？另外，推杆出界的修复（上限约 +2.9 pp，对 AdaJEPA 基线同样有效）是算进第二篇，还是作为两篇共用的评测修正？</p>
+    </div></div>
+    <div class="q"><div>
+      <h3>接下来 GPU 时间的优先级</h3>
+      <p>候选：第一篇 S7b 后两轮（确认多步 rollout 损失）和 v4 / v5 在独立目标集上复现；第二篇推杆出界修复、seed 200 / 300 保留集、终端代价原型。先做哪些？</p>
+    </div></div>
+  </div>
+</section>
+
+<footer>
+  <div>数据来源：<code>reports/exp0_shape/summary_s100.md</code> · <code>reports/cont_S2/</code> · <code>reports/cont_S7/{conclusions,rounds,routing_v4,merge_design}.md</code> · <code>reports/cont_S7/diagnostics.txt</code> · <code>reports/escape_S7/{conclusions,summary}.md</code> · <code>reports/paper2_planner/report.md</code> · <code>reports/escape_EVAL50/{conclusions,summary}.md</code> · <code>reports/escape_EVAL50/failures/failures.md</code> · <code>reports/cont_S7b/v4_vs_oracle/rounds.md</code> · <code>eval_outputs/cont_S7b/</code>（2026-10-15 17:30 快照）。</div>
+  <div>S7、escape S7、EVAL50 的整体成功率和 S7b 各组的配对比较都直接从 <code>final_eval_results.npz</code> 计算或核对。噪声基线：S7 中配置与 AdaJEPA 相同的 192 个 episode 仍有 3.6% 结果不同；escape 线因逐例固定种子，干预前逐位相同。</div>
+</footer>
+</div>
+
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+const tip=document.getElementById('tip');
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function txt(parent,x,y,s,attrs){const t=el('text',Object.assign({x:x,y:y},attrs||{}),parent);t.textContent=s;return t;}
+function place(x,y){const w=tip.offsetWidth,h=tip.offsetHeight;let L=x+14,T=y-h-12;if(L+w>innerWidth-8)L=x-w-14;if(L<8)L=8;if(T<8)T=y+18;tip.style.left=L+'px';tip.style.top=T+'px';}
+function bindTip(node,lines){
+  node.setAttribute('tabindex','0');node.setAttribute('class','hit');
+  node.setAttribute('aria-label',lines.join('，'));
+  const show=(x,y)=>{tip.replaceChildren();lines.forEach((s,i)=>{const d=document.createElement('div');d.className=i===0?'tv':'tl';d.textContent=s;tip.appendChild(d);});tip.hidden=false;place(x,y);};
+  node.addEventListener('pointermove',e=>show(e.clientX,e.clientY));
+  node.addEventListener('pointerleave',()=>{tip.hidden=true;});
+  node.addEventListener('focus',()=>{const r=node.getBoundingClientRect();show(r.left+r.width/2,r.top+4);});
+  node.addEventListener('blur',()=>{tip.hidden=true;});
+}
+function svgFor(host,w,h){return el('svg',{width:w,height:h,viewBox:'0 0 '+w+' '+h,role:'img'},host);}
+function chart(id,render){
+  const host=document.getElementById(id);if(!host)return;
+  const run=()=>{const w=Math.max(260,Math.round(host.clientWidth));if(w===host._w)return;host._w=w;host.replaceChildren();render(host,w);};
+  run();
+  if('ResizeObserver' in window)new ResizeObserver(run).observe(host);else addEventListener('resize',run);
+}
+function legend(id,items){
+  const L=document.getElementById(id);if(!L)return;
+  items.forEach(it=>{const s=document.createElement('span');const sw=document.createElement('i');sw.className='sw '+(it.kind||'dot');
+    if(it.kind==='hollow')sw.style.borderColor=it.color;else sw.style.background=it.color;
+    if(it.opacity)sw.style.opacity=it.opacity;
+    if(it.border)sw.style.border='1px solid var(--axis)';
+    s.appendChild(sw);s.appendChild(document.createTextNode(it.label));L.appendChild(s);});
+}
+function table(id,head,rows,hl){
+  const host=document.getElementById(id);if(!host)return;
+  const t=document.createElement('table');const th=document.createElement('thead');const tr=document.createElement('tr');
+  head.forEach((h,i)=>{const c=document.createElement('th');c.textContent=h;if(i>0)c.className='r';tr.appendChild(c);});th.appendChild(tr);t.appendChild(th);
+  const tb=document.createElement('tbody');
+  rows.forEach((r,ri)=>{const row=document.createElement('tr');if(hl&&hl(ri))row.className='hl';r.forEach((v,i)=>{const c=document.createElement('td');c.textContent=v;if(i>0)c.className='r';row.appendChild(c);});tb.appendChild(row);});
+  t.appendChild(tb);host.appendChild(t);
+}
+const sgn=v=>(v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(1);
+const ci=(lo,hi)=>'['+sgn(lo).replace('+0.0','0').replace('−0.0','0')+', '+sgn(hi).replace('+0.0','0').replace('−0.0','0')+']';
+function barPath(x0,y,x1,h,r){const len=x1-x0;if(len<=0)return '';r=Math.min(r,len,h/2);
+  return 'M'+x0+' '+y+'H'+(x1-r)+'Q'+x1+' '+y+' '+x1+' '+(y+r)+'V'+(y+h-r)+'Q'+x1+' '+(y+h)+' '+(x1-r)+' '+(y+h)+'H'+x0+'Z';}
+function barPathL(x1,y,x0,h,r){const len=x1-x0;if(len<=0)return '';r=Math.min(r,len,h/2); // grows leftward from x1 to x0
+  return 'M'+x1+' '+y+'H'+(x0+r)+'Q'+x0+' '+y+' '+x0+' '+(y+r)+'V'+(y+h-r)+'Q'+x0+' '+(y+h)+' '+(x0+r)+' '+(y+h)+'H'+x1+'Z';}
+function narrow(w){return w<560;}
+
+/* ---------- generic: horizontal dot + CI ---------- */
+function dotCI(host,w,cfg){
+  const lw=narrow(w)?(cfg.lwN||112):(cfg.lw||210), rp=cfg.rp||58, x0=lw, x1=w-rp;
+  const per=cfg.per||20, pad=16, top=6;
+  let H=top;const ys=[];
+  cfg.rows.forEach(r=>{const h=r.items.length*per+pad+(r.sub?6:0);ys.push([H,h]);H+=h;});
+  const axisY=H+4;H+=26;
+  const svg=svgFor(host,w,H);
+  const sx=v=>x0+(v-cfg.min)/(cfg.max-cfg.min)*(x1-x0);
+  cfg.rows.forEach((r,i)=>{if(r.band)el('rect',{x:0,y:ys[i][0]+2,width:w,height:ys[i][1]-4,rx:6,style:'fill:var(--slow-wash)'},svg);});
+  cfg.ticks.forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:top,y2:axisY,style:'stroke:var(--grid);stroke-width:1'},svg);
+    txt(svg,sx(t),axisY+16,(t>0?'+':t<0?'−':'')+Math.abs(t)+(cfg.tickUnit||''),{'text-anchor':'middle','font-size':11.5,class:'t-mu'});});
+  if(cfg.ref!==undefined)el('line',{x1:sx(cfg.ref),x2:sx(cfg.ref),y1:top,y2:axisY,style:'stroke:var(--axis);stroke-width:1.5'},svg);
+  cfg.rows.forEach((r,i)=>{
+    const [y0,h]=ys[i];const cy=y0+h/2-(r.sub?3:0);
+    const fs=narrow(w)?12.5:13.5;
+    txt(svg,0,r.sub?cy:cy+4.5,r.label,{'font-size':fs,class:'t-ink','font-weight':r.bold?700:400});
+    if(r.sub)txt(svg,0,cy+15,narrow(w)?r.sub.split(' · ')[0]:r.sub,{'font-size':11.5,class:'t-mu'});
+    const n=r.items.length;
+    r.items.forEach((it,j)=>{
+      const y=y0+pad/2+(r.sub?3:0)+per*j+per/2;const S=cfg.series[it.s];
+      if(it.lo!==undefined){el('line',{x1:sx(it.lo),x2:sx(it.hi),y1:y,y2:y,style:'stroke:'+S.color+';stroke-width:2;stroke-linecap:round;opacity:'+(S.hollow?.75:1)},svg);}
+      el('circle',{cx:sx(it.v),cy:y,r:7,style:'fill:var(--surface)'},svg);
+      el('circle',{cx:sx(it.v),cy:y,r:S.hollow?4.2:5,style:S.hollow?('fill:var(--surface);stroke:'+S.color+';stroke-width:2.2'):('fill:'+S.color)},svg);
+      const lab=it.label!==undefined?it.label:sgn(it.v);
+      const xr=(it.hi!==undefined?sx(it.hi):sx(it.v))+9;
+      if(xr+lab.length*6.8+4<w)txt(svg,xr,y+4,lab,{'font-size':12,class:'t-2'});
+      else txt(svg,(it.lo!==undefined?sx(it.lo):sx(it.v))-9,y+4,lab,{'font-size':12,class:'t-2','text-anchor':'end'});
+      const hit=el('rect',{x:x0-6,y:y-per/2,width:w-x0+6,height:per},svg);bindTip(hit,it.tip);
+    });
+  });
+  if(cfg.axisLabel)txt(svg,x1,axisY-6,cfg.axisLabel,{'text-anchor':'end','font-size':11,class:'t-mu'});
+}
+
+/* ---------- 1. stream ---------- */
+const SHAPES={T:[[2,3,16,5],[7.5,8,5,10]],L:[[4,2,5,16],[9,13,8,5]],Z:[[1.75,4.5,11,5.5],[7.25,10,11,5.5]],'+':[[7.5,2,5,16],[2,7.5,16,5]],I:[[7.5,2,5,16]],square:[[4,4,12,12]],small_tee:[[5,6,10,3.5],[8.25,9.5,3.5,5]]};
+const SEEN=new Set(['T','L','Z','+']);
+function glyph(g,shape,cx,cy,size,cls){const s=size/20;SHAPES[shape].forEach(r=>el('rect',{x:cx-size/2+r[0]*s,y:cy-size/2+r[1]*s,width:r[2]*s,height:r[3]*s,rx:.8*s,style:'fill:'+cls},g));}
+const STREAM=[['I',1,55,35],['L',1,90,85],['square',1,55,45],['Z',1,100,90],['small_tee',1,65,75],['+',1,85,80],['T',1,90,70],['square',2,50,40],['T',2,90,80],['I',2,50,40],['+',2,95,85],['L',2,85,65],['small_tee',2,80,70],['Z',2,95,90]];
+legend('lg-stream',[{label:'AdaJEPA',color:'var(--ada)'},{label:'冻结 θ0',color:'var(--frozen)'},{label:'灰底列 = 没见过的形状',color:'var(--sunk)',kind:'bar',border:true}]);
+chart('c-stream',(host,w)=>{
+  const lw=narrow(w)?30:38, rp=4, cw=(w-lw-rp)/14, top=6, gH=narrow(w)?40:50, pTop=top+gH+8, pH=170, H=pTop+pH+20;
+  const svg=svgFor(host,w,H);
+  const sy=v=>pTop+pH-(v/100)*pH;
+  STREAM.forEach((b,i)=>{const x=lw+i*cw;if(!SEEN.has(b[0]))el('rect',{x:x+1,y:top,width:cw-2,height:H-top-18,rx:5,style:'fill:var(--sunk)'},svg);});
+  [0,25,50,75,100].forEach(t=>{el('line',{x1:lw,x2:w-rp,y1:sy(t),y2:sy(t),style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,lw-6,sy(t)+4,t+(t===100?'%':''),{'text-anchor':'end','font-size':11,class:'t-mu'});});
+  STREAM.forEach((b,i)=>{
+    const cx=lw+i*cw+cw/2;const gs=Math.min(narrow(w)?15:20,cw-6);
+    glyph(svg,b[0],cx,top+gs/2+4,gs,SEEN.has(b[0])?'var(--muted)':'var(--ink)');
+    if(cw>=46)txt(svg,cx,top+gs+18,(b[0]==='small_tee'?'s_tee':b[0])+(b[1]===2?' ²':' ¹'),{'text-anchor':'middle','font-size':11,class:'t-2'});
+    else txt(svg,cx,top+gs+16,b[1]===2?'²':'¹',{'text-anchor':'middle','font-size':11,class:'t-mu'});
+    el('line',{x1:cx,x2:cx,y1:sy(b[3]),y2:sy(b[2]),style:'stroke:var(--axis);stroke-width:2'},svg);
+    el('circle',{cx:cx,cy:sy(b[3]),r:6,style:'fill:var(--surface)'},svg);el('circle',{cx:cx,cy:sy(b[3]),r:4,style:'fill:var(--frozen)'},svg);
+    el('circle',{cx:cx,cy:sy(b[2]),r:7,style:'fill:var(--surface)'},svg);el('circle',{cx:cx,cy:sy(b[2]),r:5,style:'fill:var(--ada)'},svg);
+    const hit=el('rect',{x:lw+i*cw,y:top,width:cw,height:H-top-18},svg);
+    bindTip(hit,['AdaJEPA '+b[2]+'% · 冻结 '+b[3]+'%','第 '+(i+1)+' 段：'+b[0]+(b[1]===2?'（回访）':'（首次）'),SEEN.has(b[0])?'见过的形状':'没见过的形状','每段 20 个 episode']);
+  });
+  txt(svg,lw,H-4,'流的顺序 →',{'font-size':11,class:'t-mu'});
+});
+table('t-stream',['段','形状','访问','AdaJEPA','冻结 θ0'],STREAM.map((b,i)=>[String(i+1),b[0]+(SEEN.has(b[0])?'（见过）':'（没见过）'),b[1]===1?'首次':'回访',b[2]+'%',b[3]+'%']));
+
+/* ---------- 2. exp 0 ---------- */
+const EXP0=[
+  ['AdaJEPA','A',11.3,5.3,17.3,'20/3','p<0.001',true],
+  ['随机目标一步','R_tgt · 等幅、无信息',3.3,-2.7,9.3,'14/9','p=0.40'],
+  ['随机目标·固定方向','R_tgt_fix',2.7,-3.3,8.7,'14/10','p=0.54'],
+  ['同形状别的 episode','W_dom',2.0,-3.3,7.3,'10/7','p=0.63'],
+  ['规划器随机重启','P_restart · 权重不变',2.0,-6.0,10.0,'20/17','p=0.74'],
+  ['参数空间随机符号','R_sign',1.3,-2.0,5.3,'5/3','p=0.73'],
+  ['冻结·批量规划','F_batch',-1.3,-4.7,2.0,'2/4','p=0.69'],
+  ['反方向一步','A_asc · 反信息',-12.7,-20.7,-5.3,'8/27','p=0.002']];
+chart('c-exp0',(host,w)=>dotCI(host,w,{min:-22,max:20,ticks:[-20,-10,0,10,20],ref:0,lw:200,lwN:118,rp:50,
+  series:{a:{color:'var(--ada)'},c:{color:'var(--frozen)'}},
+  rows:EXP0.map(r=>({label:r[0],sub:r[1],bold:!!r[7],items:[{s:r[7]?'a':'c',v:r[2],lo:r[3],hi:r[4],tip:[sgn(r[2])+' pp '+ci(r[3],r[4]),r[0]+'（'+r[1]+'）','仅该组 / 仅冻结成功：'+r[5]+'，'+r[6]]}]}))}));
+table('t-exp0',['组','相对冻结（pp）','95% 区间','仅该组/仅冻结','p'],EXP0.map(r=>[r[0]+'（'+r[1].split(' ·')[0]+'）',sgn(r[2]),ci(r[3],r[4]),r[5],r[6]]));
+
+/* ---------- 3.2 S7 overall ---------- */
+const S7=[
+  ['Oracle 路由','cls_oracle',2.1,-2,6,79.6,'21/15','p=0.41','s'],
+  ['Oracle + 成熟门','cls3_oracle',-0.7,-4,3,76.8,'11/13','p=0.84','s'],
+  ['无标签 v2','cls2_free · 成熟门',-1.8,-5,2,75.7,'10/15','p=0.42','s'],
+  ['无标签 v3','cls3_free · + 写入门',-2.5,-6,1,75.0,'10/17','p=0.25','s'],
+  ['冻结 θ0','frozen',-9.6,-14,-5,67.9,'8/35','p=4×10⁻⁵','f']];
+chart('c-s7',(host,w)=>dotCI(host,w,{min:-16,max:10,ticks:[-15,-10,-5,0,5,10],ref:0,lw:190,lwN:112,rp:62,
+  series:{s:{color:'var(--slow)'},f:{color:'var(--frozen)'}},
+  rows:S7.map(r=>({label:r[0],sub:r[1],items:[{s:r[8],v:r[2],lo:r[3],hi:r[4],label:r[5]+'%',tip:[sgn(r[2])+' pp '+ci(r[3],r[4]),r[0]+'：整体 '+r[5]+'%（AdaJEPA 77.5%）','仅该组 / 仅 AdaJEPA：'+r[6]+'，'+r[7]]}]}))}));
+table('t-s7',['组','整体','相对 AdaJEPA','95% 区间','仅该组/仅 AdaJEPA','p'],S7.map(r=>[r[0]+'（'+r[1].split(' ·')[0]+'）',r[5]+'%',sgn(r[2]),ci(r[3],r[4]),r[6],r[7]]));
+
+/* ---------- 3.3 cells ---------- */
+legend('lg-cells',[{label:'Oracle 路由（无成熟门，cls_oracle）',color:'var(--slow)'},{label:'Oracle + 成熟门（cls3_oracle）',color:'var(--slow)',kind:'hollow'}]);
+const CELLS=[
+  ['见过 · 首次','n=80 · AdaJEPA 91.2%',[2.5,0,6,'2/0','p=0.50'],[-1.2,-4,0,'0/1','p=1']],
+  ['见过 · 回访','n=80 · AdaJEPA 91.2%',[-2.5,-10,4,'3/5','p=0.73'],[-5.0,-10,-1,'0/4','p=0.12']],
+  ['没见过 · 首次','n=60 · AdaJEPA 58.3%',[3.3,-8,15,'8/6','p=0.79'],[-1.7,-10,5,'2/3','p=1']],
+  ['没见过 · 回访','n=60 · AdaJEPA 60.0%',[6.7,-5,18,'8/4','p=0.39'],[6.7,-5,18,'9/5','p=0.42'],true]];
+chart('c-cells',(host,w)=>dotCI(host,w,{min:-15,max:20,ticks:[-10,0,10,20],ref:0,lw:170,lwN:104,rp:84,per:24,
+  series:{o:{color:'var(--slow)'},g:{color:'var(--slow)',hollow:true}},
+  rows:CELLS.map(r=>({label:r[0],sub:r[1],band:!!r[4],bold:!!r[4],items:[
+    {s:'o',v:r[2][0],lo:r[2][1],hi:r[2][2],label:sgn(r[2][0])+' ('+r[2][3]+')',tip:[sgn(r[2][0])+' pp '+ci(r[2][1],r[2][2]),'Oracle 路由 · '+r[0],'仅该组 / 仅 AdaJEPA：'+r[2][3]+'，'+r[2][4]]},
+    {s:'g',v:r[3][0],lo:r[3][1],hi:r[3][2],label:sgn(r[3][0])+' ('+r[3][3]+')',tip:[sgn(r[3][0])+' pp '+ci(r[3][1],r[3][2]),'Oracle + 成熟门 · '+r[0],'仅该组 / 仅 AdaJEPA：'+r[3][3]+'，'+r[3][4]]}]}))}));
+table('t-cells',['格子','Oracle 路由','区间','Oracle + 成熟门','区间'],CELLS.map(r=>[r[0]+'（'+r[1]+'）',sgn(r[2][0])+'（'+r[2][3]+'）',ci(r[2][1],r[2][2]),sgn(r[3][0])+'（'+r[3][3]+'）',ci(r[3][1],r[3][2])]),i=>i===3);
+
+/* ---------- 3.4 ratio bars ---------- */
+const RATIO=[['I',0.47],['square',0.50],['small_tee',0.69],['+',0.92],['L',1.06],['T',1.06],['Z',1.07]];
+chart('c-ratio',(host,w)=>{
+  const lw=100, rp=40, x0=lw, x1=w-rp, bh=16, gap=10, top=8;
+  const rows=[{h:'没见过'}].concat(RATIO.slice(0,3).map(r=>({r:r})),[{h:'见过'}],RATIO.slice(3).map(r=>({r:r})));
+  let H=top;const pos=rows.map(o=>{const y=H;H+=o.h?22:bh+gap;return y;});const axisY=H+2;H+=24;
+  const svg=svgFor(host,w,H);const max=1.2;const sx=v=>x0+v/max*(x1-x0);
+  [0,0.25,0.5,0.75,1].forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:top,y2:axisY,style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,sx(t),axisY+16,String(t),{'text-anchor':'middle','font-size':11,class:'t-mu'});});
+  el('line',{x1:sx(1),x2:sx(1),y1:top,y2:axisY,style:'stroke:var(--axis);stroke-width:1.5'},svg);
+  txt(svg,sx(1)+4,top+10,'θ0',{'font-size':11.5,class:'t-2'});
+  rows.forEach((o,i)=>{const y=pos[i];
+    if(o.h){txt(svg,0,y+15,o.h+'的形状',{'font-size':11.5,class:'t-mu','font-weight':500});return;}
+    const [s,v]=o.r;txt(svg,lw-10,y+bh/2+4.5,s,{'text-anchor':'end','font-size':13,class:'t-ink'});
+    glyph(svg,s,9,y+bh/2,13,SEEN.has(s)?'var(--muted)':'var(--ink)');
+    el('path',{d:barPath(x0,y,sx(v),bh,4),style:'fill:var(--slow)'},svg);
+    txt(svg,sx(v)+6,y+bh/2+4.5,v.toFixed(2),{'font-size':12,class:'t-2'});
+    const hit=el('rect',{x:0,y:y-gap/2,width:w,height:bh+gap},svg);bindTip(hit,[v.toFixed(2)+'× θ0 的误差',s+'，回访时 episode 开始的最新帧预测误差',SEEN.has(s)?'见过的形状':'没见过的形状']);
+  });
+});
+table('t-ratio',['形状','误差比（慢学习器 / θ0）'],RATIO.map(r=>[r[0]+(SEEN.has(r[0])?'（见过）':'（没见过）'),r[1].toFixed(2)]));
+
+/* ---------- 3.4 bucket dumbbell ---------- */
+legend('lg-bucket',[{label:'AdaJEPA',color:'var(--ada)'},{label:'慢学习器 + AdaJEPA',color:'var(--slow)'}]);
+const BUCKET=[['误差比 < 0.6','n=34',55.9,70.6,'6/1'],['0.6 – 0.9','n=16',56.2,56.2,'1/1'],['≥ 0.9','n=10',80.0,70.0,'1/2']];
+chart('c-bucket',(host,w)=>{
+  const lw=narrow(w)?96:104, rp=62, x0=lw, x1=w-rp, rh=50, top=6, H0=top+BUCKET.length*rh, H=H0+26;
+  const svg=svgFor(host,w,H);const mn=40,mx=90;const sx=v=>x0+(v-mn)/(mx-mn)*(x1-x0);
+  [40,50,60,70,80,90].forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:top,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,sx(t),H0+16,t+'%',{'text-anchor':'middle','font-size':11,class:'t-mu'});});
+  BUCKET.forEach((b,i)=>{const cy=top+i*rh+rh/2;
+    txt(svg,0,cy-2,b[0],{'font-size':12.5,class:'t-ink','font-weight':i===0?700:400});txt(svg,0,cy+14,b[1],{'font-size':11.5,class:'t-mu'});
+    el('line',{x1:sx(b[2]),x2:sx(b[3]),y1:cy,y2:cy,style:'stroke:var(--axis);stroke-width:2'},svg);
+    [[b[2],'var(--ada)'],[b[3],'var(--slow)']].forEach(p=>{el('circle',{cx:sx(p[0]),cy:cy,r:7,style:'fill:var(--surface)'},svg);el('circle',{cx:sx(p[0]),cy:cy,r:5,style:'fill:'+p[1]},svg);});
+    const d=b[3]-b[2];txt(svg,x1+12,cy+4,sgn(d)+' ('+b[4]+')',{'font-size':12,class:'t-2'});
+    const hit=el('rect',{x:0,y:cy-rh/2,width:w,height:rh},svg);bindTip(hit,['AdaJEPA '+b[2]+'% → '+b[3]+'%','回访没见过形状，'+b[0]+'，'+b[1],'仅该组 / 仅 AdaJEPA：'+b[4]]);
+  });
+});
+table('t-bucket',['误差比分组','n','AdaJEPA','慢学习器 + AdaJEPA','仅该组/仅 AdaJEPA'],BUCKET.map(b=>[b[0],b[1].slice(2),b[2]+'%',b[3]+'%',b[4]]));
+
+/* ---------- 3.5 purity ---------- */
+const PUR=[['无标签 v2','S7 在线',0.43,12],['无标签 v3','S7 在线',0.58,29],['v4','S7b 在线',0.88,5],['v4','S7 离线回放',0.96,6],['v4','S2 离线回放',1.00,4]];
+chart('c-purity',(host,w)=>{
+  const lw=narrow(w)?110:150, rp=78, x0=lw, x1=w-rp, bh=16, rh=40, top=4, H0=top+PUR.length*rh, H=H0+24;
+  const svg=svgFor(host,w,H);const sx=v=>x0+v*(x1-x0);
+  [0,0.25,0.5,0.75,1].forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:top,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,sx(t),H0+16,String(t),{'text-anchor':'middle','font-size':11,class:'t-mu'});});
+  PUR.forEach((p,i)=>{const y=top+i*rh+(rh-bh)/2;
+    txt(svg,0,y+6,p[0],{'font-size':13,class:'t-ink','font-weight':p[0]==='v4'?700:400});txt(svg,0,y+21,p[1],{'font-size':11.5,class:'t-mu'});
+    el('path',{d:barPath(x0,y,sx(p[2]),bh,4),style:'fill:var(--slow);opacity:'+(p[0]==='v4'?1:.55)},svg);
+    txt(svg,sx(p[2])+6,y+bh/2+4.5,p[2].toFixed(2),{'font-size':12,class:'t-2'});
+    txt(svg,w,y+bh/2+4.5,p[3]+' 个领域',{'font-size':12,class:'t-2','text-anchor':'end'});
+    const hit=el('rect',{x:0,y:y-(rh-bh)/2,width:w,height:rh},svg);bindTip(hit,['纯度 '+p[2].toFixed(2)+' · '+p[3]+' 个领域',p[0]+'，'+p[1]]);
+  });
+});
+
+/* ---------- 3.6 S7b ---------- */
+const S7B=[
+  ['多步 rollout 损失 ★','cls3_oracle_ms',4.4,0.0,8.8,72.5,'11/4','p=0.12'],
+  ['优先回放 ★','cls3_oracle_pr',3.1,-1.9,8.1,71.2,'11/6','p=0.33'],
+  ['Oracle 路由 ★','cls3_oracle',3.1,-1.9,8.1,71.2,'11/6','p=0.33'],
+  ['v4 + 固定 w=0.003','fixw4_free',1.9,-1.9,5.6,70.0,'6/3','p=0.51'],
+  ['v5 = v4 + 合并','cls5_free · 合并尚未发生',-1.9,-6.2,1.9,66.2,'4/7','p=0.55'],
+  ['v4 无标签','cls4_free',-1.9,-6.2,1.9,66.2,'4/7','p=0.55']];
+chart('c-s7b',(host,w)=>dotCI(host,w,{min:-8,max:10,ticks:[-5,0,5,10],ref:0,lw:200,lwN:122,rp:62,
+  series:{s:{color:'var(--slow)'}},
+  rows:S7B.map(r=>({label:r[0],sub:r[1],bold:r[1]==='cls3_oracle_ms',items:[{s:'s',v:r[2],lo:r[3],hi:r[4],label:r[5]+'%',tip:[sgn(r[2])+' pp '+ci(r[3],r[4]),r[0]+'：'+r[5]+'%（AdaJEPA 68.1%）','仅该组 / 仅 AdaJEPA：'+r[6]+'，'+r[7]+'，n=160']}]}))}));
+table('t-s7b',['组','成功率','相对 AdaJEPA','95% 区间','仅该组/仅 AdaJEPA','p'],S7B.map(r=>[r[0]+'（'+r[1].split(' ·')[0]+'）',r[5]+'%',sgn(r[2]),ci(r[3],r[4]),r[6],r[7]]));
+
+/* ---------- 5.1 wins / losses ---------- */
+legend('lg-wl',[{label:'仅 AdaJEPA（none）成功',color:'var(--ada)',kind:'bar'},{label:'仅该组成功',color:'var(--plan)',kind:'bar'},{label:'噪声参照',color:'var(--frozen)',kind:'bar'}]);
+const WL=[
+  {h:'S7（调参用，280 个 episode）'},
+  ['KS','先物体后推杆',7,0,'+2.5 pp，p=0.016','280'],
+  ['K2P','推向目标 + 推杆项 ×10',6,0,'+2.1 pp，p=0.031','280'],
+  ['K2P7','K2P，最多 7 次',6,0,'+2.1 pp，与 K2P 逐例相同','280'],
+  ['K2','推向推杆目标',5,0,'+1.8 pp，p=0.062','280'],
+  ['K3','8 个初始化取最优',1,1,'0 pp','280'],
+  ['K1_10','随机推 10 px',1,0,'+0.8 pp（前 120 个）','120'],
+  ['K1_5','随机推 5 px',0,0,'0 pp（前 120 个）','120'],
+  {h:'保留集 EVAL50（原文协议，350 个 episode）'},
+  ['K2P','7 次 × 15 px',11,2,'+2.6 pp [+0.6, +4.6]，p=0.022','350',false,true],
+  ['KS','7 次 × 15 px',9,1,'+2.3 pp [+0.6, +4.0]，p=0.021','350'],
+  {h:'噪声参照'},
+  ['重跑','不固定种子的 AdaJEPA',8,8,'0 pp：运行间噪声','280',true]];
+chart('c-wl',(host,w)=>{
+  const lw=narrow(w)?84:180, rp=10, x0=lw, x1=w-rp, mid=(x0+x1)/2, half=(x1-x0)/2-26, rh=34, hh=28, bh=14, top=22;
+  let H=top;const pos=WL.map(r=>{const y=H;H+=r.h?hh:rh;return y;});const H0=H;H+=22;
+  const svg=svgFor(host,w,H);const max=12;const sc=v=>v/max*half;
+  txt(svg,mid-6,12,'← 仅 none',{'text-anchor':'end','font-size':11.5,class:'t-mu'});txt(svg,mid+6,12,'仅该组 →',{'font-size':11.5,class:'t-mu'});
+  [-10,-5,0,5,10].forEach(t=>{const x=mid+sc(t);el('line',{x1:x,x2:x,y1:top,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,x,H0+16,String(Math.abs(t)),{'text-anchor':'middle','font-size':11,class:'t-mu'});});
+  el('line',{x1:mid,x2:mid,y1:top-4,y2:H0,style:'stroke:var(--axis);stroke-width:1.5'},svg);
+  WL.forEach((r,i)=>{const y0=pos[i];
+    if(r.h){el('rect',{x:0,y:y0,width:w,height:hh,style:'fill:var(--surface)'},svg);
+      if(i>0)el('line',{x1:0,x2:w,y1:y0+4.5,y2:y0+4.5,style:'stroke:var(--grid);stroke-width:1'},svg);
+      txt(svg,0,y0+21,r.h,{'font-size':11.5,class:'t-mu','font-weight':500});return;}
+    const cy=y0+rh/2, y=cy-bh/2;
+    txt(svg,0,narrow(w)?cy+4:cy-2,r[0],{'font-size':13,class:'t-ink','font-weight':r[0]==='K2P'?700:400});
+    if(!narrow(w))txt(svg,0,cy+13,r[1],{'font-size':11.5,class:'t-mu'});
+    const gc=r[6]?'var(--frozen)':'var(--plan)';
+    if(r[3]>0)el('path',{d:barPathL(mid-1,y,mid-1-sc(r[3]),bh,4),style:'fill:var(--ada)'},svg);
+    if(r[2]>0)el('path',{d:barPath(mid+1,y,mid+1+sc(r[2]),bh,4),style:'fill:'+gc},svg);
+    txt(svg,mid+1+sc(r[2])+6,cy+4,String(r[2]),{'font-size':12,class:'t-2'});
+    txt(svg,mid-1-sc(r[3])-6,cy+4,String(r[3]),{'font-size':12,class:'t-2','text-anchor':'end'});
+    const hit=el('rect',{x:0,y:cy-rh/2,width:w,height:rh},svg);bindTip(hit,[r[2]+' / '+r[3]+'：'+r[4],r[0]+'：'+r[1],'配对 episode：'+r[5]]);
+  });
+});
+{let grp='';const rows=[];WL.forEach(r=>{if(r.h){grp=r.h.split('（')[0];return;}rows.push([grp+' · '+r[0]+'（'+r[1]+'）',String(r[2]),String(r[3]),r[4],r[5]]);});
+ table('t-wl',['组','仅该组成功','仅 none 成功','净效果','episode 数'],rows);}
+
+/* ---------- 5.2 failure composition (EVAL50) ---------- */
+legend('lg-fail',[{label:'AdaJEPA（none）',color:'var(--ada)',kind:'bar'},{label:'K2P',color:'var(--plan)',kind:'bar'}]);
+const FAIL=[['只差推杆','物体已到位',9,1],['只差角度','',10,12],['只差物体位置','',42,39],['位置和角度都差','',27,27]];
+chart('c-fail',(host,w)=>{
+  const lw=narrow(w)?100:130, rp=34, x0=lw, x1=w-rp, bh=12, rh=46, top=4, H0=top+FAIL.length*rh, H=H0+22;
+  const svg=svgFor(host,w,H);const max=45;const sx=v=>x0+v/max*(x1-x0);
+  [0,10,20,30,40].forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:top,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,sx(t),H0+16,String(t),{'text-anchor':'middle','font-size':11,class:'t-mu'});});
+  el('line',{x1:sx(0),x2:sx(0),y1:top,y2:H0,style:'stroke:var(--axis);stroke-width:1.5'},svg);
+  FAIL.forEach((f,i)=>{const y0=top+i*rh, ya=y0+(rh-2*bh-2)/2, yb=ya+bh+2;
+    txt(svg,0,f[1]?y0+rh/2-1:y0+rh/2+4.5,f[0],{'font-size':13,class:'t-ink','font-weight':i===0?700:400});
+    if(f[1])txt(svg,0,y0+rh/2+14,f[1],{'font-size':11.5,class:'t-mu'});
+    [[f[2],ya,'var(--ada)'],[f[3],yb,'var(--plan)']].forEach(b=>{el('path',{d:barPath(x0,b[1],Math.max(sx(b[0]),x0+2),bh,4),style:'fill:'+b[2]},svg);
+      txt(svg,Math.max(sx(b[0]),x0+2)+6,b[1]+bh/2+4.5,String(b[0]),{'font-size':12,class:'t-2'});});
+    const hit=el('rect',{x:0,y:y0,width:w,height:rh},svg);bindTip(hit,['AdaJEPA '+f[2]+' → K2P '+f[3],f[0]+(f[1]?'（'+f[1]+'）':''),'保留集失败 episode 数，按结束时状态分类']);
+  });
+});
+table('t-fail',['失败类型','AdaJEPA（88）','K2P（79）'],FAIL.map(f=>[f[0],String(f[2]),String(f[3])]));
+
+/* ---------- 5.3 cost ---------- */
+const COST=[['推杆偏 5 px',0.0005],['偏 10 px',0.0020],['偏 20 px',0.0081],['偏 40 px',0.0330],['目标处晃动 85 px/s',0.023]];
+chart('c-cost',(host,w)=>{
+  const lw=narrow(w)?118:130, rp=48, x0=lw, x1=w-rp, bh=14, rh=30, top=22, H0=top+COST.length*rh, H=H0+24;
+  const svg=svgFor(host,w,H);const max=0.18;const sx=v=>x0+v/max*(x1-x0);
+  el('rect',{x:sx(0.02),y:top-4,width:sx(0.17)-sx(0.02),height:H0-top+4,style:'fill:var(--sunk)'},svg);
+  txt(svg,sx(0.095),13,'卡住时总代价 0.02–0.17',{'text-anchor':'middle','font-size':11.5,class:'t-2'});
+  [0,0.05,0.1,0.15].forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:top-4,y2:H0,style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,sx(t),H0+16,String(t),{'text-anchor':'middle','font-size':11,class:'t-mu'});});
+  el('line',{x1:sx(0),x2:sx(0),y1:top-4,y2:H0,style:'stroke:var(--axis);stroke-width:1.5'},svg);
+  COST.forEach((c,i)=>{const y=top+i*rh+(rh-bh)/2;
+    txt(svg,lw-10,y+bh/2+4.5,c[0],{'text-anchor':'end','font-size':12.5,class:'t-ink','font-weight':c[0]==='偏 20 px'?700:400});
+    el('path',{d:barPath(x0,y,Math.max(sx(c[1]),x0+2),bh,3),style:'fill:var(--plan)'},svg);
+    txt(svg,Math.max(sx(c[1]),x0+2)+6,y+bh/2+4.5,String(c[1]),{'font-size':12,class:'t-2'});
+    const hit=el('rect',{x:0,y:y-(rh-bh)/2,width:w,height:rh},svg);bindTip(hit,['+'+c[1]+' 代价',c[0],'对比：卡住时总代价 0.02–0.17']);
+  });
+});
+
+/* ---------- 5.3 slope ---------- */
+legend('lg-slope',[{label:'K2P',color:'var(--plan)',kind:'ln'},{label:'K2',color:'var(--frozen)',kind:'ln'}]);
+const SLOPE=[['K2',[21,13,21],'var(--frozen)'],['K2P',[12,6,10],'var(--plan)']];
+const XS=['触发前','刚推完','3 次后'];
+chart('c-slope',(host,w)=>{
+  const lp=34, rp=58, top=10, pH=160, H=top+pH+30;const svg=svgFor(host,w,H);
+  const sx=i=>lp+i*(w-lp-rp)/2, sy=v=>top+pH-v/25*pH;
+  [0,10,20].forEach(t=>{el('line',{x1:lp,x2:w-rp,y1:sy(t),y2:sy(t),style:'stroke:var(--grid);stroke-width:1'},svg);txt(svg,lp-8,sy(t)+4,t+(t===20?' px':''),{'text-anchor':'end','font-size':11,class:'t-mu'});});
+  XS.forEach((s,i)=>txt(svg,sx(i),H-8,s,{'text-anchor':i===0?'start':i===2?'end':'middle','font-size':12,class:'t-2'}));
+  SLOPE.forEach(s=>{el('polyline',{points:s[1].map((v,i)=>sx(i)+','+sy(v)).join(' '),style:'fill:none;stroke:'+s[2]+';stroke-width:2;stroke-linejoin:round;stroke-linecap:round'},svg);
+    s[1].forEach((v,i)=>{el('circle',{cx:sx(i),cy:sy(v),r:6.5,style:'fill:var(--surface)'},svg);el('circle',{cx:sx(i),cy:sy(v),r:4.5,style:'fill:'+s[2]},svg);
+      const hit=el('circle',{cx:sx(i),cy:sy(v),r:13},svg);bindTip(hit,[v+' px',s[0]+'，'+XS[i]]);});
+    txt(svg,sx(2)+10,sy(s[1][2])+4,s[0]+' '+s[1][2],{'font-size':12,class:'t-2'});
+    txt(svg,sx(0)-0,sy(s[1][0])-10,String(s[1][0]),{'font-size':11.5,class:'t-mu','text-anchor':'middle'});
+    txt(svg,sx(1),sy(s[1][1])+(s[0]==='K2'?-10:20),String(s[1][1]),{'font-size':11.5,class:'t-mu','text-anchor':'middle'});
+  });
+});
+})();
+</script>

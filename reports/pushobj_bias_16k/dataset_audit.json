@@ -1,0 +1,144 @@
+{
+  "train": {
+    "episodes": 16000,
+    "frames": 1934266,
+    "length_quantiles": [
+      56.0,
+      97.0,
+      120.0,
+      143.0,
+      246.0
+    ],
+    "shapes": {
+      "T": 4000,
+      "L": 4000,
+      "Z": 4000,
+      "+": 4000
+    },
+    "unique_trajectories": 16000,
+    "unique_sources": 10537,
+    "video_sizes": [
+      [
+        224,
+        224,
+        3
+      ]
+    ],
+    "videos_checked": 16000,
+    "slices": 1630266,
+    "agent_out_of_frame_frames": 0,
+    "invalid_start_states": 0,
+    "min_start_gap_agent_to_block_px": 12.018107026875176,
+    "block_step_px_q99_max": [
+      20.484922409057617,
+      79.35474395751953
+    ],
+    "action_mean": [
+      0.001318724942393601,
+      0.0006321664550341666
+    ],
+    "action_std": [
+      0.240386500954628,
+      0.23887674510478973
+    ],
+    "proprio_mean": [
+      247.69505310058594,
+      275.48675537109375,
+      0.42072030901908875,
+      0.28424298763275146
+    ],
+    "proprio_std": [
+      107.80770874023438,
+      107.57006072998047,
+      89.35535430908203,
+      88.798095703125
+    ],
+    "episodes_with_contact": 1.0,
+    "contact_steps_per_episode_by_shape": {
+      "+": 62.2145,
+      "L": 58.582,
+      "T": 65.831,
+      "Z": 55.604
+    },
+    "block_moved_gt5px_fraction": 0.9990624785423279,
+    "block_displacement_quantiles": [
+      0.050680603832006454,
+      117.85027313232422,
+      186.68321228027344,
+      262.35545349121094,
+      554.6182861328125
+    ]
+  },
+  "val": {
+    "episodes": 4000,
+    "frames": 479951,
+    "length_quantiles": [
+      49.0,
+      97.0,
+      104.0,
+      139.0,
+      229.0
+    ],
+    "shapes": {
+      "T": 1000,
+      "L": 1000,
+      "Z": 1000,
+      "+": 1000
+    },
+    "unique_trajectories": 4000,
+    "unique_sources": 2208,
+    "video_sizes": [
+      [
+        224,
+        224,
+        3
+      ]
+    ],
+    "videos_checked": 4000,
+    "slices": 403951,
+    "agent_out_of_frame_frames": 0,
+    "invalid_start_states": 0,
+    "min_start_gap_agent_to_block_px": 12.025928250071994,
+    "block_step_px_q99_max": [
+      19.717552185058594,
+      79.63868713378906
+    ],
+    "action_mean": [
+      -0.0012901967857033014,
+      -0.009580353274941444
+    ],
+    "action_std": [
+      0.24944251775741577,
+      0.2378920018672943
+    ],
+    "proprio_mean": [
+      247.97271728515625,
+      252.00357055664062,
+      -0.4290604293346405,
+      -3.5811944007873535
+    ],
+    "proprio_std": [
+      109.53081512451172,
+      110.74237060546875,
+      92.71025085449219,
+      88.4491195678711
+    ],
+    "episodes_with_contact": 1.0,
+    "contact_steps_per_episode_by_shape": {
+      "+": 62.904,
+      "L": 56.312,
+      "T": 65.189,
+      "Z": 54.224
+    },
+    "block_moved_gt5px_fraction": 0.9962499737739563,
+    "block_displacement_quantiles": [
+      0.0,
+      94.1577091217041,
+      168.27830505371094,
+      245.68091583251953,
+      472.5503234863281
+    ]
+  },
+  "duplicate_trajectories_across_splits": 0,
+  "shared_source_trajectories_across_splits": 0
+}

@@ -1,0 +1,22 @@
+TRAIN 5/5 epochs complete
+START T/frozen GPU=4
+START L/frozen GPU=5
+START Z/frozen GPU=6
+START +/frozen GPU=7
+DONE Z/frozen seconds=136.2
+START I/frozen GPU=6
+DONE L/frozen seconds=142.8
+START small_tee/frozen GPU=5
+DONE +/frozen seconds=146.6
+START square/frozen GPU=7
+DONE T/frozen seconds=147.7
+DONE square/frozen seconds=118.7
+DONE small_tee/frozen seconds=122.9
+DONE I/frozen seconds=131.7
+{
+  "complete": false,
+  "epochs_completed": 5,
+  "evaluations_completed": 7,
+  "updated_utc": "2026-09-28T08:29:39.400305+00:00",
+  "paired_results": {}
+}

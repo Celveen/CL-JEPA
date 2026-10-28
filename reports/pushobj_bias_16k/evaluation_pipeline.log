@@ -1,0 +1,79 @@
+TRAIN 3/3 epochs complete
+START T/frozen GPU=4
+START L/frozen GPU=5
+START Z/frozen GPU=6
+START +/frozen GPU=7
+DONE T/frozen seconds=114.6
+START I/frozen GPU=4
+DONE L/frozen seconds=116.3
+START small_tee/frozen GPU=5
+DONE Z/frozen seconds=119.5
+START square/frozen GPU=6
+DONE +/frozen seconds=121.4
+START T/adajepa GPU=7
+DONE I/frozen seconds=110.1
+START L/adajepa GPU=4
+DONE small_tee/frozen seconds=109.4
+START Z/adajepa GPU=5
+DONE square/frozen seconds=111.6
+START +/adajepa GPU=6
+DONE T/adajepa seconds=1677.8
+START I/adajepa GPU=7
+DONE +/adajepa seconds=1584.2
+START small_tee/adajepa GPU=6
+DONE Z/adajepa seconds=1642.8
+START square/adajepa GPU=5
+DONE L/adajepa seconds=1687.2
+DONE small_tee/adajepa seconds=2251.3
+DONE square/adajepa seconds=2632.9
+DONE I/adajepa seconds=2881.7
+{
+  "complete": true,
+  "epochs_completed": 3,
+  "evaluations_completed": 14,
+  "updated_utc": "2026-09-30T03:07:11.846713+00:00",
+  "paired_results": {
+    "T": {
+      "both_success": 38,
+      "frozen_only": 1,
+      "adajepa_only": 6,
+      "both_fail": 5
+    },
+    "L": {
+      "both_success": 34,
+      "frozen_only": 2,
+      "adajepa_only": 9,
+      "both_fail": 5
+    },
+    "Z": {
+      "both_success": 34,
+      "frozen_only": 1,
+      "adajepa_only": 11,
+      "both_fail": 4
+    },
+    "+": {
+      "both_success": 36,
+      "frozen_only": 2,
+      "adajepa_only": 7,
+      "both_fail": 5
+    },
+    "I": {
+      "both_success": 14,
+      "frozen_only": 1,
+      "adajepa_only": 10,
+      "both_fail": 25
+    },
+    "small_tee": {
+      "both_success": 28,
+      "frozen_only": 2,
+      "adajepa_only": 3,
+      "both_fail": 17
+    },
+    "square": {
+      "both_success": 16,
+      "frozen_only": 3,
+      "adajepa_only": 9,
+      "both_fail": 22
+    }
+  }
+}
