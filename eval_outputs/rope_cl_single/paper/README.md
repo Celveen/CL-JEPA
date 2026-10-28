@@ -63,14 +63,14 @@ CUDA_VISIBLE_DEVICES=5 /data/zjc/envs/cljepa/bin/python eval_outputs/rope_cl_sin
 
 **Main table.** Planning on deformable objects: final Chamfer distance between the object and the goal after 15 pushes (lower is better), mean ± s.e. over 50 rope and 50 granular instances.
 
-**Main bars.** Final Chamfer distance (lower is better). Error bars: 95% confidence intervals over the 50 instances.
+**Main bars.** Final Chamfer distance (lower is better).
 
 **Appendix qualitative.** The instances of the main figure, step by step: the start, every third push, and the goal. The final frame shows the final Chamfer distance. DINO-WM's frames are a replay of its executed actions in the order the planning run simulated them.
 
-**Passes.** Ours over three passes of the stream. (a) Prediction error of the slow learner on the next, not-yet-trained episode, relative to θ0's (5-step open-loop latent error; points: episodes, lines: rolling geometric mean over 10). (b) Mean final Chamfer distance per pass (95% CI). (c) Success rate per pass (95% Wilson CI). Dashed: frozen DINO-WM; dotted: AdaJEPA. Passes 2 and 3 revisit the instances of pass 1.
+**Passes.** Ours over three passes of the stream. (a) Prediction error of the slow learner on the next, not-yet-trained episode, relative to θ0's (5-step open-loop latent error; points: episodes, lines: rolling geometric mean over 10). (b) Mean final Chamfer distance per pass. (c) Success rate per pass. Dashed: frozen DINO-WM; dotted: AdaJEPA. Passes 2 and 3 revisit the instances of pass 1.
 
-**Appendix bars.** (a) Final Chamfer distance. Hatched: numbers reported by DINO-WM under its own protocol. Solid: our protocol on the online stream (95% CI); for rope, also 91 unseen instances (Ours†: the learner after the first pass, planning frozen). (b) Success rate (95% Wilson CI).
+**Appendix bars.** (a) Final Chamfer distance. Hatched: numbers reported by DINO-WM under its own protocol. Solid: our protocol on the online stream; for rope, also 91 unseen instances (Ours†: the learner after the first pass, planning frozen). (b) Success rate.
 
-**Steps.** Chamfer distance and success rate after every MPC replan (5 pushes each), mean and 95% CI over the stream's instances.
+**Steps.** Chamfer distance and success rate after every MPC replan (5 pushes each), mean over the stream's instances. Shaded: ±1 standard error (for the success rate, the 68% Wilson interval).
 
 **Paired.** Final Chamfer distance per instance, Ours against DINO-WM (a) and AdaJEPA (b) on the same instance and seed. Points below the diagonal: Ours reaches a lower CD. Gray lines: the success threshold.

@@ -142,12 +142,12 @@ def load(domain):
 
 
 # ------------------------------------------------------------------ statistics
-def ci95(x):
-    return stats.t.ppf(0.975, len(x) - 1) * x.std(ddof=1) / np.sqrt(len(x))
+def se(x):
+    return x.std(ddof=1) / np.sqrt(len(x))
 
 
-def wilson(k, n):
-    z = 1.96
+def wilson(k, n, z=1.0):
+    """Wilson interval of a rate; z = 1 gives the 68% interval, the counterpart of +-1 s.e."""
     p = k / n
     c = (p + z * z / (2 * n)) / (1 + z * z / n)
     h = z * np.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
@@ -400,18 +400,8 @@ def fig_passes(domain, D):
     ax.set_title("(a) Ours: prediction error ↓", loc="left", pad=11)
     ax.grid(axis="y")
     for ax, metric in ((axs[1], "cd"), (axs[2], "sr")):
-        m, lo, hi = [], [], []
-        for key in PASSES:
-            f = D["final"][key]
-            if metric == "cd":
-                c = ci95(f)
-                m.append(f.mean()), lo.append(f.mean() - c), hi.append(f.mean() + c)
-            else:
-                k = int((f < thr).sum())
-                a, b = wilson(k, len(f))
-                m.append(100 * k / len(f)), lo.append(100 * a), hi.append(100 * b)
+        m = [D["final"][k].mean() if metric == "cd" else 100 * (D["final"][k] < thr).mean() for k in PASSES]
         x = np.arange(1, 4)
-        ax.vlines(x, lo, hi, color=C_OURS, lw=1.8, alpha=0.5)
         ax.plot(x, m, "-o", color=C_OURS, ms=4.5, lw=1.4, mec="white", mew=0.6, zorder=3)
         f0, fa = D["final"]["dinowm"], D["final"]["adajepa"]
         y0, ya = (f0.mean(), fa.mean()) if metric == "cd" else (100 * (f0 < thr).mean(), 100 * (fa < thr).mean())
@@ -423,7 +413,7 @@ def fig_passes(domain, D):
         ax.set_xlabel("pass over the stream")
         ax.grid(axis="y")
         if metric == "cd":
-            ax.set_ylabel("final CD (95% CI)")
+            ax.set_ylabel("mean final CD")
             ax.set_title("(b) Ours: final CD ↓", loc="left", pad=11)
         else:
             ax.set_ylabel(f"success rate, CD < {thr} (%)")
@@ -433,16 +423,12 @@ def fig_passes(domain, D):
     save(fig, f"{domain}_passes")
 
 
-def bar_group(ax, xs, vals, errs, colors, hatches, labels, fmt):
+def bar_group(ax, xs, vals, colors, hatches, labels, fmt):
     """Bars with value labels; the tick labels pile up on the axes (ax._bar_ticks) and are set by set_bar_ticks."""
-    for x, v, e, c, h in zip(xs, vals, errs, colors, hatches):
+    for x, v, c, h in zip(xs, vals, colors, hatches):
         ax.bar(x, v, width=0.72, color=c, edgecolor="white" if not h else INK2, linewidth=0 if not h else 0.4,
                hatch=h, zorder=2)
-        if e is not None:
-            ax.errorbar(x, v, yerr=np.array(e).reshape(2, 1), fmt="none", ecolor=INK, elinewidth=0.7, capsize=1.6,
-                        zorder=3)
-        top = v + (e[1] if e is not None else 0)
-        ax.text(x, top, fmt(v), ha="center", va="bottom", fontsize=6, color=INK2,
+        ax.text(x, v, fmt(v), ha="center", va="bottom", fontsize=6, color=INK2,
                 transform=ax.transData, clip_on=False)
     ticks = getattr(ax, "_bar_ticks", ([], []))
     ax._bar_ticks = (ticks[0] + list(xs), ticks[1] + list(labels))
@@ -466,23 +452,18 @@ def fig_bars(domain, D):
     xs, x = [], 0
     names = list(rep)
     xr = np.arange(len(names))
-    bar_group(ax, xr, [rep[n][j] for n in names], [None] * len(names),
+    bar_group(ax, xr, [rep[n][j] for n in names],
               [C_REPORTED] * (len(names) - 1) + ["#a9a8a4"], ["////"] * len(names), names, lambda v: f"{v:.2f}")
     x0 = len(names) + 0.8
     xo = x0 + np.arange(len(ours))
-    errs = []
-    for k in ours:
-        f = D["final"][k]
-        errs.append((ci95(f), ci95(f)))
-    bar_group(ax, xo, [D["final"][k].mean() for k in ours], errs, [col[k] for k in ours], [None] * len(ours),
+    bar_group(ax, xo, [D["final"][k].mean() for k in ours], [col[k] for k in ours], [None] * len(ours),
               [lab[k] for k in ours], lambda v: f"{v:.2f}")
     seps = [(xr[0] - 0.5, xr[-1] + 0.5, "reported by DINO-WM\n(its protocol)"),
             (xo[0] - 0.5, xo[-1] + 0.5, f"online stream\n(n = {D['keep'].sum()})")]
     if wide:
         u = D["unseen"]
         xu = xo[-1] + 2.2 + np.arange(2)
-        bar_group(ax, xu, [u["theta0"].mean(), u["learner"].mean()],
-                  [(ci95(u["theta0"]),) * 2, (ci95(u["learner"]),) * 2], [C_DINOWM, C_OURS], [None, None],
+        bar_group(ax, xu, [u["theta0"].mean(), u["learner"].mean()], [C_DINOWM, C_OURS], [None, None],
                   ["DINO-WM", "Ours†"], lambda v: f"{v:.2f}")
         seps.append((xu[0] - 0.5, xu[-1] + 0.5, f"unseen\n(n = {len(u['theta0'])})"))
     for a, b, t in seps:
@@ -499,23 +480,14 @@ def fig_bars(domain, D):
     ax.set_xlim(xr[0] - 0.7, (xu[-1] if wide else xo[-1]) + 0.7)
     # (b) success rate: our protocol only (DINO-WM's paper reports CD only)
     ax = axs[1]
-    vals, errs = [], []
-    for k in ours:
-        f = D["final"][k]
-        s = int((f < thr).sum())
-        a, b = wilson(s, len(f))
-        vals.append(100 * s / len(f))
-        errs.append((vals[-1] - 100 * a, 100 * b - vals[-1]))
+    vals = [100 * (D["final"][k] < thr).mean() for k in ours]
     xs2 = np.arange(len(ours))
     labels2 = [lab[k] for k in ours]
     cols2 = [col[k] for k in ours]
     if wide:
         u = D["unseen"]
         for f, c in ((u["theta0"], C_DINOWM), (u["learner"], C_OURS)):
-            s = int((f < thr).sum())
-            a, b = wilson(s, len(f))
-            vals.append(100 * s / len(f))
-            errs.append((vals[-1] - 100 * a, 100 * b - vals[-1]))
+            vals.append(100 * (f < thr).mean())
             cols2.append(c)
         xs2 = np.concatenate([xs2, xs2[-1] + 1.8 + np.arange(2)])
         labels2 += ["DINO-WM", "Ours†"]
@@ -524,7 +496,7 @@ def fig_bars(domain, D):
                 va="bottom", fontsize=6.3, color=INK2)
     ax.text((xs2[0] + xs2[len(ours) - 1]) / 2, 1.04, "online stream", transform=ax.get_xaxis_transform(),
             ha="center", va="bottom", fontsize=6.3, color=INK2)
-    bar_group(ax, xs2, vals, errs, cols2, [None] * len(vals), labels2, lambda v: f"{v:.0f}")
+    bar_group(ax, xs2, vals, cols2, [None] * len(vals), labels2, lambda v: f"{v:.0f}")
     set_bar_ticks(ax)
     ax.set_ylabel(f"success rate, CD < {thr} (%) ↑")
     ax.set_title("(b) Success rate", loc="left", pad=26)
@@ -534,13 +506,12 @@ def fig_bars(domain, D):
 
 
 def fig_main_bars(Ds, rows):
-    """The main table as bars, one panel per domain, each from worst to best; ours with 95% CIs."""
+    """The main table as bars, one panel per domain, each from worst to best."""
     fig, axs = plt.subplots(1, len(Ds), figsize=(FULL_W, 2.1), gridspec_kw={"wspace": 0.18})
     for n, (ax, (domain, D)) in enumerate(zip(axs, Ds.items())):
         rs = sorted(rows, key=lambda r: -r[2][domain][0])
         vals = [r[2][domain][0] for r in rs]
-        errs = [(ci95(D["final"][k]),) * 2 if k else None for k, _, _ in rs]
-        bar_group(ax, np.arange(len(rs)), vals, errs, [COLOR[k] if k else C_REPORTED for k, _, _ in rs],
+        bar_group(ax, np.arange(len(rs)), vals, [COLOR[k] if k else C_REPORTED for k, _, _ in rs],
                   [None] * len(rs), [name for _, name, _ in rs], lambda v: f"{v:.2f}")
         set_bar_ticks(ax)
         ax.set_xlim(-0.6, len(rs) - 0.4)
@@ -558,12 +529,12 @@ def fig_steps(domain, D):
     for key, color, ls, label in show:
         s = D["steps"][key]
         m = s.mean(0)
-        c = np.array([ci95(s[:, t]) for t in range(4)])
-        axs[0].fill_between(pushes, m - c, m + c, color=color, alpha=0.12, lw=0)
+        c = np.array([se(s[:, t]) for t in range(4)])  # bands: +-1 s.e. (68% Wilson interval for the rates)
+        axs[0].fill_between(pushes, m - c, m + c, color=color, alpha=0.07, lw=0)
         axs[0].plot(pushes, m, ls=ls, marker="o", ms=3, color=color, lw=1.3, label=label)
         sr = 100 * (s < thr).mean(0)
         ci = np.array([wilson(int((s[:, t] < thr).sum()), len(s)) for t in range(4)]) * 100
-        axs[1].fill_between(pushes, ci[:, 0], ci[:, 1], color=color, alpha=0.12, lw=0)
+        axs[1].fill_between(pushes, ci[:, 0], ci[:, 1], color=color, alpha=0.07, lw=0)
         axs[1].plot(pushes, sr, ls=ls, marker="o", ms=3, color=color, lw=1.3, label=label)
     for ax in axs:
         ax.set_xticks(pushes)
