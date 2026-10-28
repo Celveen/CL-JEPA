@@ -12,7 +12,6 @@
 | `planning/continual_merge.py` | v5：`CLSMPCPlanner` + 对称验证合并（v7 系列的父类） |
 | `planning/continual_v7.py` | **v7 系列**，同一个规划器的四组配置，都不用形状标签，熟悉的回合照旧不学、也不调用学习器：`cls7_free`（写入优先进已有领域 + 开新领域要 5 个回合 + 定期吸收未成熟领域 + 合并放宽）、`cls7c_free`（同上，但开新领域和合并按 v5，只吸收小碎片）、`cls5a_free`（写入和合并完全按 v5，只加小碎片吸收）、**`cls6a_free`（v6a，论文主方法）**（放宽写入和放宽合并，加小碎片吸收）。离线对比见 `reports/cont_S7b3/v7_offline_replay.md` |
 | `planning/adajepa_probe.py` | 实验 0 用的探针规划器（也是持续学习规划器的基类） |
-| `planning/escape.py`、`scripts/escape_*.py` | 第二条线：规划器卡住时的脱困策略 |
 | `scripts/cont_run_stream.py` | 按段串行跑一条流（各组的超参数在 `NAMED_ARMS`）；`--independent` 让 AdaJEPA 基线各段并行 |
 | `scripts/cont_build_seed_stream.py` | 用测试种子的抽样建流（如 S7t3） |
 | `scripts/cont_rounds.py` | 逐 episode 配对分析：按轮次、见过/没见过形状统计，并给出门控统计 |
