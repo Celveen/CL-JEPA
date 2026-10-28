@@ -20,7 +20,8 @@ SEEDS = (99, 100, 101, 102, 103)
 CASES = {"rope_on_rope": ("我们训的 rope DINO-WM", "rope", 0.41),
          "ddpwm_on_rope": ("DDP-WM 提供的 rope DINO-WM", "rope", 0.41),
          "rope_on_granular": ("我们训的 rope DINO-WM（θ0）", "granular", None),
-         "granular_ref": ("granular 参照模型（只用 granular 训练）", "granular", 0.26)}
+         "granular_ref": ("granular 参照模型（只用 granular 训练）", "granular", 0.26),
+         "granular_on_rope": ("granular 参照模型", "rope", None)}
 
 
 def chamfer(x, y):

@@ -15,6 +15,7 @@
 #        rope_on_rope        our rope DINO-WM on rope        (checks the pipeline against DINO-WM's 0.41)
 #        rope_on_granular    our rope DINO-WM (theta0) on granular
 #        ddpwm_on_rope       the DINO-WM rope checkpoint provided by DDP-WM on rope
+#        granular_on_rope    the granular reference on rope (cross-domain)
 # Output: eval_outputs/granular_ref/<protocol>/<case>/seed<k>/, logs eval_outputs/granular_ref/logs/<protocol>_<case>_seed<k>.log
 set -u
 REPO=/data/zjc/adaJEPA/CL-JEPA-cudagraph
@@ -38,6 +39,8 @@ case $case in
   granular_ref)     ARGS=(ckpt_base_path=$CK/granular_dino_h1_fs1_e100_seed0) ;;
   rope_on_rope)     ARGS=(ckpt_base_path=$CK/rope_dino_h1_fs1_e100_seed0) ;;
   ddpwm_on_rope)    ARGS=(ckpt_base_path=$CK/ddpwm_dinowm_rope) ;;
+  granular_on_rope) ARGS=(ckpt_base_path=$CK/granular_dino_h1_fs1_e100_seed0 +eval_object_name=rope
+                          '++env_kwargs_override.object_name=rope') ;;
   rope_on_granular) ARGS=(ckpt_base_path=$CK/rope_dino_h1_fs1_e100_seed0 +eval_object_name=granular
                           '++env_kwargs_override.object_name=granular') ;;
   *) echo "unknown case $case"; exit 1 ;;
