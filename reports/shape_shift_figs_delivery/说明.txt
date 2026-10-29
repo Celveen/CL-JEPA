@@ -1,0 +1,60 @@
+形状偏移图表（PushObj，7 个形状）- Python 论文样式版
+
+参照视觉偏移那套 20 张图的样式与配色，只做形状偏移，不含 14 域混合实验。
+
+文件
+  PDF_矢量/（打包后）或 figures/：每张图一个 PDF。曲线、柱子、文字为矢量；仿真帧为原始栅格图像。
+  形状偏移图表合集.pdf：全部页面合成一个 PDF。
+  预览/ 或 preview/：PNG 预览（180 dpi）。
+  附表/：MPC 平均步数对比表（也是合集最后一页）。
+  English_captions.txt：英文图注；figure_manifest.json / 图表清单.json：图号、标题、图注。
+  Python绘图源码与数据.zip：绘图程序、作图数据、轨迹帧，可离线重画。
+
+图表
+  01-02  七个形状的逐步累计成功率曲线（GD、CEM 合在一起 / 分开），对应视觉偏移的图 1-2。
+  03     全部 / 已见形状（T、L、Z、+）/ 未见形状（I、square、small_tee）的成功率柱状图。
+  04     每个形状的成功率柱状图（GD、CEM 两栏）。
+  05     Ours 在训练流上五轮持续学习的成功率（全部 / 已见 / 未见），纵轴 40-100%。
+  06-19  每个形状 × 规划器的轨迹图 + 潜在预测损失（GD 7 张、CEM 7 张），对应视觉偏移的图 7-20。
+  20     MPC 平均步数对比表。
+
+数据口径
+  比较用的留出目标 H7t3：7 个形状 × 50 个 episode × 测试种子 2000/2100/2200，三种方法的初始和目标状态逐一相同，
+  且都没有在持续学习中用过。
+  Frozen：AdaJEPA 官方形状偏移权重 checkpoints/pushobj_shape_shift，不做任何适应，批量规划。
+  AdaJEPA：同一份官方权重，每个 episode 做测试时适应、episode 之间重置。
+  Ours：三条持续学习链（S7t3、S7t3s400、S7t3s700）第 5 轮结束时的状态，以只读方式评测：
+        每个 episode 照常快适应和选读学习器，但不写入、不训练、不合并；基础模型是我们自己的 pushobj_bias_16k_e3。
+  均值取三个测试种子的平均；Ours 在每个种子内合并三条链（每个形状 150 个 episode，基线 50 个）。
+  阴影 / 误差线为三个测试种子之间的样本标准差，不是置信区间。
+  规划设置：最多重规划 30 次；GD 每次 100 步；CEM 200 个采样、取前 30、10 步。
+  图 05 用的是训练流本身（每轮 7 形状 × 50 episode、每轮换新种子，Ours 持续学习），不是 H7t3。
+  已见/未见指是否在我们基础模型的训练数据里。
+
+本次补跑（2026-10-28）
+  cmp_gd_frozen_official、cmp_cem_frozen_official：官方权重 Frozen，GD / CEM 各 21 段。
+  cmp_gd_v6a_s100：GD 下第三条链（S7t3）的第 5 轮状态在 H7t3 上的只读评测（之前只有 s400、s700）。
+  命令见 scripts/ 下各脚本的说明；Frozen 用 planning.continual.SlowFrozenMPCPlanner（state_in=null 即官方权重本身）。
+
+预测损失（图 06-19 下方）
+  AdaJEPA、Ours：运行中记录的适应损失（adajepa_losses.csv，与 per_iter_logs.json 逐点一致），
+  即每次更新前，在最近 5 个转移的缓冲区上算的滑窗单步潜在 MSE（视觉 + 本体 token，不含动作维度）。
+  Frozen 不做适应，没有记录损失：用官方权重在 Frozen 自己的轨迹上按同一缓冲区、预处理和损失函数事后计算。
+  为与记录的损失口径一致，前向用训练模式（预测器 dropout 0.1），dropout 用固定的诊断随机种子；
+  确定性的 eval 模式数值另存在 data/frozen_prediction_losses.json 的 eval_mode_loss 中。
+  核验：回放 AdaJEPA 的执行动作得到的帧与它保存的帧逐像素相同；同一套代码在 AdaJEPA 的缓冲区上用官方权重
+  算出的 eval 模式损失与日志里的 θ0 缓冲区损失 loss_buf_init 完全相等；Frozen 回放的首次成功步与运行记录一致；
+  计算前后模型参数与缓冲区哈希不变。
+  各方法权重和潜在空间不同（Ours 与基线），不能只凭损失绝对值判断谁预测得更准。
+
+轨迹图
+  固定取测试种子 2000 的第 1 个样本（sample index 0），不按结果挑选。Ours 用第 1 条链（S7t3）。
+  AdaJEPA、Ours 的帧是运行时保存的真实仿真帧；Frozen 的帧是用其执行动作在仿真器里回放得到（标为 Replay）。
+  浅灰帧是提前成功后的保持帧；目标栏的勾/叉为该 episode 的最终结果。
+
+重建
+  解压 Python绘图源码与数据.zip，在 shape_shift_figs/ 目录下安装 numpy matplotlib pillow 后运行：
+    python scripts/build_figures.py
+  从原始运行重新汇总（需要本仓库和 eval_outputs）：
+    TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1 CUDA_VISIBLE_DEVICES=0 python reports/shape_shift_figs/scripts/compute_frozen_prediction_loss.py
+    python reports/shape_shift_figs/scripts/collect_data.py

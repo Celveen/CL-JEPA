@@ -1,0 +1,17 @@
+start 2026-10-22 07:22:58 stream=S7t5s400 root=eval_outputs/cont_S7t3s400_cem mode=cem args: --ws 0 --independent --chain-gpus 5,6 --probe-gpus 5
+stream S7t5s400: 14 independent chunk runs on GPUs ['5', '6']
+START eval_outputs/cont_S7t3s400_cem/w0/chunk_21_I GPU=5
+START eval_outputs/cont_S7t3s400_cem/w0/chunk_22_L GPU=6
+DONE eval_outputs/cont_S7t3s400_cem/w0/chunk_22_L seconds=1172
+START eval_outputs/cont_S7t3s400_cem/w0/chunk_23_square GPU=6
+DONE eval_outputs/cont_S7t3s400_cem/w0/chunk_21_I seconds=1208
+START eval_outputs/cont_S7t3s400_cem/w0/chunk_24_Z GPU=5
+DONE eval_outputs/cont_S7t3s400_cem/w0/chunk_24_Z seconds=681
+START eval_outputs/cont_S7t3s400_cem/w0/chunk_25_small_tee GPU=5
+DONE eval_outputs/cont_S7t3s400_cem/w0/chunk_23_square seconds=1718
+START eval_outputs/cont_S7t3s400_cem/w0/chunk_26_plus GPU=6
+DONE eval_outputs/cont_S7t3s400_cem/w0/chunk_25_small_tee seconds=1017
+START eval_outputs/cont_S7t3s400_cem/w0/chunk_27_T GPU=5
+DONE eval_outputs/cont_S7t3s400_cem/w0/chunk_27_T seconds=804
+START eval_outputs/cont_S7t3s400_cem/w0/chunk_28_I GPU=5
+EXIT=143 2026-10-22 08:25:03

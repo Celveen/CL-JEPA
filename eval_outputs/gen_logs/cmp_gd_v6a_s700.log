@@ -1,0 +1,46 @@
+start 2026-10-23 02:09:25 stream=H7t3 root=eval_outputs/cmp_gd_v6a_s700 mode=gd args: --arms cls6a_free --independent --state-in /data/zjc/adaJEPA/CL-JEPA-cudagraph/eval_outputs/cont_S7t3s700/cls6a_free/chunk_34_T/continual_state.pt --chain-gpus 2,3 --probe-gpus 2
+stream H7t3: 21 independent chunk runs on GPUs ['2', '3']
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_01_L GPU=3
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_00_I GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_01_L seconds=474
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_02_square GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_00_I seconds=584
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_03_Z GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_03_Z seconds=445
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_04_small_tee GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_02_square seconds=585
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_05_plus GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_05_plus seconds=390
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_06_T GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_04_small_tee seconds=469
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_07_I GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_06_T seconds=353
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_08_L GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_07_I seconds=436
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_09_square GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_08_L seconds=352
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_10_Z GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_10_Z seconds=373
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_11_small_tee GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_09_square seconds=719
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_12_plus GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_11_small_tee seconds=596
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_13_T GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_12_plus seconds=465
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_14_I GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_13_T seconds=407
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_15_L GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_14_I seconds=490
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_16_square GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_15_L seconds=498
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_17_Z GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_16_square seconds=743
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_18_small_tee GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_17_Z seconds=442
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_19_plus GPU=3
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_18_small_tee seconds=520
+START eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_20_T GPU=2
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_19_plus seconds=455
+DONE eval_outputs/cmp_gd_v6a_s700/cls6a_free/chunk_20_T seconds=422
+finished: 21 ok, 0 failed
+EXIT=0 2026-10-23 03:37:59

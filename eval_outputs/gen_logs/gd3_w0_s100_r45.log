@@ -1,0 +1,32 @@
+start 2026-10-23 02:41:40 stream=S7t5 root=/data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3 mode=gd args: --ws 0 --independent --chain-gpus 3,6 --probe-gpus 3
+stream S7t5: 14 independent chunk runs on GPUs ['3', '6']
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_21_I GPU=3
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_22_L GPU=6
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_22_L seconds=468
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_23_square GPU=6
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_21_I seconds=861
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_24_Z GPU=3
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_24_Z seconds=379
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_25_small_tee GPU=3
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_23_square seconds=997
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_26_plus GPU=6
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_25_small_tee seconds=639
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_27_T GPU=3
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_26_plus seconds=498
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_28_I GPU=6
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_27_T seconds=442
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_29_L GPU=3
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_29_L seconds=481
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_30_square GPU=3
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_28_I seconds=856
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_31_Z GPU=6
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_31_Z seconds=461
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_32_small_tee GPU=6
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_30_square seconds=803
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_33_plus GPU=3
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_33_plus seconds=306
+START /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_34_T GPU=3
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_32_small_tee seconds=670
+DONE /data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/w0/chunk_34_T seconds=385
+finished: 14 ok, 0 failed
+EXIT=0 2026-10-23 03:53:17

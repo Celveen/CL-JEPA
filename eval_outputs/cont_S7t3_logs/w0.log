@@ -1,0 +1,46 @@
+start 2026-10-20 06:08:27 args: --ws 0 --independent --chain-gpus 5,6 --probe-gpus 5
+stream S7t3: 21 independent chunk runs on GPUs ['5', '6']
+START eval_outputs/cont_S7t3/w0/chunk_01_L GPU=6
+START eval_outputs/cont_S7t3/w0/chunk_00_I GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_01_L seconds=2933
+START eval_outputs/cont_S7t3/w0/chunk_02_square GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_00_I seconds=7451
+START eval_outputs/cont_S7t3/w0/chunk_03_Z GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_02_square seconds=6471
+START eval_outputs/cont_S7t3/w0/chunk_04_small_tee GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_03_Z seconds=3528
+START eval_outputs/cont_S7t3/w0/chunk_05_plus GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_05_plus seconds=2964
+START eval_outputs/cont_S7t3/w0/chunk_06_T GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_04_small_tee seconds=4898
+START eval_outputs/cont_S7t3/w0/chunk_07_I GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_06_T seconds=3109
+START eval_outputs/cont_S7t3/w0/chunk_08_L GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_08_L seconds=2568
+START eval_outputs/cont_S7t3/w0/chunk_09_square GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_07_I seconds=7332
+START eval_outputs/cont_S7t3/w0/chunk_10_Z GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_10_Z seconds=2739
+START eval_outputs/cont_S7t3/w0/chunk_11_small_tee GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_09_square seconds=5933
+START eval_outputs/cont_S7t3/w0/chunk_12_plus GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_11_small_tee seconds=4120
+START eval_outputs/cont_S7t3/w0/chunk_13_T GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_12_plus seconds=3662
+START eval_outputs/cont_S7t3/w0/chunk_14_I GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_13_T seconds=2982
+START eval_outputs/cont_S7t3/w0/chunk_15_L GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_15_L seconds=2662
+START eval_outputs/cont_S7t3/w0/chunk_16_square GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_14_I seconds=6791
+START eval_outputs/cont_S7t3/w0/chunk_17_Z GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_17_Z seconds=3593
+START eval_outputs/cont_S7t3/w0/chunk_18_small_tee GPU=5
+DONE eval_outputs/cont_S7t3/w0/chunk_16_square seconds=6252
+START eval_outputs/cont_S7t3/w0/chunk_19_plus GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_19_plus seconds=3548
+START eval_outputs/cont_S7t3/w0/chunk_20_T GPU=6
+DONE eval_outputs/cont_S7t3/w0/chunk_18_small_tee seconds=4423
+DONE eval_outputs/cont_S7t3/w0/chunk_20_T seconds=3164
+finished: 21 ok, 0 failed
+EXIT=0 2026-10-20 19:13:29

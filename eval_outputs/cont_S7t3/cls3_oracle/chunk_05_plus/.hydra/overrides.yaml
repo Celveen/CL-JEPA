@@ -1,0 +1,13 @@
+- ckpt_base_path=/data/zjc/adaJEPA/CL-JEPA/checkpoints/pushobj_bias_16k_e3_seed0
+- model_epoch=3
+- eval_data_path=/data/zjc/adaJEPA/CL-JEPA/data/cont_streams/S7t3/chunk_05_plus.pkl
+- n_evals=50
+- +wandb_logging=false
+- planner._target_=planning.continual.CLSMPCPlanner
+- planner.continual.write=oracle
+- planner.continual.mature_k=3
+- planner.continual.mature_ratio=0.9
+- planner.continual.tag=plus
+- planner.continual.state_in=/data/zjc/adaJEPA/CL-JEPA/eval_outputs/cont_S7t3/cls3_oracle/chunk_04_small_tee/continual_state.pt
+- planner.continual.save_deltas=false
+- seed=100

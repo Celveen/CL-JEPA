@@ -1,0 +1,5 @@
+start 2026-10-23 02:09:25 stream=H7t3 root=eval_outputs/cmp_gd_theta0 mode=gd args: --ws 0 --independent --chain-gpus 2,3 --probe-gpus 2
+stream H7t3: 21 independent chunk runs on GPUs ['2', '3']
+START eval_outputs/cmp_gd_theta0/w0/chunk_01_L GPU=3
+START eval_outputs/cmp_gd_theta0/w0/chunk_00_I GPU=2
+EXIT=143 2026-10-23 02:16:56

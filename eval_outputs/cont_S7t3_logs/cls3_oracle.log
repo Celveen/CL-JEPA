@@ -1,0 +1,46 @@
+start 2026-10-20 06:08:27 args: --arms cls3_oracle --chain-gpus 4 --probe-gpus 4 --keep-states 6 13
+stream S7t3: 21 chunks x 1 arms (['cls3_oracle']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_00_I GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_00_I seconds=6712
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_01_L GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_01_L seconds=3788
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_02_square GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_02_square seconds=5437
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_03_Z GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_03_Z seconds=3110
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_04_small_tee GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_04_small_tee seconds=4907
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_05_plus GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_05_plus seconds=3384
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_06_T GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_06_T seconds=3619
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_07_I GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_07_I seconds=5107
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_08_L GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_08_L seconds=2877
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_09_square GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_09_square seconds=4746
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_10_Z GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_10_Z seconds=3120
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_11_small_tee GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_11_small_tee seconds=3657
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_12_plus GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_12_plus seconds=3534
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_13_T GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_13_T seconds=3037
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_14_I GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_14_I seconds=4833
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_15_L GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_15_L seconds=3123
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_16_square GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_16_square seconds=4859
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_17_Z GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_17_Z seconds=3898
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_18_small_tee GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_18_small_tee seconds=3494
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_19_plus GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_19_plus seconds=3768
+START eval_outputs/cont_S7t3/cls3_oracle/chunk_20_T GPU=4
+DONE eval_outputs/cont_S7t3/cls3_oracle/chunk_20_T seconds=3583
+finished: 21 ok, 0 failed
+EXIT=0 2026-10-21 05:38:28

@@ -1,0 +1,546 @@
+<title>五轮持续学习</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Same family as the S7t3 report: one reading column for prose, figures up to 1040px. Planners keep blue/orange,
+   unseen shapes keep aqua/yellow/magenta, AdaJEPA is always a grey dashed line. */
+:root {
+  --bg:#f6f7f8; --surface:#fff; --ink:#14181d; --ink-2:#4a525c; --muted:#7b848e; --rule:#dde1e5; --rule-strong:#c4cad0;
+  --accent:#1f5fae; --accent-soft:rgba(31,95,174,.08); --pos:#0b6b35; --neg:#a8352e; --band:rgba(31,95,174,.07);
+  --gd:#2a78d6; --cem:#eb6834; --shI:#1baf7a; --shSq:#eda100; --shTee:#e87ba4; --base:#7b848e; --other:#c4cad0;
+  --f-body:"Noto Sans SC",system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:#0f1215; --surface:#161a1e; --ink:#eceff2; --ink-2:#b9c0c7; --muted:#8b939c; --rule:#2a3036; --rule-strong:#3a4148;
+  --accent:#6aa5ef; --accent-soft:rgba(106,165,239,.10); --pos:#3cc46f; --neg:#ec6a62; --band:rgba(106,165,239,.08);
+  --gd:#3987e5; --cem:#d95926; --shI:#199e70; --shSq:#c98500; --shTee:#d55181; --base:#8b939c; --other:#3a4148; color-scheme:dark; } }
+:root[data-theme="dark"] {
+  --bg:#0f1215; --surface:#161a1e; --ink:#eceff2; --ink-2:#b9c0c7; --muted:#8b939c; --rule:#2a3036; --rule-strong:#3a4148;
+  --accent:#6aa5ef; --accent-soft:rgba(106,165,239,.10); --pos:#3cc46f; --neg:#ec6a62; --band:rgba(106,165,239,.08);
+  --gd:#3987e5; --cem:#d95926; --shI:#199e70; --shSq:#c98500; --shTee:#d55181; --base:#8b939c; --other:#3a4148; color-scheme:dark; }
+* { box-sizing:border-box; }
+body { background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:.9375rem; line-height:1.7; }
+.page { max-width:1040px; margin:0 auto; padding-block:40px 72px;
+  padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px)); }
+.prose { max-width:760px; }
+h1,h2,h3 { text-wrap:balance; line-height:1.3; margin:0; }
+h1 { font-size:2rem; font-weight:700; }
+h2 { font-size:1.375rem; font-weight:700; margin-top:52px; padding-top:18px; border-top:1px solid var(--rule); }
+h3 { font-size:1.0625rem; font-weight:600; margin-top:24px; }
+p { margin:12px 0 0; }
+a { color:var(--accent); }
+code { font-family:var(--f-mono); font-size:.9em; background:var(--accent-soft); padding:1px 5px; border-radius:3px; overflow-wrap:anywhere; }
+.eyebrow { font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-family:var(--f-mono); }
+.meta { margin-top:10px; color:var(--ink-2); font-size:.8125rem; display:flex; flex-wrap:wrap; gap:4px 18px; }
+.lead { margin-top:24px; font-size:1.0625rem; line-height:1.8; }
+.kpis { margin-top:24px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+@media (max-width:760px) { .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.kpi { background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:12px 14px; }
+.kpi .v { font-size:1.6rem; font-weight:700; line-height:1.2; font-variant-numeric:tabular-nums; }
+.kpi .v.pos { color:var(--pos); }
+.kpi .k { font-size:.8125rem; color:var(--ink-2); margin-top:2px; }
+.kpi .s { font-size:.75rem; color:var(--muted); font-family:var(--f-mono); }
+ol.findings { margin:22px 0 0; padding-left:1.4em; display:grid; gap:10px; }
+.figure { margin-top:18px; background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:16px 16px 12px; position:relative; }
+.ftitle { font-weight:600; }
+.cap { color:var(--ink-2); font-size:.8125rem; margin-top:8px; line-height:1.6; }
+.grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:8px; }
+.grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:8px; }
+.grid6 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px 14px; margin-top:8px; }
+@media (max-width:760px) { .grid2,.grid3 { grid-template-columns:minmax(0,1fr); } .grid6 { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.panel { min-width:0; }
+.panel h4 { margin:0; font-size:.8125rem; font-weight:600; }
+.panel .sub { font-size:.72rem; color:var(--muted); }
+svg { display:block; width:100%; height:auto; overflow:visible; }
+svg text { font-family:var(--f-body); fill:var(--ink-2); font-size:11px; }
+svg .tick { fill:var(--muted); font-family:var(--f-mono); font-size:10px; }
+.legend { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:.8125rem; color:var(--ink-2); margin-top:6px; }
+.legend i { display:inline-block; width:16px; height:3px; border-radius:2px; vertical-align:middle; margin-right:6px; }
+.legend i.sq { width:10px; height:10px; border-radius:2px; vertical-align:-1px; }
+.legend i.dash { background:repeating-linear-gradient(90deg,var(--base) 0 5px,transparent 5px 8px) !important; }
+.tip { position:absolute; pointer-events:none; background:var(--surface); color:var(--ink); border:1px solid var(--rule-strong);
+  border-radius:6px; padding:8px 10px; font-size:.75rem; line-height:1.55; box-shadow:0 4px 16px rgba(0,0,0,.12); min-width:150px; max-width:280px; z-index:5; }
+.tip .t { font-weight:600; font-size:.8125rem; margin-bottom:2px; }
+.tip .row { display:flex; justify-content:space-between; gap:12px; font-variant-numeric:tabular-nums; }
+.tip .row span:first-child { color:var(--ink-2); }
+.tablewrap { margin-top:14px; overflow-x:auto; border:1px solid var(--rule); border-radius:6px; background:var(--surface); }
+table { border-collapse:collapse; width:100%; font-size:.8125rem; font-variant-numeric:tabular-nums; }
+th,td { padding:7px 10px; text-align:right; border-bottom:1px solid var(--rule); white-space:nowrap; }
+th:first-child,td:first-child { text-align:left; }
+thead th { font-weight:600; color:var(--ink-2); background:var(--accent-soft); border-bottom:1px solid var(--rule-strong); }
+tbody tr:last-child td { border-bottom:none; }
+tr.pool td { font-weight:700; border-top:1px solid var(--rule-strong); }
+.d { display:block; font-size:.72rem; color:var(--muted); }
+.d.sig { color:var(--pos); font-weight:500; }
+.dim { color:var(--muted); }
+.note { font-size:.8125rem; color:var(--ink-2); }
+ul.plain { margin:12px 0 0; padding-left:1.4em; display:grid; gap:8px; }
+details { margin-top:12px; }
+summary { cursor:pointer; color:var(--accent); font-size:.875rem; }
+summary:focus-visible, [tabindex]:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+footer { margin-top:52px; padding-top:14px; border-top:1px solid var(--rule); color:var(--muted); font-size:.75rem; }
+@media (prefers-reduced-motion: reduce) { * { transition:none !important; animation:none !important; } }
+</style>
+
+<div class="page">
+<header class="prose">
+  <div class="eyebrow">CL-JEPA · PushObj 持续学习 · Ours 对 AdaJEPA</div>
+  <h1 style="margin-top:8px">五轮持续学习</h1>
+  <div class="meta" id="meta"></div>
+  <p class="lead">__LEAD__</p>
+</header>
+<div class="kpis" id="kpis"></div>
+<div class="prose"><ol class="findings">__FINDINGS__</ol></div>
+
+<section>
+  <div class="prose"><h2>每轮的提升</h2>
+    <p>每一轮是 7 个形状 × 50 个 episode（350 个）。下图是每一轮里 Ours 相对 AdaJEPA 的逐 episode 配对差，GD 和 CEM 各 3 条种子流，分别合并。细线是单个实验。</p></div>
+  <div class="figure" id="fig-round">
+    <div class="ftitle">每轮 Ours − AdaJEPA（百分点）</div>
+    <div class="legend"><span><i style="background:var(--gd)"></i>GD（合并）</span><span><i style="background:var(--cem)"></i>CEM（合并）</span><span><i style="background:var(--rule-strong)"></i>单个实验</span></div>
+    <div class="grid2"><div class="panel"><h4>全部形状</h4><div class="sub">每轮每个实验 350 个 episode</div><div id="round-all"></div></div>
+      <div class="panel"><h4>没见过的形状（I、square、small_tee）</h4><div class="sub">每轮每个实验 150 个 episode</div><div id="round-unseen"></div></div></div>
+    <div class="cap">点为配对差，实心点 p &lt; 0.05；浅色带为 95% bootstrap 区间（按实验分层）。第 1 轮每个形状都是第一次出现，之后每一轮都是重访。悬停查看数值。</div>
+  </div>
+
+  <div class="figure" id="fig-abs">
+    <div class="ftitle">每轮成功率</div>
+    <div class="legend"><span><i style="background:var(--gd)"></i>Ours · GD</span><span><i style="background:var(--cem)"></i>Ours · CEM</span><span><i class="dash"></i>AdaJEPA</span></div>
+    <div class="grid6" id="abs-panels"></div>
+    <div class="cap">每个小图是一个实验（上排 GD，下排 CEM），横轴是轮次，纵轴是该轮 350 个 episode 的成功率。每轮换一组测试种子，所以两条线一起上下波动反映的是目标难度；两条线之间的距离才是持续学习的效果。</div>
+  </div>
+  <div class="tablewrap" id="round-table"></div>
+</section>
+
+<section>
+  <div class="prose"><h2>整体提升</h2><p>五轮合计，每个实验和按规划器合并后的配对差。</p></div>
+  <div class="figure" id="fig-forest">
+    <div class="ftitle">Ours − AdaJEPA（百分点，五轮合计）</div>
+    <div class="grid3" id="forest-panels"></div>
+    <div class="cap">实心点 p &lt; 0.05，空心点不显著；粗体行为合并结果；三幅图横轴刻度不同。</div>
+  </div>
+  <div class="figure" id="fig-cum">
+    <div class="ftitle">沿数据流累计多成功的 episode 数（Ours − AdaJEPA）</div>
+    <div class="legend" id="cum-legend"></div>
+    <div id="cum-chart" style="margin-top:6px"></div>
+    <div class="cap">浅色底纹是没见过形状的段；虚线分隔五轮。曲线主要在没见过形状的段上爬升，在见过形状的段上基本水平，而且越往后的轮次爬得越快。</div>
+  </div>
+</section>
+
+<section>
+  <div class="prose"><h2>没见过的形状逐次访问</h2><p>三个没见过的形状在第 1–5 次出现时的成功率（每点 150 个 episode，3 个实验各 50 个）。实线 Ours，虚线 AdaJEPA。</p></div>
+  <div class="figure" id="fig-shapes">
+    <div class="legend"><span><i style="background:var(--shI)"></i>I</span><span><i style="background:var(--shSq)"></i>square</span><span><i style="background:var(--shTee)"></i>small_tee</span><span>实线 Ours，虚线 AdaJEPA</span></div>
+    <div class="grid3" id="shape-gd"></div>
+    <div class="grid3" id="shape-cem" style="margin-top:14px"></div>
+    <div class="cap">上排 GD，下排 CEM。</div>
+  </div>
+  <div class="figure" id="fig-slow">
+    <div class="ftitle">慢学习器让预测准了多少</div>
+    <div class="grid2"><div class="panel"><h4>GD</h4><div id="slow-gd"></div></div><div class="panel"><h4>CEM</h4><div id="slow-cem"></div></div></div>
+    <div class="cap">新 episode 第 2–3 次重规划时，所读权重的最新帧误差与 θ0 之比（越低越好，1 = 与 θ0 相同），对同一规划器的实验取平均。</div>
+  </div>
+</section>
+
+<section>
+  <div class="prose"><h2>路由与领域</h2><p>第 2–5 次访问的 episode 按读了哪个学习器分组，比较同一批 episode 上 Ours 与 AdaJEPA 的成功率；领域构成是五轮结束时的状态。</p></div>
+  <div class="figure" id="fig-reads">
+    <div class="legend"><span><i class="sq" style="background:var(--accent)"></i>Ours</span><span><i class="sq" style="background:var(--other)"></i>AdaJEPA（同一批 episode）</span></div>
+    <div class="grid2"><div class="panel"><h4>GD</h4><div id="reads-gd"></div></div><div class="panel"><h4>CEM</h4><div id="reads-cem"></div></div></div>
+    <div class="cap">读 θ0 时两者计算相同（GD 下逐个 episode 完全一致），所以差别全部来自读学习器的 episode。</div>
+  </div>
+  <div class="figure" id="fig-domains">
+    <div class="ftitle">最大领域 d0 里装了什么</div>
+    <div class="legend"><span><i class="sq" style="background:var(--shI)"></i>I</span><span><i class="sq" style="background:var(--shSq)"></i>square</span><span><i class="sq" style="background:var(--shTee)"></i>small_tee</span><span><i class="sq" style="background:var(--other)"></i>见过的形状</span></div>
+    <div id="dom-chart" style="margin-top:6px"></div>
+    <div class="cap">每条是一个实验五轮结束时最大领域的 episode 构成。</div>
+  </div>
+  <div class="tablewrap" id="gate-table"></div>
+</section>
+
+<section>
+  <div class="prose"><h2>运行与开销</h2></div>
+  <div class="figure" id="fig-time">
+    <div class="ftitle">一条 Ours 链每轮的用时（小时）</div>
+    <div id="time-chart"></div>
+    <div class="cap">每轮用时 = 第 1–3 轮和第 4–5 轮两段运行的平均。GD · S7t3 的前 3 轮用 eager GD 跑（3 轮共 23.9 小时，灰条）；它的蓝条只算用 CUDA Graph 跑的第 4–5 轮。</div>
+  </div>
+</section>
+
+<section class="prose">
+  <h2>实验设置</h2>__SETUP__
+  <h2>局限</h2><ul class="plain">__LIMITS__</ul>
+  <h2>建议的下一步</h2><ul class="plain">__NEXT__</ul>
+  <h2>文件</h2>
+  <ul class="plain">
+    <li>输出：<code>CL-JEPA-cudagraph/eval_outputs/cont_S7t3s400</code>、<code>cont_S7t3s700</code>、<code>cont_S7t3*_cem</code>，GD · S7t3 在主仓库 <code>CL-JEPA/eval_outputs/cont_S7t3</code>（每个实验第 1–5 轮都在同一目录）；日志 <code>eval_outputs/gen_logs/</code></li>
+    <li>每轮成功率：<code>eval_outputs/gen_logs/round_success.md</code>；本页全部数字：<code>reports/gen5/report_data.json</code>（由 <code>reports/gen5/build_data.py</code> 生成）</li>
+  </ul>
+  <footer id="foot"></footer>
+</section>
+</div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function () {
+  const D = JSON.parse(document.getElementById("data").textContent);
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+  const fp = p => p < 0.001 ? p.toExponential(1).replace("e-", "e−") : (p < 0.01 ? p.toFixed(3) : p.toFixed(2));
+  const sgn = x => (x > 0 ? "+" : x < 0 ? "−" : "±") + Math.abs(x).toFixed(1);
+  const PC = { gd: "var(--gd)", cem: "var(--cem)" }, PN = { gd: "GD", cem: "CEM" };
+  const SC = { I: "var(--shI)", square: "var(--shSq)", small_tee: "var(--shTee)" };
+  const RUNS = D.runs, RL = Object.fromEntries(RUNS.map(r => [r.id, r.label]));
+
+  function tipFor(fig) {
+    const t = document.createElement("div"); t.className = "tip"; t.hidden = true; fig.appendChild(t);
+    return {
+      show(html, x, y) {
+        t.innerHTML = html; t.hidden = false;
+        const fr = fig.getBoundingClientRect(), w = t.offsetWidth, h = t.offsetHeight;
+        let lx = x - fr.left + 14, ly = y - fr.top - h - 10;
+        if (lx + w > fr.width - 6) lx = x - fr.left - w - 14;
+        if (lx < 6) lx = 6; if (ly < 6) ly = y - fr.top + 16;
+        t.style.left = lx + "px"; t.style.top = ly + "px";
+      },
+      hide() { t.hidden = true; }
+    };
+  }
+  function hover(node, tip, html) {
+    node.setAttribute("tabindex", 0);
+    node.addEventListener("mousemove", e => tip.show(html(), e.clientX, e.clientY));
+    node.addEventListener("mouseleave", () => tip.hide());
+    node.addEventListener("focus", () => { const b = node.getBoundingClientRect(); tip.show(html(), b.left + b.width / 2, b.top); });
+    node.addEventListener("blur", () => tip.hide());
+  }
+  // axes frame on a fixed viewBox; returns scales
+  function frame(host, o) {
+    const svg = el("svg", { viewBox: `0 0 ${o.W} ${o.H}`, role: "img", "aria-label": o.label || "" }, host);
+    const X = v => o.L + (v - o.xmin) / (o.xmax - o.xmin) * (o.W - o.L - o.R);
+    const Y = v => o.T + (o.ymax - v) / (o.ymax - o.ymin) * (o.H - o.T - o.B);
+    (o.yticks || []).forEach(v => {
+      el("line", { x1: o.L, x2: o.W - o.R, y1: Y(v), y2: Y(v), stroke: v === (o.zero === undefined ? NaN : o.zero) ? "var(--rule-strong)" : "var(--rule)", "stroke-width": v === (o.zero === undefined ? NaN : o.zero) ? 1.5 : 1 }, svg);
+      el("text", { x: o.L - 6, y: Y(v) + 3.5, "text-anchor": "end", class: "tick" }, svg).textContent = o.yfmt ? o.yfmt(v) : v;
+    });
+    (o.xticks || []).forEach(([v, t]) => el("text", { x: X(v), y: o.H - o.B + 15, "text-anchor": "middle", class: "tick" }, svg).textContent = t);
+    if (o.xlabel) el("text", { x: o.W - o.R, y: o.H - 2, "text-anchor": "end", fill: "var(--muted)", "font-size": 10 }, svg).textContent = o.xlabel;
+    return { svg, X, Y };
+  }
+  const path = (pts, X, Y) => { let d = "", pen = false; pts.forEach(([x, y]) => { if (y == null) { pen = false; return; } d += `${pen ? "L" : "M"}${X(x).toFixed(1)},${Y(y).toFixed(1)}`; pen = true; }); return d; };
+  const niceRange = (vals, pad, step) => { const lo = Math.floor((Math.min(...vals) - pad) / step) * step, hi = Math.ceil((Math.max(...vals) + pad) / step) * step; return [lo, hi]; };
+  const range = (a, b, s) => { const r = []; for (let v = a; v <= b + 1e-9; v += s) r.push(+v.toFixed(6)); return r; };
+
+  // ---------- meta, KPIs ----------
+  const P = D.overall_pooled;
+  document.getElementById("meta").innerHTML = [`${RUNS.length} 个实验 × 5 轮 × 350 个 episode`, "8 × RTX 5090", "代码 cudagraph-gd@b3a0521", `数据更新于 ${D.generated}`].map(s => `<span>${s}</span>`).join("");
+  const kp = [
+    [P.gd.all, "GD · 五轮合计", ""], [P.cem.all, "CEM · 五轮合计", ""],
+    [P.gd.unseen_revisit, "GD · 没见过形状第 2–5 次", ""], [P.cem.unseen_revisit, "CEM · 没见过形状第 2–5 次", ""]];
+  document.getElementById("kpis").innerHTML = kp.map(([r, k, s]) => `<div class="kpi"><div class="v ${r.p < 0.05 ? "pos" : ""}">${sgn(r.diff)}</div><div class="k">${k}</div><div class="s">${r.w0.toFixed(1)}% → ${r.v6a.toFixed(1)}% · n=${r.n} · p=${fp(r.p)}</div></div>`).join("");
+  document.getElementById("foot").textContent = `数据来自本批运行保存的输出，生成于 ${D.generated}。`;
+
+  // ---------- per-round gains (pooled + per run) ----------
+  function roundGain(hostId, g) {
+    const fig = document.getElementById("fig-round"), tip = tipFor(fig);
+    const vals = [];
+    ["gd", "cem"].forEach(p => D.per_round_pooled[p][g].forEach(r => r && vals.push(r.ci[0], r.ci[1])));
+    RUNS.forEach(r => D.per_round[r.id][g].forEach(x => x && vals.push(x.diff)));
+    const [ymin, ymax] = niceRange([0, ...vals], 1, 5);
+    const o = { W: 440, H: 260, L: 40, R: 14, T: 12, B: 26, xmin: 0.5, xmax: 5.5, ymin, ymax, zero: 0,
+      yticks: range(ymin, ymax, 5), yfmt: v => (v > 0 ? "+" : "") + v, xticks: [1, 2, 3, 4, 5].map(r => [r, `第 ${r} 轮`]) };
+    const { svg, X, Y } = frame(document.getElementById(hostId), o);
+    RUNS.forEach(r => {
+      const pts = D.per_round[r.id][g].map((x, i) => [i + 1, x ? x.diff : null]);
+      el("path", { d: path(pts, X, Y), fill: "none", stroke: "var(--rule-strong)", "stroke-width": 1.2 }, svg);
+    });
+    ["gd", "cem"].forEach((p, k) => {
+      const off = k ? 0.09 : -0.09, rs = D.per_round_pooled[p][g];
+      // the 95% interval as a light band rather than a bar on every point
+      const ok = rs.map((x, i) => [X(i + 1 + off), x]).filter(([, x]) => x);
+      if (ok.length > 1) el("path", { d: ok.map(([cx, x], j) => `${j ? "L" : "M"}${cx.toFixed(1)},${Y(x.ci[1]).toFixed(1)}`).join("") +
+        ok.slice().reverse().map(([cx, x]) => `L${cx.toFixed(1)},${Y(x.ci[0]).toFixed(1)}`).join("") + "Z", fill: PC[p], "fill-opacity": 0.14, stroke: "none" }, svg);
+      el("path", { d: path(rs.map((x, i) => [i + 1 + off, x ? x.diff : null]), X, Y), fill: "none", stroke: PC[p], "stroke-width": 2 }, svg);
+      rs.forEach((x, i) => {
+        if (!x) return;
+        const cx = X(i + 1 + off);
+        const c = el("circle", { cx, cy: Y(x.diff), r: 4.5, fill: x.p < 0.05 ? PC[p] : "var(--surface)", stroke: PC[p], "stroke-width": 2 }, svg);
+        const hit = el("rect", { x: cx - 12, y: Y(x.ci[1]) - 6, width: 24, height: Math.max(20, Y(x.ci[0]) - Y(x.ci[1]) + 12), fill: "transparent" }, svg);
+        hover(hit, tip, () => `<div class="t">${PN[p]} · 第 ${i + 1} 轮</div>
+          <div class="row"><span>AdaJEPA → Ours</span><span>${x.w0.toFixed(1)}% → ${x.v6a.toFixed(1)}%</span></div>
+          <div class="row"><span>配对差</span><span>${sgn(x.diff)} [${sgn(x.ci[0])}, ${sgn(x.ci[1])}]</span></div>
+          <div class="row"><span>仅 Ours / 仅基线成功</span><span>${x.only_v6a} / ${x.only_w0}</span></div>
+          <div class="row"><span>p</span><span>${fp(x.p)}</span></div>
+          ${RUNS.filter(r => r.planner === p).map(r => { const y = D.per_round[r.id][g][i]; return y ? `<div class="row"><span>${r.label}</span><span>${sgn(y.diff)}</span></div>` : ""; }).join("")}`);
+      });
+      const last = [...rs.keys()].reverse().find(i => rs[i]);
+      if (last !== undefined) el("text", { x: X(last + 1 + off) + 8, y: Y(rs[last].diff) + (k ? 12 : -6), fill: "var(--ink)", "font-size": 11 }, svg).textContent = PN[p];
+    });
+  }
+  roundGain("round-all", "all"); roundGain("round-unseen", "unseen");
+
+  // ---------- absolute success per round, small multiples ----------
+  (function abs() {
+    const fig = document.getElementById("fig-abs"), tip = tipFor(fig), host = document.getElementById("abs-panels");
+    const vals = [];
+    RUNS.forEach(r => [...D.v6a_round[r.id].all, ...D.w0_round[r.id].all].forEach(v => v != null && vals.push(v)));
+    const [ymin, ymax] = niceRange(vals, 1, 5);
+    RUNS.forEach(r => {
+      const wrap = document.createElement("div"); wrap.className = "panel";
+      wrap.innerHTML = `<h4>${r.label}</h4><div class="sub">种子 ${r.seeds.join(" / ")}</div>`; host.appendChild(wrap);
+      const o = { W: 200, H: 170, L: 30, R: 8, T: 10, B: 22, xmin: 0.6, xmax: 5.4, ymin, ymax, yticks: range(ymin, ymax, 5), xticks: [1, 2, 3, 4, 5].map(v => [v, v]) };
+      const { svg, X, Y } = frame(wrap, o);
+      const va = D.v6a_round[r.id].all, wa = D.w0_round[r.id].all, pr = D.per_round[r.id].all, col = PC[r.planner];
+      el("path", { d: path(wa.map((v, i) => [i + 1, v]), X, Y), fill: "none", stroke: "var(--base)", "stroke-width": 1.8, "stroke-dasharray": "5 4" }, svg);
+      el("path", { d: path(va.map((v, i) => [i + 1, v]), X, Y), fill: "none", stroke: col, "stroke-width": 2.2 }, svg);
+      va.forEach((v, i) => {
+        if (v == null) return;
+        const w = wa[i], x = pr[i];
+        if (w != null) el("circle", { cx: X(i + 1), cy: Y(w), r: 3, fill: "var(--surface)", stroke: "var(--base)", "stroke-width": 1.5 }, svg);
+        el("circle", { cx: X(i + 1), cy: Y(v), r: 3.5, fill: col, stroke: "var(--surface)", "stroke-width": 1.5 }, svg);
+        const hit = el("rect", { x: X(i + 1) - 14, y: o.T, width: 28, height: o.H - o.T - o.B, fill: "transparent" }, svg);
+        hover(hit, tip, () => `<div class="t">${r.label} · 第 ${i + 1} 轮（种子 ${r.seeds[i]}）</div>
+          <div class="row"><span>Ours</span><span>${v.toFixed(1)}%</span></div><div class="row"><span>AdaJEPA</span><span>${w != null ? w.toFixed(1) + "%" : "无基线"}</span></div>
+          ${x ? `<div class="row"><span>差</span><span>${sgn(x.diff)} · p=${fp(x.p)}</span></div>` : ""}`);
+      });
+    });
+  })();
+
+  // ---------- per-round table ----------
+  (function roundTable() {
+    let h = `<table><thead><tr><th>实验</th>${[1, 2, 3, 4, 5].map(r => `<th>第 ${r} 轮</th>`).join("")}</tr></thead><tbody>`;
+    RUNS.forEach(r => {
+      h += `<tr><td>${r.label}</td>` + D.per_round[r.id].all.map((x, i) => {
+        const v = D.v6a_round[r.id].all[i];
+        if (x) return `<td>${x.w0.toFixed(1)} → ${x.v6a.toFixed(1)}<span class="d ${x.p < 0.05 ? "sig" : ""}">${sgn(x.diff)} · p=${fp(x.p)}</span></td>`;
+        if (v != null) return `<td>Ours ${v.toFixed(1)}<span class="d">无基线</span></td>`;
+        return `<td class="dim">未完成</td>`;
+      }).join("") + "</tr>";
+    });
+    ["gd", "cem"].forEach(p => {
+      h += `<tr class="pool"><td>${PN[p]} 合并</td>` + D.per_round_pooled[p].all.map((x, i) => {
+        const v = D.v6a_round_pooled[p].all[i];
+        if (x) return `<td>${x.w0.toFixed(1)} → ${x.v6a.toFixed(1)}<span class="d ${x.p < 0.05 ? "sig" : ""}">${sgn(x.diff)} [${sgn(x.ci[0])}, ${sgn(x.ci[1])}]</span></td>`;
+        if (v != null) return `<td>Ours ${v.toFixed(1)}<span class="d">无基线</span></td>`;
+        return `<td class="dim">—</td>`;
+      }).join("") + "</tr>";
+    });
+    document.getElementById("round-table").innerHTML = h + "</tbody></table>";
+  })();
+
+  // ---------- forest ----------
+  (function forest() {
+    const fig = document.getElementById("fig-forest"), tip = tipFor(fig), host = document.getElementById("forest-panels");
+    const groups = [["all", "全部"], ["unseen_revisit", "没见过 · 第 2–5 次"], ["seen", "见过的形状"]];
+    groups.forEach(([g, title]) => {
+      const rr = r => r.paired_rounds.length === 5 ? "" : `（${r.paired_rounds[0]}–${r.paired_rounds[r.paired_rounds.length - 1]} 轮）`;
+      const rows = [...RUNS.map(r => ({ label: r.label + rr(r), p: r.planner, x: D.overall[r.id][g] })),
+        { label: "GD 合并", p: "gd", x: D.overall_pooled.gd[g], pool: true }, { label: "CEM 合并", p: "cem", x: D.overall_pooled.cem[g], pool: true }];
+      const ok = rows.filter(r => r.x);
+      const vals = ok.flatMap(r => r.x.ci || [r.x.diff]);
+      const [xmin, xmax] = niceRange([0, ...vals], 1, g === "unseen_revisit" ? 5 : 2);
+      const W = 330, H = 26 * ok.length + 30, L0 = 150, R0 = 10;
+      const X = v => L0 + (v - xmin) / (xmax - xmin) * (W - L0 - R0);
+      const wrap = document.createElement("div"); wrap.className = "panel"; wrap.innerHTML = `<h4>${title}</h4>`; host.appendChild(wrap);
+      const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": title }, wrap);
+      const step = g === "unseen_revisit" ? 5 : 2;
+      range(xmin, xmax, step).forEach(v => {
+        el("line", { x1: X(v), x2: X(v), y1: 4, y2: H - 22, stroke: v === 0 ? "var(--rule-strong)" : "var(--rule)", "stroke-width": v === 0 ? 1.5 : 1 }, svg);
+        el("text", { x: X(v), y: H - 8, "text-anchor": "middle", class: "tick" }, svg).textContent = (v > 0 ? "+" : "") + v;
+      });
+      ok.forEach((r, i) => {
+        const y = 16 + i * 26, col = PC[r.p];
+        el("text", { x: 0, y: y + 4, "font-size": 11, fill: r.pool ? "var(--ink)" : "var(--ink-2)", "font-weight": r.pool ? 700 : 400 }, svg).textContent = r.label;
+        el("line", { x1: X(r.x.ci[0]), x2: X(r.x.ci[1]), y1: y, y2: y, stroke: col, "stroke-width": r.pool ? 3 : 2, "stroke-linecap": "round" }, svg);
+        el("circle", { cx: X(r.x.diff), cy: y, r: r.pool ? 5.5 : 4.5, fill: r.x.p < 0.05 ? col : "var(--surface)", stroke: col, "stroke-width": 2 }, svg);
+        const hit = el("rect", { x: 0, y: y - 12, width: W, height: 24, fill: "transparent" }, svg);
+        hover(hit, tip, () => `<div class="t">${r.label} · ${title}</div><div class="row"><span>AdaJEPA → Ours</span><span>${r.x.w0.toFixed(1)}% → ${r.x.v6a.toFixed(1)}%</span></div>
+          <div class="row"><span>配对差</span><span>${sgn(r.x.diff)} [${sgn(r.x.ci[0])}, ${sgn(r.x.ci[1])}]</span></div>
+          <div class="row"><span>n · p</span><span>${r.x.n} · ${fp(r.x.p)}</span></div>`);
+      });
+    });
+  })();
+
+  // ---------- cumulative ----------
+  (function cumulative() {
+    const fig = document.getElementById("fig-cum"), tip = tipFor(fig);
+    const dash = { gd_s100: "none", gd_s400: "6 3", gd_s700: "2 3", cem_s100: "none", cem_s400: "6 3", cem_s700: "2 3" };
+    document.getElementById("cum-legend").innerHTML = RUNS.map(r => `<span><svg width="22" height="8" style="display:inline;width:22px;vertical-align:middle;margin-right:6px"><line x1="1" x2="21" y1="4" y2="4" stroke="${PC[r.planner]}" stroke-width="2.5" stroke-dasharray="${dash[r.id]}"/></svg>${r.label}</span>`).join("");
+    const S = Object.fromEntries(RUNS.map(r => [r.id, [0, ...D.cumulative[r.id]]]));
+    const maxLen = Math.max(...RUNS.map(r => S[r.id].length)), total = D.chunks[D.chunks.length - 1].end;
+    const all = RUNS.flatMap(r => S[r.id]);
+    const [ymin, ymax] = niceRange([0, ...all], 2, 10);
+    const o = { W: 980, H: 330, L: 44, R: 120, T: 28, B: 30, xmin: 0, xmax: total, ymin: Math.min(ymin, -10), ymax, zero: 0,
+      yticks: range(Math.min(ymin, -10), ymax, 10), yfmt: v => (v > 0 ? "+" : "") + v, xticks: range(0, total, 350).map(v => [v, v]), xlabel: "流中的 episode" };
+    const { svg, X, Y } = frame(document.getElementById("cum-chart"), o);
+    D.chunks.forEach(c => { if (!c.seen) el("rect", { x: X(c.start), y: o.T, width: X(c.end) - X(c.start), height: o.H - o.T - o.B, fill: "var(--band)" }, svg); });
+    for (let r = 1; r <= 5; r++) {
+      const x0 = (r - 1) * 350;
+      if (r > 1) el("line", { x1: X(x0), x2: X(x0), y1: o.T - 8, y2: o.H - o.B, stroke: "var(--rule-strong)", "stroke-dasharray": "3 3" }, svg);
+      el("text", { x: X(x0) + 6, y: o.T - 10, fill: "var(--ink-2)", "font-size": 11 }, svg).textContent = `第 ${r} 轮`;
+    }
+    const ends = [];
+    RUNS.forEach(r => {
+      const pts = S[r.id].map((v, i) => [i * 10, v]);
+      el("path", { d: path(pts, X, Y), fill: "none", stroke: PC[r.planner], "stroke-width": 2, "stroke-dasharray": dash[r.id], "stroke-linejoin": "round" }, svg);
+      const lv = S[r.id][S[r.id].length - 1], lx = (S[r.id].length - 1) * 10;
+      ends.push({ r, y: Y(lv), v: lv, x: X(lx) });
+    });
+    ends.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 13) ends[i].y = ends[i - 1].y + 13;
+    ends.forEach(e => el("text", { x: X(total) + 8, y: e.y + 4, "font-size": 10.5, fill: "var(--ink)" }, svg).textContent = `${e.r.label.replace(" · ", " ")} ${e.v > 0 ? "+" : ""}${e.v}`);
+    const cross = el("line", { y1: o.T, y2: o.H - o.B, stroke: "var(--muted)", visibility: "hidden" }, svg);
+    const hit = el("rect", { x: o.L, y: o.T, width: o.W - o.L - o.R, height: o.H - o.T - o.B, fill: "transparent" }, svg);
+    hit.addEventListener("mousemove", e => {
+      const b = svg.getBoundingClientRect(), sx = (e.clientX - b.left) / b.width * o.W;
+      const i = Math.max(0, Math.min(maxLen - 1, Math.round((sx - o.L) / (o.W - o.L - o.R) * total / 10)));
+      cross.setAttribute("x1", X(i * 10)); cross.setAttribute("x2", X(i * 10)); cross.setAttribute("visibility", "visible");
+      const c = D.chunks.find(c => i * 10 > c.start && i * 10 <= c.end) || D.chunks[0];
+      tip.show(`<div class="t">第 ${i * 10} 个 episode · 第 ${c.round} 轮 ${c.shape}</div>` +
+        RUNS.map(r => S[r.id][i] != null ? `<div class="row"><span>${r.label}</span><span>${S[r.id][i] > 0 ? "+" : ""}${S[r.id][i]}</span></div>` : "").join(""), e.clientX, e.clientY);
+    });
+    hit.addEventListener("mouseleave", () => { tip.hide(); cross.setAttribute("visibility", "hidden"); });
+  })();
+
+  // ---------- unseen shapes per visit ----------
+  (function shapes() {
+    const fig = document.getElementById("fig-shapes"), tip = tipFor(fig);
+    const vals = [];
+    ["gd", "cem"].forEach(p => ["I", "square", "small_tee"].forEach(sh => { const r = D.shape_visit[p][sh]; [...r.v6a, ...r.w0].forEach(v => v != null && vals.push(v)); }));
+    const [ymin, ymax] = niceRange(vals, 2, 10);
+    ["gd", "cem"].forEach(p => {
+      const host = document.getElementById(`shape-${p}`);
+      ["I", "square", "small_tee"].forEach(sh => {
+        const r = D.shape_visit[p][sh], wrap = document.createElement("div"); wrap.className = "panel";
+        wrap.innerHTML = `<h4>${PN[p]} · ${sh}</h4>`; host.appendChild(wrap);
+        const o = { W: 300, H: 170, L: 32, R: 10, T: 10, B: 22, xmin: 0.6, xmax: 5.4, ymin, ymax, yticks: range(ymin, ymax, 10), yfmt: v => v + "%", xticks: [1, 2, 3, 4, 5].map(v => [v, `第 ${v} 次`]) };
+        const { svg, X, Y } = frame(wrap, o);
+        el("path", { d: path(r.w0.map((v, i) => [i + 1, v]), X, Y), fill: "none", stroke: SC[sh], "stroke-width": 1.8, "stroke-dasharray": "5 4", opacity: .8 }, svg);
+        el("path", { d: path(r.v6a.map((v, i) => [i + 1, v]), X, Y), fill: "none", stroke: SC[sh], "stroke-width": 2.4 }, svg);
+        r.v6a.forEach((v, i) => {
+          if (v == null) return;
+          if (r.w0[i] != null) el("circle", { cx: X(i + 1), cy: Y(r.w0[i]), r: 3, fill: "var(--surface)", stroke: SC[sh], "stroke-width": 1.5 }, svg);
+          el("circle", { cx: X(i + 1), cy: Y(v), r: 3.5, fill: SC[sh], stroke: "var(--surface)", "stroke-width": 1.5 }, svg);
+          const hit = el("rect", { x: X(i + 1) - 16, y: o.T, width: 32, height: o.H - o.T - o.B, fill: "transparent" }, svg);
+          hover(hit, tip, () => `<div class="t">${PN[p]} · ${sh} · 第 ${i + 1} 次访问</div><div class="row"><span>Ours</span><span>${v.toFixed(1)}%</span></div>
+            <div class="row"><span>AdaJEPA</span><span>${r.w0[i] != null ? r.w0[i].toFixed(1) + "%" : "无基线"}</span></div>${r.w0[i] != null ? `<div class="row"><span>差</span><span>${sgn(v - r.w0[i])}</span></div>` : ""}<div class="row"><span>n</span><span>${r.n[i]}</span></div>`);
+        });
+      });
+    });
+  })();
+
+  // ---------- slow-learner effect per visit ----------
+  (function slow() {
+    const fig = document.getElementById("fig-slow"), tip = tipFor(fig);
+    ["gd", "cem"].forEach(p => {
+      const rs = RUNS.filter(r => r.planner === p && D.slow[r.id]);
+      const series = ["I", "square", "small_tee"].map(sh => {
+        const pts = [1, 2, 3, 4, 5].map(v => {
+          const idx = D.chunks.findIndex(c => c.shape === sh && c.round === v);
+          const xs = rs.map(r => D.slow[r.id][idx]).filter(x => x != null && x !== undefined);
+          return [v, xs.length === rs.length && xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null];
+        });
+        return { sh, pts };
+      });
+      const o = { W: 440, H: 220, L: 40, R: 70, T: 10, B: 26, xmin: 0.6, xmax: 5.4, ymin: 0, ymax: 1.2, zero: 1, yticks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2], yfmt: v => v.toFixed(1), xticks: [1, 2, 3, 4, 5].map(v => [v, `第 ${v} 次`]) };
+      const { svg, X, Y } = frame(document.getElementById(`slow-${p}`), o);
+      series.forEach(s => {
+        el("path", { d: path(s.pts, X, Y), fill: "none", stroke: SC[s.sh], "stroke-width": 2.2 }, svg);
+        s.pts.forEach(([v, y]) => {
+          if (y == null) return;
+          const c = el("circle", { cx: X(v), cy: Y(y), r: 4, fill: SC[s.sh], stroke: "var(--surface)", "stroke-width": 1.5 }, svg);
+          const hit = el("circle", { cx: X(v), cy: Y(y), r: 10, fill: "transparent" }, svg);
+          hover(hit, tip, () => `<div class="t">${PN[p]} · ${s.sh} · 第 ${v} 次访问</div><div class="row"><span>误差 / θ0</span><span>${y.toFixed(2)}</span></div>`);
+        });
+        const last = [...s.pts].reverse().find(q => q[1] != null);
+        if (last) el("text", { x: X(last[0]) + 8, y: Y(last[1]) + 4, "font-size": 11, fill: "var(--ink)" }, svg).textContent = s.sh;
+      });
+    });
+  })();
+
+  // ---------- reads ----------
+  (function reads() {
+    const fig = document.getElementById("fig-reads"), tip = tipFor(fig);
+    const kinds = [["own", "本形状学习器"], ["other", "其他形状学习器"], ["theta0", "θ0"]];
+    ["gd", "cem"].forEach(p => {
+      const R = D.reads_pooled[p] || {};
+      const agg = kinds.map(([k, name]) => {
+        const xs = (R[k] || []).filter(x => x.visit >= 2);
+        const n = xs.reduce((a, x) => a + x.n, 0);
+        return { k, name, n, v6a: n ? xs.reduce((a, x) => a + x.n * x.v6a, 0) / n : null, w0: n ? xs.reduce((a, x) => a + x.n * x.w0, 0) / n : null };
+      });
+      const o = { W: 440, H: 230, L: 40, R: 10, T: 16, B: 40, xmin: 0, xmax: 3, ymin: 0, ymax: 100, yticks: [0, 20, 40, 60, 80, 100], yfmt: v => v + "%" };
+      const { svg, X, Y } = frame(document.getElementById(`reads-${p}`), o);
+      agg.forEach((a, i) => {
+        if (a.v6a == null) return;
+        const cx = X(i + 0.5), bw = 36;
+        [["v6a", "var(--accent)", -bw - 1], ["w0", "var(--other)", 1]].forEach(([key, col, dx]) => {
+          const y = Y(a[key]);
+          el("path", { d: `M${cx + dx},${Y(0)}V${y + 4}q0,-4 4,-4h${bw - 8}q4,0 4,4V${Y(0)}Z`, fill: col }, svg);
+          el("text", { x: cx + dx + bw / 2, y: y - 4, "text-anchor": "middle", "font-size": 10.5, fill: "var(--ink)" }, svg).textContent = a[key].toFixed(0);
+        });
+        el("text", { x: cx, y: o.H - o.B + 15, "text-anchor": "middle", "font-size": 11, fill: "var(--ink-2)" }, svg).textContent = a.name;
+        el("text", { x: cx, y: o.H - o.B + 29, "text-anchor": "middle", class: "tick" }, svg).textContent = `n=${a.n} · ${sgn(a.v6a - a.w0)}`;
+        const hit = el("rect", { x: cx - bw - 2, y: o.T, width: 2 * bw + 4, height: o.H - o.T - o.B, fill: "transparent" }, svg);
+        hover(hit, tip, () => `<div class="t">${PN[p]} · 读${a.name}</div><div class="row"><span>Ours</span><span>${a.v6a.toFixed(1)}%</span></div>
+          <div class="row"><span>AdaJEPA</span><span>${a.w0.toFixed(1)}%</span></div><div class="row"><span>n（第 2–5 次访问）</span><span>${a.n}</span></div>`);
+      });
+    });
+  })();
+
+  // ---------- domains ----------
+  (function domains() {
+    const fig = document.getElementById("fig-domains"), tip = tipFor(fig);
+    const rs = RUNS.filter(r => D.gates[r.id]);
+    const W = 940, rowH = 30, L0 = 130, R0 = 150, H = rs.length * rowH + 26;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "各实验最大领域的构成" }, document.getElementById("dom-chart"));
+    const maxN = Math.max(...rs.map(r => D.gates[r.id].top[0].n));
+    const X = v => L0 + v / maxN * (W - L0 - R0);
+    rs.forEach((r, i) => {
+      const g = D.gates[r.id], d0 = g.top[0], t = d0.tags, y = 8 + i * rowH;
+      const parts = [["I", t.I || 0, "var(--shI)"], ["square", t.square || 0, "var(--shSq)"], ["small_tee", t.small_tee || 0, "var(--shTee)"],
+        ["见过的形状", Object.entries(t).filter(([k]) => !["I", "square", "small_tee"].includes(k)).reduce((a, [, v]) => a + v, 0), "var(--other)"]];
+      el("text", { x: 0, y: y + 15, "font-size": 11, fill: "var(--ink)" }, svg).textContent = r.label;
+      let acc = 0;
+      parts.forEach(([name, n, col]) => {
+        if (!n) return;
+        const x0 = X(acc), x1 = X(acc + n) - 2;
+        const rect = el("rect", { x: x0, y, width: Math.max(1, x1 - x0), height: 20, rx: 2, fill: col }, svg);
+        if (x1 - x0 > 26) el("text", { x: (x0 + x1) / 2, y: y + 14, "text-anchor": "middle", "font-size": 10, fill: "var(--ink)" }, svg).textContent = n;
+        hover(rect, tip, () => `<div class="t">${r.label} · ${d0.id}</div><div class="row"><span>${name}</span><span>${n} 个 episode</span></div>`);
+        acc += n;
+      });
+      el("text", { x: X(acc) + 8, y: y + 15, "font-size": 10.5, fill: "var(--ink-2)" }, svg).textContent = `共 ${acc} · 纯度 ${g.purity.toFixed(2)} · ${g.n_domains} 个领域`;
+    });
+    let h = `<table><thead><tr><th>实验</th><th>写入 episode</th><th>领域数（≥3 个）</th><th>写入纯度</th><th>写入门拒绝</th><th>第 2–5 次访问读本形状学习器的 episode</th></tr></thead><tbody>`;
+    rs.forEach(r => {
+      const g = D.gates[r.id];
+      const own = g.per_chunk_reads.filter(c => c.visit >= 2 && ["I", "square", "small_tee"].includes(c.shape)).reduce((a, c) => a + c.own, 0);
+      const tot = g.per_chunk_reads.filter(c => c.visit >= 2 && ["I", "square", "small_tee"].includes(c.shape)).reduce((a, c) => a + c.own + c.other + c.theta0, 0);
+      h += `<tr><td>${r.label}</td><td>${g.n_written}</td><td>${g.n_domains}（${g.n_domains_ge3}）</td><td>${g.purity.toFixed(2)}</td><td>${g.n_rejections}</td><td>${own} / ${tot}（${(100 * own / tot).toFixed(0)}%）</td></tr>`;
+    });
+    document.getElementById("gate-table").innerHTML = h + "</tbody></table>";
+  })();
+
+  // ---------- runtime ----------
+  (function runtime() {
+    const fig = document.getElementById("fig-time"), tip = tipFor(fig);
+    const rows = [{ label: "Ours · GD · eager（S7t3 前 3 轮）", v: 23.86 / 3, col: "var(--other)" },
+      ...RUNS.map(r => { const t = D.runtime[r.id]; const per = [t.v6a_r13 != null ? t.v6a_r13 / 3 : null, t.v6a_r45 != null ? t.v6a_r45 / 2 : null].filter(x => x != null);
+        return { label: `Ours · ${r.label}${t.v6a_r13 == null ? "（第 4–5 轮）" : ""}`, v: per.length ? per.reduce((a, b) => a + b, 0) / per.length : null, col: PC[r.planner], t }; })].filter(r => r.v != null);
+    const W = 940, rowH = 26, L0 = 230, R0 = 70, H = rows.length * rowH + 30;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "每轮用时" }, document.getElementById("time-chart"));
+    const X = v => L0 + v / 9 * (W - L0 - R0);
+    [0, 2, 4, 6, 8].forEach(v => { el("line", { x1: X(v), x2: X(v), y1: 4, y2: H - 22, stroke: "var(--rule)" }, svg); el("text", { x: X(v), y: H - 8, "text-anchor": "middle", class: "tick" }, svg).textContent = v + " h"; });
+    rows.forEach((r, i) => {
+      const y = 8 + i * rowH;
+      el("text", { x: 0, y: y + 13, "font-size": 11, fill: "var(--ink)" }, svg).textContent = r.label;
+      const bar = el("path", { d: `M${X(0)},${y}H${X(r.v) - 3}q3,0 3,3V${y + 15}q0,3 -3,3H${X(0)}Z`, fill: r.col }, svg);
+      el("text", { x: X(r.v) + 6, y: y + 13, "font-size": 10.5, fill: "var(--ink-2)" }, svg).textContent = r.v.toFixed(2) + " h";
+      hover(bar, tip, () => `<div class="t">${r.label}</div><div class="row"><span>每轮平均</span><span>${r.v.toFixed(2)} h</span></div>` +
+        (r.t ? `<div class="row"><span>第 1–3 轮 / 第 4–5 轮</span><span>${r.t.v6a_r13 != null ? r.t.v6a_r13 : "—"} h / ${r.t.v6a_r45 != null ? r.t.v6a_r45 : "—"} h</span></div>` : ""));
+    });
+  })();
+})();
+</script>

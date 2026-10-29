@@ -1,0 +1,5 @@
+start 2026-10-23 02:09:25 stream=H7t3 root=eval_outputs/cmp_cem_theta0 mode=cem args: --ws 0 --independent --chain-gpus 6,7 --probe-gpus 6
+stream H7t3: 21 independent chunk runs on GPUs ['6', '7']
+START eval_outputs/cmp_cem_theta0/w0/chunk_00_I GPU=6
+START eval_outputs/cmp_cem_theta0/w0/chunk_01_L GPU=7
+EXIT=143 2026-10-23 02:16:56

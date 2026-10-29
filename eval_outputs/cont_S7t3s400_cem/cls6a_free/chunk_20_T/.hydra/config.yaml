@@ -1,0 +1,98 @@
+ckpt_base_path: /data/zjc/adaJEPA/CL-JEPA/checkpoints/pushobj_bias_16k_e3_seed0
+model_name: null
+model_epoch: 3
+seed: 600
+n_evals: 50
+segments_order: file
+goal_source: segments
+eval_data_path: /data/zjc/adaJEPA/CL-JEPA-cudagraph/data/cont_streams/S7t3s400/chunk_20_T.pkl
+ood_corruption: null
+ood_level: null
+env_kwargs_override: null
+goal_H: 25
+n_plot_samples: 10
+decode_for_viz: false
+num_start_frames: 1
+debug_dset_init: false
+objective:
+  _target_: planning.objectives.create_objective_fn
+  alpha: 1
+  base: 2
+  mode: staged
+planner:
+  _target_: planning.continual_v7.CLSv7MPCPlanner
+  max_iter: 30
+  n_taken_actions: 5
+  adapt:
+    lr: 0.0005
+    steps: 1
+    optimizer: adam
+    finetune_every: 1
+    replay_buffer: recent5
+    finetune_encoder: true
+    encoder_lr: 1.0e-05
+    last_layer_only: true
+    encoder_last_layer_only: true
+  probe:
+    seed: 0
+  continual:
+    w: 0.0
+    tag: T
+    state_in: /data/zjc/adaJEPA/CL-JEPA-cudagraph/eval_outputs/cont_S7t3s400_cem/cls6a_free/chunk_19_plus/continual_state.pt
+    state_out: continual_state.pt
+    memory_size: 30
+    save_deltas: false
+    save_frames: true
+    alpha: 1.0
+    write: delta
+    tau: 0.1
+    min_n: 3
+    slow_lr: 0.0001
+    slow_steps: 15
+    slow_batch: 8
+    reroute: 3
+    mature_k: 3
+    mature_ratio: 0.9
+    reject_ratio: 1.2
+    familiar_thr: 0.0146
+    pending_m: 3
+    tau_new: 0.05
+    pending_max: 40
+    fp_unit: true
+    slow_w: 0.003
+    merge_eps: 0.5
+    merge_k: 2
+    ms_h: 5
+    pr_succ: 2.0
+    pr_contact: 3.0
+    knn_k: 5
+    knn_vote: 0.6
+    knn_min_ref: 3
+    mergeb_every: 5
+    mergeb_eps: 0.1
+    mergeb_hold: 2
+    mergeb_max_steps: 300
+    seen_probe: null
+    seen_conf: 0.95
+    familiar_read: true
+    join_ratio: 0
+    absorb_ratio: 0.8
+    absorb_every: 25
+    learner_win: false
+    absorb_frag: 6
+    absorb_pending: false
+  reuse_actions: true
+  sub_planner:
+    target: planning.cem.CEMPlanner
+    lr: 0.1
+    sample_type: zero
+    action_noise: 0
+    horizon: 25
+    var_scale: 1
+    opt_steps: 10
+    cuda_graph: false
+    eval_every: -1
+    topk: 30
+    num_samples: 200
+  name: cont_plan_gd_pushobj
+wandb_logging: false

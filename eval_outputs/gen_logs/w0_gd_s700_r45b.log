@@ -1,0 +1,16 @@
+start 2026-10-22 08:46:23 stream=S7t5s700 root=eval_outputs/cont_S7t3s700 mode=gd args: --ws 0 --independent --chain-gpus 7,5 --probe-gpus 7
+stream S7t5s700: 6 independent chunk runs on GPUs ['7', '5']
+START eval_outputs/cont_S7t3s700/w0/chunk_28_I GPU=7
+START eval_outputs/cont_S7t3s700/w0/chunk_30_square GPU=5
+DONE eval_outputs/cont_S7t3s700/w0/chunk_30_square seconds=1175
+START eval_outputs/cont_S7t3s700/w0/chunk_31_Z GPU=5
+DONE eval_outputs/cont_S7t3s700/w0/chunk_28_I seconds=1303
+START eval_outputs/cont_S7t3s700/w0/chunk_32_small_tee GPU=7
+DONE eval_outputs/cont_S7t3s700/w0/chunk_31_Z seconds=526
+START eval_outputs/cont_S7t3s700/w0/chunk_33_plus GPU=5
+DONE eval_outputs/cont_S7t3s700/w0/chunk_32_small_tee seconds=870
+START eval_outputs/cont_S7t3s700/w0/chunk_34_T GPU=7
+DONE eval_outputs/cont_S7t3s700/w0/chunk_33_plus seconds=667
+DONE eval_outputs/cont_S7t3s700/w0/chunk_34_T seconds=458
+finished: 6 ok, 0 failed
+EXIT=0 2026-10-22 09:30:13

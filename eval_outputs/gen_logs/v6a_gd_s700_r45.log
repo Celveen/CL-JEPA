@@ -1,0 +1,32 @@
+start 2026-10-22 07:22:58 stream=S7t5s700 root=eval_outputs/cont_S7t3s700 mode=gd args: --arms cls6a_free --chain-gpus 1 --probe-gpus 1 --keep-states 6 13 20 27
+stream S7t5s700: 35 chunks x 1 arms (['cls6a_free']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_21_I GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_21_I seconds=668
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_22_L GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_22_L seconds=365
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_23_square GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_23_square seconds=748
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_24_Z GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_24_Z seconds=394
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_25_small_tee GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_25_small_tee seconds=721
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_26_plus GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_26_plus seconds=376
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_27_T GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_27_T seconds=359
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_28_I GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_28_I seconds=642
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_29_L GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_29_L seconds=283
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_30_square GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_30_square seconds=725
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_31_Z GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_31_Z seconds=362
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_32_small_tee GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_32_small_tee seconds=618
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_33_plus GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_33_plus seconds=443
+START eval_outputs/cont_S7t3s700/cls6a_free/chunk_34_T GPU=1
+DONE eval_outputs/cont_S7t3s700/cls6a_free/chunk_34_T seconds=285
+finished: 14 ok, 0 failed
+EXIT=0 2026-10-22 09:19:38

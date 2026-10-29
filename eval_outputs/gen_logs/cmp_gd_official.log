@@ -1,0 +1,46 @@
+start 2026-10-23 02:08:42 stream=H7t3 root=eval_outputs/cmp_gd_official mode=gd args: --ws 0 --independent --chain-gpus 0,1 --probe-gpus 0 --ckpt checkpoints/pushobj_shape_shift --epoch latest
+stream H7t3: 21 independent chunk runs on GPUs ['0', '1']
+START eval_outputs/cmp_gd_official/w0/chunk_00_I GPU=0
+START eval_outputs/cmp_gd_official/w0/chunk_01_L GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_01_L seconds=442
+START eval_outputs/cmp_gd_official/w0/chunk_02_square GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_00_I seconds=1000
+START eval_outputs/cmp_gd_official/w0/chunk_03_Z GPU=0
+DONE eval_outputs/cmp_gd_official/w0/chunk_02_square seconds=942
+START eval_outputs/cmp_gd_official/w0/chunk_04_small_tee GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_03_Z seconds=593
+START eval_outputs/cmp_gd_official/w0/chunk_05_plus GPU=0
+DONE eval_outputs/cmp_gd_official/w0/chunk_04_small_tee seconds=674
+START eval_outputs/cmp_gd_official/w0/chunk_06_T GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_05_plus seconds=493
+START eval_outputs/cmp_gd_official/w0/chunk_07_I GPU=0
+DONE eval_outputs/cmp_gd_official/w0/chunk_06_T seconds=582
+START eval_outputs/cmp_gd_official/w0/chunk_08_L GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_07_I seconds=838
+START eval_outputs/cmp_gd_official/w0/chunk_09_square GPU=0
+DONE eval_outputs/cmp_gd_official/w0/chunk_08_L seconds=412
+START eval_outputs/cmp_gd_official/w0/chunk_10_Z GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_10_Z seconds=521
+START eval_outputs/cmp_gd_official/w0/chunk_11_small_tee GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_09_square seconds=905
+START eval_outputs/cmp_gd_official/w0/chunk_12_plus GPU=0
+DONE eval_outputs/cmp_gd_official/w0/chunk_11_small_tee seconds=590
+START eval_outputs/cmp_gd_official/w0/chunk_13_T GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_12_plus seconds=588
+START eval_outputs/cmp_gd_official/w0/chunk_14_I GPU=0
+DONE eval_outputs/cmp_gd_official/w0/chunk_13_T seconds=439
+START eval_outputs/cmp_gd_official/w0/chunk_15_L GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_15_L seconds=485
+START eval_outputs/cmp_gd_official/w0/chunk_16_square GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_14_I seconds=1015
+START eval_outputs/cmp_gd_official/w0/chunk_17_Z GPU=0
+DONE eval_outputs/cmp_gd_official/w0/chunk_16_square seconds=775
+START eval_outputs/cmp_gd_official/w0/chunk_18_small_tee GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_17_Z seconds=510
+START eval_outputs/cmp_gd_official/w0/chunk_19_plus GPU=0
+DONE eval_outputs/cmp_gd_official/w0/chunk_18_small_tee seconds=491
+START eval_outputs/cmp_gd_official/w0/chunk_20_T GPU=1
+DONE eval_outputs/cmp_gd_official/w0/chunk_19_plus seconds=446
+DONE eval_outputs/cmp_gd_official/w0/chunk_20_T seconds=362
+finished: 21 ok, 0 failed
+EXIT=0 2026-10-23 04:00:50

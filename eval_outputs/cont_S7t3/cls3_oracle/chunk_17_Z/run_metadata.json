@@ -1,0 +1,1 @@
+{"seconds": 3897.6845370279625, "gpu": "4", "arm": "cls3_oracle", "overrides": ["planner._target_=planning.continual.CLSMPCPlanner", "planner.continual.write=oracle", "planner.continual.mature_k=3", "planner.continual.mature_ratio=0.9"], "rc": 0}

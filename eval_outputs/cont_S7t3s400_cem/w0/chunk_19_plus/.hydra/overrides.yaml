@@ -1,0 +1,14 @@
+- ckpt_base_path=/data/zjc/adaJEPA/CL-JEPA/checkpoints/pushobj_bias_16k_e3_seed0
+- model_epoch=3
+- eval_data_path=/data/zjc/adaJEPA/CL-JEPA-cudagraph/data/cont_streams/S7t3s400/chunk_19_plus.pkl
+- n_evals=50
+- +wandb_logging=false
+- planner.continual.w=0
+- planner.continual.tag=plus
+- planner.continual.state_in=null
+- planner.continual.save_deltas=false
+- planner.sub_planner.target=planning.cem.CEMPlanner
+- +planner.sub_planner.topk=30
+- +planner.sub_planner.num_samples=200
+- planner.sub_planner.opt_steps=10
+- seed=600

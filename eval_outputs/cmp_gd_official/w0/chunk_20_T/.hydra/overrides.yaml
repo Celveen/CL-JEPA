@@ -1,0 +1,11 @@
+- ckpt_base_path=/data/zjc/adaJEPA/CL-JEPA/checkpoints/pushobj_shape_shift
+- model_epoch=latest
+- eval_data_path=/data/zjc/adaJEPA/CL-JEPA-cudagraph/data/cont_streams/H7t3/chunk_20_T.pkl
+- n_evals=50
+- +wandb_logging=false
+- planner.continual.w=0
+- planner.continual.tag=T
+- planner.continual.state_in=null
+- planner.continual.save_deltas=false
+- planner.sub_planner.cuda_graph=true
+- seed=2200

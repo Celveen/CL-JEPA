@@ -1,0 +1,22 @@
+{
+  "mode": "grad",
+  "seed": 0,
+  "scale": 1.0,
+  "bank_dir": null,
+  "bank_shapes": [],
+  "n_tensors": {
+    "pred": 13,
+    "enc": 6
+  },
+  "n_params": {
+    "pred": 3314848,
+    "enc": 345600
+  },
+  "lr": 0.0005,
+  "encoder_lr": 1e-05,
+  "steps": 1,
+  "replay": [
+    "recent",
+    5
+  ]
+}

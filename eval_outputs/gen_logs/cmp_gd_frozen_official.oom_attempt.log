@@ -1,0 +1,6 @@
+stream H7t3: 21 independent chunk runs on GPUs ['0']
+START eval_outputs/cmp_gd_frozen_official/w0/chunk_00_I GPU=0
+FAIL eval_outputs/cmp_gd_frozen_official/w0/chunk_00_I seconds=89 exit=1
+START eval_outputs/cmp_gd_frozen_official/w0/chunk_01_L GPU=0
+FAIL eval_outputs/cmp_gd_frozen_official/w0/chunk_01_L seconds=79 exit=1
+START eval_outputs/cmp_gd_frozen_official/w0/chunk_02_square GPU=0

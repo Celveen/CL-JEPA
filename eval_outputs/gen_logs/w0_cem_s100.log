@@ -1,0 +1,46 @@
+start 2026-10-22 02:51:20 stream=S7t3 root=eval_outputs/cont_S7t3_cem mode=cem args: --ws 0 --independent --chain-gpus 6,7 --probe-gpus 6
+stream S7t3: 21 independent chunk runs on GPUs ['6', '7']
+START eval_outputs/cont_S7t3_cem/w0/chunk_00_I GPU=6
+START eval_outputs/cont_S7t3_cem/w0/chunk_01_L GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_01_L seconds=898
+START eval_outputs/cont_S7t3_cem/w0/chunk_02_square GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_00_I seconds=1707
+START eval_outputs/cont_S7t3_cem/w0/chunk_03_Z GPU=6
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_02_square seconds=1280
+START eval_outputs/cont_S7t3_cem/w0/chunk_04_small_tee GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_03_Z seconds=1058
+START eval_outputs/cont_S7t3_cem/w0/chunk_05_plus GPU=6
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_04_small_tee seconds=912
+START eval_outputs/cont_S7t3_cem/w0/chunk_06_T GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_05_plus seconds=917
+START eval_outputs/cont_S7t3_cem/w0/chunk_07_I GPU=6
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_06_T seconds=705
+START eval_outputs/cont_S7t3_cem/w0/chunk_08_L GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_08_L seconds=754
+START eval_outputs/cont_S7t3_cem/w0/chunk_09_square GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_07_I seconds=1867
+START eval_outputs/cont_S7t3_cem/w0/chunk_10_Z GPU=6
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_09_square seconds=1215
+START eval_outputs/cont_S7t3_cem/w0/chunk_11_small_tee GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_10_Z seconds=926
+START eval_outputs/cont_S7t3_cem/w0/chunk_12_plus GPU=6
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_11_small_tee seconds=1025
+START eval_outputs/cont_S7t3_cem/w0/chunk_13_T GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_12_plus seconds=1063
+START eval_outputs/cont_S7t3_cem/w0/chunk_14_I GPU=6
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_13_T seconds=739
+START eval_outputs/cont_S7t3_cem/w0/chunk_15_L GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_15_L seconds=740
+START eval_outputs/cont_S7t3_cem/w0/chunk_16_square GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_14_I seconds=1647
+START eval_outputs/cont_S7t3_cem/w0/chunk_17_Z GPU=6
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_16_square seconds=1135
+START eval_outputs/cont_S7t3_cem/w0/chunk_18_small_tee GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_17_Z seconds=706
+START eval_outputs/cont_S7t3_cem/w0/chunk_19_plus GPU=6
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_18_small_tee seconds=764
+START eval_outputs/cont_S7t3_cem/w0/chunk_20_T GPU=7
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_19_plus seconds=628
+DONE eval_outputs/cont_S7t3_cem/w0/chunk_20_T seconds=428
+finished: 21 ok, 0 failed
+EXIT=0 2026-10-22 05:48:20

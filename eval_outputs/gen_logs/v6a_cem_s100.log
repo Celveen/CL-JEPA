@@ -1,0 +1,46 @@
+start 2026-10-22 02:51:20 stream=S7t3 root=eval_outputs/cont_S7t3_cem mode=cem args: --arms cls6a_free --chain-gpus 2 --probe-gpus 2 --keep-states 6 13
+stream S7t3: 21 chunks x 1 arms (['cls6a_free']); probes on ['I', 'square', 'T', 'L', 'small_tee']
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_00_I GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_00_I seconds=906
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_01_L GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_01_L seconds=541
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_02_square GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_02_square seconds=883
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_03_Z GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_03_Z seconds=498
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_04_small_tee GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_04_small_tee seconds=638
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_05_plus GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_05_plus seconds=429
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_06_T GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_06_T seconds=413
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_07_I GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_07_I seconds=845
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_08_L GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_08_L seconds=442
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_09_square GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_09_square seconds=854
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_10_Z GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_10_Z seconds=437
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_11_small_tee GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_11_small_tee seconds=664
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_12_plus GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_12_plus seconds=568
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_13_T GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_13_T seconds=442
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_14_I GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_14_I seconds=725
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_15_L GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_15_L seconds=444
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_16_square GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_16_square seconds=900
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_17_Z GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_17_Z seconds=418
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_18_small_tee GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_18_small_tee seconds=636
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_19_plus GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_19_plus seconds=525
+START eval_outputs/cont_S7t3_cem/cls6a_free/chunk_20_T GPU=2
+DONE eval_outputs/cont_S7t3_cem/cls6a_free/chunk_20_T seconds=412
+finished: 21 ok, 0 failed
+EXIT=0 2026-10-22 06:21:40
