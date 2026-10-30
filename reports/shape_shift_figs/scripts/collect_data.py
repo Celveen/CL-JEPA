@@ -7,12 +7,15 @@ Sources (all under eval_outputs/ of this checkout unless noted):
   H7t3 held-out comparison, 7 shapes x 50 episodes x test seeds 2000/2100/2200, identical targets for all methods
     Frozen   official shape-shift weights, no adaptation   cmp_{gd,cem}_frozen_official/w0
     AdaJEPA  official shape-shift weights                   cmp_{gd,cem}_official/w0
-    Ours     round-5 continual state of each of the three chains, read-only
+    Ours     round-5 continual state of each of the planner's three chains, read-only
              GD:  cmp_gd_v6a_s100, cmp_gd_v6a_s400, cmp_gd_v6a_s700
-             CEM: cmp_cem_v6a_s100, cmp_cem_v6a_s400, cmp_cem_v6a_s700
-  Ours five rounds: the three continual chains (streams S7t3, S7t3s400, S7t3s700), arm cls6a_free
+             CEM: cmp_cem_v6a_s100, cmp_cem_v6a_s100b, cmp_cem_v6a_s700
+  Ours five rounds: the same chains on their training streams, arm cls6a_free
              GD:  ../CL-JEPA/eval_outputs/cont_S7t3, cont_S7t3s400, cont_S7t3s700
-             CEM: cont_S7t3_cem, cont_S7t3s400_cem, cont_S7t3s700_cem
+             CEM: cont_S7t3_cem, cont_S7t3b_cem, cont_S7t3s700_cem
+  CEM's S7t3s400 chain is left out: its round-5 learner lost maturity on small_tee and the state planned with the
+  base model alone. S7t3b replaces it: the S7t3 stream (same targets and seeds) run again on a second machine
+  (results branch of the repository; its round-5 state downloaded into cont_S7t3b_cem/cls6a_free/chunk_34_T).
 
 Writes data/*.json|csv and replay/<planner>/<shape>/<method>/{step_XX,goal}.png next to this folder.
 """
@@ -38,8 +41,9 @@ SHAPES = ["I", "L", "square", "Z", "small_tee", "plus", "T"]
 SEEN = {"T", "L", "Z", "plus"}
 SEEDS = [2000, 2100, 2200]
 METHODS = ["frozen", "adajepa", "ours"]
-CHAINS = ["s100", "s400", "s700"]
-STREAM_OF = {"s100": "S7t3", "s400": "S7t3s400", "s700": "S7t3s700"}
+CHAINS = {"GD": ["s100", "s400", "s700"], "CEM": ["s100", "s100b", "s700"]}
+STREAM_OF = {"s100": "S7t3", "s100b": "S7t3b", "s400": "S7t3s400", "s700": "S7t3s700"}
+STREAM5_OF = {"s100": "S7t5", "s100b": "S7t5", "s400": "S7t5s400", "s700": "S7t5s700"}  # 5-round manifests
 MAX_STEPS = 30
 
 
@@ -53,7 +57,7 @@ def h7_dirs(planner, method):
         return {"official": EV / f"cmp_{p}_frozen_official/w0"}
     if method == "adajepa":
         return {"official": EV / f"cmp_{p}_official/w0"}
-    return {c: EV / f"cmp_{p}_v6a_{c}/cls6a_free" for c in CHAINS}
+    return {c: EV / f"cmp_{p}_v6a_{c}/cls6a_free" for c in CHAINS[planner]}
 
 
 def stream_root(planner, chain):
@@ -159,7 +163,7 @@ for planner in PLANNERS:
             assert abs(c.mean(0)[-1] - summary["by_shape"][planner][shape][method]["mean"]) < 1e-9
     summary["per_chain"][planner] = {
         c: {g: 100 * np.mean([e["success"] for e in select(planner=planner, method="ours", unit=c) if e["shape"] in sh])
-            for g, sh in GROUPS.items()} for c in CHAINS}
+            for g, sh in GROUPS.items()} for c in CHAINS[planner]}
 
 # ---------------------------------------------------------------- MPC steps (equal episodes per method)
 mpc = {}
@@ -180,10 +184,9 @@ rounds = {}
 for planner in PLANNERS:
     rounds[planner] = {}
     per_chain = {}
-    for chain in CHAINS:
+    for chain in CHAINS[planner]:
         root = stream_root(planner, chain)
-        stream5 = {"s100": "S7t5", "s400": "S7t5s400", "s700": "S7t5s700"}[chain]
-        blocks = json.loads((REPO / "data/cont_streams" / stream5 / "manifest.json").read_text())["blocks"]
+        blocks = json.loads((REPO / "data/cont_streams" / STREAM5_OF[chain] / "manifest.json").read_text())["blocks"]
         assert len(blocks) == 35
         per_chain[chain] = {}
         for r in range(5):
@@ -198,8 +201,9 @@ for planner in PLANNERS:
                         res[g].extend(s.tolist())
             per_chain[chain][r + 1] = {g: {"rate": 100 * float(np.mean(v)), "episodes": len(v)} for g, v in res.items()}
     for r in range(1, 6):
-        rounds[planner][r] = {g: {**stats([per_chain[c][r][g]["rate"] for c in CHAINS]),
-                                  "episodes": sum(per_chain[c][r][g]["episodes"] for c in CHAINS)} for g in GROUPS}
+        rounds[planner][r] = {g: {**stats([per_chain[c][r][g]["rate"] for c in CHAINS[planner]]),
+                                  "episodes": sum(per_chain[c][r][g]["episodes"] for c in CHAINS[planner])}
+                              for g in GROUPS}
     rounds[planner]["per_chain"] = per_chain
 
 # ---------------------------------------------------------------- trajectories and logged prediction loss

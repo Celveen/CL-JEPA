@@ -1515,191 +1515,191 @@
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2000,
       "shape": "I",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_00_I",
-      "final_eval_results_sha256": "e88fbb7ff15804eb9dfc473d5d6cf484d947b73da7efdd73fe5f82eb1a1cb460"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_00_I",
+      "final_eval_results_sha256": "82091a1755873087c26c51cf71331b7f868e10f110050c19e276accd054e0e30"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2000,
       "shape": "L",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_01_L",
-      "final_eval_results_sha256": "631858b3b3a5839fece71a75661c66a29a50c49d25db9b3552db5ff96727f2d6"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_01_L",
+      "final_eval_results_sha256": "1c10bf32adcae661d276d1aefdbf5a4bc9a45673b598ceb43a33231cf2fc1ada"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2000,
       "shape": "square",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_02_square",
-      "final_eval_results_sha256": "5bd6cdf3aefef61896957a00f17b60aadab6194357e0dea56cd9a59e623f3dc7"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_02_square",
+      "final_eval_results_sha256": "a381f631d38e6a6c51beeb109f47514662e01d3b25ee41b735139e17b75f91b5"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2000,
       "shape": "Z",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_03_Z",
-      "final_eval_results_sha256": "d2f7a967adf1e029c3bf72aa7e8d19373fbdac6fe111595496901deff78d5b90"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_03_Z",
+      "final_eval_results_sha256": "be49167bec16f071e4648964e8cec190be19415efbeb0262aea44b6050bd2768"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2000,
       "shape": "small_tee",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_04_small_tee",
-      "final_eval_results_sha256": "8731ecd7ae068cf69d3726f7db063d01afbff2ff3c3fae6c8c876f0cb27f5486"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_04_small_tee",
+      "final_eval_results_sha256": "93c511fb76157a6a82a1681321729b28c9cbc36d1c6812168ac676326e1c3260"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2000,
       "shape": "plus",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_05_plus",
-      "final_eval_results_sha256": "cc7186f4df338ecf5a1e4aa61c0cfdaee8d16b070dd01688fccda0d5d78de231"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_05_plus",
+      "final_eval_results_sha256": "4ce03925fb038e42eaa4d0f30b51f84164bde027b315c02a1fd567489806653f"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2000,
       "shape": "T",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_06_T",
-      "final_eval_results_sha256": "c644c3d06fab7abe3e4f7a7e5bcf26775362b5becee61532a1894d963b812908"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_06_T",
+      "final_eval_results_sha256": "f867018a707eb37daeb0e0b335ebfa8b7a5a0931f9e8d79b558a3d643d7f2362"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2100,
       "shape": "I",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_07_I",
-      "final_eval_results_sha256": "1a74e8203e253ca87da0365b3f335e0ed5ad234e4864a3c43746725d0fd6a4c4"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_07_I",
+      "final_eval_results_sha256": "af2db37c6c21842d906dff4cd6d2b698b6e18572ab46715b6fe738064790fcef"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2100,
       "shape": "L",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_08_L",
-      "final_eval_results_sha256": "47b948c50b517a8e94cb64c3a3dba9ac81395b3615a71fc1b9602abd559a98da"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_08_L",
+      "final_eval_results_sha256": "a29a1ff9e4845ed31bec93ccf6c013520fc5df753f29bdb599e60f07f0704dea"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2100,
       "shape": "square",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_09_square",
-      "final_eval_results_sha256": "54a59e25553b19a84accd3151fd175b987dba3541088804a3b9cc4bb72b305db"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_09_square",
+      "final_eval_results_sha256": "52df373e5964f042e37970cd71de4da485bfc9584e9d4a1672fe8d652f25953d"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2100,
       "shape": "Z",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_10_Z",
-      "final_eval_results_sha256": "090f6454236d45fc2946ecdd4e5d5ef9a40d4e89231daa114ad2008dc81b3ef8"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_10_Z",
+      "final_eval_results_sha256": "9e6d7fd64b7e77603f64b8f476441ae1671b045e372761519eec84f634bd2988"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2100,
       "shape": "small_tee",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_11_small_tee",
-      "final_eval_results_sha256": "1a7d20cad398825e9b64342632a8d17a9100fd856cc26f1ed73e7fc8c7414332"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_11_small_tee",
+      "final_eval_results_sha256": "1d840a17cc8044e3ccf712b929742960269b198809d135515bd261c78bad656a"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2100,
       "shape": "plus",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_12_plus",
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_12_plus",
       "final_eval_results_sha256": "63cef7571e8ea3e243aa0ee92174ef3e7705305b8f87294c09b8120d53fc610a"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2100,
       "shape": "T",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_13_T",
-      "final_eval_results_sha256": "b346786b6c66020c3dd59ad081242a75fa729ebe1c053abcf8415572c6a65e8e"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_13_T",
+      "final_eval_results_sha256": "cc8ccf7ed53950fbb841658ac83b51e0de7b98f50c0051685ef1fb9dae1b5caa"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2200,
       "shape": "I",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_14_I",
-      "final_eval_results_sha256": "9f779254b52a6457fa06af225aa9597273eaf781bcacab5ffa4ca033c8c8d8da"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_14_I",
+      "final_eval_results_sha256": "e52f8cf5f2d01f862168455daf2abab4811987c92a77f877670018d1165fb3b4"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2200,
       "shape": "L",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_15_L",
-      "final_eval_results_sha256": "5fcc61c16bc9e1fc91387c3aaca9461b1742847a67bcd71bdd8aa0f488eea0ea"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_15_L",
+      "final_eval_results_sha256": "0404927c5469b06f7ee36c9d81ef6152b125408dcdf9c7551f1706e2846a96f4"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2200,
       "shape": "square",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_16_square",
-      "final_eval_results_sha256": "3ab56e766951111bf106ec28bc7562a64aa87c134f8531cc57abe86d56c776ec"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_16_square",
+      "final_eval_results_sha256": "848c52beefde4d28927374c9e88cae5a212c67d9222e913b9e84a68cef907c1e"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2200,
       "shape": "Z",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_17_Z",
-      "final_eval_results_sha256": "9d0f20df7ed735131921d4d1aab2bac4f6e4f217306dfcebd42f8e2db284b256"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_17_Z",
+      "final_eval_results_sha256": "93552262dba2e6c692a974fec203db29d80a37b3052c00a4da2decb8da1904dc"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2200,
       "shape": "small_tee",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_18_small_tee",
-      "final_eval_results_sha256": "f576e681732770724c1fadd5007c236cd7d7d7a01bf467689e48ca041e8ff943"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_18_small_tee",
+      "final_eval_results_sha256": "8de64af74e01816c30e2bfc58778d402ddc67c4de503a2f2b98aaa0be79d265c"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2200,
       "shape": "plus",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_19_plus",
-      "final_eval_results_sha256": "713c1f55893a86a91ec1564e940a18e34328985ea46092bc4dd1243f82aa3e3b"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_19_plus",
+      "final_eval_results_sha256": "01510d62830de134264d7d3e7aade66a6c1aa5c2fa7692ad53288b0ae7bdca48"
     },
     {
       "planner": "CEM",
       "method": "ours",
-      "unit": "s400",
+      "unit": "s100b",
       "seed": 2200,
       "shape": "T",
-      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s400/cls6a_free/chunk_20_T",
-      "final_eval_results_sha256": "2c88729ee675464e315b7a51732cd392d35bf0eb403e916961aa3c6949698ecf"
+      "path": "CL-JEPA-cudagraph/eval_outputs/cmp_cem_v6a_s100b/cls6a_free/chunk_20_T",
+      "final_eval_results_sha256": "c2fc16854b055c0248878a167b5771a02a6416944268311b8940da5648cb98de"
     },
     {
       "planner": "CEM",

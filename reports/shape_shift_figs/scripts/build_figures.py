@@ -60,8 +60,9 @@ MANIFEST, FIGS = [], []
 COMMON = ("Held-out shape-shift targets H7t3: seven shapes x 50 episodes x test seeds 2000/2100/2200, identical "
           "initial/goal pairs for every method; none was used during continual learning. Frozen and AdaJEPA use the "
           "official AdaJEPA shape-shift checkpoint (Frozen: no adaptation; AdaJEPA: per-episode test-time adaptation, "
-          "reset every episode). Ours is the round-5 state of each of three continual-learning chains (streams S7t3, "
-          "S7t3s400, S7t3s700) on its own base checkpoint, evaluated read-only: within-episode adaptation as usual, "
+          "reset every episode). Ours is the round-5 state of each of three continual-learning chains per planner (GD: "
+          "streams S7t3, S7t3s400, S7t3s700; CEM: S7t3, S7t3b, S7t3s700, where S7t3b is the S7t3 stream run again "
+          "on a second machine) on its own base checkpoint, evaluated read-only: within-episode adaptation as usual, "
           "but no learner is written, trained or merged. Means are over the three test-seed blocks (Ours pools its "
           "three chains inside each block: 150 episodes per shape per block, baselines 50); +/- 1 sample SD across "
           "the three blocks, not a confidence interval. Seen shapes T, L, Z, + are in our base model's training "
@@ -226,14 +227,16 @@ for ax, g, title in zip(axs, ["all", "seen", "unseen"],
     ax.set(xticks=range(1, 6), xlabel="Continual-adaptation round", title=title)
 axs[0].set_ylabel("Success Rate (%)")
 axs[2].legend(frameon=False, loc="lower right")
-fig.text(.06, .025, "Mean +/- 1 SD across three chains (streams S7t3, S7t3s400, S7t3s700). Each round: 7 shapes x 50 "
-         "episodes with new test seeds; Ours keeps learning across rounds.", fontsize=8.3, color="#555555")
+fig.text(.06, .025, "Mean +/- 1 SD across three chains (GD: streams S7t3, S7t3s400, S7t3s700; CEM: S7t3, S7t3b, "
+         "S7t3s700). Each round: 7 shapes x 50 episodes with new test seeds; Ours keeps learning across rounds.",
+         fontsize=8.3, color="#555555")
 assert all(tuple(ax.get_ylim()) == (40., 100.) for ax in axs)
 save(fig, "ours_five_rounds", "Ours over five continual-learning rounds - shape shifts",
      "Success of Ours on its training streams over five continual-learning rounds. Each chain runs the seven shapes in "
      "the order I, L, square, Z, small T, +, T, 50 episodes each per round, with new test seeds every round, and keeps "
-     "learning throughout; 350 episodes per chain per round. Lines show the mean over three chains (streams S7t3, "
-     "S7t3s400, S7t3s700); shading denotes +/- 1 sample SD across chains. Rounds use different targets, so round "
+     "learning throughout; 350 episodes per chain per round. Lines show the mean over three chains (GD: streams "
+     "S7t3, S7t3s400, S7t3s700; CEM: S7t3, S7t3b, S7t3s700, where S7t3b is the S7t3 stream run again on a second "
+     "machine); shading denotes +/- 1 sample SD across chains. Rounds use different targets, so round "
      "differences include target, seed and adaptation-history effects. These are training-stream episodes, not the "
      "held-out H7t3 targets of the other figures. All panels use a 40-100% y-axis.")
 

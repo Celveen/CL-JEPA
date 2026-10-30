@@ -23,7 +23,8 @@
   且都没有在持续学习中用过。
   Frozen：AdaJEPA 官方形状偏移权重 checkpoints/pushobj_shape_shift，不做任何适应，批量规划。
   AdaJEPA：同一份官方权重，每个 episode 做测试时适应、episode 之间重置。
-  Ours：三条持续学习链（S7t3、S7t3s400、S7t3s700）第 5 轮结束时的状态，以只读方式评测：
+  Ours：每个规划器三条持续学习链第 5 轮结束时的状态，以只读方式评测：
+        GD 用 S7t3、S7t3s400、S7t3s700；CEM 用 S7t3、S7t3b、S7t3s700（换链原因见下）。
         每个 episode 照常快适应和选读学习器，但不写入、不训练、不合并；基础模型是我们自己的 pushobj_bias_16k_e3。
   均值取三个测试种子的平均；Ours 在每个种子内合并三条链（每个形状 150 个 episode，基线 50 个）。
   阴影 / 误差线为三个测试种子之间的样本标准差，不是置信区间。
@@ -35,6 +36,18 @@
   cmp_gd_frozen_official、cmp_cem_frozen_official：官方权重 Frozen，GD / CEM 各 21 段。
   cmp_gd_v6a_s100：GD 下第三条链（S7t3）的第 5 轮状态在 H7t3 上的只读评测（之前只有 s400、s700）。
   命令见 scripts/ 下各脚本的说明；Frozen 用 planning.continual.SlowFrozenMPCPlanner（state_in=null 即官方权重本身）。
+
+CEM 换链（2026-10-29）
+  CEM 的 S7t3s400 链不再使用。第 5 轮结束时它没有一个学习器具备成熟资格（最大的域最近 3 次验证比的均值是 0.94，
+  门槛是不超过 0.9），所以在 H7t3 上 1050 个 episode 一次也没有读学习器，等于只用了基础模型（另外两条链分别读了
+  290 次和 313 次）；成绩 73.5%（未见形状 56.2%），明显低于另外两条链。
+  换成 S7t3b：在另一台服务器上把 S7t3 流（S7t5 清单，同一批目标、同一批种子）重新跑了五轮，
+  和本地的 S7t3 只在运行时的随机性上相互独立，不是一条新种子的流。
+    五轮训练流结果：仓库 results 分支的 eval_outputs/cont_S7t3_cem/cls6a_free，放在本机 eval_outputs/cont_S7t3b_cem/。
+    第 5 轮状态：从 Drive 下载（sha256 56e7b3f6…a37ea），回合数 1750，各域的回合数和形状分布与该链最后一个
+    episode 的记录逐一相同，确认是这条链的第 5 轮状态。
+    H7t3 评测：eval_outputs/cmp_cem_v6a_s100b，设置与其他链完全相同（scripts/run_h7t3_cem.sh）。
+  GD 的三条链不变。S7t3s400 的原始结果仍保留在 eval_outputs/cmp_cem_v6a_s400 和 cont_S7t3s400_cem，没有删除。
 
 预测损失（图 06-19 下方）
   AdaJEPA、Ours：运行中记录的适应损失（adajepa_losses.csv，与 per_iter_logs.json 逐点一致），
